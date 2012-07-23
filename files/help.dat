@@ -1,0 +1,17 @@
+OBJECT TYPE="config_itm", NAME=HTML_Help
+   UNIQUE_FIELD=name
+  FIELDS
+  name = "HTML Help Setup";
+  i_value = 1;
+  scope = 0;
+  END_FIELDS
+END_OBJECT NAME = HTML_Help
+
+OBJECT TYPE="config_itm", NAME=HTML_Help_Option
+   UNIQUE_FIELD=name
+  FIELDS
+  name = "HTML Help Option";
+  i_value = 1;
+  scope = 0;
+  END_FIELDS
+END_OBJECT NAME = HTML_Help_Option

@@ -1,0 +1,1589 @@
+VERSION 5.00
+Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
+Begin VB.UserDocument formdoc 
+   ClientHeight    =   6885
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   8910
+   ClipControls    =   0   'False
+   HScrollSmallChange=   225
+   ScaleHeight     =   6885
+   ScaleWidth      =   8910
+   VScrollSmallChange=   225
+   Begin VB.CommandButton Command3 
+      Caption         =   "Custom"
+      Height          =   255
+      Left            =   120
+      TabIndex        =   27
+      Top             =   360
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.VScrollBar VScroll1 
+      Height          =   1335
+      Left            =   4800
+      TabIndex        =   26
+      Top             =   1440
+      Visible         =   0   'False
+      Width           =   255
+   End
+   Begin VB.HScrollBar HScroll1 
+      Height          =   255
+      Left            =   120
+      TabIndex        =   25
+      Top             =   3600
+      Visible         =   0   'False
+      Width           =   1575
+   End
+   Begin VB.DirListBox Dir2 
+      Height          =   540
+      Index           =   0
+      Left            =   1200
+      TabIndex        =   24
+      Top             =   2880
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.Frame Frame2 
+      Caption         =   "Frame2"
+      Height          =   375
+      Index           =   0
+      Left            =   1200
+      TabIndex        =   22
+      Top             =   2400
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.OptionButton Option2 
+      Caption         =   "Option2"
+      Height          =   255
+      Index           =   0
+      Left            =   1200
+      TabIndex        =   21
+      Top             =   2160
+      Visible         =   0   'False
+      Width           =   855
+   End
+   Begin VB.ComboBox Combo2 
+      Height          =   315
+      Index           =   0
+      Left            =   3720
+      TabIndex        =   19
+      Text            =   "Combo2"
+      Top             =   2040
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.CheckBox Check2 
+      Caption         =   "Check2"
+      Height          =   255
+      Index           =   0
+      Left            =   3720
+      TabIndex        =   18
+      Top             =   1680
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.TextBox Text2 
+      Height          =   285
+      Index           =   0
+      Left            =   3720
+      TabIndex        =   17
+      Text            =   "Text2"
+      Top             =   1320
+      Visible         =   0   'False
+      Width           =   615
+   End
+   Begin VB.ListBox List2 
+      Height          =   255
+      Index           =   0
+      Left            =   3720
+      TabIndex        =   16
+      Top             =   960
+      Visible         =   0   'False
+      Width           =   495
+   End
+   Begin VB.CommandButton Command2 
+      Caption         =   "Command2"
+      Height          =   255
+      Index           =   0
+      Left            =   3720
+      TabIndex        =   14
+      Top             =   120
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.PictureBox Picture2 
+      ClipControls    =   0   'False
+      BeginProperty DataFormat 
+         Type            =   0
+         Format          =   ""
+         HaveTrueFalseNull=   0
+         FirstDayOfWeek  =   0
+         FirstWeekOfYear =   0
+         LCID            =   1033
+         SubFormatType   =   0
+      EndProperty
+      Height          =   495
+      Index           =   0
+      Left            =   1920
+      ScaleHeight     =   435
+      ScaleWidth      =   555
+      TabIndex        =   13
+      Top             =   720
+      Visible         =   0   'False
+      Width           =   615
+   End
+   Begin VB.CommandButton Command0 
+      Caption         =   "BaseLine"
+      Height          =   255
+      Left            =   120
+      TabIndex        =   12
+      Top             =   120
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.DirListBox Dir1 
+      Height          =   540
+      Index           =   0
+      Left            =   120
+      TabIndex        =   11
+      Top             =   2880
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.ListBox List1 
+      Height          =   255
+      Index           =   0
+      Left            =   2640
+      TabIndex        =   10
+      Top             =   960
+      Visible         =   0   'False
+      Width           =   495
+   End
+   Begin TabDlg.SSTab SSTab1 
+      Height          =   495
+      Index           =   0
+      Left            =   2640
+      TabIndex        =   9
+      Top             =   2400
+      Visible         =   0   'False
+      Width           =   1845
+      _ExtentX        =   3254
+      _ExtentY        =   873
+      _Version        =   393216
+      Tab             =   1
+      TabHeight       =   520
+      TabCaption(0)   =   "Tab 0"
+      TabPicture(0)   =   "UserDocument1.dox":0000
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlCount=   0
+      TabCaption(1)   =   "Tab 1"
+      TabPicture(1)   =   "UserDocument1.dox":001C
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlCount=   0
+      TabCaption(2)   =   "Tab 2"
+      TabPicture(2)   =   "UserDocument1.dox":0038
+      Tab(2).ControlEnabled=   0   'False
+      Tab(2).ControlCount=   0
+   End
+   Begin MSDataGridLib.DataGrid DataGrid1 
+      Height          =   735
+      Index           =   0
+      Left            =   120
+      TabIndex        =   8
+      Top             =   1320
+      Visible         =   0   'False
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1296
+      _Version        =   393216
+      HeadLines       =   1
+      RowHeight       =   15
+      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ColumnCount     =   2
+      BeginProperty Column00 
+         DataField       =   ""
+         Caption         =   ""
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   1033
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column01 
+         DataField       =   ""
+         Caption         =   ""
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   1033
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      SplitCount      =   1
+      BeginProperty Split0 
+         BeginProperty Column00 
+         EndProperty
+         BeginProperty Column01 
+         EndProperty
+      EndProperty
+   End
+   Begin VB.ComboBox Combo1 
+      Height          =   315
+      Index           =   0
+      Left            =   2640
+      TabIndex        =   7
+      Text            =   "Combo1"
+      Top             =   2040
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "Frame1"
+      Height          =   375
+      Index           =   0
+      Left            =   120
+      TabIndex        =   6
+      Top             =   2400
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.OptionButton Option1 
+      Caption         =   "Option1"
+      Height          =   255
+      Index           =   0
+      Left            =   120
+      TabIndex        =   5
+      Top             =   2160
+      Visible         =   0   'False
+      Width           =   855
+   End
+   Begin VB.CheckBox Check1 
+      Caption         =   "Check1"
+      Height          =   255
+      Index           =   0
+      Left            =   2640
+      TabIndex        =   4
+      Top             =   1680
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.TextBox Text1 
+      Height          =   285
+      Index           =   0
+      Left            =   1200
+      TabIndex        =   3
+      Text            =   "Text1"
+      Top             =   120
+      Visible         =   0   'False
+      Width           =   1335
+   End
+   Begin VB.PictureBox Picture1 
+      AutoRedraw      =   -1  'True
+      AutoSize        =   -1  'True
+      ClipControls    =   0   'False
+      BeginProperty DataFormat 
+         Type            =   0
+         Format          =   ""
+         HaveTrueFalseNull=   0
+         FirstDayOfWeek  =   0
+         FirstWeekOfYear =   0
+         LCID            =   1033
+         SubFormatType   =   0
+      EndProperty
+      Height          =   495
+      Index           =   0
+      Left            =   1920
+      ScaleHeight     =   435
+      ScaleWidth      =   555
+      TabIndex        =   1
+      Top             =   120
+      Visible         =   0   'False
+      Width           =   615
+   End
+   Begin VB.CommandButton Command1 
+      Caption         =   "Command1"
+      Height          =   255
+      Index           =   0
+      Left            =   2640
+      TabIndex        =   0
+      Top             =   120
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin MSDataGridLib.DataGrid DataGrid2 
+      Height          =   735
+      Index           =   0
+      Left            =   1200
+      TabIndex        =   20
+      Top             =   1320
+      Visible         =   0   'False
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1296
+      _Version        =   393216
+      HeadLines       =   1
+      RowHeight       =   15
+      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ColumnCount     =   2
+      BeginProperty Column00 
+         DataField       =   ""
+         Caption         =   ""
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   1033
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column01 
+         DataField       =   ""
+         Caption         =   ""
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   1033
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      SplitCount      =   1
+      BeginProperty Split0 
+         BeginProperty Column00 
+         EndProperty
+         BeginProperty Column01 
+         EndProperty
+      EndProperty
+   End
+   Begin TabDlg.SSTab SSTab2 
+      Height          =   495
+      Index           =   0
+      Left            =   2640
+      TabIndex        =   23
+      Top             =   3000
+      Visible         =   0   'False
+      Width           =   1845
+      _ExtentX        =   3254
+      _ExtentY        =   873
+      _Version        =   393216
+      Tab             =   2
+      TabHeight       =   520
+      TabCaption(0)   =   "Tab 0"
+      TabPicture(0)   =   "UserDocument1.dox":0054
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlCount=   0
+      TabCaption(1)   =   "Tab 1"
+      TabPicture(1)   =   "UserDocument1.dox":0070
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlCount=   0
+      TabCaption(2)   =   "Tab 2"
+      TabPicture(2)   =   "UserDocument1.dox":008C
+      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlCount=   0
+   End
+   Begin VB.Shape Shape2 
+      Height          =   375
+      Index           =   0
+      Left            =   1080
+      Top             =   720
+      Visible         =   0   'False
+      Width           =   735
+   End
+   Begin VB.Label Label2 
+      Caption         =   "Label2"
+      Height          =   255
+      Index           =   0
+      Left            =   3720
+      TabIndex        =   15
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.Line Line2 
+      Index           =   0
+      Visible         =   0   'False
+      X1              =   3720
+      X2              =   4560
+      Y1              =   480
+      Y2              =   480
+   End
+   Begin VB.Line Line1 
+      Index           =   0
+      Visible         =   0   'False
+      X1              =   2640
+      X2              =   3480
+      Y1              =   480
+      Y2              =   480
+   End
+   Begin VB.Shape Shape1 
+      Height          =   375
+      Index           =   0
+      Left            =   120
+      Top             =   720
+      Visible         =   0   'False
+      Width           =   735
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Label1"
+      Height          =   255
+      Index           =   0
+      Left            =   2640
+      TabIndex        =   2
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   975
+   End
+End
+Attribute VB_Name = "formdoc"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Product        : Form Viewer for BOLT
+'
+' Series         : First Choice Development Series(tm)
+'
+' Name           : formdoc.cls
+'
+' Description    : VB APP to allow online Clarify Form Viewing
+'
+' Preconditions  : A UDL file must exist, be properly configured, and be
+'                  specified in the "VF_UDL" environment vairable.
+'
+' Author         : First Choice Software, Inc.
+'                  8900 Business Park Road
+'                  Austin, TX 78759
+'                  (512) 418-2905
+'                  EMAIL: support@fchoice.com
+'                  WEB  : http://www.fchoice.com
+'
+' Platforms      : This version supports Clarify 7.0 and later
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Directive Statements
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Option Explicit
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Local Variables
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Dim lbl             As Integer                           ' label control count
+Dim btn             As Integer                           ' button control count
+Dim txt             As Integer                           ' textbox control count
+Dim grd             As Integer                           ' grid control count
+Dim cmb             As Integer                           ' combo control count
+Dim chk             As Integer                           ' checkbox control count
+Dim lst             As Integer                           ' listbox control count
+Dim opt             As Integer                           ' option control count
+Dim lin             As Integer                           ' line control count
+Dim trv             As Integer                           ' treeview control count
+Dim shp             As Integer                           ' shape control count
+Dim tbc             As Integer                           ' tab control count
+
+Dim tab_lbl         As Integer                           ' subform label control count
+Dim tab_btn         As Integer                           ' subform button control count
+Dim tab_txt         As Integer                           ' subform textbox control count
+Dim tab_grd         As Integer                           ' subform grid control count
+Dim tab_cmb         As Integer                           ' subform combo control count
+Dim tab_chk         As Integer                           ' subform checkbox control count
+Dim tab_lst         As Integer                           ' subform listbox control count
+Dim tab_opt         As Integer                           ' subform option control count
+Dim tab_lin         As Integer                           ' subform line control count
+Dim tab_trv         As Integer                           ' subform treeview control count
+Dim tab_shp         As Integer                           ' subform shape control count
+Dim tab_tbc         As Integer                           ' subform tab control count
+
+Dim conn_str        As String                            ' connection string
+Dim error_str       As String                            ' error string
+Dim res_cfg         As Long                              ' resource config objid
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Main Routine
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Private Sub Command0_Click()
+  Command0.Visible = False
+  Command3.Visible = False
+  Text1(0).Visible = False
+
+  'view_form CLng(Text1(0).Text), CLng(0), "sa", "sa", "sqlsvr", "kenny", "CLI9"          'baseline 412
+  view_form CLng(Text1(0).Text), CLng(0), "sa", "sa", "oracle", "gandalf", ""
+  
+End Sub
+
+Private Sub Command3_Click()
+  Command0.Visible = False
+  Command3.Visible = False
+  Text1(0).Visible = False
+
+  'view_form CLng(Text1(0).Text), CLng(536870914), "sa", "sa", "sqlsvr", "kenny", "CLI9"  'custom 412
+   view_form CLng(Text1(0).Text), CLng(0), "sa", "sa", "oracle", "gandalf", ""
+End Sub
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Build and Show the Form
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Private Sub UserDocument_Show()
+  Dim P             As Integer                           ' Parsing Integer
+  Dim Param         As String                            ' Parameter String
+  Dim params        As String                            ' Parameters
+
+'  MsgBox "URL:" & Parent.LocationURL
+
+  P = InStr(Parent.LocationURL, "%3F")
+  If P > 0 Then
+    Param = Mid$(Parent.LocationURL, P + 3)
+  Else
+    P = InStr(Parent.LocationURL, "?")
+    If P > 0 Then
+      Param = Mid$(Parent.LocationURL, P + 1)
+    End If
+  End If
+
+' Param = "xxx=536871636|536870914|sa|sa|SQLOLEDB.1|KENNY|CLI9"
+
+  If Len(Param) > 0 Then
+'   MsgBox "Got : " & Param & " from " & Parent.LocationURL
+    P = InStr(Param, "=")
+    params = Mid$(Param, P + 1)
+    If ItemCount(params, "|") <> 7 Then
+      Exit Sub
+    End If
+    view_form CLng(item(params, 1, 1, "|")), CLng(item(params, 2, 2, "|")), item(params, 3, 3, "|"), _
+              item(params, 4, 4, "|"), item(params, 5, 5, "|"), item(params, 6, 6, "|"), item(params, 7, 7, "|")
+
+  Else
+    Command0.Visible = True
+    Command3.Visible = True
+    Text1(0).Visible = True
+    Text1(0).Text = 268436304                             'custom 411 form on kenny/CLI9
+    'Text1(0).Text = 268435890                             'custom 411 form on kenny/CLI9
+  End If
+End Sub
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Resize the Form
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Private Sub Form_Resize()
+                   ' Position the scroll bars:
+  HScroll1.Left = 0
+  VScroll1.Top = 0
+  If Picture1(0).Width > ScaleWidth Then
+    HScroll1.Top = ScaleHeight - HScroll1.Height
+  Else
+    HScroll1.Top = ScaleHeight
+  End If
+
+  If Picture1(0).Height > HScroll1.Top Then
+    VScroll1.Left = ScaleWidth - VScroll1.Width
+    If Picture1(0).Width > VScroll1.Left Then
+      HScroll1.Top = ScaleHeight - HScroll1.Height
+    End If
+  Else
+    VScroll1.Left = ScaleWidth
+  End If
+
+  HScroll1.Width = ScaleWidth
+
+  If HScroll1.Top > 0 Then
+    VScroll1.Height = HScroll1.Top
+  End If
+
+                   ' Set the scroll bar ranges
+  HScroll1.Max = Picture1(0).Width - VScroll1.Left
+  VScroll1.Max = Picture1(0).Height - HScroll1.Top
+  HScroll1.SmallChange = Abs(HScroll1.Max \ 16) + 1
+  HScroll1.LargeChange = Abs(HScroll1.Max \ 4) + 1
+  VScroll1.SmallChange = Abs(VScroll1.Max \ 16) + 1
+  VScroll1.LargeChange = Abs(VScroll1.Max \ 4) + 1
+  HScroll1.Visible = True
+  VScroll1.Visible = True
+  HScroll1.ZOrder 0
+  VScroll1.ZOrder 0
+End Sub
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Shift the Form Horizontally
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Private Sub HScroll1_Change()
+  Picture1(0).Left = -HScroll1.Value
+End Sub
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Shift the Form Vertically
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Private Sub VScroll1_Change()
+  Picture1(0).Top = -VScroll1.Value
+End Sub
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Build the Form
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Public Function view_form(form_objid As Long, rc_objid As Long, _
+                          user_name As String, password As String, _
+                          db_type As String, db_server As String, _
+                          db_name As String) As Integer
+                          
+  Dim t_idx         As Integer                           ' loop index
+  Dim x             As Integer                           ' horizontal factor
+  Dim y             As Integer                           ' vertical factor
+
+  Dim cn            As New ADODB.Connection              '
+  Dim rs            As New ADODB.Recordset               '
+  Dim vi            As New ADODB.Recordset               '
+  Dim driver        As String                            ' database driver type
+
+  Dim w_stmt        As String                            ' SQL Statement string
+  Dim w_top         As Integer                           '
+  Dim w_left        As Integer                           '
+  Dim w_right       As Integer                           '
+  Dim w_bottom      As Integer                           '
+  Dim w_title       As String                            '
+  Dim w_objid       As Long                              '
+  Dim w_version     As String                            ' customer version
+
+  Dim c_stmt        As String                            ' SQL Statement string
+  Dim c_top         As Integer                           '
+  Dim c_left        As Integer                           '
+  Dim c_right       As Integer                           '
+  Dim c_bottom      As Integer                           '
+  Dim c_intval4     As Long                              ' form id number
+  Dim c_title       As String                            '
+  Dim c_name        As String                            '
+  Dim c_vlink       As String                            '
+  Dim c_type        As Integer                           '
+  Dim c_objid       As Long                              '
+
+  Dim i_stmt        As String                            ' SQL Statement string
+  Dim i_value2      As String                            '
+  Dim i_intval3     As Integer                           '
+
+                   ' Set control counts to 0
+  lbl = 0
+  btn = 0
+  txt = 0
+  grd = 0
+  cmb = 0
+  chk = 0
+  lst = 0
+  opt = 0
+  lin = 0
+  trv = 0
+  shp = 0
+  tbc = 0
+
+                   ' Set subform control counts to 1
+  tab_lbl = 1
+  tab_btn = 1
+  tab_txt = 1
+  tab_grd = 1
+  tab_cmb = 1
+  tab_chk = 1
+  tab_lst = 1
+  tab_opt = 1
+  tab_lin = 1
+  tab_trv = 1
+  tab_shp = 1
+  tab_tbc = 1
+
+  On Error GoTo sql_err
+
+'  udl = Environ("VF_UDL")
+'  cn.ConnectionString = "File Name=" & udl
+  
+  If Left(LCase(db_type), 2) = "sq" Then
+    driver = "SQL Server"
+    conn_str = "User Id=" & user_name & ";Password=" & password & _
+      ";Provider=SQLOLEDB;server=" & db_server & _
+      ";Initial Catalog=" & db_name
+  Else
+    driver = "Microsoft ODBC for Oracle"
+    conn_str = "User Id=" & user_name & ";Password=" & password & _
+      ";Data Source=" & db_server & _
+      ";Provider=MSDAORA"
+  End If
+  
+  
+  cn.ConnectionString = conn_str
+  cn.ConnectionTimeout = 10
+  cn.Open
+
+  res_cfg = rc_objid
+  
+  If form_objid < 100000 Then
+    w_stmt = "select top_c, bottom_c, left_c, right_c, title, objid, ver_customer from table_window_db where id = " & form_objid
+  Else
+    w_stmt = "select top_c, bottom_c, left_c, right_c, title, objid, ver_customer from table_window_db where objid = " & form_objid
+  End If
+  
+  rs.Open w_stmt, cn, , , adCmdText
+
+                   ' Get window_db info
+  If Not rs.EOF Then
+    w_top = rs.Fields(0)
+    w_bottom = rs.Fields(1)
+    w_left = rs.Fields(2)
+    w_right = rs.Fields(3)
+    w_title = rs.Fields(4) & ""
+    w_objid = rs.Fields(5)
+    w_version = rs.Fields(6) & ""
+    rs.Close
+  Else
+    MsgBox "Form not found"
+    GoTo sql_err
+  End If
+
+  x = Screen.TwipsPerPixelX
+  y = Screen.TwipsPerPixelY
+
+  Picture1(0).Top = w_top
+  Picture1(0).Left = w_left
+  Picture1(0).Height = (w_bottom - w_top) * y
+  Picture1(0).Width = (w_right - w_left) * x
+  Picture1(0).Visible = True
+
+
+  Form_Resize
+
+  c_stmt = "select top_c, bottom_c, left_c, right_c, title, intval4, name, vlink_name, type, objid from table_control_db where control2window_db = " & w_objid
+  rs.Open c_stmt, cn, , , adCmdText
+
+
+  While Not rs.EOF
+    c_top = rs.Fields(0)
+    c_bottom = rs.Fields(1)
+    c_left = rs.Fields(2)
+    c_right = rs.Fields(3)
+    c_title = rs.Fields(4) & ""
+    c_intval4 = rs.Fields(5)
+    c_name = rs.Fields(6) & ""
+    c_vlink = rs.Fields(7) & ""
+    c_type = rs.Fields(8)
+    c_objid = rs.Fields(9)
+
+    Debug.Print c_type
+
+    Select Case c_type
+    
+      Case 0
+        lbl = lbl + 1
+        Load Label1(lbl)
+        Set Label1(lbl).Container = Picture1(0)
+        Label1(lbl).Top = Picture1(0).Top + (y * c_top)
+        Label1(lbl).Height = y * (c_bottom - c_top)
+        Label1(lbl).Left = Picture1(0).Left + (x * c_left)
+        Label1(lbl).Width = x * (c_right - c_left)
+        Label1(lbl).Caption = c_title
+        Label1(lbl).Visible = True
+
+      Case 3, 23, 24
+        txt = txt + 1
+        Load Text1(txt)
+        Set Text1(txt).Container = Picture1(0)
+        Text1(txt).Top = Picture1(0).Top + (y * c_top)
+        Text1(txt).Height = y * (c_bottom - c_top)
+        Text1(txt).Left = Picture1(0).Left + (x * c_left)
+        Text1(txt).Width = x * (c_right - c_left)
+        Text1(txt).Text = c_name
+        Text1(txt).Visible = True
+
+      Case 20
+        txt = txt + 1
+        Load Text1(txt)
+        Set Text1(txt).Container = Picture1(0)
+        Text1(txt).Top = Picture1(0).Top + (y * c_top)
+        Text1(txt).Height = y * (c_bottom - c_top)
+        Text1(txt).Left = Picture1(0).Left + (x * c_left)
+        Text1(txt).Width = x * (c_right - c_left)
+        Text1(txt).Text = c_name
+        Text1(txt).Visible = True
+
+      Case 4
+        btn = btn + 1
+        Load Command1(btn)
+        Set Command1(btn).Container = Picture1(0)
+        Command1(btn).Top = Picture1(0).Top + (y * c_top)
+        Command1(btn).Height = y * (c_bottom - c_top)
+        Command1(btn).Left = Picture1(0).Left + (x * c_left)
+        Command1(btn).Width = x * (c_right - c_left)
+'       'If c_title = "Done" Then
+'       '  Command1(btn).Caption = "&" & c_title
+'       'Else
+          Command1(btn).Caption = c_title
+'       'End If
+        Command1(btn).Visible = True
+      Case 5
+        If Left(c_name, 6) = "TAB_D_" Then
+          tbc = tbc + 1
+          If tbc = 1 Then
+            SSTab1(0).Visible = True
+            SSTab1(0).Style = 1
+            SSTab1(0).Top = Picture1(0).Top + (y * c_top)
+            SSTab1(0).Height = y * (c_bottom - c_top)
+            SSTab1(0).Left = Picture1(0).Left + (x * c_left)
+            SSTab1(0).Width = x * (c_right - c_left)
+
+            Picture2(0).Top = SSTab1(0).Top + 350
+            Picture2(0).Left = SSTab1(0).Left + 80
+            Picture2(0).Height = SSTab1(0).Height - 400
+            Picture2(0).Width = SSTab1(0).Width - 160
+            Picture2(0).Visible = True
+            view_tab c_objid, c_intval4
+          End If
+          SSTab1(0).Tabs = tbc
+          SSTab1(0).TabsPerRow = tbc
+          SSTab1(0).Tab = tbc - 1
+          SSTab1(0).Caption = c_title
+          If SSTab1(0).Tag = "" Then
+            SSTab1(0).Tag = c_intval4
+'           SSTab1(0).Tag = c_objid
+          Else
+            SSTab1(0).Tag = SSTab1(0).Tag & "|" & c_intval4
+'           SSTab1(0).Tag = SSTab1(0).Tag & "|" & c_objid
+          End If
+          SSTab1(0).Tab = 0
+
+        Else
+          opt = opt + 1
+          Load Option1(opt)
+          Set Option1(opt).Container = Picture1(0)
+          Option1(opt).Top = Picture1(0).Top + (y * c_top)
+          Option1(opt).Height = y * (c_bottom - c_top)
+          Option1(opt).Left = Picture1(0).Left + (x * c_left)
+          Option1(opt).Width = x * (c_right - c_left)
+          Option1(opt).Caption = c_title
+          Option1(opt).ZOrder 0
+          Option1(opt).Visible = True
+        End If
+      Case 6
+        chk = chk + 1
+        Load Check1(chk)
+        Set Check1(chk).Container = Picture1(0)
+        Check1(chk).Top = Picture1(0).Top + (y * c_top)
+        Check1(chk).Height = y * (c_bottom - c_top)
+        Check1(chk).Left = Picture1(0).Left + (x * c_left)
+        Check1(chk).Width = x * (c_right - c_left)
+        Check1(chk).Caption = c_title
+        Check1(chk).ZOrder 0
+        Check1(chk).Visible = True
+      Case 7, 11
+        cmb = cmb + 1
+        Load Combo1(cmb)
+        Set Combo1(cmb).Container = Picture1(0)
+        Combo1(cmb).Top = Picture1(0).Top + (y * c_top)
+'      'Combo1(cmb).Height = y * (c_bottom - c_top)
+        Combo1(cmb).Left = Picture1(0).Left + (x * c_left)
+        Combo1(cmb).Width = x * (c_right - c_left)
+        Combo1(cmb).Text = c_vlink
+        Combo1(cmb).Visible = True
+      Case 9
+        lst = lst + 1
+        Load List1(lst)
+        Set List1(lst).Container = Picture1(0)
+        List1(lst).Top = Picture1(0).Top + (y * c_top)
+        List1(lst).Height = y * (c_bottom - c_top)
+        List1(lst).Left = Picture1(0).Left + (x * c_left)
+        List1(lst).Width = x * (c_right - c_left)
+        List1(lst).Text = c_title
+        List1(lst).Visible = True
+      Case 13
+        grd = grd + 1
+        Load DataGrid1(grd)
+        Set DataGrid1(grd).Container = Picture1(0)
+        DataGrid1(grd).Top = Picture1(0).Top + (y * c_top)
+        DataGrid1(grd).Height = y * (c_bottom - c_top)
+        DataGrid1(grd).Left = Picture1(0).Left + (x * c_left)
+        DataGrid1(grd).Width = x * (c_right - c_left)
+        DataGrid1(grd).Visible = True
+
+        i_stmt = "select value2, intval3 from table_value_item where value2control_db = " & c_objid
+        vi.Open i_stmt, cn, , , adCmdText
+
+        t_idx = 0
+        While Not vi.EOF
+          i_value2 = vi.Fields(0)
+          i_intval3 = vi.Fields(1)
+
+          vi.MoveNext
+
+          DataGrid1(grd).Columns.Add (t_idx)
+          DataGrid1(grd).Columns(t_idx).Caption = i_value2
+          DataGrid1(grd).Columns(t_idx).Width = i_intval3 * x
+          DataGrid1(grd).Columns(t_idx).Alignment = dbgCenter
+          t_idx = t_idx + 1
+        Wend
+        vi.Close
+      Case 14
+        shp = shp + 1
+        Load Shape1(shp)
+        Set Shape1(shp).Container = Picture1(0)
+        Shape1(shp).Top = Picture1(0).Top + (y * c_top)
+        Shape1(shp).Height = y * (c_bottom - c_top)
+        Shape1(shp).Left = Picture1(0).Left + (x * c_left)
+        Shape1(shp).Width = x * (c_right - c_left)
+        Shape1(shp).Visible = True
+
+        shp = shp + 1
+        Load Shape1(shp)
+        Set Shape1(shp).Container = Picture1(0)
+        Shape1(shp).Top = Picture1(0).Top + (y * c_top) - 5
+        Shape1(shp).Height = 20
+        Shape1(shp).Left = Picture1(0).Left + (x * c_left) + 18
+        Shape1(shp).Width = Len(c_title) * 6
+        Shape1(shp).DrawMode = 13
+        Shape1(shp).FillStyle = 0
+        Shape1(shp).BorderStyle = 0
+        Shape1(shp).Visible = True
+
+        lbl = lbl + 1
+        Load Label1(lbl)
+        Set Label1(lbl).Container = Picture1(0)
+        Label1(lbl).Top = Picture1(0).Top + (y * c_top) - 5
+        Label1(lbl).Height = 20
+        Label1(lbl).Left = Picture1(0).Left + (x * c_left) + 20
+        Label1(lbl).Width = Len(c_title) * 6
+        Label1(lbl).Caption = c_title
+        Label1(lbl).ZOrder 0
+        Label1(lbl).Visible = True
+
+      Case 18
+
+'       'select cbx controls not implemented
+
+      Case 19
+        lin = lin + 1
+        Load Line1(lin)
+        Set Line1(lin).Container = Picture1(0)
+        Line1(lin).Y1 = Picture1(0).Top + (y * c_top)
+        Line1(lin).Y2 = (c_bottom) - 1
+        Line1(lin).X1 = c_left
+        Line1(lin).X2 = (c_right)
+        Line1(lin).Visible = True
+
+'     'Case 20
+'
+'        'winsock controls implemented as text boxes
+
+      Case 21
+
+'        'chart controls not implemented
+
+'     'Case 23
+
+'        'progress bars implemented as text boxes
+
+'     'Case 24
+
+'        'slider bar controls implemented as text boxes
+
+      Case 26
+        trv = trv + 1
+        Load Dir1(trv)
+        Set Dir1(trv).Container = Picture1(0)
+        Dir1(trv).Top = Picture1(0).Top + (y * c_top)
+        Dir1(trv).Height = y * (c_bottom - c_top)
+        Dir1(trv).Left = Picture1(0).Left + (x * c_left)
+        Dir1(trv).Width = x * (c_right - c_left)
+        Dir1(trv).Visible = True
+    End Select
+    rs.MoveNext
+  Wend
+
+  Picture1(0).Refresh
+  Picture1(0).Tag = "done"
+
+  Exit Function
+sql_err:
+  MsgBox "Error " & CStr(Error)
+End Function
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' View a Tab Form
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Private Function view_tab(form_objid As Long, form_id As Long) As Integer
+  Dim t_idx         As Integer                           ' loop index
+  Dim x             As Integer                           ' horizontal factor
+  Dim y             As Integer                           ' vertical factor
+
+  Dim cn            As New ADODB.Connection              '
+  Dim rs            As New ADODB.Recordset               '
+  Dim vi            As New ADODB.Recordset               '
+
+  Dim w_stmt        As String                            ' SQL Statement string
+  Dim w_top         As Integer                           '
+  Dim w_left        As Integer                           '
+  Dim w_right       As Integer                           '
+  Dim w_bottom      As Integer                           '
+  Dim w_title       As String                            '
+  Dim w_objid       As Long                              '
+
+  Dim c_stmt        As String                            ' SQL Statement string
+  Dim c_top         As Integer                           '
+  Dim c_left        As Integer                           '
+  Dim c_right       As Integer                           '
+  Dim c_bottom      As Integer                           '
+  Dim c_intval4     As Long                              ' form id number
+  Dim c_title       As String                            '
+  Dim c_name        As String                            '
+  Dim c_vlink       As String                            '
+  Dim c_type        As Integer                           '
+  Dim c_objid       As Long                              '
+
+  Dim i_stmt        As String                            ' SQL Statement string
+  Dim i_value2      As String                            '
+  Dim i_intval3     As Integer                           '
+
+  On Error GoTo sql_err2
+
+  While tab_lbl > 1
+    Unload Label2(tab_lbl)
+    tab_lbl = tab_lbl - 1
+  Wend
+  While tab_btn > 1
+    Unload Command2(tab_btn)
+    tab_btn = tab_btn - 1
+  Wend
+  While tab_txt > 1
+    Unload Text2(tab_txt)
+    tab_txt = tab_txt - 1
+  Wend
+  While tab_lst > 1
+    Unload List2(tab_lst)
+    tab_lst = tab_lst - 1
+  Wend
+  While tab_lin > 1
+    Unload Line2(tab_lin)
+    tab_lin = tab_lin - 1
+  Wend
+  While tab_grd > 1
+    Unload DataGrid2(tab_grd)
+    tab_grd = tab_grd - 1
+  Wend
+  While tab_tbc > 1
+    Unload SSTab2(tab_tbc)
+    tab_tbc = tab_tbc - 1
+  Wend
+  While tab_cmb > 1
+    Unload Combo2(tab_cmb)
+    tab_cmb = tab_cmb - 1
+  Wend
+  While tab_chk > 1
+    Unload Check2(tab_chk)
+    tab_chk = tab_chk - 1
+  Wend
+  While tab_trv > 1
+    Unload Dir2(tab_trv)
+    tab_trv = tab_trv - 1
+  Wend
+  While tab_opt > 1
+    Unload Option2(tab_opt)
+    tab_opt = tab_opt - 1
+  Wend
+  While tab_shp > 1
+    Unload Shape2(tab_shp)
+    tab_shp = tab_shp - 1
+  Wend
+
+  cn.ConnectionString = conn_str
+  cn.ConnectionTimeout = 10
+  cn.Open
+
+  If res_cfg = 0 Then
+    w_stmt = "select top_c, bottom_c, left_c, right_c, title, objid from table_window_db where id = " & form_id
+  Else
+    w_stmt = "select top_c, bottom_c, left_c, right_c, title, objid from table_window_db a, mtm_window_db4_rc_config1 b where a.objid = b.window_db2rc_config And b.rc_config2window_db = " & res_cfg & " and a.id = " & form_id
+  End If
+  rs.Open w_stmt, cn, , , adCmdText
+  
+  If rs.EOF And res_cfg > 0 Then
+    rs.Close
+    w_stmt = "select top_c, bottom_c, left_c, right_c, title, objid from table_window_db where id = " & form_id
+    rs.Open w_stmt, cn, , , adCmdText
+  End If
+
+                   ' Get window_db info
+  If Not rs.EOF Then
+    w_top = rs.Fields(0)
+    w_bottom = rs.Fields(1)
+    w_left = rs.Fields(2)
+    w_right = rs.Fields(3)
+    w_title = rs.Fields(4) & ""
+    w_objid = rs.Fields(5)
+    rs.Close
+  Else
+    error_str = "Specified TAB Form not found"
+    GoTo sql_err2
+  End If
+
+  x = Screen.TwipsPerPixelX
+  y = Screen.TwipsPerPixelY
+
+  c_stmt = "select top_c, bottom_c, left_c, right_c, title, intval4, name, vlink_name, type, objid from table_control_db where control2window_db = " & w_objid
+  rs.Open c_stmt, cn, , , adCmdText
+
+  While Not rs.EOF
+    c_top = rs.Fields(0)
+    c_bottom = rs.Fields(1)
+    c_left = rs.Fields(2)
+    c_right = rs.Fields(3)
+    c_title = rs.Fields(4) & ""
+    c_intval4 = rs.Fields(5)
+    c_name = rs.Fields(6) & ""
+    c_vlink = rs.Fields(7) & ""
+    c_type = rs.Fields(8)
+    c_objid = rs.Fields(9)
+
+'  'Debug.Print c_type & " " & c_name & " " & c_title
+    Select Case c_type
+      Case 0
+        tab_lbl = tab_lbl + 1
+        Load Label2(tab_lbl)
+        Set Label2(tab_lbl).Container = Picture2(0)
+        Label2(tab_lbl).Top = Picture1(0).Top + (y * c_top)
+        Label2(tab_lbl).Height = y * (c_bottom - c_top)
+        Label2(tab_lbl).Left = Picture1(0).Left + (x * c_left)
+        Label2(tab_lbl).Width = x * (c_right - c_left)
+        Label2(tab_lbl).Caption = c_title
+        Label2(tab_lbl).Visible = True
+
+      Case 3, 20, 23, 24
+        tab_txt = tab_txt + 1
+        Load Text2(tab_txt)
+        Set Text2(tab_txt).Container = Picture2(0)
+        Text2(tab_txt).Top = Picture1(0).Top + (y * c_top)
+        Text2(tab_txt).Height = y * (c_bottom - c_top)
+        Text2(tab_txt).Left = Picture1(0).Left + (x * c_left)
+        Text2(tab_txt).Width = x * (c_right - c_left)
+        Text2(tab_txt).Text = c_name
+        Text2(tab_txt).Visible = True
+
+      Case 4
+        tab_btn = tab_btn + 1
+        Load Command2(tab_btn)
+        Set Command2(tab_btn).Container = Picture2(0)
+        Command2(tab_btn).Top = Picture1(0).Top + (y * c_top)
+        Command2(tab_btn).Height = y * (c_bottom - c_top)
+        Command2(tab_btn).Left = Picture1(0).Left + (x * c_left)
+        Command2(tab_btn).Width = x * (c_right - c_left)
+        Command2(tab_btn).Caption = c_title
+        Command2(tab_btn).Visible = True
+      Case 5
+        If Left(c_name, 3) = "TAB" Then
+          tab_tbc = tab_tbc + 1
+          If tab_tbc = 1 Then
+            SSTab2(0).Visible = True
+            SSTab2(0).Style = 1
+            SSTab2(0).Top = Picture1(0).Top + (y * c_top)
+            SSTab2(0).Height = y * (c_bottom - c_top)
+            SSTab2(0).Left = Picture1(0).Left + (x * c_left)
+            SSTab2(0).Width = x * (c_right - c_left)
+
+'            Picture2(0).Top = SSTab2(0).Top + 350
+'            Picture2(0).Left = SSTab2(0).Left + 80
+'            Picture2(0).Height = SSTab2(0).Height - 400
+'            Picture2(0).Width = SSTab2(0).Width - 160
+'            Picture2(0).Visible = True
+          End If
+          SSTab2(0).Tabs = tab_tbc
+          SSTab2(0).TabsPerRow = tab_tbc
+          SSTab2(0).Tab = tab_tbc - 1
+          SSTab2(0).Caption = c_title
+          If SSTab2(0).Tag = "" Then
+            SSTab2(0).Tag = c_intval4
+'           SSTab2(0).Tag = c_objid
+          Else
+            SSTab2(0).Tag = SSTab2(0).Tag & "|" & c_intval4
+'           SSTab2(0).Tag = SSTab2(0).Tag & "|" & c_objid
+          End If
+          SSTab2(0).Tab = 0
+
+        Else
+          tab_opt = tab_opt + 1
+          Load Option2(tab_opt)
+          Set Option2(tab_opt).Container = Picture2(0)
+          Option2(tab_opt).Top = Picture1(0).Top + (y * c_top)
+          Option2(tab_opt).Height = y * (c_bottom - c_top)
+          Option2(tab_opt).Left = Picture1(0).Left + (x * c_left)
+          Option2(tab_opt).Width = x * (c_right - c_left)
+          Option2(tab_opt).Caption = c_title
+          Option2(tab_opt).ZOrder 0
+          Option2(tab_opt).Visible = True
+        End If
+      Case 6
+        tab_chk = tab_chk + 1
+        Load Check2(tab_chk)
+        Set Check2(tab_chk).Container = Picture2(0)
+        Check2(tab_chk).Top = Picture1(0).Top + (y * c_top)
+        Check2(tab_chk).Height = y * (c_bottom - c_top)
+        Check2(tab_chk).Left = Picture1(0).Left + (x * c_left)
+        Check2(tab_chk).Width = x * (c_right - c_left)
+        Check2(tab_chk).Caption = c_title
+        Check2(tab_chk).ZOrder 0
+        Check2(tab_chk).Visible = True
+      Case 7, 11
+        tab_cmb = tab_cmb + 1
+        Load Combo2(tab_cmb)
+        Set Combo2(tab_cmb).Container = Picture2(0)
+        Combo2(tab_cmb).Top = Picture1(0).Top + (y * c_top)
+        Combo2(tab_cmb).Left = Picture1(0).Left + (x * c_left)
+        Combo2(tab_cmb).Width = x * (c_right - c_left)
+        Combo2(tab_cmb).Text = c_vlink
+        Combo2(tab_cmb).Visible = True
+      Case 9
+        tab_lst = tab_lst + 1
+        Load List2(tab_lst)
+        Set List2(tab_lst).Container = Picture2(0)
+        List2(tab_lst).Top = Picture1(0).Top + (y * c_top)
+        List2(tab_lst).Height = y * (c_bottom - c_top)
+        List2(tab_lst).Left = Picture1(0).Left + (x * c_left)
+        List2(tab_lst).Width = x * (c_right - c_left)
+        List2(tab_lst).Text = c_title
+        List2(tab_lst).Visible = True
+      Case 13
+        tab_grd = tab_grd + 1
+        Load DataGrid2(tab_grd)
+        Set DataGrid2(tab_grd).Container = Picture2(0)
+        DataGrid2(tab_grd).Top = Picture1(0).Top + (y * c_top)
+        DataGrid2(tab_grd).Height = y * (c_bottom - c_top)
+        DataGrid2(tab_grd).Left = Picture1(0).Left + (x * c_left)
+        DataGrid2(tab_grd).Width = x * (c_right - c_left)
+        DataGrid2(tab_grd).Visible = True
+
+        i_stmt = "select value2, intval3 from table_value_item where value2control_db = " & c_objid
+        vi.Open i_stmt, cn, , , adCmdText
+
+        t_idx = 0
+        While Not vi.EOF
+          i_value2 = vi.Fields(0)
+          i_intval3 = vi.Fields(1)
+
+          vi.MoveNext
+
+          DataGrid2(tab_grd).Columns.Add (t_idx)
+          DataGrid2(tab_grd).Columns(t_idx).Caption = i_value2
+          DataGrid2(tab_grd).Columns(t_idx).Width = i_intval3 * x
+          DataGrid2(tab_grd).Columns(t_idx).Alignment = dbgCenter
+          t_idx = t_idx + 1
+        Wend
+        vi.Close
+      Case 14
+        tab_shp = tab_shp + 1
+        Load Shape2(tab_shp)
+        Set Shape2(tab_shp).Container = Picture2(0)
+        Shape2(tab_shp).Top = Picture1(0).Top + (y * c_top)
+        Shape2(tab_shp).Height = y * (c_bottom - c_top)
+        Shape2(tab_shp).Left = Picture1(0).Left + (x * c_left)
+        Shape2(tab_shp).Width = x * (c_right - c_left)
+        Shape2(tab_shp).Visible = True
+
+        tab_shp = tab_shp + 1
+        Load Shape2(tab_shp)
+        Set Shape2(tab_shp).Container = Picture2(0)
+        Shape2(tab_shp).Top = Picture1(0).Top + (y * c_top) - 5
+        Shape2(tab_shp).Height = 20
+        Shape2(tab_shp).Left = Picture1(0).Left + (x * c_left) + 18
+        Shape2(tab_shp).Width = Len(c_title) * 6
+        Shape2(tab_shp).DrawMode = 13
+        Shape2(tab_shp).FillStyle = 0
+        Shape2(tab_shp).BorderStyle = 0
+        Shape2(tab_shp).Visible = True
+
+        tab_lbl = tab_lbl + 1
+        Load Label2(tab_lbl)
+        Set Label2(tab_lbl).Container = Picture2(0)
+        Label2(tab_lbl).Top = Picture1(0).Top + (y * c_top) - 5
+        Label2(tab_lbl).Height = 20
+        Label2(tab_lbl).Left = Picture1(0).Left + (x * c_left) + 20
+        Label2(tab_lbl).Width = Len(c_title) * 6
+        Label2(tab_lbl).Caption = c_title
+        Label2(tab_lbl).ZOrder 0
+        Label2(tab_lbl).Visible = True
+
+      Case 18
+
+'       'select cbx controls not implemented
+
+      Case 19
+        tab_lin = tab_lin + 1
+        Load Line2(tab_lin)
+        Set Line2(tab_lin).Container = Picture2(0)
+        Line2(tab_lin).Y1 = Picture1(0).Top + (y * c_top)
+        Line2(tab_lin).Y2 = (c_bottom) - 1
+        Line2(tab_lin).X1 = c_left
+        Line2(tab_lin).X2 = (c_right)
+        Line2(tab_lin).Visible = True
+
+'     'Case 20
+'
+'        'winsock controls implemented as text boxes
+'
+      Case 21
+'
+'        'chart controls not implemented
+'
+'     'Case 23
+'
+'        'progress bars implemented as text boxes
+'
+'     'Case 24
+'
+'        'slider bar controls implemented as text boxes
+
+      Case 26
+        tab_trv = tab_trv + 1
+        Load Dir2(tab_trv)
+        Set Dir2(tab_trv).Container = Picture2(0)
+        Dir2(tab_trv).Top = Picture1(0).Top + (y * c_top)
+        Dir2(tab_trv).Height = y * (c_bottom - c_top)
+        Dir2(tab_trv).Left = Picture1(0).Left + (x * c_left)
+        Dir2(tab_trv).Width = x * (c_right - c_left)
+        Dir2(tab_trv).Visible = True
+    End Select
+    rs.MoveNext
+  Wend
+
+  Picture2(0).Refresh
+
+  Exit Function
+sql_err2:
+  MsgBox "Error:" & error_str
+  On Error GoTo 0
+End Function
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Front a Selected Tab
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Private Sub SSTab1_Click(Index As Integer, prev As Integer)
+  Dim c             As Object                            ' temp control objects
+  Dim item_count    As Integer                           ' items in the path
+  Dim pos           As Integer                           ' parsing integer
+  Dim pos1          As Integer                           ' temp position
+  Dim ret_string    As String                            ' temp string
+  Dim str0          As String                            ' temp string
+
+  If Picture1(0).Tag <> "done" Then
+    Exit Sub
+  End If
+
+  pos = SSTab1(Index).Tab
+  item_count = 0
+  str0 = CStr(SSTab1(Index).Tag)
+  pos1 = InStr(str0, "|")
+  While pos1 > 0
+    If item_count = pos Then
+      ret_string = Mid(str0, 1, pos1 - 1)
+    End If
+    item_count = item_count + 1
+    str0 = Mid(str0, pos1 + 1)
+    pos1 = InStr(str0, "|")
+  Wend
+
+                   ' If the last item found is in range, add it to list
+  If item_count = pos Then
+    ret_string = str0
+  End If
+
+  If Len(ret_string) > 0 Then
+    If CLng(ret_string) > 0 Then
+      view_tab 0, CLng(ret_string)
+    End If
+  End If
+End Sub
+
+' CONNECTION STRING DRIVER NOTES
+' From http://support.microsoft.com/support/kb/articles/Q193/3/32.ASP
+'
+' Using a DSN-Less Connection to an ODBC Driver In the following example, notice
+' that SQL Server and Oracle both have Server= parameters but Microsoft Access
+' uses DBQ= to specify a database. SQL Server also specifies an initial catalog to
+' open on the server with the DATABASE= clause.
+'
+'     '  Access ODBC Driver via DSN-Less
+'     con1.Open "PROVIDER=MSDASQL;" & _
+'               "DRIVER={Microsoft Access Driver (*.mdb)};" & _
+'               "DBQ=C:\...\NWind.mdb;" & _
+'               "UID=admin;PWD=;"
+'
+'     '  Oracle ODBC Driver
+'     con1.Open "PROVIDER=MSDASQL;" & _
+'               "DRIVER={Microsoft ODBC for Oracle};" & _
+'               "SERVER=MyOracleServer;" & _
+'               "UID=demo;PWD=demo;"
+'
+'     '  SQL Server ODBC Driver
+'     con1.Open "PROVIDER=MSDASQL;" & _
+'               "DRIVER={SQL Server};" & _
+'               "SERVER=MySQLServer;DATABASE=pubs;" & _
+'               "UID=sa;PWD=;"
+'
+' As in the DSN examples, the Provider is specifically enumerated even though you
+' could rely upon ADO's use of this particular provider by default.
+'
+' The significant difference in each of the three connection strings is the
+' DRIVER= syntax. While shared by all three code samples, the content in between
+' the {} corresponds to the exact syntax of the name of an ODBC Driver registered
+' in the ODBC Driver Manager.
+'
+' The other main difference between each data source is the syntax used to specify
+' the actual database being opened. For Microsoft Access the DBQ clause is used to
+' provide a path to an actual Microsoft Access .mdb file. For SQL Server both the
+' server name as well as the database to access within that server are specified.
+' For Oracle a value that matches the name of a service specified in the SQL Easy
+' Net utility is specified.
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Returns a sublist of delimited items from a delimited list.
+'   'path_str' is a list of items delimited by 'separator',
+'   function returns a list of start through stop items.
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Public Function item(path_str As String, start_item As Integer, _
+                     stop_item As Integer, separator As String) As String
+  
+  Dim item_count    As Integer  ' Items in the path
+  Dim pos1          As Integer  ' Temp position
+  Dim str0          As String   ' Temp string
+  Dim ret_string    As String   ' Temp string
+
+                   ' Find out how many items there are in the list
+  item_count = ItemCount(path_str, separator)
+
+                   ' If no items, then return the empty list
+  If item_count = 0 Or start_item > item_count Or start_item < 1 Or start_item > stop_item Then
+    item = ""
+    Exit Function
+  End If
+
+                   ' Loop through list adding items to return list one by one
+  item_count = 1
+  str0 = path_str
+  pos1 = InStr(str0, separator)
+  While pos1 > 0
+                   ' If the current item found is in range, add it to list
+    If item_count >= start_item And item_count <= stop_item Then
+      If Len(ret_string) > 0 Then
+        ret_string = ret_string & separator & Mid$(str0, 1, pos1 - 1)
+      Else
+        ret_string = Mid$(str0, 1, pos1 - 1)
+      End If
+    End If
+    item_count = item_count + 1
+    str0 = Mid$(str0, pos1 + 1)
+    pos1 = InStr(str0, separator)
+  Wend
+
+                   ' If the last item found is in range, add it to list
+  If item_count >= start_item And item_count <= stop_item And str0 <> "" Then
+    If Len(ret_string) > 0 Then
+      ret_string = ret_string & separator & str0
+    Else
+      ret_string = str0
+    End If
+  End If
+
+  item = ret_string
+End Function
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Returns the number of items in a delimited list.
+'
+' Copyright (C) 2001. First Choice Software, Inc., All Rights Reserved.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Public Function ItemCount(path_str As String, separator As String) As Integer
+  Dim path_count    As Integer  ' Items in the path
+  Dim pos1          As Integer  ' Temp position
+  Dim str0          As String   ' Temp string
+
+                   ' Set the initial path count
+  If Len(path_str) > 0 Then
+    path_count = 1
+  Else
+    ItemCount = 0
+    Exit Function
+  End If
+
+                   ' Count how many times separator is found in the list
+  str0 = path_str
+  pos1 = InStr(str0, separator)
+  While pos1 <> 0
+    path_count = path_count + 1
+    str0 = Mid$(str0, pos1 + 1)
+    pos1 = InStr(str0, separator)
+  Wend
+
+  ItemCount = path_count
+End Function
+
+

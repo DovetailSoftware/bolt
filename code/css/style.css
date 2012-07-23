@@ -1,0 +1,37 @@
+body {
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	padding-top: 44px;
+}
+
+#homeContainer h3, #homeContainer h4 {
+	text-align: center;
+	margin: 10px 0;
+}
+
+#footer {
+	position:fixed;
+	bottom: 20px;
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+.fullWidth.top tr td {
+	vertical-align: top;
+}
+
+table.middle tr td {
+	vertical-align: middle;
+}
+
+.highlight {
+  background-color: #ffff80 !important;
+}
+
+#quickLinks td {
+	width: 25%;
+}
+
+.topMargin { margin-top: 20px; }
+.padRight { padding-right: .5em; }

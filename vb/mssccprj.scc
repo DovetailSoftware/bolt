@@ -1,0 +1,5 @@
+SCC = This is a Source Code Control file
+
+[form_view.vbp]
+SCC_Aux_Path = "\\freddy\vss_db\"
+SCC_Project_Name = "$/fchoice/product/bolt/vb", XRHAAAAA

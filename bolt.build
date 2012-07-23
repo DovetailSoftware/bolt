@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<project name="Bolt" default="build-release" xmlns="http://nant.sf.net/release/0.85-rc3/nant.xsd">
+
+	<target name="build-release" depends="clean, make-builddir, release-properties, get-release-version, copy-to-release, retrieve-published-documentation, build-installer" description="Compile and run unit tests" />
+	<target name="deploy-release" depends="build-release, deploy-to-qa"/>
+	<target name="ship-release"   depends="deploy-release, tag-release, deploy-to-ship, authenticate-against-website deploy-product-to-public-website, deploy-documentation-to-public-website, unauthenticate-from-website"/>
+
+	<!-- Main paths -->
+	<property name="tools.dir" value="${path::get-full-path('tools')}" />
+	<property name="src.dir" value="${path::get-full-path('code')}" />
+	<property name="build.dir" value="${path::get-full-path('build')}" />
+
+	<!--Clean-->
+	<target name="clean" description="Delete automated build artifacts">
+		<delete dir="${build.dir}" if="${directory::exists(build.dir)}" failonerror="false"/>
+	</target>
+
+	<!--Make build dir-->
+	<target name="make-builddir" description="Create build dir and build report dir">
+		<mkdir dir="${build.dir}" unless="${directory::exists(build.dir)}" />
+	</target>
+
+	<target name="release-properties">
+		<property name="asm.version" value="9.9" />
+		<property name="release.dir" value="${path::combine(path::get-full-path(build.dir),'Release')}"/>
+		<property name="htmldocs.release.dir" value="${path::combine(path::get-full-path(release.dir),'docs')}"/>
+		<property name="asm.version.file" value="Bolt.Version.xml"/>
+
+		<property name="documentation.unc" value="\\focus.fcs.local\DovetailCRM\releases\documentation\BOLT"/>
+		<property name="website.unc" value="\\focus.fcs.local\DovetailCRM\releases\products\BOLT"/>
+		<property name="website.username" value="FOCUS\dovetaildeployer"/>
+		<property name="website.password" value="B0mb3rM@n"/>
+
+  		<property name="product.chm.path" value="\\authorit\Publishing\HTMLHelp\Dovetail BOLT\" />
+		<property name="product.chm.file" value="${product.chm.path}\bolt.chm" />
+		<property name="product.html.docs.dir" value="\\authorit\Publishing\HTML\Dovetail BOLT\" />
+	</target>
+
+	<target name="copy-to-release">
+		<mkdir dir="${release.dir}" failonerror="false"/>
+		<copy todir="${release.dir}">
+			<fileset basedir="${src.dir}">
+				<include name="*" />
+				<include name="images/*" />
+				<include name="jQuery/*" />
+				<include name="ClarifyID/*" />
+				<include name="files/*" />
+				<exclude name="*.sln"/>
+				<exclude name="*.suo"/>
+				<exclude name="_ReSharper.bolt"/>
+				<exclude name=".svn"/>
+				<exclude name="*.Resharper*"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="retrieve-published-documentation" depends="release-properties">
+
+		<mkdir dir="${htmldocs.release.dir}"/>
+		<copy todir="${htmldocs.release.dir}">
+			<fileset basedir="\\authorit\Publishing\HTML\Dovetail Bolt">
+				<include name="*"/>
+			</fileset>
+		</copy>
+
+		<copy file="\\authorit\Publishing\HTMLHelp\Dovetail Bolt\bolt.chm"  tofile="${htmldocs.release.dir}\bolt.chm" />
+	</target>
+
+	<target name="build-installer">
+		<property name="wix.dir" value="${tools.dir}\wix" overwrite="false" />
+
+		<!-- for wix preprocessor so that the version number gets propagated into msi -->
+		<setenv name="asm.version" value="${asm.version}"/>
+
+		<!-- for wix preprocessor so that the location of released files gets propagated into msi -->
+		<setenv name="bolt.dir" value="${release.dir}"/>
+		<setenv name="bolt.docs.dir" value="${htmldocs.release.dir}"/>
+		<setenv name="bolt.tools.dir" value="${tools.dir}"/>
+
+		<setenv name="wix.lib" value="${path::get-full-path('./wix/lib')}"/>
+
+		<echo message="Build MSI using Wix"/>
+
+		<delete>
+			<fileset>
+				<include name="${wix.dir}/*.wixobj"/>
+			</fileset>
+		</delete>
+
+		<exec program="${wix.dir}\candle.exe" workingdir=".\wix" commandline="bolt.wxs UdlConfigurationPromptDialog.wxs DialogSet.wxs" />
+		<exec program="${wix.dir}\light.exe" workingdir=".\wix" commandline="bolt.wixobj DialogSet.wixobj UdlConfigurationPromptDialog.wixobj ${wix.dir}\wixui.wixlib ${wix.dir}\sca.wixlib -loc ${wix.dir}\WixUI_en-us.wxl -out ${release.dir}\bolt_${asm.version}.msi"/>
+	</target>
+
+	<target name="deploy-to-qa">
+		<property name="deployment.base.dir" value="\\marvin\build\bolt" />
+		<property name="deployment.dir" value="${deployment.base.dir}\${asm.version}" />
+
+		<mkdir dir="${deployment.base.dir}" unless="${directory::exists(deployment.base.dir)}" />
+
+		<mkdir dir="${deployment.dir}" unless="${directory::exists(deployment.dir)}" />
+
+		<copy todir="${deployment.dir}" overwrite="true">
+			<fileset basedir="${release.dir}">
+				<include name="${release.dir}/bolt_${asm.version}.chm" />
+				<include name="*.msi" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="deploy-to-ship">
+		<property name="deployment.base.dir" value="\\marvin\product\bolt" />
+		<property name="deployment.dir" value="${deployment.base.dir}\${asm.version}" />
+		<property name="ship.dir" value="${deployment.dir}\ship" />
+
+		<mkdir dir="${deployment.base.dir}" unless="${directory::exists(deployment.base.dir)}" />
+		<mkdir dir="${deployment.dir}" unless="${directory::exists(deployment.dir)}" />
+		<mkdir dir="${ship.dir}" unless="${directory::exists(ship.dir)}" />
+
+		<copy todir="${ship.dir}" overwrite="true">
+			<fileset basedir="${release.dir}">
+				<include name="${release.dir}/bolt_${asm.version}.chm" />
+				<include name="*.msi" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="svn.revision">
+		<property name="svn.infotempfile" value="svninfo.txt" />
+		<exec program="svn.exe" output="${svn.infotempfile}">
+			<arg value="info" />
+		</exec>
+		<loadfile file="${svn.infotempfile}" property="svn.info" />
+		<delete file="${svn.infotempfile}" />
+		<property name="match" value="" />
+		<regex pattern="Last Changed Rev: (?'match'\d+)" input="${svn.info}" />
+		<property name="svn.info.revision" value="${match}"/>
+	</target>
+
+	<target name="get-release-version" depends="release-properties, svn.revision">
+		<exec program="svn.exe" commandline="update ${asm.version.file}"/>
+
+		<xmlpeek file="${asm.version.file}" property="asm.tempversion" xpath="//version"/>
+
+		<property name="asm.version.sans.tag"
+			value="${ int::to-string(version::get-major(version::parse(asm.tempversion)))
+				+ '.' + int::to-string(version::get-minor(version::parse(asm.tempversion)))
+				+ '.' + int::to-string(version::get-build(version::parse(asm.tempversion)))}" overwrite="true" />
+
+
+		<property name="asm.version"
+			value="${ int::to-string(version::get-major(version::parse(asm.tempversion)))
+				+ '.' + int::to-string(version::get-minor(version::parse(asm.tempversion)))
+				+ '.' + int::to-string(version::get-build(version::parse(asm.tempversion)))
+				+ '.' + svn.info.revision }" overwrite="true" />
+
+		<property name="asm.version.major" value="${ int::to-string(version::get-major(version::parse(asm.tempversion))) }" overwrite="true" />
+		<property name="asm.version.minor" value="${ int::to-string(version::get-minor(version::parse(asm.tempversion))) }" overwrite="true" />
+
+		<setenv name="asm.version" value="${asm.version}"/>
+
+		<echo message="Version set to ${asm.version}"/>
+		<echo message="Version (sans tag) set to ${asm.version.sans.tag}"/>
+	</target>
+
+	<target name="tag-release" depends="release-properties, get-release-version">
+		<property name="svn.tag.path" value="https://code.dovetailsoftware.com/svn/classic/bolt/tags/release_${asm.version}" />
+		<property name="svn.tag.message" value="Tagging Bolt version ${asm.version} to ${svn.tag.path}" />
+
+		<echo message="${svn.tag.message}"/>
+
+		<exec program="svn.exe" commandline="copy https://code.dovetailsoftware.com/svn/classic/bolt/trunk ${svn.tag.path} -m &quot;${svn.tag.message}&quot;" />
+	</target>
+
+	<target name="deploy-product-to-public-website" depends="get-release-version">
+		<property name="deployment.dir" value="${website.unc}/${asm.version.sans.tag}"/>
+
+		<mkdir dir="${deployment.dir}" failonerror="false"/>
+
+		<copy todir="${deployment.dir}" overwrite="true">
+			<fileset basedir="${release.dir}">
+				<include name="*.msi" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="deploy-documentation-to-public-website" depends="get-release-version, release-properties">
+	  <property name="deployment.dir" value="${documentation.unc}/${asm.version.sans.tag}"/>
+	  <property name="deployment.html.dir" value="${deployment.dir}/html"/>
+
+	  <mkdir dir="${deployment.dir}" failonerror="true"/>
+	  <mkdir dir="${deployment.html.dir}" failonerror="true"/>
+
+	  <copy todir="${deployment.html.dir}">
+		  <fileset basedir="${product.html.docs.dir}">
+			  <include name="**/*" />
+			  <exclude name="*.chm"/>
+		  </fileset>
+	  </copy>
+
+	  <copy todir="${deployment.dir}">
+		  <fileset basedir="${product.chm.path}">
+			  <include name="*.chm" />
+		  </fileset>
+	  </copy>
+	</target>
+
+	<target name="authenticate-against-website" depends="release-properties">
+		<echo message="authenticating against FOCUS.fcs.local IPC"/>
+		<exec program="net" commandline="use &quot;\\FOCUS.fcs.local\IPC$&quot; /USER:${website.username} ${website.password}" failonerror="false"/>
+	</target>
+
+	<target name="unauthenticate-from-website" depends="release-properties">
+		<echo message="unauthenticating from FOCUS.fcs.local IPC"/>
+		<exec program="net" commandline="use \\FOCUS.fcs.local\IPC$ /DELETE" failonerror="false"/>
+	</target>
+</project>
