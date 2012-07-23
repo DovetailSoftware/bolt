@@ -1,0 +1,107 @@
+<%@ language="JavaScript" %>
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="expires" content="0">
+<meta name="KeyWords" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<style>
+</style>
+<!--#include file="inc/config.inc"-->
+<!--#include file="inc/adojavas.inc"-->
+<%
+var sPageTitle = "ClarifyID";
+var sPageType = "Forms";
+
+function DisplayConceptInfo(){
+	rw("<h3>Sorry, I couldn't determine the form that got you here.</h3>");
+	rw("<p>It appears you came here via a general help request, as opposed to from a form.</p>");
+	rw("<p>This can happen if you click Help (or F1) while not having focus on a form.</p>");
+	rw("<p>Try clicking Help (or F1) while your cursor has focus on a form or form element/control.</p>");
+	rw("<hr/>");
+	rw("<p>Additional Info:</p>");
+	rw("<ul>");
+	rw("<li>last part of uri:" + uriFile+ "	</li>");
+	rw("<li>Request.QueryString:" + Request.QueryString + "</li>");
+	rw("</ul>");
+}
+
+function DisplayNoFormInfo(){
+	rw("<h3>Sorry, I couldn't figure out the form ID.</h3>");
+	rw("<p>If you believe you received this message in error, please contact our support team at <a href='http://www.dovetailsoftware.com'>www.dovetailsoftware.com</a></p>");
+	rw("<p>Be sure to include this information in your support request:</p>");
+	rw("<ul>");
+	rw("<li>Application: BOLT</li>");
+	rw("<li>Page: clarifyID.asp</li>");
+	rw("<li>Request.QueryString: " + Request.QueryString + "</li>");
+	rw("</ul>");
+}
+%>
+<!--#include file="inc/ddonline.inc"-->
+<!--#include file="inc/parseuri.js"-->
+</head>
+<body>
+<!--#include file="inc/navbar.inc"-->
+<div class="container-fluid">
+	<div class="row-fluid bottomMargin">
+		<div class="span2"></div>
+		<div id="homeContainer" class="span8">
+<%
+			var uriFile = parseUri(Request.QueryString).file;
+			var formId = uriFile.replace(".html", "") + "";
+			var noError = true;
+
+			if(formId.length <= 1) {
+				DisplayNoFormInfo();
+				noError = false;
+			}
+
+			if(noError && formId.slice(0,6) == "concpt") {
+				DisplayConceptInfo();
+				noError = false;
+			}
+
+			if(noError) {
+%>
+			<h3>Clarify Form Identifier</h3>
+			<h4>It looks like you got here from form <%=formId%>.</h4>
+			<h4><a href="#" onclick="$('#formsonline').submit();">View details about form <%=formId%></a></h4>
+
+			<form method="POST" id="formsonline" name="formsonline" action="forms.asp">
+				<input type="hidden" name="attribute" value="id" />
+				<input type="hidden" name="operator" value="equals" />
+				<input type="hidden" name="filter" value="<%=formId%>" />
+				<input type="hidden" name="which" value="all" />
+			</form>
+<%
+			}
+%>
+		</div>
+		<div class="span2"></div>
+	</div>
+
+<!--#include file="inc/footer.inc"-->
+</div>
+</body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var path = window.location.pathname;
+	var page = path.substr(path.lastIndexOf("/")+1);
+	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$(".navbar").find(".connected").text("<%=connect_info%>");
+	document.title = "Bolt: <%=sPageTitle%>";
+});
+</script>
+</html>
+<%
+FSO = null;
+udl_file = null;
+%>
