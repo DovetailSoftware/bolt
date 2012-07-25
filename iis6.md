@@ -46,7 +46,7 @@ ASP is disabled by default on Windows 2003. You must explicitly enable ASP and S
 
 ### Enable Parent Paths
 
-Parent Paths need to be enabled when an asp page includes a script with a path containing a ".." An example would be:
+Parent Paths need to be enabled when an ASP page includes a script with a path containing a ".." An example would be:
 
 	<!--#include file="../include/inc_room.asp"-->
 
@@ -62,9 +62,8 @@ Dovetail Bolt does use parent paths.
 
 When you try to browse your web application you may run into this message telling you... "Something went going wrong but sorry I won't tell you what." That error looks like this:"
 
-An error occurred on the server when processing the URL. Please contact the system administrator.
-
-If you are the system administrator please click here to find out more about this error.
+	An error occurred on the server when processing the URL. Please contact the system administrator.
+	If you are the system administrator please click here to find out more about this error.
 
 To see the actual error, you can configure the application to send errors to the browser. This is helpful when debugging a problem.
 
