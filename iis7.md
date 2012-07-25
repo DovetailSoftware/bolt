@@ -39,6 +39,7 @@ Parent Paths need to be enabled when an asp page includes a script with a path c
 <!--#include file="../include/inc_room.asp"-->
 
 Dovetail Bolt does use parent paths.
+
 1. Navigate to your web application in IIS7 Manager.
 1. Click on <b>ASP</b>.
 1. Set <b>Enable Parent Paths</b> to <b>True</b>.
@@ -53,6 +54,7 @@ An error occurred on the server when processing the URL. Please contact the syst
 If you are the system administrator please click here to find out more about this error.
 
 To see the actual error, you can configure the application to send errors to the browser. This is helpful when debugging a problem.
+
 1. Navigate to your web application in IIS7 Manager.
 1. Click on <b>ASP</b>.
 1. Expand the <b>Debugging</b> section
