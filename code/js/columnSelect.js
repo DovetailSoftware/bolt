@@ -3,9 +3,7 @@ function resetColumnSelection() {
 	$(".columnHighlight").removeClass("columnHighlight");
 }
 
-$(document).ready(function() {
-   $("<span class='helpSpan'>(double-click a column header to select column text)</span>").insertAfter("#fields");
-   $(".deleteIcon").live("click", resetColumnSelection);
+function columnSelect() {
    $(".headerRow th").dblclick(function() {
    	resetColumnSelection()
 
@@ -23,4 +21,11 @@ $(document).ready(function() {
 		$(".temp").focus().select();
       return false;
    });
+}
+
+$(document).ready(function() {
+   $("<span class='helpSpan'>(double-click a column header to select column text)</span>").insertAfter("#fields");
+   $(".deleteIcon").live("click", resetColumnSelection);
+
+   columnSelect();
 });

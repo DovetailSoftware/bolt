@@ -122,7 +122,7 @@ function submitCustom() {
 
 $(document).ready(function() {
 	var path = window.location.pathname;
-	var page = path.substr(path.lastIndexOf('/')+1);
+	var page = path.substr(path.lastIndexOf("/")+1);
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";

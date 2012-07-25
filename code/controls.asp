@@ -82,17 +82,18 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 			//If we have none, say so & exit
 			if (rsButtons.EOF) {
-				rw("<H3 align='center'>No matches</H3>");
+				rw("<h3 align='center'>No matches</h3>");
 				rw("</body>");
 				rw("</html>");
 				Response.End
 			}
 
-		//If we're still here, then we're building a list of buttons
-		//Page Header:
-			rw("<H3 align = 'center'>Controls</H3>");
-		//Table Header
-			rw("<table border=1 align='center' class='tablesorter'>");
+			//If we're still here, then we're building a list of buttons
+			//Page Header:
+			rw("<h3>Controls</h3>");
+
+			//Table Header
+			rw("<table class='tablesorter'>");
 			rw("<thead><tr>");
 			rw("<th>");
 			rw("Control Name");

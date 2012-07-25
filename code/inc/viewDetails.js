@@ -5,7 +5,7 @@
 function outputViewHeader(ViewKind,TheLink) {
 	rw("<table class='fullWidth top'>");
    rw("<tr>");
-   rw("<td>");
+   rw("<td width='20%'>");
    rw(ViewKind+"View Name: ");
    rw("</td>");
    rw("<td>");

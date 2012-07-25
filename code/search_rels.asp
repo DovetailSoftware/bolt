@@ -11,30 +11,23 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/jquery.tablesorter.css" rel="stylesheet">
-<style>
-</style>
-
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
-var sPageTitle = "Tables";
+var sPageTitle = "Relations";
 var sPageType = "Schema";
 
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
-
 %>
 <!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
-<%
-%>
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
-
 <div class="container-fluid">
 	<div class="row-fluid bottomMargin">
-		<div id="headerContainer" class="span12">
+		<div id="headerContainer" class="span12 topMargin">
 		<%
 			var name_filter=Request("rel_name");
 			var name_filter = SQLFixup(name_filter);
@@ -71,11 +64,11 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 				//If we are still here, then we are building a list of tables
 				//Page Header:
-				rw("<h3 align = 'center'>Tables/Views containing a relation named like '" + name_filter + "'</h3>");
+				rw("<h3>Tables/Views containing a relation named like '" + name_filter + "'</h3>");
 
 				//Table Header
-				rw("<table class='tablesorter fullWidth'>");
-				rw("<thead><tr class=headerRow>");
+				rw("<table class='tablesorter fullWidth topMargin'>");
+				rw("<thead><tr>");
 				rw("<th>");
 				rw("Table ID");
 				rw("</th>");
@@ -135,18 +128,10 @@ $(document).ready(function() {
 	var page = path.substr(path.lastIndexOf("/")+1);
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
+	document.title = "Bolt: <%=sPageTitle%>";
 
-	$(".tablesorter").tablesorter({
-		headers: {
-			// the first column is the "id_number" column
-			0: {
-				// force custom sort for id_number
-				sorter: "id_number"
-			}
-		}
-	});
-
-	$("#resultsContainer").on("click", ".tablesorter tbody tr", function () {
+	$(".tablesorter").tablesorter();
+	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});
 });

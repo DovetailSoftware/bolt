@@ -11,6 +11,7 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/jquery.tablesorter.css" rel="stylesheet">
+<link href="css/columnSelect.css" rel="stylesheet">
 <style>
 #sqlButtons { text-align: left; }
 #buttonContainer { text-align: center; }
@@ -162,11 +163,12 @@ var initSort = "";
 					      }
 					   }
 					}
-					rw("<table class='tablesorter topMargin'>");
+
+					rw("<p id='fields' class=''></p><table class='tablesorter'>");
 					if(RS.State == 1) { // if the recordset has rows
 					  //show the column names
 					  rw("<thead>");
-					  rw("  <tr>");
+					  rw("  <tr class='headerRow'>");
 					  for(var i=0; i < RS.Fields.Count;i++) {
 					     the_type = "CaseInsensitiveString";
 					     if( RS.Fields(i).Type == 135) the_type="Date";
@@ -230,6 +232,7 @@ var initSort = "";
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="js/columnSelect.js"></script>
 <script type="text/javascript">
 function setCookie(name, value) {
 	var exp = new Date();
@@ -408,6 +411,7 @@ $(document).ready(function() {
 	var page = path.substr(path.lastIndexOf("/")+1);
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
+	document.title = "Bolt: <%=sPageTitle%>";
 
 	$("#resultsContainer").on("click", ".tablesorter tbody tr", function () {
 	   $(this).children("td").toggleClass("highlight");
@@ -431,7 +435,10 @@ $(document).ready(function() {
 		}
 	});
 
-	if(<%=sql.length%> > 0) $(".tablesorter").tablesorter(initSort);
+	if(<%=sql.length%> > 0) {
+		$(".tablesorter").tablesorter(initSort);
+	   columnSelect();
+	}
 
 	var sql = $("#sqlStmt").val() + "";
 	$("#sqlStmt").focus().val(sql);

@@ -41,7 +41,7 @@ UpdateCookies();
 			//Page Header:
 			rw("<table class='fullWidth top'>");
 			rw("<tr>");
-			rw("<td>Table Name:</td>");
+			rw("<td width='20%'>Table Name:</td>");
 			rw("<td>" + type_name + "</td>");
 			rw("</tr>");
 			rw("<tr>");
@@ -62,10 +62,10 @@ UpdateCookies();
 			rw("</tr>");
 			rw("<tr>");
 			rw("<td class='padRight'>");
-			var BC = 'Baseline';
+			var BC = "Baseline";
 			type_id = type_id - 0;
-			if (type_id >= 2000 & type_id <= 4999){BC ='Custom';}
-			if (type_id >= 430 & type_id <= 511){BC ='Custom';}
+			if (type_id >= 2000 & type_id <= 4999) BC = "Custom";
+			if (type_id >= 430 & type_id <= 511) BC = "Custom";
 			rw("Baseline/Custom:");
 			rw("</td><td>");
 			rw(BC);
@@ -95,7 +95,7 @@ UpdateCookies();
 			rw("</td><td>");
 			rw("<a href='#views'>Referenced in Views</a>");
 			rw("</td>");
-			if(storageSQL != '') {
+			if(storageSQL != "") {
 				rw("<td>");
 				rw("<a href='#storage'>Storage</a>");
 				rw("</td>");
@@ -223,7 +223,7 @@ UpdateCookies();
    	ViewLink += "&field_name=";
    	ViewLink += FieldName;
    	//We could use an image if we want:
-   	//ViewLink += "><IMG SRC='./images/smallv.gif' ALIGN='center' ALT='List of Views where this field is used' BORDER=0>"
+   	//ViewLink += "><img src='./images/smallv.gif' align='center' alt='List of Views where this field is used' />"
    	//Or, just use a simple string
    	ViewLink += ">Search"
    	ViewLink += "</a>";
@@ -330,11 +330,11 @@ UpdateCookies();
 		RelationSpecRelID = rsRelations("spec_rel_id");
 		InverseRelation = rsRelations(INVERSE_RELATION_FIELD);
 
-		Flags = rsRelations('flags') + '';
+		Flags = rsRelations("flags") + "";
 		strFlags = GetRelationParams(Flags);
 
-		Comments = rsRelations(comment_field) + '';
-		if (Comments == "null") {Comments = '';}
+		Comments = rsRelations(comment_field) + "";
+		if (Comments == "null") Comments = "";
 		Comments = Server.HTMLEncode(Comments) + EmptyString;
 
 		//Build the MTM Table Name
@@ -343,7 +343,7 @@ UpdateCookies();
 			TargetSpecRelID = GetSpecRelID(TargetObjectID,InverseRelation);
 			//Put the lower table ID first
 			if (type_id - 0  < TargetObjectID - 0){
-				//We'll break the MTM table name into 2 rows for nicer page formatting
+				//We will break the MTM table name into 2 rows for nicer page formatting
 				MTMTableName = "mtm_" + type_name + RelationSpecRelID + "_" + "<BR>" + TargetObject + TargetSpecRelID;
 			} else {
 				MTMTableName = "mtm_" + TargetObject + TargetSpecRelID + "_"  + "<BR>" + type_name + RelationSpecRelID;
@@ -476,14 +476,14 @@ UpdateCookies();
 			}
 
 			var rsIndexStorage = retrieveDataFromDB(TheSQL);
-			var TheStorageSQL = '&nbsp;';
+			var TheStorageSQL = "&nbsp;";
 			if(!rsIndexStorage.EOF) {
-				TheStorageSQL = rsIndexStorage(TheSQLStrName) + '';
-				if(TheStorageSQL == null || TheStorageSQL == 'null' || TheStorageSQL == '') TheStorageSQL = rsIndexStorage('generic_sql') + '';
-				if(TheStorageSQL == null || TheStorageSQL == 'null') TheStorageSQL = '&nbsp;';
+				TheStorageSQL = rsIndexStorage(TheSQLStrName) + "";
+				if(TheStorageSQL == null || TheStorageSQL == "null" || TheStorageSQL == "") TheStorageSQL = rsIndexStorage("generic_sql") + "";
+				if(TheStorageSQL == null || TheStorageSQL == "null") TheStorageSQL = "&nbsp;";
 			}
 			rsIndexStorage.Close();
-			if(TheStorageSQL != '') {
+			if(TheStorageSQL != "") {
 				rw("<td>");
 				rw(TheStorageSQL);
 				rw("</td>");
@@ -550,9 +550,9 @@ UpdateCookies();
 	rw("</table>");
 
 	//Print the storage
-	if(storageSQL != '') {
+	if(storageSQL != "") {
 		rw("<h4 id='storage'>Storage:</h4>");
-		rw(storageSQL.replace(/\n/g,'<br>'));
+		rw(storageSQL.replace(/\n/g, "<br>"));
 	}
 %>
 		</div>
@@ -583,7 +583,7 @@ UpdateCookies();
 <script type="text/javascript">
 $(document).ready(function() {
 	var path = window.location.pathname;
-	var page = path.substr(path.lastIndexOf('/')+1);
+	var page = path.substr(path.lastIndexOf("/")+1);
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";

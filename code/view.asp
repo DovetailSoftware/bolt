@@ -56,15 +56,15 @@ if (Flags & UNION_VIEW_FLAG){
 %>
 
 <div class="container-fluid">
-	<div class="row-fluid">
+	<div class="row-fluid topMargin">
 		<div class="span2"></div>
-		<div id="headerContainer" class="span8 topMargin">
+		<div id="headerContainer" class="span8">
 		<%	outputViewHeader("", ""); %>
 		</div>
 		<div class="span2"></div>
 	</div>
 
-	<div class="row-fluid">
+	<div class="row-fluid topMargin">
 		<div class="span2"></div>
 		<div id="hyperlinksContainer" class="span8">
 		<%	//See if it contributes to any UNION views
@@ -226,8 +226,8 @@ if (Flags & UNION_VIEW_FLAG){
 			//Print the Table of Union Views this view contributes to
    		if(unionViewsList.length > 0) {
    		   rw("<h4 id='contribs'>Contributes To UNION Views:</h4>");
-   		   rw("<table id='contribs' border=1 class='tablesorter'>");
-   		   rw("<thead><tr class=headerRow>");
+   		   rw("<table id='contribs' class='tablesorter'>");
+   		   rw("<thead><tr>");
    		   rw("<th>");
    		   rw("View Name");
    		   rw("</th>");
