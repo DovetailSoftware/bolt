@@ -19,8 +19,8 @@ Dovetail Bolt
 
 Configure the web server to support Dovetail Bolt:
 
-* If you are using IIS7 (on Windows 7 or Windows Server 2008), refer to the [IIS7 Setup Instructions](./iis7.md)
-* If you are using IIS6 (on Windows Server 2003), refer to the [IIS6 Setup Instructions](./iis6.md)
+* If you are using IIS7 (on Windows 7 or Windows Server 2008), refer to the [IIS7 Setup Instructions](bolt/blob/master/iis7.md)
+* If you are using IIS6 (on Windows Server 2003), refer to the [IIS6 Setup Instructions](bolt/blob/master/iis6.md)
 
 
 ### Getting Help
