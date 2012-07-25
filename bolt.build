@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <project name="Bolt" default="build-release" xmlns="http://nant.sf.net/release/0.85-rc3/nant.xsd">
 
-	<target name="build-release" depends="clean, make-builddir, release-properties, get-release-version, copy-to-release, retrieve-published-documentation, build-installer" description="Compile and run unit tests" />
+	<target name="build-release" depends="clean, make-builddir, release-properties, get-release-version, copy-to-release, retrieve-published-documentation" description="Compile and run unit tests" />
 	<target name="deploy-release" depends="build-release, deploy-to-qa"/>
-	<target name="ship-release"   depends="deploy-release, tag-release, deploy-to-ship, authenticate-against-website deploy-product-to-public-website, deploy-documentation-to-public-website, unauthenticate-from-website"/>
+	<target name="ship-release"   depends="deploy-release, git.tag.release, deploy-to-ship, authenticate-against-website deploy-product-to-public-website, deploy-documentation-to-public-website, unauthenticate-from-website"/>
 
 	<!-- Main paths -->
 	<property name="tools.dir" value="${path::get-full-path('tools')}" />
@@ -41,14 +41,15 @@
 		<copy todir="${release.dir}">
 			<fileset basedir="${src.dir}">
 				<include name="*" />
-				<include name="images/*" />
-				<include name="jQuery/*" />
+				<include name="css/*" />
+				<include name="img/*" />
+				<include name="inc/*" />
+				<include name="js/*" />
 				<include name="ClarifyID/*" />
 				<include name="files/*" />
 				<exclude name="*.sln"/>
 				<exclude name="*.suo"/>
 				<exclude name="_ReSharper.bolt"/>
-				<exclude name=".svn"/>
 				<exclude name="*.Resharper*"/>
 			</fileset>
 		</copy>
@@ -64,31 +65,6 @@
 		</copy>
 
 		<copy file="\\authorit\Publishing\HTMLHelp\Dovetail Bolt\bolt.chm"  tofile="${htmldocs.release.dir}\bolt.chm" />
-	</target>
-
-	<target name="build-installer">
-		<property name="wix.dir" value="${tools.dir}\wix" overwrite="false" />
-
-		<!-- for wix preprocessor so that the version number gets propagated into msi -->
-		<setenv name="asm.version" value="${asm.version}"/>
-
-		<!-- for wix preprocessor so that the location of released files gets propagated into msi -->
-		<setenv name="bolt.dir" value="${release.dir}"/>
-		<setenv name="bolt.docs.dir" value="${htmldocs.release.dir}"/>
-		<setenv name="bolt.tools.dir" value="${tools.dir}"/>
-
-		<setenv name="wix.lib" value="${path::get-full-path('./wix/lib')}"/>
-
-		<echo message="Build MSI using Wix"/>
-
-		<delete>
-			<fileset>
-				<include name="${wix.dir}/*.wixobj"/>
-			</fileset>
-		</delete>
-
-		<exec program="${wix.dir}\candle.exe" workingdir=".\wix" commandline="bolt.wxs UdlConfigurationPromptDialog.wxs DialogSet.wxs" />
-		<exec program="${wix.dir}\light.exe" workingdir=".\wix" commandline="bolt.wixobj DialogSet.wixobj UdlConfigurationPromptDialog.wixobj ${wix.dir}\wixui.wixlib ${wix.dir}\sca.wixlib -loc ${wix.dir}\WixUI_en-us.wxl -out ${release.dir}\bolt_${asm.version}.msi"/>
 	</target>
 
 	<target name="deploy-to-qa">
@@ -124,6 +100,59 @@
 		</copy>
 	</target>
 
+	<target name="git.tag">
+		<property name="git.describe.file" value="gitDescribe.txt" />
+		<exec program="CMD" commandline="/C git.cmd describe --long" output="${git.describe.file}" verbose="true" failonerror="false"/>
+		<loadfile file="${git.describe.file}" property="git.describe" />
+		<delete file="${git.describe.file}" />
+		<property name="gitTag" value="0" />
+		<regex pattern="v(?'gitTagVersion'\d+.\d+.\d+)-(?'gitTagCommits'\d*)" input="${git.describe}" failonerror="false"/>
+		<property name="git.tag" value="${gitTagCommits}"/>
+		<property name="git.tag.version" value="${gitTagVersion}"/>
+		<echo message="Git tag version is ${git.tag.version}. There have been ${git.tag} commits since the tag." />
+	</target>
+
+	<target name="git.tag.release" depends="get-release-version">
+		<echo if="${git.tag.version == asm.version.sans.tag}">Tag and Assembly version are the same ${asm.version.sans.tag}. No tag will be created.</echo>
+		<if test="${git.tag.version != asm.version.sans.tag}">
+			<echo message="Creating tag for release ${asm.version.sans.tag}" />
+			<property name="git.tag.name" value="v${asm.version.sans.tag}"/>
+			<exec program="CMD" commandline="/C git.cmd tag -a ${git.tag.name} -m &quot;tagging release ${git.tag.name}&quot; --force" verbose="true"/>
+			<exec program="CMD" commandline="/C git.cmd push dovetail git.tag.name" verbose="true"/>
+			<echo message="Created tag ${git.tag.name} pushed to dovetail master" />
+		</if>
+	</target>
+
+	<target name="git.sha">
+		<property name="git.log.file" value="gitLog.txt" />
+		<exec program="CMD" commandline="/C git.cmd log -1 --pretty=%H" output="${git.log.file}" />
+		<loadfile file="${git.log.file}" property="git.log" />
+		<delete file="${git.log.file}" />
+		<property name="gitSHA" value="" />
+		<regex pattern="(?'gitSHA'.*)\s*" input="${git.log}" />
+		<property name="git.sha" value="${gitSHA}"/>
+		<echo message="${gitSHA} is the most recent commit sha." />
+	</target>
+
+   <target name="get-release-version" depends="git.tag, git.sha">
+      <xmlpeek file="${asm.version.file}" property="asm.tempversion" xpath="//version"/>
+
+		<property name="asm.version.sans.tag"
+			value="${ int::to-string(version::get-major(version::parse(asm.tempversion)))
+				+ '.' + int::to-string(version::get-minor(version::parse(asm.tempversion))) + '.' + int::to-string(version::get-build(version::parse(asm.tempversion)))}"/>
+
+		<property name="asm.version" value="${asm.version.sans.tag + '.' + git.tag }" overwrite="true" />
+
+		<property name="asm.version.major" value="${ int::to-string(version::get-major(version::parse(asm.tempversion))) }" overwrite="true" />
+		<property name="asm.version.minor" value="${ int::to-string(version::get-minor(version::parse(asm.tempversion))) }" overwrite="true" />
+		<property name="asm.version.build" value="${ int::to-string(version::get-build(version::parse(asm.tempversion))) }" overwrite="true" />
+		<property name="asm.version.revision" value="${git.tag}" overwrite="true" />
+
+		<setenv name="asm.version" value="${asm.version}"/>
+
+		<echo message="Version set to ${asm.version}"/>
+   </target>
+<!--
 	<target name="svn.revision">
 		<property name="svn.infotempfile" value="svninfo.txt" />
 		<exec program="svn.exe" output="${svn.infotempfile}">
@@ -170,6 +199,7 @@
 
 		<exec program="svn.exe" commandline="copy https://code.dovetailsoftware.com/svn/classic/bolt/trunk ${svn.tag.path} -m &quot;${svn.tag.message}&quot;" />
 	</target>
+-->
 
 	<target name="deploy-product-to-public-website" depends="get-release-version">
 		<property name="deployment.dir" value="${website.unc}/${asm.version.sans.tag}"/>
