@@ -1,5 +1,28 @@
 <%@ language="JavaScript" %>
 <!DOCTYPE html>
+<!--
+///////////////////////////////////////////////////////////////////////////////
+// Product        :  Online Tools(tm)
+//
+// Series         :  Dovetail Software Development Series(tm)
+//
+// Name           :  bizrules2.asp
+//
+// Description    :  Business Rule Details
+//
+// Author         :  Dovetail Software, Inc.
+//                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
+//                   Austin, TX 78759
+//                   (512) 610-5400
+//                   EMAIL: support@dovetailsoftware.com
+//                   www.dovetailsoftware.com
+//
+// Platforms      :  This version supports Clarify 9.0 and later
+//
+// Copyright (C) 2001-2012 Dovetail Software, Inc.
+// All Rights Reserved.
+///////////////////////////////////////////////////////////////////////////////
+-->
 <html>
 <head>
 <title></title>
@@ -146,7 +169,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		//Loop through the list of rules
 		while(rsCT.EOF == false) {
 			// Assume that we do not display this rule
-			DisplayRow = "none";
+			var DisplayRow = false;
 
 			//Get the Object Types, Start Events, Stop Events, and Conditions for the rule
 			CTObjid = rsCT("objid") - 0;
@@ -317,11 +340,11 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			}
 
 			//If all of our match booleans are true, then we will display this rule, so set its display property to nothing
-			if(StartMatch && StopMatch && ObjectTypeMatch && ConditionPropMatch && ConditionValueMatch) {DisplayRow = "";}
-			if(forceDisplay) DisplayRow = "";
+			if(StartMatch && StopMatch && ObjectTypeMatch && ConditionPropMatch && ConditionValueMatch) DisplayRow = true;
+			if(forceDisplay) DisplayRow = true;
 			%>
 
-			<tr class="<%=the_class=SwapClass(the_class)%>" style="display:<%=DisplayRow%>" id="<%=rsCT("objid")%>" >
+			<tr class="<%=the_class=SwapClass(the_class)%>" <%=(DisplayRow)? "" : "style='display:none;'" %> id="<%=rsCT("objid")%>">
 			<td><b><%=rsCT("title")%></b></td>
 			<td><%=rsCT("rule_set")%>&nbsp;</td>
 			<td><%=rsCT("description")%>&nbsp;</td>

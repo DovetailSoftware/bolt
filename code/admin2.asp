@@ -1,13 +1,13 @@
 <%@ language="JavaScript" %>
-<%
+<!--
 ///////////////////////////////////////////////////////////////////////////////
 // Product        :  Online Tools(tm)
 //
-// Series         :  First Choice Development Series(tm)
+// Series         :  Dovetail Software Development Series(tm)
 //
 // Name           :  admin2.asp
 //
-// Description    :  Administrative Tools for BOLT
+// Description    :  Server page that updates the database information
 //
 // Author         :  Dovetail Software, Inc.
 //                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
@@ -18,10 +18,10 @@
 //
 // Platforms      :  This version supports Clarify 9.0 and later
 //
-// Copyright (C)  2001-2009 Dovetail Software, Inc.
+// Copyright (C) 2001-2012 Dovetail Software, Inc.
 // All Rights Reserved.
 ///////////////////////////////////////////////////////////////////////////////
-%>
+-->
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/json.asp"-->
 <%

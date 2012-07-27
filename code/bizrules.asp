@@ -1,5 +1,28 @@
 <%@ language="JavaScript" %>
 <!DOCTYPE html>
+<!--
+///////////////////////////////////////////////////////////////////////////////
+// Product        :  Online Tools(tm)
+//
+// Series         :  Dovetail Software Development Series(tm)
+//
+// Name           :  bizrules.asp
+//
+// Description    :  Filter page for viewing Business Rules
+//
+// Author         :  Dovetail Software, Inc.
+//                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
+//                   Austin, TX 78759
+//                   (512) 610-5400
+//                   EMAIL: support@dovetailsoftware.com
+//                   www.dovetailsoftware.com
+//
+// Platforms      :  This version supports Clarify 9.0 and later
+//
+// Copyright (C) 2001-2012 Dovetail Software, Inc.
+// All Rights Reserved.
+///////////////////////////////////////////////////////////////////////////////
+-->
 <html>
 <head>
 <title></title>
@@ -35,7 +58,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 			<h3>Business Rule Usage Report</h3>
 
-			<div class="centered_wrapper" />
+			<div class="horizontalMargin" />
 				<p class="centered" style="text-align:center"><a href="business_rule_report.asp">Business Rule Usage Report</a></p>
 			</div>
 		</div>

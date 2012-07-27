@@ -1,13 +1,13 @@
 <%@ language="JavaScript" %>
-<%
+<!--
 ///////////////////////////////////////////////////////////////////////////////
 // Product        :  Online Tools(tm)
 //
-// Series         :  First Choice Development Series(tm)
+// Series         :  Dovetail Software Development Series(tm)
 //
-// Name           :  getforms.asp
+// Name           :  getform.asp
 //
-// Description    :
+// Description    :  Form Finder
 //
 // Author         :  Dovetail Software, Inc.
 //                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
@@ -18,13 +18,15 @@
 //
 // Platforms      :  This version supports Clarify 9.0 and later
 //
-// Copyright (C)  2001-2009 Dovetail Software, Inc.
+// Copyright (C) 2001-2012 Dovetail Software, Inc.
 // All Rights Reserved.
 ///////////////////////////////////////////////////////////////////////////////
-%>
+-->
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
+var sPageTitle = "Form";
+var sPageType = "Forms";
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
 %>
@@ -45,12 +47,9 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		FormId = rsForms("id");
 		TheLink = BuildFormURL(FormObjid, FormId)
 		Response.Redirect(TheLink);
-	}
-	else{
-		rw("<h3 align='center'>Form not found</h3>");
+	} else {
+		rw("<h3>Form not found</h3>");
 		rw("Unable to find a form with id =" + id + " and clarify version = " + ver_clarify + " and customer version = " + ver_customer);
-		rw("</body>");
-		rw("</html>");
-		Response.End();
+		re();
 	}
 %>

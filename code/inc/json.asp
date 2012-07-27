@@ -1,99 +1,25 @@
 <%
-function userListToJson(userList) {
-  	var object = {};
-	for(var i = 0; i < userList.RecordCount; i++) {
-		var title = userList("title") + "";
-		object[title.toLowerCase()] = title;
-  		userList.MoveNext();
-	}
-
-	return JSON.stringify(object);
-}
-
-function recordsetToJson(records) {
-  var object = new Object();
-  //var records = fcGeneric.Records;
-  var rowCounter = 1;
-  while (!records.EOF)
-  {
-    var row = new Object();
-  	//row.DBObjectName = fcGeneric.DBObjectName;
-    for (var i=0; i < records.Fields.Count;i++){
-      fieldName = records.Fields(i).Name;
-      row[fieldName] = records.Fields(i).Value;
-    }
-    object[rowCounter] = row;
-    rowCounter++;
-    records.MoveNext();
-  }
-
-  return JSON.stringify(object);
-}
-
-function fcGenericToJson(fcGeneric) {
-  var object = new Object();
-  var records = fcGeneric.Records;
-  var rowCounter = 1;
-  while (!records.EOF)
-  {
-    var row = new Object();
-  	row.DBObjectName = fcGeneric.DBObjectName;
-    for (var i=0; i < records.Fields.Count;i++){
-      fieldName = records.Fields(i).Name;
-      row[fieldName] = records.Fields(i).Value;
-    }
-    object[fcGeneric.DBObjectName + rowCounter] = row;
-    rowCounter++;
-    records.MoveNext();
-  }
-
-  return JSON.stringify(object);
-}
-
-function fcGenericToJqGridObject(fcGeneric, idFieldName) {
-   var object = new Object();
-   var rows = [];
-   var records = fcGeneric.Records;
-   var rowCounter = 1;
-   if(idFieldName == undefined) idFieldName = "objid";
-
-   object["total"] = 0;
-   object["page"] = 0;
-   object["records"] = fcGeneric.Count();
-
-   while(!records.EOF) {
-      var row = new Object();
-      row["id"] = records.Fields(idFieldName).Value;
-      var cells = [];
-      for (var i=0; i < records.Fields.Count;i++){
-         fieldName = records.Fields(i).Name;
-         if((fieldName == "objid" && idFieldName == "objid") || (fieldName != "objid")) {
-            cells[cells.length] = records.Fields(i).Value;
-         }
-      }
-      row["cell"] = cells;
-      rows[rows.length] = row;
-      rowCounter++;
-      records.MoveNext();
-   }
-   object["rows"] = rows;
-
-   return object;
-}
-
-function fcGenericToJqGrid(fcGeneric, idFieldName) {
-
-   return JSON.stringify(fcGenericToJqGridObject(fcGeneric, idFieldName));
-}
-
-function fcGenericToJsonObject(fcGeneric) {
-  var object = new Object();
-  for (var i=0; i < fcGeneric.Records.Fields.Count;i++){
-    fieldName = fcGeneric.Records.Fields(i).Name;
-    object[fieldName] = escape(fcGeneric(fieldName).Value);
-  }
-  return object;
-}
+///////////////////////////////////////////////////////////////////////////////
+// Product        :  Online Tools(tm)
+//
+// Series         :  Dovetail Software Development Series(tm)
+//
+// Name           :  json.asp
+//
+// Description    :  JSON utilities
+//
+// Author         :  Dovetail Software, Inc.
+//                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
+//                   Austin, TX 78759
+//                   (512) 610-5400
+//                   EMAIL: support@dovetailsoftware.com
+//                   www.dovetailsoftware.com
+//
+// Platforms      :  This version supports Clarify 9.0 and later
+//
+// Copyright (C) 2001-2012 Dovetail Software, Inc.
+// All Rights Reserved.
+///////////////////////////////////////////////////////////////////////////////
 
 /*
     json2.js

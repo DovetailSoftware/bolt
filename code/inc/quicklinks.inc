@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Product        :  Online Tools(tm)
 //
-// Series         :  First Choice Development Series(tm)
+// Series         :  Dovetail Software Development Series(tm)
 //
 // Name           :  quicklinks.inc
 //
@@ -17,7 +17,7 @@
 //
 // Platforms      :  This version supports Clarify 9.0 and later
 //
-// Copyright (C)  2001-2009 Dovetail Software, Inc.
+// Copyright (C) 2001-2012 Dovetail Software, Inc.
 // All Rights Reserved.
 ///////////////////////////////////////////////////////////////////////////////
 

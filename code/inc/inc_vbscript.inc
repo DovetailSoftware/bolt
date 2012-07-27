@@ -1,23 +1,23 @@
 <SCRIPT Runat=Server Language=VBScript>
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-'' Product        : Dovetail Agent
+'' Product        :  Online Tools(tm)
 ''
-'' Series         : Dovetail Software Web Series(tm)
+'' Series         :  Dovetail Software Development Series(tm)
 ''
-'' Name           : inc_vbscript.inc
+'' Name           :  inc_vbscript.inc
 ''
-'' Description    : Common VBScript Functions
+'' Description    :  VB utility functions
 ''
-'' Author         : Dovetail Software, Inc.
-''                  4807 Spicewood Springs Rd, Bldg 4 Suite 200
-''                  Austin, TX 78759
-''                  (512) 610-5400
-''                  EMAIL: support@dovetailsoftware.com
-''                  www.dovetailsoftware.com
+'' Author         :  Dovetail Software, Inc.
+''                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
+''                   Austin, TX 78759
+''                   (512) 610-5400
+''                   EMAIL: support@dovetailsoftware.com
+''                   www.dovetailsoftware.com
 ''
-'' Platforms      : This version supports Clarify 4.5 and later
+'' Platforms      :  This version supports Clarify 9.0 and later
 ''
-'' Copyright (C) 2002 Dovetail Software, Inc.
+'' Copyright (C) 2001-2012 Dovetail Software, Inc.
 '' All Rights Reserved.
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
@@ -112,6 +112,5 @@ Dim out_date
   If t_date =  end_dt Then out_date = "*/*/* *:*:*"
   vbPrettyDate = out_date
 End Function
-
 
 </SCRIPT>

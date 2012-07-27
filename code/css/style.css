@@ -35,3 +35,7 @@ table.middle tr td {
 
 .topMargin { margin-top: 20px; }
 .padRight { padding-right: .5em; }
+
+.horizontalMargin {
+	margin: 10px 0;
+}

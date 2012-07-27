@@ -1,5 +1,28 @@
 <%@ language="JavaScript" %>
 <!DOCTYPE html>
+<!--
+///////////////////////////////////////////////////////////////////////////////
+// Product        :  Online Tools(tm)
+//
+// Series         :  Dovetail Software Development Series(tm)
+//
+// Name           :  schema_id_info.asp
+//
+// Description    :  Information about User-Defined Table and View IDs
+//
+// Author         :  Dovetail Software, Inc.
+//                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
+//                   Austin, TX 78759
+//                   (512) 610-5400
+//                   EMAIL: support@dovetailsoftware.com
+//                   www.dovetailsoftware.com
+//
+// Platforms      :  This version supports Clarify 9.0 and later
+//
+// Copyright (C) 2001-2012 Dovetail Software, Inc.
+// All Rights Reserved.
+///////////////////////////////////////////////////////////////////////////////
+-->
 <html>
 <head>
 <title></title>
@@ -68,8 +91,6 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 				The rest are reserved for Clarify baseline use.
 			</p>
 
-			<div class="centered_wrapper" >
-
 				<div class="cssbox topMargin" >
 				  <div class="cssbox_head">
 				    <h2>Low Range: 430-571</h2>
@@ -87,7 +108,7 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 						<% DisplayInfoForSchemaIdRange(2000,4999); %>
 				  </div>
 				</div>
-			</div>
+
 		</div>
 		<div class="span2"></div>
 	</div>
