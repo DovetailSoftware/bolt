@@ -3,15 +3,5 @@
 # ===================
 /build/
 build
-[Bb]in/
-[Oo]bj/
-*.sln.cache
-source/tools/fc.env
-logs/*.log*
 
-*.log
-pages/logs/
-pages/fc.env
-pages/global.asa
-pages/agent_logging.config
-database/clarify125_*.*
+code/bolt.udl
