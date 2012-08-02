@@ -167,7 +167,7 @@ if(sPageType != "Admin") {
 	TheFields = rsFieldName.Fields;
 
 	var fldCount = rsFieldName.Fields.Count
-	for (count=1;count <= fldCount;count++) {
+	for(count=1;count <= fldCount;count++) {
 		if(rsFieldName.Fields(count - 1).Name.toLowerCase() + "" == "comments") comment_field = "comments";
 	}
 
@@ -425,9 +425,9 @@ function TranslateDBType(DBType) {
 //////////////////////////////////////////////////////////////////////
 function BuildTableURL(TableNum, TableName) {
 	TheURL = "table.asp?type_id=";
-	TheURL+= TableNum;
-	TheURL+= "&type_name=";
-	TheURL+= TableName;
+	TheURL += TableNum;
+	TheURL += "&type_name=";
+	TheURL += TableName;
 	return TheURL;
 }
 
@@ -436,9 +436,9 @@ function BuildTableURL(TableNum, TableName) {
 //////////////////////////////////////////////////////////////////////
 function BuildViewURL(TableNum, TableName) {
 	TheURL = "view.asp?type_id=";
-	TheURL+= TableNum;
-	TheURL+= "&type_name=";
-	TheURL+= TableName;
+	TheURL += TableNum;
+	TheURL += "&type_name=";
+	TheURL += TableName;
 	return TheURL;
 }
 
@@ -447,9 +447,9 @@ function BuildViewURL(TableNum, TableName) {
 //////////////////////////////////////////////////////////////////////
 function BuildSQLViewURL(TableNum, TableName) {
 	TheURL = "sql_view.asp?type_id=";
-	TheURL+= TableNum;
-	TheURL+= "&type_name=";
-	TheURL+= TableName;
+	TheURL += TableNum;
+	TheURL += "&type_name=";
+	TheURL += TableName;
 	return TheURL;
 }
 
@@ -458,9 +458,9 @@ function BuildSQLViewURL(TableNum, TableName) {
 //////////////////////////////////////////////////////////////////////
 function BuildUnionViewURL(TableNum, TableName) {
 	TheURL = "union_view.asp?type_id=";
-	TheURL+= TableNum;
-	TheURL+= "&type_name=";
-	TheURL+= TableName;
+	TheURL += TableNum;
+	TheURL += "&type_name=";
+	TheURL += TableName;
 	return TheURL;
 }
 
@@ -469,7 +469,7 @@ function BuildUnionViewURL(TableNum, TableName) {
 //////////////////////////////////////////////////////////////////////
 function BuildButtonURL(Objid) {
 	TheURL = "button.asp?objid=";
-	TheURL+= Objid;
+	TheURL += Objid;
 	return TheURL;
 }
 
@@ -478,9 +478,9 @@ function BuildButtonURL(Objid) {
 //////////////////////////////////////////////////////////////////////
 function BuildChildFormURL(FormID,ParentObjid) {
 	TheURL = "childform.asp?id=";
-	TheURL+= FormID;
-	TheURL+= "&parent_objid=";
-	TheURL+= ParentObjid;
+	TheURL += FormID;
+	TheURL += "&parent_objid=";
+	TheURL += ParentObjid;
 	return TheURL;
 }
 
@@ -496,9 +496,9 @@ function BuildChildFormHyperLink(FormID,ParentObjid) {
 //////////////////////////////////////////////////////////////////////
 function BuildParentChildFormURL(FormID,ParentObjid) {
 	TheURL = "parentchildform.asp?id=";
-	TheURL+= FormID;
-	TheURL+= "&parent_objid=";
-	TheURL+= ParentObjid;
+	TheURL += FormID;
+	TheURL += "&parent_objid=";
+	TheURL += ParentObjid;
 	return TheURL;
 }
 
@@ -514,9 +514,9 @@ function BuildParentChildFormHyperLink(FormID,ParentObjid) {
 //////////////////////////////////////////////////////////////////////
 function BuildParentFormURL(FormID,ChildObjid) {
 	TheURL = "childform.asp?id=";
-	TheURL+= FormID;
-	TheURL+= "&parent_objid=";
-	TheURL+= ChildObjid;
+	TheURL += FormID;
+	TheURL += "&parent_objid=";
+	TheURL += ChildObjid;
 	return TheURL;
 }
 
@@ -535,7 +535,7 @@ function BuildHyperLink(URL,Title,Target) {
 	HyperLink+= URL;
 
 	if(Target == "top") {
-	  HyperLink+= " target=_top "
+		HyperLink+= " target=_top "
 	}
 
 	HyperLink+= ">" + Title;
@@ -568,7 +568,7 @@ function IsView(TypeID) {
 	rs = retrieveDataFromDB(TheSQL);
 	Flags = 0;
 	try {
-	  Flags = rs(0) - 0;
+		Flags = rs(0) - 0;
 	} catch (e) { }
 
 	//If the flag 512 bit is on, then this is a view
@@ -640,9 +640,9 @@ function GetTableGroup(TableName) {
 //////////////////////////////////////////////////////////////////////
 function BuildFormURL(Objid,Id) {
 	TheURL = "form.asp?objid=";
-	TheURL+= Objid;
-	TheURL+= "&id=";
-	TheURL+= Id;
+	TheURL += Objid;
+	TheURL += "&id=";
+	TheURL += Id;
 	return TheURL;
 }
 
@@ -872,13 +872,13 @@ function TranslateBtnActionSync(iSync) {
 // Get the Objid for a particular child form in a RC
 //////////////////////////////////////////////////////////////////////
 function GetChildFormObjid(ChildID,RCObjid) {
-	TheSQL= "select table_window_db.objid from mtm_window_db4_rc_config1, table_rc_config , table_window_db";
-	TheSQL+= " where table_window_db.objid = mtm_window_db4_rc_config1.window_db2rc_config";
-	TheSQL+= " AND mtm_window_db4_rc_config1.rc_config2window_db = table_rc_config.objid";
-	TheSQL+= " and table_rc_config.objid  = ";
-	TheSQL+= RCObjid;
-	TheSQL+= " and table_window_db.id = ";
-	TheSQL+= ChildID;
+	TheSQL = "select table_window_db.objid from mtm_window_db4_rc_config1, table_rc_config , table_window_db";
+	TheSQL += " where table_window_db.objid = mtm_window_db4_rc_config1.window_db2rc_config";
+	TheSQL += " AND mtm_window_db4_rc_config1.rc_config2window_db = table_rc_config.objid";
+	TheSQL += " and table_rc_config.objid  = ";
+	TheSQL += RCObjid;
+	TheSQL += " and table_window_db.id = ";
+	TheSQL += ChildID;
 	rsChild = retrieveDataFromDB(TheSQL);
 
 	if(rsChild.EOF) {
@@ -912,69 +912,69 @@ function GetRCName(RCObjid) {
 function GetFieldParams(flags) {
 	var sp_str = "";
 	if((flags & CHANGE_DATE_FIELD) > 0) {
-	 sp_str = CHANGE_DATE_STR;
+		sp_str = CHANGE_DATE_STR;
 	}
 	if((flags & USER_DEFINED_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + USER_DEFINED_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += USER_DEFINED_STR;
 	}
 	if((flags & DIRECT_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + DIRECT_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += DIRECT_STR;
 	}
 	if((flags & BINARY_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + BINARY_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += BINARY_STR;
 	}
 	if((flags & ALLOW_NULL_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + ALLOW_NULL_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += ALLOW_NULL_STR;
 	}
 	if((flags & SEARCHABLE_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + SEARCHABLE_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += SEARCHABLE_STR;
 	}
 	if((flags & CHANGE_FIELD_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + CHANGE_FIELD_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += CHANGE_FIELD_STR;
 	}
 	if((flags & NO_CLIENT_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + NO_CLIENT_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += NO_CLIENT_STR;
 	}
 	if((flags & NO_SERVER_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + NO_SERVER_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += NO_SERVER_STR;
 	}
 	if((flags & CURRENCY_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + CURRENCY_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += CURRENCY_STR;
 	}
 	if((flags & NON_UNIQUE_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + NON_UNIQUE_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += NON_UNIQUE_STR;
 	}
 	if((flags & CONSTANT_VALUE_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + CONSTANT_VALUE_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += CONSTANT_VALUE_STR;
 	}
 	if((flags & UNCNC_KEY_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + UNCNC_KEY_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += UNCNC_KEY_STR;
 	}
 	if((flags & FORCE_CASE_SENS_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + FORCE_CASE_SENS_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += FORCE_CASE_SENS_STR;
 	}
 	if((flags & MULTILINGUAL_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + MULTILINGUAL_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += MULTILINGUAL_STR;
 	}
 	if((flags & NONBASE_LANG_FIELD) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + NONBASE_LANG_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += NONBASE_LANG_STR;
 	}
-	sp_str = sp_str + EmptyString;
+	sp_str += EmptyString;
 
 	return sp_str;
 }
@@ -985,9 +985,9 @@ function GetFieldParams(flags) {
 function GetIndexParams(flags) {
 	var sp_str = "";
 	if((flags & UNIQUE_INDEX) > 0) {
-	 sp_str = UNIQUE_INDEX_STR;
+		sp_str = UNIQUE_INDEX_STR;
 	}
-	sp_str = sp_str + EmptyString;
+	sp_str += EmptyString;
 
 	return sp_str;
 }
@@ -998,13 +998,13 @@ function GetIndexParams(flags) {
 function GetRelationParams(flags) {
 	var sp_str = "";
 	if((flags & USER_DEFINED_RELATION_FLAG) > 0) {
-	 sp_str = USER_DEFINED_STR;
+		sp_str = USER_DEFINED_STR;
 	}
 	if((flags & REQUIRED_RELATION_FLAG) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str = sp_str + REQUIRED_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str += REQUIRED_STR;
 	}
-	sp_str = sp_str + EmptyString;
+	sp_str += EmptyString;
 
 	return sp_str;
 }
@@ -1013,9 +1013,8 @@ function GetRelationParams(flags) {
 // Return the Database Name
 //////////////////////////////////////////////////////////////////////
 function GetDBName() {
-
-	  rsFieldName = Server.CreateObject("ADODB.Recordset");
-	  rsFieldName.ActiveConnection = dbConnect;
+	rsFieldName = Server.CreateObject("ADODB.Recordset");
+	rsFieldName.ActiveConnection = dbConnect;
 	DBName = rsFieldName.ActiveConnection.DefaultDatabase;
 
 	rsFieldName = null;
@@ -1044,44 +1043,44 @@ function GetClarifyVersion() {
 function GetClarifyRelease() {
   var SchemaRev = GetClarifyVersion();
   switch (SchemaRev + "") {
-	  case CLARIFY_70 + "":
-		return "7.x"
-		  break;
-	  case CLARIFY_80 + "":
-		return "8.x"
-		  break;
-	  case CLARIFY_85 + "":
-		return "8.5"
-		  break;
-	  case CLARIFY_90 + "":
-		return "9.x"
-		  break;
-	  case CLARIFY_10 + "":
-		return "10.x"
-		  break;
-	  case CLARIFY_11 + "":
-		return "11.x"
-		  break;
-	  case CLARIFY_112 + "":
-		return "11.2"
-		  break;
-	  case CLARIFY_115 + "":
-		return "11.5"
-		  break;
-	  case CLARIFY_12 + "":
-		return "12.0"
-		  break;
-	  case CLARIFY_125 + "":
-		return "12.5"
-		  break;
-	  case CLARIFY_131 + "":
-		return "Amdocs CRM6"
-		  break;
-	  case AMDOCS_75 + "":
-		return "Amdocs CRM 7.5"
-		  break;
-	  default:
-		return "Unknown";
+		case CLARIFY_70 + "":
+			return "7.x"
+			break;
+		case CLARIFY_80 + "":
+			return "8.x"
+			break;
+		case CLARIFY_85 + "":
+			return "8.5"
+			break;
+		case CLARIFY_90 + "":
+			return "9.x"
+			break;
+		case CLARIFY_10 + "":
+			return "10.x"
+			break;
+		case CLARIFY_11 + "":
+			return "11.x"
+			break;
+		case CLARIFY_112 + "":
+			return "11.2"
+			break;
+		case CLARIFY_115 + "":
+			return "11.5"
+			break;
+		case CLARIFY_12 + "":
+			return "12.0"
+			break;
+		case CLARIFY_125 + "":
+			return "12.5"
+			break;
+		case CLARIFY_131 + "":
+			return "Amdocs CRM6"
+			break;
+		case AMDOCS_75 + "":
+			return "Amdocs CRM 7.5"
+			break;
+		default:
+			return "Unknown";
   }
 }
 
@@ -1090,9 +1089,9 @@ function GetClarifyRelease() {
 //////////////////////////////////////////////////////////////////////
 function GetSpecRelID(TargetObjectID,InverseRelation) {
 	TheSQL = "select spec_rel_id from adp_sch_rel_info where type_id = ";
-	TheSQL+= TargetObjectID;
-	TheSQL+= " and rel_name = '";
-	TheSQL+= InverseRelation + "'";
+	TheSQL += TargetObjectID;
+	TheSQL += " and rel_name = '";
+	TheSQL += InverseRelation + "'";
 	rsSpecRelID = retrieveDataFromDB(TheSQL);
 	SpecRelID = rsSpecRelID("spec_rel_id") - 0;
 	rsSpecRelID.Close();
@@ -1105,72 +1104,61 @@ function GetSpecRelID(TargetObjectID,InverseRelation) {
 // Update the Cookie Collection
 //////////////////////////////////////////////////////////////////////
 function UpdateCookies() {
-  in_list = false;
-  var position = 0;
-  var i;
+	in_list = false;
+	var position = 0;
 
-  for (i = 1; i<=12; i++) {
-	 if(Request.Cookies("bolt_recent")("recent" + i) == type_name) {
-		in_list = true;
-		position = i;
-	  }
-  }
+	for(var i = 1; i<=12; i++) {
+		if(Request.Cookies("bolt_recent")("recent" + i) == type_name) {
+			in_list = true;
+			position = i;
+		}
+	}
 
-  Response.Cookies("bolt_recent").Expires = "2020-01-01";
+	Response.Cookies("bolt_recent").Expires = "2020-01-01";
 
-  if(in_list) {
-	 for (i = 12; i >= position; i--) {
-		  //These stay in the same position
-		  Response.Cookies("bolt_recent")("recent" + i) = Request.Cookies("bolt_recent")("recent" + i) + "";
-		  Response.Cookies("bolt_recent")("recent" + i + "id") = Request.Cookies("bolt_recent")("recent" + i + "id") + "";
-	 }
-	 for (i = position - 1; i >= 1; i--) {
-		  //These move down one
-		  Response.Cookies("bolt_recent")("recent" + (i + 1) ) = Request.Cookies("bolt_recent")("recent" + i ) + "";
-		  Response.Cookies("bolt_recent")("recent" + (i + 1) + "id") = Request.Cookies("bolt_recent")("recent" + i + "id") + "";
-	 }
-  } else {
-	 for (i = 12; i > 1; i--) {
-		Response.Cookies("bolt_recent")("recent" + i) = Request.Cookies("bolt_recent")("recent" + (i - 1)) + "";
-		Response.Cookies("bolt_recent")("recent" + i + "id") = Request.Cookies("bolt_recent")("recent" + (i-1) + "id") + "";
-	 }
-  }
+	if(in_list) {
+		for(i = 12; i >= position; i--) {
+			//These stay in the same position
+			Response.Cookies("bolt_recent")("recent" + i) = Request.Cookies("bolt_recent")("recent" + i) + "";
+			Response.Cookies("bolt_recent")("recent" + i + "id") = Request.Cookies("bolt_recent")("recent" + i + "id") + "";
+		}
+		for(i = position - 1; i >= 1; i--) {
+			//These move down one
+			Response.Cookies("bolt_recent")("recent" + (i + 1) ) = Request.Cookies("bolt_recent")("recent" + i ) + "";
+			Response.Cookies("bolt_recent")("recent" + (i + 1) + "id") = Request.Cookies("bolt_recent")("recent" + i + "id") + "";
+		}
+	} else {
+		for(i = 12; i > 1; i--) {
+			Response.Cookies("bolt_recent")("recent" + i) = Request.Cookies("bolt_recent")("recent" + (i - 1)) + "";
+			Response.Cookies("bolt_recent")("recent" + i + "id") = Request.Cookies("bolt_recent")("recent" + (i-1) + "id") + "";
+		}
+	}
 
-  Response.Cookies("bolt_recent")("recent1") = type_name
-  Response.Cookies("bolt_recent")("recent1id") = type_id
+	Response.Cookies("bolt_recent")("recent1") = type_name
+	Response.Cookies("bolt_recent")("recent1id") = type_id
 }
 
 //////////////////////////////////////////////////////////////////////
 // Formats a seconds value as "d h:m"
 //////////////////////////////////////////////////////////////////////
 function FormatSeconds(nSeconds) {
-  var nDays;
-  var nHours;
-  var nMinutes;
+	// Break the seconds into days, hours and minutes
+	var nDays = Math.floor(nSeconds / (60 * 60 * 24));
+	var nHours = Math.floor((nSeconds / (60 * 60)) - (nDays * 24));
+	var nMinutes = Math.floor((nSeconds / 60) - (nDays * 24 * 60) - (nHours * 60));
 
-  // Break the seconds into days, hours and minutes
-  nDays = Math.floor(nSeconds / (60 * 60 * 24));
-  nHours = Math.floor((nSeconds / (60 * 60)) - (nDays * 24));
-  nMinutes = Math.floor((nSeconds / 60) - (nDays * 24 * 60) - (nHours * 60));
+	// add the leading zeros
+	if(nDays <= 9) {
+		nDays = '00' + nDays;
+	} else if(nDays >= 10 && nDays <= 99) {
+		nDays = '0' + nDays;
+	}
 
-  // add the leading zeros
+	if(nHours <= 9) nHours = '0' + nHours;
+	if(nMinutes <= 9) nMinutes = '0' + nMinutes;
 
-  if(nDays <= 9) {
-	 nDays = '00' + nDays;
-  } else if(nDays >= 10 && nDays <= 99) {
-	 nDays = '0' + nDays;
-  }
-
-  if(nHours <= 9) {
-	 nHours = '0' + nHours;
-  }
-
-  if(nMinutes <= 9) {
-	 nMinutes = '0' + nMinutes;
-  }
-
-  // return the formatted values
-  return nDays + ' ' + nHours + ':' + nMinutes;
+	// return the formatted values
+	return nDays + ' ' + nHours + ':' + nMinutes;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -1178,52 +1166,52 @@ function FormatSeconds(nSeconds) {
 //////////////////////////////////////////////////////////////////////
 function TranslateTimeType(TimeType) {
 	switch (TimeType - 0) {
-	  case 0:
+		case 0:
 			TimeString = "event creation";
 			break;
-	  case 1:
+		case 1:
 			TimeString = "contract response";
 			break;
-	  case 2:
+		case 2:
 			TimeString = "subcase commit";
 			break;
-	  case 3:
+		case 3:
 			TimeString = "subcase warning";
 			break;
-	  case 4:
+		case 4:
 			TimeString = "commitment time";
 			break;
-	  case 50:
+		case 50:
 			TimeString = "renew notification";
 			break;
-	  case 51:
+		case 51:
 			TimeString = "quote expiration";
 			break;
-	  case 52:
+		case 52:
 			TimeString = "earliest svc end date";
 			break;
-	  case 53:
+		case 53:
 			TimeString = "support pgm response";
 			break;
-	  case 54:
+		case 54:
 			TimeString = "commitment warning";
 			break;
-	  case 150:
+		case 150:
 			TimeString = "renew notification";
 			break;
-	  case 151:
+		case 151:
 			TimeString = "quote expiration";
 			break;
-	  case 152:
+		case 152:
 			TimeString = "earliest svc end date";
 			break;
-	  case 153:
+		case 153:
 			TimeString = "support pgm response";
 			break;
-	  case 154:
+		case 154:
 			TimeString = "commitment warning";
 			break;
-	  default:
+		default:
 			TimeString = TimeType + '&nbsp';
 			break;
 	}
@@ -1235,25 +1223,25 @@ function TranslateTimeType(TimeType) {
 //////////////////////////////////////////////////////////////////////
 function TranslateTimeUnits(TimeType) {
 	switch (TimeType - 0) {
-	  case 0:
+		case 0:
 			TimeString = "Elapsed Time";
 			break;
-	  case 1:
+		case 1:
 			TimeString = "Cust Bus Hrs";
 			break;
-	  case 2:
+		case 2:
 			TimeString = "Sppt Bus Hrs";
 			break;
-	  case 50:
+		case 50:
 			TimeString = "Cust Spt Prog Hrs";
 			break;
-	  case 51:
+		case 51:
 			TimeString = "Int Spt Prog Hrs";
 			break;
-	  case 150:
+		case 150:
 			TimeString = "Cust Spt Prog Hrs";
 			break;
-	  case 151:
+		case 151:
 			TimeString = "Int Spt Prog Hrs";
 			break;
 		default:
@@ -1268,51 +1256,51 @@ function TranslateTimeUnits(TimeType) {
 //////////////////////////////////////////////////////////////////////
 function TranslateRuleOperator(RuleOperator) {
 	switch (RuleOperator - 0) {
-	  case 0:
-		 CondOperator = ' > ';
-		 break;
-	  case 1:
-		 CondOperator = ' >= ';
-		 break;
-	  case 2:
-		 CondOperator = ' < ';
-		 break;
-	  case 3:
-		 CondOperator = ' <= ';
-		 break;
-	  case 4:
-		 CondOperator = ' = ';
-		 break;
-	  case 5:
-		 CondOperator = ' != ';
-		 break;
-	  case 6:
-		 CondOperator = ' starts with ';
-		 break;
-	  case 7:
-		 CondOperator = ' ends with ';
-		 break;
-	  case 8:
-		 CondOperator = ' does not start with ';
-		 break;
-	  case 9:
-		 CondOperator = ' does not end with ';
-		 break;
-	  case 10:
-		 CondOperator = ' contains ';
-		 break;
-	  case 11:
-		 CondOperator = ' does not contain ';
-		 break;
-	  case 12:
-		 CondOperator = ' is in ';
-		 break;
-	  case 13:
-		 CondOperator = ' is between ';
-		 break;
-	  default:
-		 CondOperator = ' ? ';
-		 break;
+		case 0:
+			CondOperator = ' > ';
+			break;
+		case 1:
+			CondOperator = ' >= ';
+			break;
+		case 2:
+			CondOperator = ' < ';
+			break;
+		case 3:
+			CondOperator = ' <= ';
+			break;
+		case 4:
+			CondOperator = ' = ';
+			break;
+		case 5:
+			CondOperator = ' != ';
+			break;
+		case 6:
+			CondOperator = ' starts with ';
+			break;
+		case 7:
+			CondOperator = ' ends with ';
+			break;
+		case 8:
+			CondOperator = ' does not start with ';
+			break;
+		case 9:
+			CondOperator = ' does not end with ';
+			break;
+		case 10:
+			CondOperator = ' contains ';
+			break;
+		case 11:
+			CondOperator = ' does not contain ';
+			break;
+		case 12:
+			CondOperator = ' is in ';
+			break;
+		case 13:
+			CondOperator = ' is between ';
+			break;
+		default:
+			CondOperator = ' ? ';
+			break;
 	}
 
 	return CondOperator;
@@ -1326,7 +1314,7 @@ function CleanUpString(inString) {
 	//Then add the HTML non-breaking space to it
 	outString = inString;
 	if(String(inString + "") == "null") outString = "";
-	outString += EmptyString;
+	if(outString.length == 0) outString = EmptyString;
 	return outString;
 }
 
@@ -1352,33 +1340,33 @@ function GetTableParams(table_id) {
 
 	var sp_str = "";
 	if((flags & CACHEOBJIDS_FLAG) > 0) {
-	 sp_str = CACHEOBJIDS_STR;
+		sp_str = CACHEOBJIDS_STR;
 	}
 	if((flags & VIEW_OPTIMIZED_FLAG) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str+= VIEW_OPTIMIZED_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str+= VIEW_OPTIMIZED_STR;
 	}
 	if((flags & ALLOW_FLEX_FLAG) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str+= ALLOW_FLEX_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str+= ALLOW_FLEX_STR;
 	}
 	if((flags & FLEX_TABLE_FLAG) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str+= FLEX_TABLE_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str+= FLEX_TABLE_STR;
 	}
 	if((flags & LOGICAL_TABLE_FLAG) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str+= LOGICAL_TABLE_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str+= LOGICAL_TABLE_STR;
 	}
 	if((flags & APP_OBJID_FLAG) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str+= APP_OBJID_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str+= APP_OBJID_STR;
 	}
 	if((flags & STR_OBJID_FLAG) > 0) {
-	 if(sp_str != "")  {sp_str = sp_str + COMMA_SPACE;}
-	 sp_str+= STR_OBJID_STR;
+		if(sp_str != "") sp_str += COMMA_SPACE;
+		sp_str+= STR_OBJID_STR;
 	}
-	sp_str = sp_str + EmptyString;
+	sp_str += EmptyString;
 
 	rs.Close();
 	rs = null;
@@ -1409,7 +1397,7 @@ function renderImage(id,path,alt,height,width,onclick) {
 //Function to trim leading and trailing spaces
 ///////////////////////////////////////////////////////////////////////////////////
 function FCTrim(strItem) {
-	strItem+="";
+	strItem += "";
 	strItem = strItem.replace(/^\s*/, "").replace(/\s*$/, "");
 	return strItem;
 }
@@ -1418,8 +1406,7 @@ function FCTrim(strItem) {
 //Get the base table link for a view
 ///////////////////////////////////////////////////////////////////////////////////
 function getBaseTableLink() {
-	TheSQL = "select from_obj_type from " + VIEW_TABLE + " where " + VIEW_ID + " = ";
-	TheSQL+= type_id;
+	TheSQL = "select from_obj_type from " + VIEW_TABLE + " where " + VIEW_ID + " = " + type_id;
 	rsView = retrieveDataFromDB(TheSQL);
 
 	if(rsView.RecordCount > 0) {
@@ -1446,12 +1433,11 @@ function getBaseTableLink() {
 function getFilterSQL() {
 	var TheFilterSQL = "";
 	if(ver > CLARIFY_125) {
-
 		if(dbType == "MSSQL") {
 			var TheSQL = "select ans.generic_sql,ans." + TheSQLStrName + " from adp_object ao left outer join adp_native_sql ans on ao.filter_sql_str_id = ans.objid where ao.type_name = '" + type_name + "'";
-			} else {
+		} else {
 			var TheSQL = "select TO_CHAR(ans.generic_sql) AS generic_sql,TO_CHAR(ans." + TheSQLStrName + ") AS " + TheSQLStrName + " from adp_object ao left outer join adp_native_sql ans on ao.filter_sql_str_id = ans.objid where ao.type_name = '" + type_name + "'";
-			}
+		}
 
 		rsView = retrieveDataFromDB(TheSQL);
 		if(!rsView.EOF) {
@@ -1515,17 +1501,17 @@ function getStorageSQL() {
 function ReplaceStr (TextIn,SearchStr, Replacement, CompMode)
 	Dim WorkText
 	Dim Pointer
-	  If IsNull(TextIn) Then
-		 ReplaceStr = Null
-	  Else
-		 WorkText = TextIn
-		 Pointer = InStr(1, WorkText, SearchStr, CompMode)
-		 Do While Pointer > 0
+	If IsNull(TextIn) Then
+		ReplaceStr = Null
+	Else
+		WorkText = TextIn
+		Pointer = InStr(1, WorkText, SearchStr, CompMode)
+		Do While Pointer > 0
 			WorkText = Left(WorkText, Pointer - 1) & Replacement & Mid(WorkText, Pointer + Len(SearchStr))
 			Pointer = InStr(Pointer + Len(Replacement), WorkText, SearchStr, CompMode)
-		 Loop
-		 ReplaceStr = WorkText
-	  End If
+		Loop
+		ReplaceStr = WorkText
+	End If
 End Function
 
 function SQLFixup(TextIn)

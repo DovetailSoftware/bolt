@@ -140,7 +140,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			rw("<tbody>");
 
 			while (!rsForms.EOF)	{
-				FormTitle = CleanUpString(rsForms("title"));
+				FormTitle = Server.HtmlEncode(CleanUpString(rsForms("title")));
 				FormVerClarify = CleanUpString(rsForms("ver_clarify"));
 				FormVerCust = CleanUpString(rsForms("ver_customer"));
 				FormID = rsForms("id");
