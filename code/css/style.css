@@ -26,7 +26,11 @@ table.middle tr td {
 }
 
 .highlight {
-  background-color: #ffff80 !important;
+	background-color: #ffff80 !important;
+}
+.exclusive {
+	text-align: center;
+	background-color: #BDD7FD !important;
 }
 
 #quickLinks td {

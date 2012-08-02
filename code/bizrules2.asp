@@ -332,8 +332,6 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			if(bSuppressActions == false) {
 				TheSQL3 = "select * from table_com_tmplte where escal_act2com_tmplte = " + CTObjid;
 
-				//rw(TheSQL3);
-				//Response.Flush();
 				rsAction = retrieveDataFromDB(TheSQL3);
 				ActionTitle = "";
 				ActionCount = 0;
@@ -344,7 +342,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			if(forceDisplay) DisplayRow = true;
 			%>
 
-			<tr class="<%=the_class=SwapClass(the_class)%>" <%=(DisplayRow)? "" : "style='display:none;'" %> id="<%=rsCT("objid")%>">
+			<tr <%=(DisplayRow)? "" : "style='display:none;'" %> id="<%=rsCT("objid")%>">
 			<td><b><%=rsCT("title")%></b></td>
 			<td><%=rsCT("rule_set")%>&nbsp;</td>
 			<td><%=rsCT("description")%>&nbsp;</td>
@@ -372,6 +370,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			  				<th>Repeat Duration (d:h:m)</th>
 			  			</tr>
 					</thead>
+					<tbody>
 			<% } %>
 			<% if(bSuppressActions == false) {
 				//Assume this is not an action that should be displayed
@@ -480,9 +479,9 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 							<td><%=ActionTitle%>&nbsp;</td>
 							<td>
 							<%
-								// Figure out of the "Create Act Log on Action" is checked or not
+							// Figure out of the "Create Act Log on Action" is checked or not
 							// If the 1024 bit is on, then its checked;
-							if((ActionFlags & 1024) > 0) rw("Yes"); else rw("No");
+							rw((ActionFlags & 1024) > 0)? "Yes" : "No");
 							%>
 							</td>
 							<td><%=ActionType%>&nbsp;</td>
@@ -529,6 +528,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 			if(bSuppressActions == false) {
 			%>
+				</tbody>
 			</table>
 			<% } %>
 			</td>
@@ -557,6 +557,9 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
+   $(".tablesorter").tablesorter({
+		widgets: [ 'zebra' ]
+	});
 	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});

@@ -188,9 +188,9 @@ UpdateCookies();
       SpecFieldID = 0;
       GenFieldID = 0;
 	   Comment = Server.HTMLEncode(rsTables(comment_field) + "") + EmptyString;
-    	if (Comment == "null" + EmptyString) {Comment = EmptyString;}
+    	if (Comment == "null" + EmptyString) Comment = EmptyString;
    	FldDefault = Server.HTMLEncode(rsTables(DEFAULT_FIELD) + "") + EmptyString;
-    	if (FldDefault == "null" + EmptyString) {FldDefault = EmptyString;}
+    	if (FldDefault == "null" + EmptyString) FldDefault = EmptyString;
    	ArraySize = rsTables(FIELD_LENGTH_FIELD);
    	TableNum = type_id;
    	Flags = rsTables("flags");
@@ -213,10 +213,10 @@ UpdateCookies();
    	}
 
    	//If the GenFieldID = -1, then change it to an empty string
-   	if (GenFieldID == "-1"){GenFieldID=EmptyString;}
+   	if (GenFieldID == "-1") GenFieldID = EmptyString;
 
    	//If the ArraySize = -1, then change it to an empty string
-   	if (ArraySize == "-1"){ArraySize=EmptyString;}
+   	if (ArraySize == "-1") ArraySize = EmptyString;
 
    	//Now that all of our data is cool, build the data part of the table
    	rw("<tr>");
@@ -323,12 +323,9 @@ UpdateCookies();
 
 	if(hasExclusiveRelationSet) {
 		rw("<tr>");
-		rw("<td COLSPAN=7>&nbsp</td>");
-		if (GetClarifyVersion() > CLARIFY_85) {
-			rw("<td COLSPAN=3 align='right'>");
-		} else {
-			rw("<td COLSPAN=2 align='right'>");
-		}
+		rw("<td colspan=7>&nbsp;</td>");
+		var columns = (GetClarifyVersion() > CLARIFY_85)? 3 : 2;
+		rw("<td colspan=" + columns + " class='exclusive'>");
 		rw("<b>Exclusive Set Relations</b>");
 		rw("</td>");
 		rw("</tr>");
@@ -367,9 +364,9 @@ UpdateCookies();
 			//Put the lower table ID first
 			if (type_id - 0  < TargetObjectID - 0){
 				//We will break the MTM table name into 2 rows for nicer page formatting
-				MTMTableName = "mtm_" + type_name + RelationSpecRelID + "_" + "<BR>" + TargetObject + TargetSpecRelID;
+				MTMTableName = "mtm_" + type_name + RelationSpecRelID + "_" + "<br>" + TargetObject + TargetSpecRelID;
 			} else {
-				MTMTableName = "mtm_" + TargetObject + TargetSpecRelID + "_"  + "<BR>" + type_name + RelationSpecRelID;
+				MTMTableName = "mtm_" + TargetObject + TargetSpecRelID + "_"  + "<br>" + type_name + RelationSpecRelID;
 			}
 		} else {
 			MTMTableName = EmptyString;
@@ -412,12 +409,12 @@ UpdateCookies();
 			RelPhyName = rsRelations(REL_PHY_NAME) + EmptyString;
 
 			//Oracle returns these as null
-			if (FocusField == "null" + EmptyString) {FocusField = EmptyString;}
-			if (RelPhyName == "null" + EmptyString) {RelPhyName = EmptyString;}
+			if (FocusField == "null" + EmptyString) FocusField = EmptyString;
+			if (RelPhyName == "null" + EmptyString) RelPhyName = EmptyString;
 
 			if (GetClarifyVersion() > CLARIFY_85){
 				ExclusiveSet = rsRelations("exclusive_set") + EmptyString;
-				if (ExclusiveSet == "null" + EmptyString) {ExclusiveSet = EmptyString;}
+				if (ExclusiveSet == "null" + EmptyString) ExclusiveSet = EmptyString;
 			}
 			if (GetClarifyVersion() > CLARIFY_85){
 				rw("<td>");
@@ -612,7 +609,7 @@ $(document).ready(function() {
 	document.title = "Bolt: <%=sPageTitle%>";
 
    $(".tablesorter").tablesorter();
-	$(".tablesorter tr").click(function () {
+	$(".tablesorter tbody tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});
 });
