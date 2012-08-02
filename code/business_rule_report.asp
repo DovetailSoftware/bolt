@@ -33,7 +33,7 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/jquery.tablesorter.css" rel="stylesheet">
+<link href="css/tablesorter.css" rel="stylesheet">
 <style>
 #headerContainer, .span12 { margin: 20px 0; }
 table.leftHeader thead th { text-align: left; }

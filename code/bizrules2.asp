@@ -33,7 +33,7 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/jquery.tablesorter.css" rel="stylesheet">
+<link href="css/tablesorter.css" rel="stylesheet">
 <style>
 .span12 h3 { text-align: center;margin-bottom: .5em; }
 label { display: inline-block }
