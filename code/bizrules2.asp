@@ -424,7 +424,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					if(numActionType == 3) ActionType = "Command Line";
 					if(numActionType == 4) ActionType = "Service Message";
 
-					if(numActionType == ActionTypeFilter ) { GoodAction = true; }
+					if(numActionType == ActionTypeFilter) GoodAction = true;
 
 					//If the action type is "All" (actiontypefilter=0), then
 					//this is an action that should be displayed
@@ -481,7 +481,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 							<%
 							// Figure out of the "Create Act Log on Action" is checked or not
 							// If the 1024 bit is on, then its checked;
-							rw((ActionFlags & 1024) > 0)? "Yes" : "No");
+							rw(((ActionFlags & 1024) > 0)? "Yes" : "No");
 							%>
 							</td>
 							<td><%=ActionType%>&nbsp;</td>
@@ -495,8 +495,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 							<td><%=Repeat%>&nbsp;</td>
 							<td><%=Duration%>&nbsp;</td>
 					 	</tr>
-				  <%
-				  rsAction.MoveNext();
+					<%
+					rsAction.MoveNext();
 				}
 
 				%>
