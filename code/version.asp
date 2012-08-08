@@ -65,6 +65,13 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					</tr>
 				</thead>
 				<tr>
+					<td>3.0</td>
+					<td>08/08/12</td>
+					<td>Upgraded style using Twitter Bootstrap. Added many improvements to html, javascript, and sql.<br/>
+					Moved project to public <a href="https://github.com/DovetailSoftware/bolt" target="_blank">GitHub Repo</a>, and dropped help file and installer support.
+					</td>
+				</tr>
+				<tr>
 					<td>2.10.2</td>
 					<td>08/22/11</td>
 					<td>Fixed a bug with date conversions in the <a href="business_rule_report.asp">Business Rules Usage Report</a> when using the Microsoft OLEDB Provider for Oracle.</td>
@@ -108,20 +115,20 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<tr>
 					<td>2.8.1</td>
 					<td>8/11/09</td>
-					<td>Added <a href="schema_id_info.asp">More information about User-Defined Table and View IDs</a>.<br></td>
+					<td>Added <a href="schema_id_info.asp">More information about User-Defined Table and View IDs</a>.</td>
 				</tr>
 
 				<tr>
 					<td>2.8</td>
 					<td>5/29/09</td>
-					<td>Allow <a href="formsonline.asp">searching for controls</a>.<br>
+					<td>Allow <a href="formsonline.asp">searching for controls</a>.<br/>
 						Display prilevege class restrictions for command button controls.</td>
 				</tr>
 
 				<tr>
 					<td>2.7.2</td>
 					<td>4/30/09</td>
-					<td>Added full support of Amdocs 6 and Amdocs 7 metadata.<br>
+					<td>Added full support of Amdocs 6 and Amdocs 7 metadata.<br/>
 						Added database error handling.</td>
 				</tr>
 
@@ -147,7 +154,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<tr>
 					<td>2.5.4</td>
 					<td>3/8/06</td>
-					<td>On Business Rule Display Page, add data for "To Urgency", "CC Urgency", and "Create Act Log?"<br>
+					<td>On Business Rule Display Page, add data for "To Urgency", "CC Urgency", and "Create Act Log?"<br/>
 						Add support for "Service Message" action type</td>
 				</tr>
 
@@ -160,15 +167,15 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<tr>
 					<td>2.5.2</td>
 					<td>1/24/06</td>
-					<td>Added support for binary array types on the table detail page. <br>The common type will show as ARRAY and the flags will include the BINARY flag.</td>
+					<td>Added support for binary array types on the table detail page.<br/>The common type will show as ARRAY and the flags will include the BINARY flag.</td>
 				</tr>
 
 				<tr>
 					<td>2.5.1</td>
 					<td>9/23/05</td>
-					<td>Added client-side table sorting (Internet Explorer Only).<br>
-						Reformated main info layout of table/view page.<br>
-						Added Custom/Baseline indicator on table/view page.<br>
+					<td>Added client-side table sorting (Internet Explorer Only).<br/>
+						Reformated main info layout of table/view page.<br/>
+						Added Custom/Baseline indicator on table/view page.<br/>
 						Added ability to sort for user-defined tables/views on the <a href=ddonline.asp>Data Dictionary</a> page.</td>
 				</tr>
 
@@ -218,8 +225,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<tr>
 					<td>2.3.3</td>
 					<td>11/19/04</td>
-					<td>On the <a href="admin.asp">Administration</a> page, added support for Oracle OLEDB Provider.
-						<br>On the <a href="sql.asp">SQL page</a>, add bind variable substitution capabilities.</td>
+					<td>On the <a href="admin.asp">Administration</a> page, added support for Oracle OLEDB Provider.<br/>
+						On the <a href="sql.asp">SQL page</a>, add bind variable substitution capabilities.</td>
 				</tr>
 
 				<tr>
@@ -255,58 +262,58 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<tr>
 					<td>2.1</td>
 					<td>10/16/03</td>
-					<td>BOLT now supports SQL Views (new schema type as of Clarify 11.5)<BR>
+					<td>BOLT now supports SQL Views (new schema type as of Clarify 11.5)<br/>
 						Add Recent Objects and Quick Search to the footer of the schema pages (view, table, sql_view)</td>
 				</tr>
 
 				<tr>
 					<td>2.0</td>
 					<td>6/17/03</td>
-					<td>BOLT now supports Clarify and First Choice databases<BR></td>
+					<td>BOLT now supports Clarify and First Choice databases.</td>
 				</tr>
 
 				<tr>
 					<td>1.7</td>
 					<td>1/22/03</td>
-					<td>Added ability to search the message text in <a href="select_biz_rules.asp">Select Business Rules</a> page.<BR></td>
+					<td>Added ability to search the message text in <a href="select_biz_rules.asp">Select Business Rules</a> page.</td>
 				</tr>
 
 				<tr>
 					<td>1.6</td>
 					<td>10/28/02</td>
-					<td>Added <a href="licenses.asp">Clarify Licenses</a> page.<BR></td>
+					<td>Added <a href="licenses.asp">Clarify Licenses</a> page.</td>
 				</tr>
 
 				<tr>
 					<td>1.5</td>
 					<td>8/26/02</td>
-					<td>Added <a href="select_biz_rules.asp">Business Rules</a> page.<BR></td>
+					<td>Added <a href="select_biz_rules.asp">Business Rules</a> page.</td>
 				</tr>
 
 				<tr>
 					<td>1.4</td>
 					<td>7/8/02</td>
-					<td>Added <a href="db_info.asp">Database Information page</a>. Validation and changes for Clarify version 11.x<BR></td>
+					<td>Added <a href="db_info.asp">Database Information page</a>. Validation and changes for Clarify version 11.x</td>
 				</tr>
 
 				<tr>
 					<td>1.3</td>
 					<td>4/24/02</td>
-					<td>Added Recent Objects and Quick Links on <a href="ddonline.asp">Data Dictionary</a> page<BR></td>
+					<td>Added Recent Objects and Quick Links on <a href="ddonline.asp">Data Dictionary</a> page.</td>
 				</tr>
 
 				<tr>
 					<td>1.2</td>
 					<td>2/1/02</td>
-					<td>Added MTM table names in table page output<BR></td>
+					<td>Added MTM table names in table page output.</td>
 				</tr>
 
 				<tr>
 					<td>1.1</td>
 					<td>11/12/01</td>
-					<td>Added BOLT Administration<BR>
-						Added Aliases for Views<BR>
-						Added Schema Rev & Version in Page Headers<BR></td>
+					<td>Added BOLT Administration<br/>
+						Added Aliases for Views<br/>
+						Added Schema Rev & Version in Page Headers</td>
 				</tr>
 
 				<tr>
@@ -332,7 +339,7 @@ $(document).ready(function() {
 
 	$(".tablesorter").tablesorter({
 		widgets: ['zebra']
-	 });
+	});
 	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});
