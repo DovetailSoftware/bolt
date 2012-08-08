@@ -105,17 +105,17 @@ var initSort = "";
 
 	<div class="row-fluid">
 		<div id="sqlButtons" class="span4">
-			<button class="btn btn-primary" id="execSql" onclick="submitForm()" title="Execute SQL">Go</button>
-			<button class="btn btn-primary" id="clearsql" onclick="clearsql()" title="Clear SQL">Clear</button>
+			<button class="btn btn-primary" id="execSql" onclick="submitForm()" title="Execute SQL"><i class="icon-white icon-play"></i> Run</button>
+			<button class="btn btn-primary" id="clearsql" onclick="clearsql()" title="Clear SQL"><i class="icon-white icon-trash"></i> Clear</button>
 		</div>
 		<div id="buttonContainer" class="span4">
-			<button class="btn btn-primary" id="copySql" onclick="copysql()" title="Copy SQL to Clipboard">>></button>
-			<button class="btn btn-primary" id="copyClp" onclick="copyclp()" title="Copy Clipboard to SQL"><<</button>
-			<button class="btn btn-primary" id="swapSql" onclick="swap()" title="Swap SQL and Clipboard"><></button>
+			<button class="btn btn-primary" id="copySql" onclick="copysql()" title="Copy SQL to Clipboard"><i class="icon-white icon-chevron-right"></i></button>
+			<button class="btn btn-primary" id="swapSql" onclick="swap()" title="Swap SQL and Clipboard"><i class="icon-white icon-chevron-left"></i><i class="icon-white icon-chevron-right"></i></button>
+			<button class="btn btn-primary" id="copyClp" onclick="copyclp()" title="Copy Clipboard to SQL"><i class="icon-white icon-chevron-left"></i></button>
 		</div>
 		<div id="clipboardButtons" class="span4">
-			<button class="btn btn-primary" id="clearClp" onclick="clearclp()" title="Clear Clipboard">Clear</button>
-			<button class="btn btn-primary" id="updateClp" onclick="updateclp()" title="Update Clipboard">Update</button>
+			<button class="btn btn-primary" id="updateClp" onclick="updateclp()" title="Update Clipboard"><i class="icon-white icon-hdd"></i> Save</button>
+			<button class="btn btn-primary" id="clearClp" onclick="clearclp()" title="Clear Clipboard"><i class="icon-white icon-trash"></i> Clear</button>
 		</div>
 	</div>
 
