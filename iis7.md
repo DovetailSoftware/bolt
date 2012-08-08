@@ -7,21 +7,21 @@ In IIS 7.0 and 7.5, the classic version of ASP is not installed by default. Beca
 To configure Bolt on your Web server, you must install the ASP module using the following steps for your version of Windows:
 
 * Installing Classic ASP on Windows 7 Client
-1. Click Start, and then click Control Panel.
-1. In Control Panel, click Programs and Features, and then click Turn Windows Features on or off.
-1. Expand Internet Information Services, then World Wide Web Services, then Application Development Features.
-1. Select the ASP, Server Side Includes, and ASP.NET features.
-1. Click OK.
-* Installing Classic ASP on Windows Server 2008 R2
-1. Click Start, point to Administrative Tools, and then click Server Manager.
-1. In the Server Manager hierarchy pane, expand Roles, and then click Web Server (IIS).
-1. In the Web Server (IIS) pane, scroll to the Role Services section, and then click Add Role Services.
-1. On the Select Role Services page of the Add Role Services Wizard, make sure you have ASP and Server Side Includes, ASP.NET, and IIS 6 Management Compatibility selected.
-1. If the Add Role Services required by ASP dialog box appears, click Add Required Role Services. (This page appears only if you have not already installed the ISAPI Extensions role service on your server.)
-1. On the Select Role Services page, click Next.
-1. On the Confirm Installation Selections page, click Install.
-1. On the Results page, click Close.
+ 1. Click Start, and then click Control Panel.
+ 1. In Control Panel, click Programs and Features, and then click Turn Windows Features on or off.
+ 1. Expand Internet Information Services, then World Wide Web Services, then Application Development  Features.
+ 1. Select the ASP, Server Side Includes, and ASP.NET features.
+ 1. Click OK.
 
+* Installing Classic ASP on Windows Server 2008 R2
+ 1. Click Start, point to Administrative Tools, and then click Server Manager.
+ 1. In the Server Manager hierarchy pane, expand Roles, and then click Web Server (IIS).
+ 1. In the Web Server (IIS) pane, scroll to the Role Services section, and then click Add Role Services.
+ 1. On the Select Role Services page of the Add Role Services Wizard, make sure you have ASP and Server Side Includes, ASP.NET, and IIS 6 Management Compatibility selected.
+ 1. If the Add Role Services required by ASP dialog box appears, click Add Required Role Services. (This page appears only if you have not already installed the ISAPI Extensions role service on your server.)
+ 1. On the Select Role Services page, click Next.
+ 1. On the Confirm Installation Selections page, click Install.
+ 1. On the Results page, click Close.
 
 ### Create a Application Pool
 
