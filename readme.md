@@ -6,7 +6,7 @@
 
 > Dovetail Bolt gives you real-time access to your Clarify data from a set of easy-to-use web pages and provides the data tools you need
 
-Features: 
+Features:
 
 * **Schema**: Search for and view your customized schema in real-time, including tables, views, relations, joins, and indexes.
 * **Forms**: Search for your Clarify Classic Client Forms, and see details about the form's contextual objects, controls, child forms, tabs, and parent forms.
@@ -27,7 +27,7 @@ Review this section before you begin the installation.
 
 #### Requirements
 
-This version of Dovetai Bolt requires the following:
+This version of Dovetail Bolt requires the following:
 
 * **Clarify Version** - Any version
 * **Database** - Microsoft SQL Server, Oracle
@@ -37,20 +37,20 @@ This version of Dovetai Bolt requires the following:
 
 #### Limitations
 
-Dovetai Bolt has the following limitations:
+Dovetail Bolt has the following limitations:
 
-* Dovetai Bolt is not internationalized. It is only available in US English.
+* Dovetail Bolt is not internationalized. It is only available in US English.
 
 
 ### Installing Dovetail Bolt
 
-On your server, change to the location where Dovetai Bolt is to be installed.
+On your server, change to the location where Dovetail Bolt is to be installed.
 
 [Clone the Repo](https://github.com/DovetailSoftware/bolt), or [download the repo as a zip file](https://github.com/DovetailSoftware/bolt/zipball/master).
 
-If the repo was cloned, there should now be a bolt project folder, which will contain a copy of the Dovetai Bolt folders and files.
+If the repo was cloned, there should now be a bolt project folder, which will contain a copy of the Dovetail Bolt folders and files.
 
-If the zip file was downloaded, extract the zip file into a folder. This folder will then contain a copy of the Dovetai Bolt folders and files.
+If the zip file was downloaded, extract the zip file into a folder. This folder will then contain a copy of the Dovetail Bolt folders and files.
 
 The directory structure should like similar to this:
 
@@ -156,7 +156,7 @@ In the Business Rules section, you can view all aspects of a business rule at on
 
 To search for business rules:
 
-1. From Dovetai Bolt, select Business Rules.
+1. From Dovetail Bolt, select Business Rules.
 1. Enter one or more search criteria and click Search.
 
 	<pre><code>Note: All search filters are ANDed together.</code></pre>
@@ -205,7 +205,7 @@ You can use Dovetail Bolt's style sheet, <i>code/css/style.css</i>, to customize
 
 ### Customizing the Dovetail Bolt Quick Links
 
-You can customize the Quick Links shown on the Schema page (schema.asp), which are global and seen by all Dovetai Bolt users. By default, they link to a set of tables and views.
+You can customize the Quick Links shown on the Schema page (schema.asp), which are global and seen by all Dovetail Bolt users. By default, they link to a set of tables and views.
 
 You can modify <i>inc/quicklinks.inc</i> with any text editor. The file is an array. Each element in the array is an object name and its object ID.
 
@@ -243,6 +243,6 @@ Dovetail Software intends the information in this document solely for its licens
 
 Dovetail Software develops and supplies software and customizations to the following Clarify products: ClearSupport, ClearQuality, ClearHelpDesk, ClearContracts, Policies and Customers, ClearSales, ProductManager, ClearCallCenter, and ClearLogistics.
 
-ManyDovetail Software products use the following Clarify tools: User Interface Editor, ClearBasic Exchange, Data Dictionary Editor, ClearBasic Batch, Data Exchange, Clarify Business Objects, RuleManager, eBusiness Framework, ClearBasic, and Clarify Low-Level API©.
+Many Dovetail Software products use the following Clarify tools: User Interface Editor, ClearBasic Exchange, Data Dictionary Editor, ClearBasic Batch, Data Exchange, Clarify Business Objects, RuleManager, eBusiness Framework, ClearBasic, and Clarify Low-Level API©.
 
 Clarify, its product names, and tools are trademarks of Amdocs, which may include the following: AmdocsCRM, ClearConfigurator, SalesBasic, ClearConfigurator Workshop, Notifier, eSupport, Classification Engine, eOrder Routing Server, eResponse Manager, ClearEnterprise, Email Clerk, Email Manager, Traveler, e.link, Diagnosis Engine, and Flexible Deployment.
