@@ -38,6 +38,7 @@
           <li class=""><a href="bizrules.asp">Business Rules</a></li>
           <li class=""><a href="dbInfo.asp">Database Info</a></li>
           <li class=""><a href="sql.asp">SQL</a></li>
+          <li class=""><a href="lists.asp">Lists</a></li>
           <li class=""><a href="licenses.asp">Clarify Licenses</a></li>
         </ul>
         <ul class="nav pull-right">
