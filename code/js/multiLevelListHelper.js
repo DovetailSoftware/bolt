@@ -1,9 +1,38 @@
-function multiLevelListHelper(_listName, _elementIds, _values){
+function GetXmlHttpObject(handler) {
+   var objXmlHttp = null;
+
+   if(navigator.userAgent.indexOf("MSIE") >= 0) {
+      var strName="Msxml2.XMLHTTP";
+      if(navigator.appVersion.indexOf("MSIE 5.5") >= 0) {
+         strName="Microsoft.XMLHTTP";
+      }
+      try {
+         objXmlHttp = new ActiveXObject(strName);
+         if (handler){objXmlHttp.onreadystatechange=handler;}
+         return objXmlHttp;
+      } catch(e) {
+         alert("Error. Scripting for ActiveX might be disabled");
+         return;
+      }
+   }
+   if(navigator.userAgent.indexOf("Mozilla") >= 0) {
+      objXmlHttp = new XMLHttpRequest();
+      if(handler) {
+         objXmlHttp.onload = handler;
+         objXmlHttp.onerror= handler;
+      }
+      return objXmlHttp;
+   }
+}
+
+function multiLevelListHelper(_listName, _elementIds, _values) {
    this.listName = _listName;
    this.values = _values;
    this.elementIds = _elementIds;
    this.whichSelectElementIdChanged = '';
-   this.pathToPopulateDropDowns = '../inc/PopulateDropDowns.asp';
+   var loc = window.location.href;
+   var pos = loc.lastIndexOf("/");
+   this.pathToPopulateDropDowns = loc.substr(0,pos) + '/inc/PopulateDropDowns.asp';
 
    //Add an on change event to all but the last drop-down
    for( var i = 0; i < this.elementIds.length - 1; i++ ) {
