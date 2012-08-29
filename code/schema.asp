@@ -36,7 +36,7 @@
 <style>
 input.formInput { margin-bottom: 0; }
 table.fullWidth.middle tr td { padding: .5em; }
-.bottomMargin { margin-bottom: 10em; }
+.bottomMargin { margin-bottom: 5em; }
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
