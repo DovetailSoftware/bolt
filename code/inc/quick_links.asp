@@ -36,9 +36,9 @@
 				var table_num = GetTableNum(LinkArray[i][1]);
 				if((table_num  >= 0) && (table_num == LinkArray[i][2])) {
 					if(IsView(LinkArray[i][2])) { %>
-              		<td><a href="view.asp?type_id=<%=LinkArray[i][2]%>&type_name=<%=LinkArray[i][1]%> "> <%=LinkArray[i][1]%> </a></td>
+              		<td><a href="view.asp?type_id=<%=LinkArray[i][2]%>"> <%=LinkArray[i][1]%> </a></td>
 					<% } else { %>
-						<td><a href="table.asp?type_id=<%=LinkArray[i][2]%>&type_name=<%=LinkArray[i][1]%> "> <%=LinkArray[i][1]%> </a></td>
+						<td><a href="table.asp?type_id=<%=LinkArray[i][2]%>"> <%=LinkArray[i][1]%> </a></td>
 					<% }
         		} else {
            		rw("<td>" + LinkArray[i][1] + "</td>");

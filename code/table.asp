@@ -39,7 +39,6 @@
 <!--#include file="inc/adojavas.inc"-->
 <%
 var type_id = Request("type_id");
-var type_name = Request("type_name");
 var rsSpecRelID;
 
 var sPageTitle = "Details for Table";
@@ -47,10 +46,13 @@ var sPageType = "Schema";
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
 
+%>
+<!--#include file="inc/ddonline.inc"-->
+<%
+var type_name = GetTableName(type_id);
 //Update the Recent Cookie Collection
 UpdateCookies();
 %>
-<!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
 </head>
 <body>
@@ -375,8 +377,6 @@ UpdateCookies();
 		//Make the Target Object be a hyperlink:
 		TargetObjectLink = "<a href=table.asp?type_id=";
 		TargetObjectLink += TargetObjectID;
-		TargetObjectLink += "&type_name=";
-		TargetObjectLink += TargetObject;
 		TargetObjectLink += ">" + TargetObject;
 		TargetObjectLink += "</a>";
 
@@ -553,8 +553,6 @@ UpdateCookies();
 	   //The view name should be a hyperlink
 	   TheLink = "<a href=view.asp?type_id=";
 	   TheLink += ViewNum;
-	   TheLink += "&type_name=";
-	   TheLink += ViewName;
 	   TheLink += ">" + ViewName;
 	   TheLink += "</a>";
 	   rw(TheLink);

@@ -157,7 +157,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				rw("<TR>");
 				rw("<TD>");
 				if (rsButtons("control_type")==4){
-					rw(BuildHyperLink(buttonURL,ButtonName));
+					rw(BuildHyperLink(buttonURL, ButtonName));
 				}
 				else{
 					rw(ButtonName);

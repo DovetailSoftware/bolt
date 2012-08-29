@@ -151,7 +151,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				rw("<tr>");
 				rw("<td>");
 				//We want the FormTitle to be a HyperLink
-				rw(BuildHyperLink(BuildFormURL(FormObjid,FormID) ,FormTitle));
+				rw(BuildHyperLink(BuildFormURL(FormObjid,FormID), FormTitle));
 				rw("</td>");
 				rw("<td>");
 				rw(FormName);

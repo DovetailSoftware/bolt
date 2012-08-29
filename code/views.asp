@@ -89,7 +89,6 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 				while(!rsViews.EOF)	{
 					var ViewNum = rsViews(VIEW_ID);
-					var ViewName = GetTableName(ViewNum);
 
 					rw("<tr>");
 					rw("<td>");
@@ -98,7 +97,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					rw("<td>");
 
 					//Make a hyperlink
-					var TheLink = BuildViewHyperLink(ViewNum, ViewName);
+					var TheLink = BuildViewHyperLink(ViewNum);
 
 					rw(TheLink);
 					rw("</td>");

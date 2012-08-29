@@ -67,15 +67,14 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 			//If we only have one, then redirect to the details page for that table/view
 			if (rsTables.RecordCount == 1) {
-				TableName = rsTables(NAME_FIELD);
 				TableNum = rsTables(ID_FIELD);
 				Flags = rsTables(FLAGS_FIELD);
 				Flags = Flags & VIEW_FIELD_BIT;
 
 				if (Flags > 0) {
-					TheLink = BuildViewURL(TableNum, TableName);
+					TheLink = BuildViewURL(TableNum);
 				} else {
-					TheLink = BuildTableURL(TableNum, TableName);
+					TheLink = BuildTableURL(TableNum);
 				}
 				Response.Redirect(TheLink);
 			}
@@ -104,7 +103,6 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				rw("</tr></thead>");
 
 				while (!rsTables.EOF) {
-					TableName = rsTables(NAME_FIELD);
 					TableNum = rsTables(ID_FIELD);
 					Flags = rsTables(FLAGS_FIELD);
 					TableComment = Server.HTMLEncode((rsTables(comment_field)));
@@ -118,9 +116,9 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					//Flags = Flags & 512;
 					Flags = Flags & VIEW_FIELD_BIT;
 					if (Flags > 0) {
-						TheLink = BuildViewHyperLink(TableNum, TableName);
+						TheLink = BuildViewHyperLink(TableNum);
 					} else {
-						TheLink = BuildTableHyperLink(TableNum, TableName);
+						TheLink = BuildTableHyperLink(TableNum);
 					}
 					rw(TheLink);
 					rw("</td>");

@@ -39,7 +39,6 @@
 <!--#include file="inc/adojavas.inc"-->
 <%
 var type_id = Request("type_id");
-var type_name = Request("type_name");
 var rsSpecRelID;
 
 var sPageTitle = "Details for View";
@@ -47,11 +46,13 @@ var sPageType = "Schema";
 
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
-
+%>
+<!--#include file="inc/ddonline.inc"-->
+<%
+var type_name = GetTableName(type_id);
 //Update the Recent Cookie Collection
 UpdateCookies();
 %>
-<!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
 <!--#include file="inc/viewDetails.js"-->
 </head>
@@ -201,7 +202,7 @@ if (Flags & UNION_VIEW_FLAG){
    		   if (JoinFlag == "3") { RightOuter = "CROSS "; }
 
    		   //Make the From Joined Table Name be a hyperlink:
-   		   TheLink = BuildTableHyperLink(FromTableNum,FromTable);
+   		   TheLink = BuildTableHyperLink(FromTableNum);
    		   //If there's an alias, show the alias, and put the real table in parens & hyperlinked
 
    		   switch(FromAlias){
@@ -214,7 +215,7 @@ if (Flags & UNION_VIEW_FLAG){
    		   }
 
    		   //Make the To Joined Table Name be a hyperlink:
-   		   TheLink = BuildTableHyperLink(ToTableNum,ToTable);
+   		   TheLink = BuildTableHyperLink(ToTableNum);
    		   //If there's an alias, show the alias, and put the real table in parens & hyperlinked
 
    		   switch(ToAlias){
@@ -259,7 +260,7 @@ if (Flags & UNION_VIEW_FLAG){
    		   for(var j=0; j < unionViewsList.length; j++) {
 					rw("<tr>");
    		      rw("<TD>");
-   		      rw(BuildViewHyperLink(unionViewsList[j][0],unionViewsList[j][1]));
+   		      rw(BuildViewHyperLink(unionViewsList[j][0]));
    		      rw("</TD>");
    		      rw("</tr>");
    		   }

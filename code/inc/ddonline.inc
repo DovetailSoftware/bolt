@@ -423,22 +423,18 @@ function TranslateDBType(DBType) {
 //////////////////////////////////////////////////////////////////////
 // Build a URL for a Table
 //////////////////////////////////////////////////////////////////////
-function BuildTableURL(TableNum, TableName) {
+function BuildTableURL(TableNum) {
 	TheURL = "table.asp?type_id=";
 	TheURL += TableNum;
-	TheURL += "&type_name=";
-	TheURL += TableName;
 	return TheURL;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Build a URL for a View
 //////////////////////////////////////////////////////////////////////
-function BuildViewURL(TableNum, TableName) {
+function BuildViewURL(TableNum) {
 	TheURL = "view.asp?type_id=";
 	TheURL += TableNum;
-	TheURL += "&type_name=";
-	TheURL += TableName;
 	return TheURL;
 }
 
@@ -531,32 +527,32 @@ function BuildParentFormHyperLink(FormID,ChildObjid) {
 // Build a Hyperlink from a URL
 //////////////////////////////////////////////////////////////////////
 function BuildHyperLink(URL,Title,Target) {
-	HyperLink = "<A HREF= ";
+	HyperLink = "<a href= ";
 	HyperLink+= URL;
 
-	if(Target == "top") {
-		HyperLink+= " target=_top "
-	}
+	if(Target == "top") HyperLink += " target=_top ";
 
-	HyperLink+= ">" + Title;
-	HyperLink+= "</A>";
+	HyperLink += ">" + Title;
+	HyperLink += "</a>";
 	return HyperLink;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Build a Hyperlink for a View
 //////////////////////////////////////////////////////////////////////
-function BuildViewHyperLink(TableNum, TableName,Target) {
+function BuildViewHyperLink(TableNum, Target) {
+	TableName = GetTableName(TableNum);
 	TheURL = BuildViewURL(TableNum, TableName);
-	TheHyperLink = BuildHyperLink(TheURL, TableName,Target);
+	TheHyperLink = BuildHyperLink(TheURL, TableName, Target);
 	return TheHyperLink;
 }
 
 //////////////////////////////////////////////////////////////////////
-// KBuild a Hyperlink for a Table
+// Build a Hyperlink for a Table
 //////////////////////////////////////////////////////////////////////
-function BuildTableHyperLink(TableNum, TableName,Target) {
-	return BuildHyperLink(BuildTableURL(TableNum, TableName),TableName,Target);
+function BuildTableHyperLink(TableNum, Target) {
+	TableName = GetTableName(TableNum);
+	return BuildHyperLink(BuildTableURL(TableNum), TableName, Target);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -582,12 +578,12 @@ function IsView(TypeID) {
 //////////////////////////////////////////////////////////////////////
 // Build a Hyperlink for a Table or for a view
 //////////////////////////////////////////////////////////////////////
-function MakeTableOrViewHyperLink(TableID, TableName) {
+function MakeTableOrViewHyperLink(TableID) {
 	//Need to find out of this is a view or a table
 	if(IsView(TableID))
-		{return BuildViewHyperLink(TableID, TableName);}
+		return BuildViewHyperLink(TableID);
 	else
-		{return BuildTableHyperLink(TableID, TableName);}
+		return BuildTableHyperLink(TableID);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -1428,10 +1424,7 @@ function getBaseTableLink() {
 
 	var TheLink = "";
 	//Make the Base Table Name be a hyperlink:
-	if(TableNum >=0 ) {
-		var TableName = GetTableName(TableNum);
-		TheLink = BuildTableHyperLink(TableNum,TableName);
-	}
+	if(TableNum >= 0) TheLink = BuildTableHyperLink(TableNum);
 
 	return TheLink;
 }
