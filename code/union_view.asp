@@ -39,19 +39,19 @@
 <!--#include file="inc/adojavas.inc"-->
 <%
 var type_id = Request("type_id");
-var type_name = Request("type_name");
 var rsSpecRelID;
-
-var sPageTitle = "Details for Union View: " + type_name;
-var sPageType = "Schema";
 
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
-
+%>
+<!--#include file="inc/ddonline.inc"-->
+<%
+var type_name = GetTableName(type_id);
+var sPageTitle = "Details for Union View: " + type_name;
+var sPageType = "Schema";
 //Update the Recent Cookie Collection
 UpdateCookies();
 %>
-<!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
 <!--#include file="inc/viewDetails.js"-->
 </head>

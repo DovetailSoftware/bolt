@@ -49,6 +49,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 %>
 <!--#include file="inc/ddonline.inc"-->
 <%
+if(IsView(type_id) == true) Response.Redirect(BuildViewURL(type_id));
 var type_name = GetTableName(type_id);
 //Update the Recent Cookie Collection
 UpdateCookies();

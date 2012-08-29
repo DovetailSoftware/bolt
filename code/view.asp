@@ -50,6 +50,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/ddonline.inc"-->
 <%
 var type_name = GetTableName(type_id);
+if(IsView(type_id) == false) Response.Redirect(BuildTableURL(type_id));
 //Update the Recent Cookie Collection
 UpdateCookies();
 %>
@@ -69,12 +70,12 @@ rsView.Close;
 rsView = null;
 
 if (Flags & SQL_VIEW_FLAG){
-   var TheURL = BuildSQLViewURL(type_id, type_name);
+   var TheURL = BuildSQLViewURL(type_id);
    Response.Redirect(TheURL);
 }
 
 if (Flags & UNION_VIEW_FLAG){
-   var TheURL = BuildUnionViewURL(type_id, type_name);
+   var TheURL = BuildUnionViewURL(type_id);
    Response.Redirect(TheURL);
 }
 %>

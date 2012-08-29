@@ -441,22 +441,18 @@ function BuildViewURL(TableNum) {
 //////////////////////////////////////////////////////////////////////
 // Build a URL for a SQL View
 //////////////////////////////////////////////////////////////////////
-function BuildSQLViewURL(TableNum, TableName) {
+function BuildSQLViewURL(TableNum) {
 	TheURL = "sql_view.asp?type_id=";
 	TheURL += TableNum;
-	TheURL += "&type_name=";
-	TheURL += TableName;
 	return TheURL;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Build a URL for a Union View
 //////////////////////////////////////////////////////////////////////
-function BuildUnionViewURL(TableNum, TableName) {
+function BuildUnionViewURL(TableNum) {
 	TheURL = "union_view.asp?type_id=";
 	TheURL += TableNum;
-	TheURL += "&type_name=";
-	TheURL += TableName;
 	return TheURL;
 }
 
@@ -1130,8 +1126,8 @@ function UpdateCookies() {
 		}
 	}
 
-	Response.Cookies("bolt_recent")("recent1") = type_name
-	Response.Cookies("bolt_recent")("recent1id") = type_id
+	Response.Cookies("bolt_recent")("recent1") = type_name;
+	Response.Cookies("bolt_recent")("recent1id") = type_id;
 }
 
 //////////////////////////////////////////////////////////////////////
