@@ -34,8 +34,7 @@ You need to run each of your Dovetail web applications in their own Application 
 1. Enter a name, such as DovetailBolt_AppPool
 1. Set the Managed Pipeline Mode to Classic
 1. Set the .NET Framework Version to version 2. If version 2 is not available, select version 3.5.
-1. If you are running a 64bit operating system, and using the 32-bit Dovetail SDK, you will need to Enable 32-Bit Applications for the Application Pool. Click on Advanced Settings… Set Enable 32-Bit Applications to True. Note that his is not the recommendation configuration.
-1. The recommendation is to use the 64-bit Dovetail SDK on 64-bit systems, and leave the Enable 32-Bit Applications application pool setting set to False.
+1. If you are running a 64bit operating system you will need to Enable 32-Bit Applications for the Application Pool. Click on Advanced Settings… Set Enable 32-Bit Applications to True. Note that his is not the recommendation configuration.
 
 ### Create the web application(s)
 
