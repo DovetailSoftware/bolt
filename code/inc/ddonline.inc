@@ -1493,6 +1493,88 @@ function getStorageSQL() {
 	}
 	return TheStorageSQL;
 }
+
+function DisplayDatabaseIndexesMSSQL(type_name){
+	var TheSQL = "sp_helpindex table_" + type_name;
+	var rsIndexes = retrieveDataFromDB(TheSQL);
+
+	var IndexName;
+	var FieldNames;
+	var IndexDescription;
+
+	while (!rsIndexes.EOF) {
+   	IndexName = rsIndexes("index_name");
+   	FieldNames = rsIndexes("index_keys");
+   	IndexDescription = rsIndexes("index_description");
+
+   	//Build the data part of the table
+   	rw("<tr>");
+   	rw("<td>");
+   	rw(IndexName);
+   	rw("</td>");
+   	rw("<td>");
+   	rw(FieldNames);
+   	rw("</td>");
+   	rw("<td>");
+   	rw(IndexDescription);
+   	rw("</td>");
+   	rw("</tr>");
+
+   	rsIndexes.MoveNext();
+	}
+
+	rsIndexes.Close;
+	rsIndexes = null;
+}
+
+function DisplayDatabaseIndexesOracle(type_name){
+	var TheSQL = "SELECT i.index_name,i.uniqueness,c.column_name from USER_INDEXES i,USER_IND_COLUMNS c WHERE i.index_name = c.index_name ";
+	TheSQL += " and i.table_name = UPPER('table_" + type_name + "') order by i.index_name, c.column_name";
+
+	var rsIndexes = retrieveDataFromDB(TheSQL);
+	var IndexArray = [];
+	var row = 0;
+	var FieldNames = '';
+	var IndexName;
+	var IndexDescription;
+
+	while (!rsIndexes.EOF) {
+		IndexName = rsIndexes("INDEX_NAME");
+		IndexDescription = rsIndexes("UNIQUENESS");
+
+		IndexArray[row] = [];
+		IndexArray[row][0] = IndexName + "";
+		IndexArray[row][1] = IndexDescription + "";
+
+		//If this index is the same as the previous one, then we've found another column that belongs to that index, so update the column (fields) data
+		//else, just set the column data and increment the row counter
+		if (row > 0 && (IndexName == IndexArray[row-1][0])){
+	   	IndexArray[row-1][2] = IndexArray[row-1][2] + ", " + rsIndexes("COLUMN_NAME")
+		}else{
+			IndexArray[row][2] = rsIndexes("COLUMN_NAME") + "";
+	   	row++;
+		}
+   	rsIndexes.MoveNext();
+	}
+
+	for(row = 0; row < IndexArray.length; row++) {
+   	rw("<tr>");
+   	rw("<td>");
+   	rw(IndexArray[row][0]);
+   	rw("</td>");
+   	rw("<td>");
+   	rw(IndexArray[row][2]);
+   	rw("</td>");
+   	rw("<td>");
+   	rw(IndexArray[row][1]);
+   	rw("</td>");
+   	rw("</tr>");
+	}
+
+	rsIndexes.Close;
+	rsIndexes = null;
+}
+
 %>
 
 <script Runat=Server Language=VBscript>

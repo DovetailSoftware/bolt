@@ -65,11 +65,21 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					</tr>
 				</thead>
 				<tr>
+					<td>3.0.1</td>
+					<td>08/30/12</td>
+					<td>Upgraded to use Twitter Bootstrap version 2.1.0.</td>
+				</tr>
+				<tr>
 					<td>3.0</td>
 					<td>08/08/12</td>
 					<td>Upgraded style using Twitter Bootstrap. Added many improvements to html, javascript, and sql.<br/>
 					Moved project to public <a href="https://github.com/DovetailSoftware/bolt" target="_blank">GitHub Repo</a>, and dropped help file and installer support.
 					</td>
+				</tr>
+				<tr>
+					<td>2.11</td>
+					<td>02/28/12</td>
+					<td>Display database indexes for a table (in addition to indexes defined in the Clarify schema)</td>
 				</tr>
 				<tr>
 					<td>2.10.2</td>

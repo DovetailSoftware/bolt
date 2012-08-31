@@ -444,10 +444,10 @@ UpdateCookies();
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="indexesContainer" class="span4">
+		<div class="span1"></div>
+		<div id="indexesContainer" class="span6">
 <%
-	rw("<h4 id='indexes'>Indexes:</h4>");
+	rw("<h4 id='indexes'>Indexes: (Defined in Clarify Schema)</h4>");
 	rw("<table class='tablesorter'>");
 	rw("<thead><tr>");
 	rw("<th>");
@@ -520,6 +520,35 @@ UpdateCookies();
 	rw("</tbody>");
 	rw("</table>");
    rf();
+
+	//Build the (database) Indexes Table:
+	rw("<p><a name='db_indexes'></a></p>");
+	rw("\n<h4>Indexes (Defined in Database):</h4>");
+	rw("\n<table class='tablesorter'>");
+	rw("<thead><TR class=headerRow>");
+	rw("<th>");
+	rw("Index Name");
+	rw("</th>");
+	rw("<th>");
+	rw("Fields");
+	rw("</th>");
+	rw("<th>");
+	rw("Additional Information");
+	rw("</th>");
+	rw("</tr></thead>");
+	rw("<tbody>");
+
+	if (dbType == "MSSQL"){
+		DisplayDatabaseIndexesMSSQL(type_name);
+	}else{
+		DisplayDatabaseIndexesOracle(type_name);
+	}
+
+	rw("</tbody>");
+	rw("</table>");
+  	rf();
+
+
 %>
 		</div>
 		<div id="viewsContainer" class="span4">
@@ -575,7 +604,7 @@ UpdateCookies();
 	}
 %>
 		</div>
-		<div class="span2"></div>
+		<div class="span1"></div>
 	</div>
 
 	<div class="row-fluid topMargin">
