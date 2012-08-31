@@ -30,11 +30,18 @@
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/<%=Request.Cookies("boltTheme")%>/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <style>
 .topMargin { margin-top: 40px; }
+iframe.theme {
+	width: 204px;
+	height: 120px;
+	margin: 1em;
+	scrolling: no;
+
+}
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
@@ -77,11 +84,28 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	</div>
 	<%}%>
 
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span10 hero-unit topMargin">
+			<h2>Change Bootstrap Theme</h2>
+			<p>Click on a theme below to change the theme used for Dovetail Bolt.</p>
+
+			<iframe class="theme" src="themes/baseline.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/cyborg.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/cerulean.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/readable.asp" scrolling="no"></iframe>
+
+			<input type="hidden" id="newTheme" />
+		</div>
+		<div class="span1"></div>
+	</div>
+
 <!--#include file="inc/footer.inc"-->
 </div>
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var path = window.location.pathname;
@@ -89,6 +113,11 @@ $(document).ready(function() {
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
+
+	$("#newTheme").click(function() {
+		$.cookie("boltTheme", $(this).val(), { expires: 365 });
+		window.location.href = path;
+	});
 });
 </script>
 </html>
