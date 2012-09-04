@@ -30,7 +30,7 @@
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/<%=Request.Cookies("boltTheme")%>/bootstrap.min.css" rel="stylesheet">
+<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <style>
@@ -115,7 +115,9 @@ $(document).ready(function() {
 	document.title = "Bolt: <%=sPageTitle%>";
 
 	$("#newTheme").click(function() {
-		$.cookie("boltTheme", $(this).val(), { expires: 365 });
+		var themePath = $(this).val() + "";
+		if(themePath > "") themePath = themePath + "/";
+		$.cookie("boltTheme", themePath, { expires: 365 });
 		window.location.href = path;
 	});
 });
