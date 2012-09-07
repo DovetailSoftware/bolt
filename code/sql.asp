@@ -36,15 +36,14 @@
 <link href="css/tablesorter.css" rel="stylesheet">
 <link href="css/columnSelect.css" rel="stylesheet">
 <style>
-#sqlButtons { text-align: left; }
-#buttonContainer { text-align: center; }
+#sqlContainer h5 { margin: 0; }
 #clipboardButtons { text-align: right; }
 #clipboardContainer { white-space: nowrap;}
 textarea { width:100%;height:150px;float:left;}
-#sqlButtons .btn, #buttonContainer .btn, #clipboardButtons .btn { width: 70px; }
-#otherButtons { margin-top: .4em; }
+#otherButtons { margin-top: .2em; }
 label.checkbox { display: inline-block; margin-left: 4em; margin-bottom: -.5em; }
 #resultsContainer, pre { margin-top: 1em; }
+#stats { font-size: .8em;margin:-.5em 0; }
 .error { border: 2pt red solid;padding: 1em; }
 .btn { white-space: nowrap; }
 </style>
@@ -113,7 +112,7 @@ var initSort = "";
 
 	<div class="row-fluid">
 		<div id="sqlButtons" class="span4">
-			<button class="btn btn-primary" id="execSql" onclick="submitForm()" title="Execute SQL"><i class="icon-white icon-play"></i> Run</button>
+			<button class="btn btn-primary input-medium" id="execSql" onclick="submitForm()" title="Execute SQL"><i class="icon-white icon-play"></i> Run</button>
 			<button class="btn btn-link" id="clearsql" onclick="clearsql()" title="Clear SQL">Clear</button>
 		</div>
 		<div class="span4 empty"></div>
@@ -135,8 +134,7 @@ var initSort = "";
 
 	<div class="row-fluid">
 		<div id="resultsContainer" class="span12">
-		<%
-			if(sql.length > 0 && flag != "no_query"){
+		<% if(sql.length > 0 && flag != "no_query") {
 				try {
 				  	var start = new Date();
 
@@ -151,7 +149,7 @@ var initSort = "";
 
 					var RS = aRecordSet;
 
-					rw("<table>");
+					rw("<table id='stats'>");
 					rw("<tr>");
 					rw("<td><b>Start Time:&nbsp;</b></td><td>" + start + "</td>");
 					rw("<td style='width:20px;'>&nbsp;</td>");
@@ -159,12 +157,12 @@ var initSort = "";
 					var elapsed_ms = end.getMilliseconds() - start.getMilliseconds();
 
 					try {
-					   rw("<td><b>Number of Records:&nbsp;</b></td><td>" + RS.RecordCount + "</td>");
+					   rw("<td><b>Number of Records:</b></td><td>" + RS.RecordCount + "</td>");
 					} catch(e) {}
 					rw("</tr>");
 					rw("<tr>");
-					rw("<td><b>End Time:&nbsp;</b></td><td>" + end + "</td>");
-					rw("<td>&nbsp;</td>");
+					rw("<td><b>End Time:</b></td><td>" + end + "</td>");
+					rw("<td></td>");
 					rw("<td><b>Elapsed Time (seconds):&nbsp;</b></td><td>" + elapsed_ms/1000 + "</td>");
 					rw("</tr>");
 					rw("</table>")
@@ -192,7 +190,7 @@ var initSort = "";
 					   }
 					}
 
-					rw("<p id='fields' class=''></p><table class='tablesorter'>");
+					rw("<p id='fields'/><table class='tablesorter'>");
 					if(RS.State == 1) { // if the recordset has rows
 					  //show the column names
 					  rw("<thead>");
@@ -210,7 +208,7 @@ var initSort = "";
 					      rw("  <tr>");
 					      for(var i=0; i < RS.Fields.Count;i++) {
 					         colName = RS.Fields(i).Name;
-					         colValue = Server.HTMLEncode(RS.Fields(i).Value + "") + "&nbsp;";
+					         colValue = Server.HTMLEncode(RS.Fields(i).Value + "");
 
 					         //show dates in a nice format
 							   if( RS.Fields(i).Type == 135 && RS.Fields(i).Value != null) colValue = I18N_FormatGeneralDate( RS.Fields(i).Value);
@@ -238,7 +236,7 @@ var initSort = "";
 
 				} catch(e) {
 				   rw("<h2>SQL Error</h2>");
-				   rw("<h3>" + e.description + "</h3>");
+				   rw("<h3 class='error'>" + e.description + "</h3>");
 				   rw("<pre>" + sql + "</pre>");
 				}
 

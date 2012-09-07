@@ -87,7 +87,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	<div class="row-fluid">
 		<div class="span1"></div>
 		<div class="span10 well well-small topMargin">
-			<h2>Change Bootstrap Theme</h2>
+			<h2>Change Theme</h2>
 			<p>Click on a theme below to change the theme used for Dovetail Bolt.</p>
 
 			<iframe class="theme" src="themes/baseline.asp" scrolling="no"></iframe>

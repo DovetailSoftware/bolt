@@ -1,0 +1,12 @@
+#headerContainer td {
+	width: auto;
+	vertical-align: top;
+}
+#headerContainer td.header {
+	text-align: right;
+	padding-right: .6em;
+	font-weight: bold;
+}
+#fields { margin: -1em 0 0 0; }
+#jump { margin: 2em 0 .5em 0; }
+ul { margin: 1em; }

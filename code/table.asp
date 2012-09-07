@@ -35,6 +35,7 @@
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <link href="css/columnSelect.css" rel="stylesheet">
+<link href="css/tableView.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -45,7 +46,6 @@ var sPageTitle = "Details for Table";
 var sPageType = "Schema";
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
-
 %>
 <!--#include file="inc/ddonline.inc"-->
 <%
@@ -53,6 +53,11 @@ if(IsView(type_id) == true) Response.Redirect(BuildViewURL(type_id));
 var type_name = GetTableName(type_id);
 //Update the Recent Cookie Collection
 UpdateCookies();
+
+var BC = "Baseline";
+type_id = type_id - 0;
+if (type_id >= 2000 & type_id <= 4999) BC = "Custom";
+if (type_id >= 430 & type_id <= 511) BC = "Custom";
 %>
 <!--#include file="inc/quicklinks.inc"-->
 </head>
@@ -61,78 +66,36 @@ UpdateCookies();
 
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="headerContainer" class="span8 topMargin">
-		<%
-			//Page Header:
-			rw("<table class='fullWidth top'>");
-			rw("<tr>");
-			rw("<td width='20%'>Table Name:</td>");
-			rw("<td>" + type_name + "</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td>Table Number:</td>");
-			rw("<td>" + type_id + "</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td>Group:</td>");
-			rw("<td>" + GetTableGroup(type_name) + "</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td>Description:</td>");
-			rw("<td>" + Server.HTMLEncode(GetTableComment(type_name)) + "</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td>Flags:</td>");
-			rw("<td>" + GetTableParams(type_id) + "</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td class='padRight'>");
-			var BC = "Baseline";
-			type_id = type_id - 0;
-			if (type_id >= 2000 & type_id <= 4999) BC = "Custom";
-			if (type_id >= 430 & type_id <= 511) BC = "Custom";
-			rw("Baseline/Custom:");
-			rw("</td><td>");
-			rw(BC);
-			rw("</td>");
-			rw("</tr>");
-			rw("</table>");
-		%>
+		<div class="span3"></div>
+		<div id="headerContainer" class="span6 topMargin well">
+			<center>
+			<table>
+			<tr><td class="header">Table Name:</td><td><%=type_name %></td>													</tr>
+			<tr><td class="header">Table Number:</td><td><%=type_id %></td>                                       </tr>
+			<tr><td class="header">Group:</td><td><%=GetTableGroup(type_name) %></td>                             </tr>
+			<tr><td class="header">Description:</td><td><%=Server.HTMLEncode(GetTableComment(type_name)) %></td>  </tr>
+			<tr><td class="header">Flags:</td><td><%=GetTableParams(type_id) %></td>                              </tr>
+			<tr><td class="header">Baseline/Custom:</td><td><%=BC %></td>                                         </tr>
+			</table>
+			</center>
 		</div>
-		<div class="span2"></div>
-	</div>
-
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div id="hyperlinksContainer" class="span8">
-		<%	//See if it has storage SQL
-			var storageSQL = getStorageSQL();
-
-			//Build the Hyperlinks Table:
-			rw("<table class='fullWidth'>");
-			rw("<tr>");
-			rw("<td>");
-			rw("<a href='#fields'>Fields</a>");
-			rw("</td><td>");
-			rw("<a href='#relations'>Relations</a>");
-			rw("</td><td>");
-			rw("<a href='#indexes'>Indexes</a>");
-			rw("</td><td>");
-			rw("<a href='#views'>Referenced in Views</a>");
-			rw("</td>");
-			if(storageSQL != "") {
-				rw("<td>");
-				rw("<a href='#storage'>Storage</a>");
-				rw("</td>");
-			}
-			var select_sql = "select * from table_" + type_name;
-			var encoded_select_sql = Server.URLEncode(select_sql);
-			rw("<td><a href=sql.asp?sql=" + encoded_select_sql + "&flag=no_query>" + select_sql + "</a></td>");
-			rw("</table>");
-		%>
+		<div class="span3">
+			<h5 id="jump">Jump Links</h5>
+			<ul class="unstyled">
+				<li><a href='#fields'>Fields</a></li>
+				<li><a href='#relations'>Relations</a></li>
+				<li><a href='#indexes'>Indexes</a></li>
+				<li><a href='#views'>Referenced in Views</a></li>
+				<% //See if it has storage SQL
+					var storageSQL = getStorageSQL();
+					if(storageSQL != "") { %>
+				<li><a href='#storage'>Storage</a></li>
+				<% } %>
+			</ul>
+			<% var select_sql = "select * from table_" + type_name;
+				var encoded_select_sql = Server.URLEncode(select_sql); %>
+				<button class="btn"><a href=sql.asp?sql=<%=encoded_select_sql%>&flag=no_query><%=select_sql%></a></button>
 		</div>
-		<div class="span2"></div>
 	</div>
 
 	<div class="row-fluid">
@@ -142,7 +105,7 @@ UpdateCookies();
 	//Build the Table Header:
 	rw("<h4 id='fields'>Fields:</h4>");
 	rw("<table class='tablesorter fullWidth'>");
-	rw("<thead><tr class='headerRow'>");
+	rw("<thead><tr class='headerRow navbar-inverse navbar'>");
 	rw("<th>");
 	rw("Field Name");
 	rw("</th>");
@@ -444,8 +407,8 @@ UpdateCookies();
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span1"></div>
-		<div id="indexesContainer" class="span6">
+		<div class="span2"></div>
+		<div id="indexesContainer" class="span8">
 <%
 	rw("<h4 id='indexes'>Indexes: (Defined in Clarify Schema)</h4>");
 	rw("<table class='tablesorter'>");
@@ -547,11 +510,13 @@ UpdateCookies();
 	rw("</tbody>");
 	rw("</table>");
   	rf();
-
-
 %>
 		</div>
-		<div id="viewsContainer" class="span4">
+		<div class="span2"></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span2"></div>
+		<div id="viewsContainer" class="span8">
 <%
 	//Table for the List of views where this table is joined
 	//First, build the Table Header
@@ -604,7 +569,7 @@ UpdateCookies();
 	}
 %>
 		</div>
-		<div class="span1"></div>
+		<div class="span2"></div>
 	</div>
 
 	<!--#include file="inc/recent_objects.asp"-->
@@ -622,6 +587,7 @@ $(document).ready(function() {
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
+	window.addEventListener("hashchange", function() { scrollBy(0, -50) });
 
    $(".tablesorter").tablesorter();
 	$(".tablesorter tbody tr").click(function () {

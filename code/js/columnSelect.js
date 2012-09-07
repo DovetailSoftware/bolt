@@ -17,14 +17,14 @@ function columnSelect() {
 			if(colText > "") colData += ((colData > "")? ", " : "") + colText;
 		});
 
-		$("<span class='column'>Text from Selected Column:<img src='img/delete.png' class='deleteIcon'/></span><input type=text class=temp title='text from column' />").val(colData).insertBefore($th.parents("table"));
+		$("<span class='column'>Text from Selected Column:<i class='icon icon-remove deleteIcon' title='Hide column text'></i></span><input type=text class=temp title='text from column' />").val(colData).insertBefore($th.parents("table"));
 		$(".temp").focus().select();
       return false;
    });
 }
 
 $(document).ready(function() {
-   $("<span class='helpSpan'>(double-click a column header to select column text)</span>").insertAfter("#fields");
+   $("<p class='helpSpan'>(double-click a column header to select column text)</p>").insertAfter("#fields");
    $(".deleteIcon").live("click", resetColumnSelection);
 
    columnSelect();

@@ -6,9 +6,9 @@
 //
 // Series         :  Dovetail Software Development Series(tm)
 //
-// Name           :  schema.asp
+// Name           :  index.asp
 //
-// Description    :  Selection page for Database objects
+// Description    :  Selection page for Database objects (app default)
 //
 // Author         :  Dovetail Software, Inc.
 //                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
@@ -35,7 +35,6 @@
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <style>
 input.formInput { margin-bottom: 0;margin-left: .5em; }
-.btn { margin-left: .5em; }
 table.middle tr td { padding: .2em 0; }
 .bottomMargin { margin-bottom: 3em; }
 </style>
@@ -65,47 +64,47 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<tr>
 					<td>Tables/Views whose name starts with</td>
 					<td>
-						<input type="text" class="input-medium formInput" id="type_name" />
-					</td>
-					<td>
-						<button class="btn " id="ddonline">Search</button>
-					</td>
+						<div class="input-append">
+    						<input type="text" class="input-medium formInput" id="type_name" />
+    						<button class="btn " id="ddonline">Search</button>
+						</div>
+  					</td>
 				</tr>
 				<tr>
 					<td>Tables/Views whose ID equals</td>
 					<td>
-						<input type="text" class="input-medium formInput" id="type_id" />
-					</td>
-					<td>
-						<button class="btn " id="ddonline2">Search</button>
+						<div class="input-append">
+							<input type="text" class="input-medium formInput" id="type_id" />
+							<button class="btn " id="ddonline2">Search</button>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>Tables/Views that contain a field named</td>
 					<td>
+						<div class="input-append">
 						<input type="text" class="input-medium formInput" id="field_name" />
-					</td>
-					<td>
-						<button class="btn " id="fieldButton">Search</button>
-						<input type="hidden" value="search_by_field_name" id="search_type" />
+							<button class="btn " id="fieldButton">Search</button>
+							<input type="hidden" value="search_by_field_name" id="search_type" />
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>Tables that contain a relation name starting with</td>
 					<td>
-						<input type="text" class="input-medium formInput" id="rel_name" />
-					</td>
-					<td>
-						<button class="btn " id="relationButton">Search</button>
+						<div class="input-append">
+							<input type="text" class="input-medium formInput" id="rel_name" />
+							<button class="btn " id="relationButton">Search</button>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>User-Defined Tables/Views whose name starts with</td>
 					<td>
-						<input type="text" class="input-medium formInput" id="type_custom" />
-					</td>
-					<td>
-						<button class="btn " id="customButton">Search</button>
+						<div class="input-append">
+							<input type="text" class="input-medium formInput" id="type_custom" />
+							<button class="btn " id="customButton">Search</button>
+						</div>
 					</td>
 				</tr>
 			</table>

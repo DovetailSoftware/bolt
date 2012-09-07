@@ -34,6 +34,7 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
+<link href="css/tableView.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -88,43 +89,35 @@ function GetSQL(){
 
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="headerContainer" class="span8 topMargin">
-		<%
-			//Get the base table
+		<% //Get the base table
 			var TheLink = getBaseTableLink();
 
 			//Get the sql
 			var ver = GetClarifyVersion();
-   		var TheViewSQL = (ver > CLARIFY_125)? GetNativeSQL() : GetSQL();
+			var TheViewSQL = (ver > CLARIFY_125)? GetNativeSQL() : GetSQL();
 
 			//See if it has filter SQL
 			var filterSQL = getFilterSQL();
-
-			//Page Header:
-			outputViewHeader("SQL ", TheLink);
 		%>
+		<div class="span3"></div>
+		<div id="headerContainer" class="span6 topMargin well">
+			<center>
+			<%	outputViewHeader("SQL ", TheLink); %>
+			</center>
 		</div>
-		<div class="span2"></div>
-	</div>
-
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div id="hyperlinksContainer" class="span8">
-		<%
-			var select_sql = "select * from table_" + type_name;
-			var encoded_select_sql = Server.URLEncode(select_sql);
-			var unionViewsList = "";
-			hyperlinksTable();
-		%>
+		<div class="span3">
+			<%
+				var select_sql = "select * from table_" + type_name;
+				var encoded_select_sql = Server.URLEncode(select_sql);
+				var unionViewsList = "";
+				hyperlinksTable();
+			%>
 		</div>
-		<div class="span2"></div>
 	</div>
 
 	<div class="row-fluid">
 		<div id="fieldsContainer" class="span12 topMargin">
-		<%
-			//Fields Table:
+		<% //Fields Table:
 			outputViewFields();
 
 			//SQL for the view:
@@ -154,6 +147,7 @@ $(document).ready(function() {
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
+	window.addEventListener("hashchange", function() { scrollBy(0, -50) });
 
    $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {

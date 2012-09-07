@@ -180,7 +180,7 @@ function changeDatabase() {
 	   data: databaseData,
 	   success: function(results) {
 	      if(results.success == true) {
-	         window.location = "schema.asp";
+	         window.location = "index.asp";
 	      } else {
 	         alert("An error occurred while updating database: " + results.errorMessage);
 	      }

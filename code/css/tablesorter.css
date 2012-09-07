@@ -1,7 +1,6 @@
 /* Blue Theme */
 table.tablesorter {
-	font: 11px/18px Arial, Sans-serif;
-	background-color: #cdcdcd;
+	font-size: 8pt;
 	margin: 10px 0 15px;
 	width: 100%;
 	text-align: left;
@@ -15,11 +14,10 @@ table.tablesorter td {
 }
 
 table.tablesorter th {
-	background-color: #e6EEEE;
+	background-color: #ddd;
 	color: #000;
 	border-collapse: collapse;
-	font: 12px/18px Arial, Sans-serif;
-	padding: 4px;
+	padding: 2px;
 }
 table.tablesorter .header,
 table.tablesorter .tablesorter-header {
@@ -31,12 +29,12 @@ table.tablesorter .tablesorter-header {
 	/* background-image: url(black-bg.gif); */
 	background-repeat: no-repeat;
 	background-position: center left;
-	padding: 4px 4px 4px 20px;
+	padding: 2px 2px 2px 20px;
 	cursor: pointer;
 }
 table.tablesorter tbody td {
 	color: #3d3d3d;
-	padding: 4px;
+	padding: 0 2px;
 	background-color: #fff;
 	vertical-align: top;
 }
@@ -99,6 +97,7 @@ table.tablesorter tr.even td {
 }
 
 /* hovered row colors */
+/*
 table.tablesorter tbody tr:hover td,
 table.tablesorter tbody tr.even:hover td {
 	background: #d9d9d9;
@@ -106,6 +105,7 @@ table.tablesorter tbody tr.even:hover td {
 table.tablesorter tbody tr.odd:hover td {
 	background: #bfbfbf;
 }
+*/
 
 /* filter widget */
 table.tablesorter input.tablesorter-filter,

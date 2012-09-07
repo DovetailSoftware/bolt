@@ -3,95 +3,73 @@
 //Output header for a view
 ///////////////////////////////////////////////////////////////////////////////////
 function outputViewHeader(ViewKind,TheLink) {
-	rw("<table class='fullWidth top'>");
+	rw("<table>");
    rw("<tr>");
-   rw("<td width='20%'>");
-   rw(ViewKind+"View Name: ");
+   rw("<td class='header'>");
+   rw(ViewKind+"View Name:");
    rw("</td>");
    rw("<td>");
-   rw(type_name );
+   rw(type_name);
    rw("</td>");
    rw("</tr>");
    rw("<tr>");
-   rw("<td class='padRight'>");
-   rw(ViewKind+"View Number:" );
+   rw("<td class='header'>");
+   rw(ViewKind+"View Number:");
    rw("</td>");
    rw("<td>");
    rw(type_id);
    rw("</td>");
    rw("</tr>");
    rw("<tr>");
+   rw("<td class='header'>Group:</td>");
    rw("<td>");
-   rw("Group: ");
-   rw("</td>");
-   rw("<td>");
-   rw(GetTableGroup(type_name) );
+   rw(GetTableGroup(type_name));
    rw("</td>");
    rw("</tr>");
    if(TheLink.length > 0){
       rw("<tr>");
-      rw("<td>");
-      rw("Base Table: ");
-      rw("</td>");
+	   rw("<td class='header'>Base Table:</td>");
       rw("<td>");
       rw(TheLink);
       rw("</td>");
       rw("</tr>");
    }
    rw("<tr>");
-   rw("<td>");
-   rw("Description: ");
-   rw("</td>");
+   rw("<td class='header'>Description:</td>");
    rw("<td>");
    rw(Server.HTMLEncode(GetTableComment(type_name)));
    rw("</td>");
    rw("<tr>");
-   rw("<td>");
-   rw("Flags:");
-   rw("</td>");
+   rw("<td class='header'>Flags:</td>");
    rw("<td>");
    rw(GetTableParams(type_id));
    rw("</td>");
    rw("</tr>");
    rw("<tr>");
-   rw("<td class='padRight'>");
+   rw("<td class='header'>Baseline/Custom:</td>");
+   rw("<td>");
    var BC = "Baseline";
    type_id = type_id - 0;
    if((type_id >= 2000 && type_id <= 4999) ||
       (type_id >= 430  && type_id <= 511)) BC = "Custom";
-   rw("Baseline/Custom:");
-   rw("</td>");
-   rw("<td>");
-   rw(BC );
+   rw(BC);
    rw("</td>");
    rw("</tr>");
    rw("</table>");
 }
 
 function hyperlinksTable() {
-	rw("<table class='fullWidth'>");
-	rw("<table class='fullWidth'>");
-	rw("<tr>");
-	rw("<td>");
-	rw("<a href='#fields'>Fields</a>");
-	rw("</td>");
-	rw("<td>");
-	rw("<a href='#joins'>Joins</a>");
-	rw("</td>");
-	if(filterSQL != "") {
-	   rw("<td>");
-	   rw("<a href='#filters'>Filters</a>");
-	   rw("</td>");
-	}
-	if(unionViewsList.length > 0) {
-	   rw("<td>");
-	   rw("<a href='#contribs'>Union Views Which This View Contributes To</a>");
-	   rw("</td>");
-	}
+	rw("<h5 id='jump'>Jump Links</h5>");
+	rw("<ul class='unstyled'>");
+	rw("	<li><a href='#fields'>Fields</a></li>");
+	rw((filterSQL == "" && unionViewsList.length == 0)? "	<li><a href='#joins'>Joins</a></li>" : "");
+   rw((filterSQL != "")? "<li><a href='#filters'>Filters</a></li>" : "");
+   rw((unionViewsList.length > 0)? "<li><a href='#contribs'>Union Views Which This View Contributes To</a></li>" : "");
+	rw("</ul>");
+
 	var select_sql = "select * from table_" + type_name;
 	var encoded_select_sql = Server.URLEncode(select_sql);
-	rw("<td colspan=2><a href=sql.asp?sql=" + encoded_select_sql + "&flag=no_query>" + select_sql + "</a></td>");
-	rw("</table>");
+	rw("<button class='btn'><a href='sql.asp?sql=" + encoded_select_sql + "&flag=no_query'>" + select_sql + "</a></button>");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -119,8 +97,8 @@ function outputViewFields() {
    var ViewArray = [];
    var row = 0;
 
-   rw("<h4>Fields:</h4>");
-   rw("<table id='fields' class='tablesorter fullWidth'>");
+   rw("<h4 id='fields'>Fields:</h4>");
+   rw("<table class='tablesorter fullWidth'>");
 	rw("<table class='tablesorter fullWidth'>");
    rw("<thead><tr class='headerRow'>");
 

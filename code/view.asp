@@ -35,6 +35,7 @@
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <link href="css/columnSelect.css" rel="stylesheet">
+<link href="css/tableView.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -78,34 +79,27 @@ if (Flags & UNION_VIEW_FLAG){
    var TheURL = BuildUnionViewURL(type_id);
    Response.Redirect(TheURL);
 }
-%>
 
+//See if it contributes to any UNION views
+var unionViewsList = getUnionViewsList(type_id);
+//See if it has filter SQL
+var filterSQL = getFilterSQL();
+%>
 <div class="container-fluid">
 	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div id="headerContainer" class="span8">
-		<%	outputViewHeader("", ""); %>
+		<div class="span3"></div>
+		<div id="headerContainer" class="span6 topMargin well">
+			<center>
+			<%	outputViewHeader("", ""); %>
+			</center>
 		</div>
-		<div class="span2"></div>
+		<div class="span3">
+			<%	hyperlinksTable(); %>
+		</div>
 	</div>
 
 	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div id="hyperlinksContainer" class="span8">
-		<%	//See if it contributes to any UNION views
-		   var unionViewsList = getUnionViewsList(type_id);
-
-			//See if it has filter SQL
-		   var filterSQL = getFilterSQL();
-
-			hyperlinksTable();
-		%>
-		</div>
-		<div class="span2"></div>
-	</div>
-
-	<div class="row-fluid">
-		<div id="fieldsContainer" class="span12">
+		<div class="span12">
 		<% outputViewFields(); %>
 		</div>
 	</div>
@@ -172,8 +166,8 @@ if (Flags & UNION_VIEW_FLAG){
 
 			//Print the Table of Joins
 			//Build the table header
-   		rw("<h4>Joins:</h4>");
-   		rw("<table id='joins' class='tablesorter'>");
+   		rw("<h4 id='joins'>Joins:</h4>");
+   		rw("<table class='tablesorter'>");
    		rw("<thead><tr class='headerRow'>");
    		rw("<th>");
    		rw("Join From");
@@ -194,10 +188,10 @@ if (Flags & UNION_VIEW_FLAG){
    		   ToAlias = JoinArray[row][7];
    		   JoinFlag = JoinArray[row][8];
    		   ToTableNum = GetTableNum(ToTable);
-   		   FromJoin = '';
-   		   ToJoin = '';
-   		   LeftOuter = '';
-   		   RightOuter = '';
+   		   FromJoin = "";
+   		   ToJoin = "";
+   		   LeftOuter = "";
+   		   RightOuter = "";
    		   if (JoinFlag == "1") { LeftOuter  = "OUTER "; }
    		   if (JoinFlag == "2") { RightOuter = "OUTER "; }
    		   if (JoinFlag == "3") { RightOuter = "CROSS "; }
@@ -211,7 +205,7 @@ if (Flags & UNION_VIEW_FLAG){
    		      FromJoin = RightOuter + TheLink + Dot + FromRel;
    		      break;
    		    default:
-   		      FromJoin = RightOuter + FromAlias + "(" + TheLink + ")" + ((FromRel != undefined) ? (Dot + FromRel) : '');
+   		      FromJoin = RightOuter + FromAlias + "(" + TheLink + ")" + ((FromRel != undefined) ? (Dot + FromRel) : "");
    		      break;
    		   }
 
@@ -224,7 +218,7 @@ if (Flags & UNION_VIEW_FLAG){
    		      ToJoin = LeftOuter + TheLink + Dot + ToRel;
    		      break;
    		    default:
-   		      ToJoin = LeftOuter + ToAlias + ((ToRel != undefined) ? ("(" + TheLink + ")" + Dot + ToRel) : '');
+   		      ToJoin = LeftOuter + ToAlias + ((ToRel != undefined) ? ("(" + TheLink + ")" + Dot + ToRel) : "");
    		      break;
    		   }
 
@@ -243,9 +237,9 @@ if (Flags & UNION_VIEW_FLAG){
    		rsJoins = null;
 
 			//Print the filter
-   		if(filterSQL != '') {
+   		if(filterSQL != "") {
    		   rw("<h4 id='filters'>Filters:</h4>");
-   		   rw(filterSQL.replace(/\n/g,'<br>'));
+   		   rw(filterSQL.replace(/\n/g,"<br/>"));
    		}
 
 			//Print the Table of Union Views this view contributes to
@@ -286,6 +280,7 @@ $(document).ready(function() {
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
+	window.addEventListener("hashchange", function() { scrollBy(0, -50) });
 
    $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
