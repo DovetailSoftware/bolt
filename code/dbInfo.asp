@@ -78,7 +78,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<thead>
 				<tr>
 					<th>ADP DB Header Information</th>
-					<th>Data</th>
+					<th>&nbsp;</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -113,7 +113,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<thead>
 				<tr>
 					<th>Database Flags</th>
-					<th>Data</th>
+					<th>&nbsp;</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -171,7 +171,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<thead>
 				<tr>
 					<th>Additional Database Information</th>
-					<th>Data</th>
+					<th>&nbsp;</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -247,8 +247,8 @@ $(document).ready(function() {
 	document.title = "Bolt: <%=sPageTitle%>";
 
    $(".tablesorter").tablesorter({
-		widgets: ['zebra']
-	});
+      headers: { 1: { sorter: false } }
+   });
 	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});

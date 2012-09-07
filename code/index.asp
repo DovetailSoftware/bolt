@@ -6,9 +6,9 @@
 //
 // Series         :  Dovetail Software Development Series(tm)
 //
-// Name           :  index.asp
+// Name           :  schema.asp
 //
-// Description    :  Home page with links to Version History and Admin
+// Description    :  Selection page for Database objects
 //
 // Author         :  Dovetail Software, Inc.
 //                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
@@ -34,79 +34,115 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <style>
-.topMargin { margin-top: 40px; }
-iframe.theme {
-	width: 204px;
-	height: 120px;
-	margin: 1em;
-	scrolling: no;
-
-}
+input.formInput { margin-bottom: 0;margin-left: .5em; }
+.btn { margin-left: .5em; }
+table.middle tr td { padding: .2em 0; }
+.bottomMargin { margin-bottom: 3em; }
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
-var sPageTitle = "Home";
-var sPageType = "Master";
+var sPageTitle = "Schema";
+var sPageType = "Schema";
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
 %>
 <!--#include file="inc/ddonline.inc"-->
+<!--#include file="inc/quicklinks.inc"-->
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<a href=http://www.dovetailsoftware.com><img src="img/dovetail.png" alt="Dovetail Software"></a>
+	<div class="row-fluid bottomMargin">
+		<div class="span2"></div>
+		<div id="homeContainer" class="span8">
+
+			<h3>Schema Search</h3>
+
+			<center>
+			<table class="middle">
+				<tr>
+					<td>Tables/Views whose name starts with</td>
+					<td>
+						<input type="text" class="input-medium formInput" id="type_name" />
+					</td>
+					<td>
+						<button class="btn " id="ddonline">Search</button>
+					</td>
+				</tr>
+				<tr>
+					<td>Tables/Views whose ID equals</td>
+					<td>
+						<input type="text" class="input-medium formInput" id="type_id" />
+					</td>
+					<td>
+						<button class="btn " id="ddonline2">Search</button>
+					</td>
+				</tr>
+				<tr>
+					<td>Tables/Views that contain a field named</td>
+					<td>
+						<input type="text" class="input-medium formInput" id="field_name" />
+					</td>
+					<td>
+						<button class="btn " id="fieldButton">Search</button>
+						<input type="hidden" value="search_by_field_name" id="search_type" />
+					</td>
+				</tr>
+				<tr>
+					<td>Tables that contain a relation name starting with</td>
+					<td>
+						<input type="text" class="input-medium formInput" id="rel_name" />
+					</td>
+					<td>
+						<button class="btn " id="relationButton">Search</button>
+					</td>
+				</tr>
+				<tr>
+					<td>User-Defined Tables/Views whose name starts with</td>
+					<td>
+						<input type="text" class="input-medium formInput" id="type_custom" />
+					</td>
+					<td>
+						<button class="btn " id="customButton">Search</button>
+					</td>
+				</tr>
+			</table>
+			</center>
+			<br/>
+
+		<h4><a href="schema_id_info.asp">More information about User-Defined Table/View IDs</a></h4>
+
 		</div>
+		<div class="span2"></div>
 	</div>
 
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div class="span8 hero-unit topMargin">
-			<h2>About BOLT</h2>
-    		<p>BOLT is a set of <u>B</u>rowser <u>O</u>n<u>L</u>ine <u>T</u>ools for the Clarify<sup>&reg;</sup> system.</p>
-    		<p>View the <a href="version.asp">BOLT Version History</a>.</p>
-		</div>
-		<div class="span2"></div>
-	</div>
+	<!--#include file="inc/recent_objects.asp"-->
+	<!--#include file="inc/quick_links.asp"-->
 
-	<%if (!(udl_file.Attributes & 1) ){%>
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div class="span8 hero-unit topMargin">
-			<h2>Administration</h2>
-			<p>Configure the database connection using the <a href="admin.asp">Administration page</a>.</p>
-		</div>
-		<div class="span2"></div>
-	</div>
-	<%}%>
-
-	<div class="row-fluid">
-		<div class="span1"></div>
-		<div class="span10 hero-unit topMargin">
-			<h2>Change Bootstrap Theme</h2>
-			<p>Click on a theme below to change the theme used for Dovetail Bolt.</p>
-
-			<iframe class="theme" src="themes/baseline.asp" scrolling="no"></iframe>
-			<iframe class="theme" src="themes/cyborg.asp" scrolling="no"></iframe>
-			<iframe class="theme" src="themes/cerulean.asp" scrolling="no"></iframe>
-			<iframe class="theme" src="themes/readable.asp" scrolling="no"></iframe>
-
-			<input type="hidden" id="newTheme" />
-		</div>
-		<div class="span1"></div>
-	</div>
-
-<!--#include file="inc/footer.inc"-->
 </div>
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/schemaValidate.js"></script>
 <script type="text/javascript">
+function submitFormByName(strUrl, fieldName) {
+	if(!validate_filter(fieldName)) return;
+	window.location = strUrl + "?" + fieldName + "=" + $("#" + fieldName).val() + "&custom=0";
+}
+
+function submitFormById(strUrl, fieldName) {
+	if(!validate_id(fieldName)) return;
+	window.location = strUrl + "?" + fieldName + "=" + $("#" + fieldName).val() + "&custom=0";
+}
+
+function submitCustom() {
+	if(!validate_filter("type_custom")) return;
+	window.location = "tables.asp?type_name=" + $("#type_custom").val() + "&custom=1";
+	submitFormByName("", "");
+}
+
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
@@ -114,12 +150,40 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
-	$("#newTheme").click(function() {
-		var themePath = $(this).val() + "";
-		if(themePath > "") themePath = themePath + "/";
-		$.cookie("boltTheme", themePath, { expires: 365 });
-		window.location.href = path;
+	$("#type_name").keypress(function(event) {
+		if(event.keyCode == 13) $("#ddonline").click();
 	});
+	$("#ddonline").click(function() {
+		submitFormByName("tables.asp", "type_name");
+	});
+
+	$("#type_id").keypress(function(event) {
+		if(event.keyCode == 13) $("#ddonline2").click();
+	});
+	$("#ddonline2").click(function() {
+		submitFormById("tables.asp", "type_id");
+	});
+
+	$("#field_name").keypress(function(event) {
+		if(event.keyCode == 13) $("#fieldButton").click();
+	});
+	$("#fieldButton").click(function() {
+		submitFormByName("search_fields.asp", "field_name");
+	});
+
+	$("#rel_name").keypress(function(event) {
+		if(event.keyCode == 13) $("#relationButton").click();
+	});
+	$("#relationButton").click(function() {
+		submitFormByName("search_rels.asp", "rel_name");
+	});
+
+	$("#type_custom").keypress(function(event) {
+		if(event.keyCode == 13) $("#customButton").click();
+	});
+	$("#customButton").click(submitCustom);
+
+	$("#type_name").focus();
 });
 </script>
 </html>

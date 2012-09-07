@@ -43,10 +43,10 @@
 textarea { width:100%;height:150px;float:left;}
 #sqlButtons .btn, #buttonContainer .btn, #clipboardButtons .btn { width: 70px; }
 #otherButtons { margin-top: .4em; }
-label { display: inline-block; margin-left: .4em; }
-span, input[type="checkbox"] { margin-left: 6em; }
+label.checkbox { display: inline-block; margin-left: 4em; margin-bottom: -.5em; }
 #resultsContainer, pre { margin-top: 1em; }
 .error { border: 2pt red solid;padding: 1em; }
+.btn { white-space: nowrap; }
 </style>
 
 <!--#include file="inc/config.inc"-->
@@ -86,45 +86,50 @@ var initSort = "";
 <!--#include file="inc/navbar.inc"-->
 
 <div class="container-fluid">
-	<div class="row-fluid bottomMargin">
+	<div class="row-fluid">
 		<div id="homeContainer" class="span12">
 			<h3>SQL</h3>
 		</div>
 	</div>
 
 	<div class="row-fluid">
-		<div id="sqlContainer" class="span6">
-			<h5>SQL Code</h5>
-			<textarea id="sqlStmt" name="sqlStmt" wrap="soft"><%=sql%></textarea>
-		</div>
-		<div id="clipboardContainer" class="span6">
-			<h5>Clipboard</h5>
-			<textarea id="clp" name="clp" wrap="soft"><%=clp%></textarea><br clear="left" />
+		<div id="sqlContainer" class="span12">
+			<div id="sqlDiv" style="width:45%;float:left;">
+				<h5>SQL Code</h5>
+				<textarea id="sqlStmt" name="sqlStmt" wrap="soft" style="width:97%;"><%=sql%></textarea>
+			</div>
+			<div style="width:85px; float:left;margin-left:.5em;">
+				<h5>&nbsp;</h5>
+				<button class="btn btn-block" id="copySql" onclick="copysql()" title="Copy SQL to Clipboard">Copy <i class="icon icon-chevron-right"></i></button>
+				<button class="btn btn-block" id="swapSql" onclick="swap()" title="Swap SQL and Clipboard"><i class="icon icon-chevron-left"></i> Swap <i class="icon icon-chevron-right"></i></button>
+				<button class="btn btn-block" id="copyClp" onclick="copyclp()" title="Copy Clipboard to SQL"><i class="icon icon-chevron-left"></i> Copy</button>
+			</div>
+			<div id="clipDiv" style="float:right;width:42%;">
+				<h5>Clipboard</h5>
+				<textarea id="clp" name="clp" wrap="soft" style="width:97%;"><%=clp%></textarea>
+			</div>
 		</div>
 	</div>
 
 	<div class="row-fluid">
 		<div id="sqlButtons" class="span4">
 			<button class="btn btn-primary" id="execSql" onclick="submitForm()" title="Execute SQL"><i class="icon-white icon-play"></i> Run</button>
-			<button class="btn btn-primary" id="clearsql" onclick="clearsql()" title="Clear SQL"><i class="icon-white icon-trash"></i> Clear</button>
+			<button class="btn btn-link" id="clearsql" onclick="clearsql()" title="Clear SQL">Clear</button>
 		</div>
-		<div id="buttonContainer" class="span4">
-			<button class="btn btn-primary" id="copySql" onclick="copysql()" title="Copy SQL to Clipboard"><i class="icon-white icon-chevron-right"></i></button>
-			<button class="btn btn-primary" id="swapSql" onclick="swap()" title="Swap SQL and Clipboard"><i class="icon-white icon-chevron-left"></i><i class="icon-white icon-chevron-right"></i></button>
-			<button class="btn btn-primary" id="copyClp" onclick="copyclp()" title="Copy Clipboard to SQL"><i class="icon-white icon-chevron-left"></i></button>
-		</div>
+		<div class="span4 empty"></div>
 		<div id="clipboardButtons" class="span4">
-			<button class="btn btn-primary" id="updateClp" onclick="updateclp()" title="Update Clipboard"><i class="icon-white icon-hdd"></i> Save</button>
-			<button class="btn btn-primary" id="clearClp" onclick="clearclp()" title="Clear Clipboard"><i class="icon-white icon-trash"></i> Clear</button>
+			<button class="btn btn-link" id="clearClp" onclick="clearclp()" title="Clear Clipboard">Clear</button>
 		</div>
 	</div>
 
 	<div class="row-fluid bottomMargin">
 		<div id="otherButtons" class="span12">
-			<button class="btn btn-primary" id="clearsql" onclick="prefill()" title="Prefill SQL">select * from table_</button>
-			<button class="btn btn-primary" id="clearsql" onclick="substitute()" title="Bind Variables">Substitute Bind Variables</button>
-         <input type="checkbox" id="wrapLong" name="wrapLong" <%=(wrap == 'on')? 'checked' : '' %>></input><label for="wrapLong">Wrap Long Columns</label>
+			<button class="btn " id="prefill" onclick="prefill()" title="Prefill SQL">select * from table_</button>
+			<button class="btn " id="substitute" onclick="substitute()" title="Bind Variables">Substitute Bind Variables</button>
 			<span>(Bind Variable Character is "<b><%=PARAM_CHAR%></b>")</span>
+			<label class="checkbox">
+  				<input type="checkbox" id="wrapLong" name="wrapLong" <%=(wrap == 'on')? 'checked' : '' %> /> Wrap Long Columns
+			</label>
 		</div>
 	</div>
 
@@ -297,10 +302,6 @@ function clearclp() {
 	deleteCookie("bolt_sql_clp");
 }
 
-function updateclp() {
-	setCookie("bolt_sql_clp", $("#clp").val());
-}
-
 function copysql() {
 	var sql = $("#sqlStmt").val();
 	if(sql.length == 0) return false;
@@ -429,12 +430,20 @@ function submitForm() {
 	$("#formSQL").submit();
 }
 
+function resizeTextAreas() {
+	var newWidth = ($(".navbar").width() - 85 - 53) / 2;
+	$("#sqlDiv, #clipDiv").css("width", newWidth);
+}
+
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
+
+	resizeTextAreas();
+	$(window).resize(resizeTextAreas);
 
 	$("#resultsContainer").on("click", ".tablesorter tbody tr", function () {
 	   $(this).children("td").toggleClass("highlight");

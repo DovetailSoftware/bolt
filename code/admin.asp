@@ -76,7 +76,7 @@ if(read_only_udl) Response.Redirect("online.asp");
 		<div class="span2"></div>
 		<div id="headerContainer" class="span8">
 
-			<p><b>Set BOLT Database</b></p>
+			<h2>Set BOLT Database</h2>
 			<p><b>Warning!</b> Please keep in mind that this sets the database for everyone using this BOLT Web Application.
 			<br/>This is a global, not an individual setting.</p>
 
@@ -102,8 +102,8 @@ if(read_only_udl) Response.Redirect("online.asp");
 		   </div>
 
 		   <div id="buttonArea">
-		   	<button class="btn btn-primary" id="submitButton">Submit</button>
-		   	<button class="btn btn-primary" id="resetButton">Reset</button>
+		   	<button class="btn " id="submitButton">Submit</button>
+		   	<button class="btn" id="resetButton">Reset</button>
 		   </div>
 
 		</div>

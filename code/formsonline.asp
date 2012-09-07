@@ -34,10 +34,10 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <style>
-#showControlSearch, #hideControlSearch { padding-top:50px;text-align:center; }
+#showControlSearch, #hideControlSearch { padding-top:20px;text-align:center; }
 #hideControlSearch, #controlsSearchArea { display:none; }
 .bottomMargin { margin-bottom: .7em; }
-#formsonline { margin-bottom: 0; }
+.extraBottomMargin { margin-bottom: 3em; }
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
@@ -64,7 +64,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span2"></div>
-		<div id="headerContainer" class="span8 topMargin">
+		<div id="headerContainer" class="span8 topMargin extraBottomMargin">
 			<form method="POST" name="formsonline" id="formsonline" action="forms.asp">
 				<h3>Search for Forms where</h3>
 
@@ -77,16 +77,16 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					<option value="ver_customer">Customer Version</option>
 				</select>
 
-				<select id="operator" name="operator">
+				<select name="operator" class="input-medium">
 					<option selected value="starts">starts with</option>
 					<option value="ends">ends with</option>
 					<option value="equals">equals</option>
 					<option value="contains">contains</option>
 				</select>
 
-				<input type="text" id="filter" name="filter" class="filter" />
+				<input type="text" id="filter" name="filter" class="filter input-medium" />
 
-				<button id="formSearchButton" class="btn btn-primary bottomMargin">Search</button>
+				<button id="formSearchButton" class="btn  bottomMargin">Search</button>
 
 				<select name="which" id="which">
 			   	<option selected value="all">Search all forms</option>
@@ -111,19 +111,19 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					<option value="customer_ver">Customer Version</option>
 				</select>
 
-				<select name="operator">
+				<select name="operator" class="input-medium">
 					<option selected value="starts">starts with</option>
 					<option value="ends">ends with</option>
 					<option value="equals">equals</option>
 					<option value="contains">contains</option>
 				</select>
 
-				<input type="text" id="controlFilter" name="controlFilter" class="filter" />
+				<input type="text" id="controlFilter" name="controlFilter" class="filter input-medium" />
 
-				<button id="controlSearchButton" class="btn btn-primary bottomMargin">Search</button>
+				<button id="controlSearchButton" class="btn  bottomMargin">Search</button>
 				<br />
 
-				<select name="which" id="which" style="width:280px;">
+				<select name="which" id="which" style="width:300px;">
 				    <option selected value="all">Search for All Control Types or limit to...</option>
 				    <option value="4">Button</option>
 				    <option value="0">Static Text</option>
@@ -154,33 +154,13 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			</div>
 		</div>
 	</div>
-
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div class="span8 hero-unit">
-		<!--#include file="inc/recent_objects.asp"-->
-		</div>
-		<div class="span2"></div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div class="span8 hero-unit">
-		<!--#include file="inc/quick_links.asp"-->
-		</div>
-		<div class="span2"></div>
-	</div>
-
-<!--#include file="inc/footer.inc"-->
 </div>
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript">
 function toggleSearch(){
-	$("#controlsSearchArea").toggle();
-	$("#hideControlSearch").toggle();
-	$("#showControlSearch").toggle();
+	$("#controlsSearchArea, #hideControlSearch, #showControlSearch").toggle();
 	$(".filter:not(:hidden)").focus();
 }
 
@@ -192,15 +172,6 @@ $(document).ready(function() {
 	document.title = "Bolt: <%=sPageTitle%>";
 
 	if($("#controlsSearchArea #controlFilter").val().length > 0) toggleSearch();
-
-	$("#controlSearchButton").click(function() {
- 		if(validate_form("formsonline")) $("#formsonline").submit();
-	});
-
-	$("#controlSearchButton").click(function() {
- 		if(validate_form("controlSearchForm")) $("#controlSearchForm").submit();
-	});
-
 	$("#filter").focus();
 });
 </script>

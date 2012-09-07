@@ -116,9 +116,7 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
-	$(".tablesorter").tablesorter({
-		widgets: ['zebra']
-	});
+	$(".tablesorter").tablesorter();
 });
 </script>
 </html>

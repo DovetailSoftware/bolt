@@ -144,9 +144,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			rsCT = retrieveDataFromDBStatic(TheSQL);
 		%>
 
-		<p align="center">
-		<b>Business Rules</b><BR><BR>
-		</p>
+		<h3>Business Rules</h3>
 
 		<p align="center">
 		<table class="tablesorter fullWidth">
@@ -557,9 +555,7 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
-   $(".tablesorter").tablesorter({
-		widgets: [ 'zebra' ]
-	});
+   $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});

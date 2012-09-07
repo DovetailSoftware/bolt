@@ -116,21 +116,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		</div>
 	</div>
 
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div class="span8 hero-unit">
-		<!--#include file="inc/recent_objects.asp"-->
-		</div>
-		<div class="span2"></div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div class="span8 hero-unit">
-		<!--#include file="inc/quick_links.asp"-->
-		</div>
-		<div class="span2"></div>
-	</div>
+	<!--#include file="inc/recent_objects.asp"-->
+	<!--#include file="inc/quick_links.asp"-->
 </div>
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>

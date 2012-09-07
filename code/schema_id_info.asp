@@ -113,7 +113,6 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 		<div class="span2"></div>
 	</div>
 
-<!--#include file="inc/footer.inc"-->
 </div>
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>

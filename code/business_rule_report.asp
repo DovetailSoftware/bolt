@@ -173,9 +173,7 @@ $(document).ready(function() {
 
 	$("#loading").hide();
 
-   $(".tablesorter").tablesorter({
-		widgets: ['zebra']
-	});
+   $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});

@@ -35,7 +35,7 @@
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <style>
 .span8 h3 { text-align: center;margin-bottom: .5em; }
-#reportContainer table * { margin-bottom: .4em; }
+#reportContainer table * { margin-bottom: .2em; }
 label { display: inline-block }
 </style>
 <!--#include file="inc/config.inc"-->
@@ -65,7 +65,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		<div class="span2"></div>
 	</div>
 
-	<div class="row-fluid topMargin">
+	<div class="row-fluid">
 		<div class="span2"></div>
 		<div id="reportContainer" class="span8">
 
@@ -209,22 +209,18 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3">
-					<input type="checkbox" name="SuppressActions" id="SuppressActions" style="width:20px;margin-right:10px" checked><label for="SuppressActions">Hide Rule Actions in Results</label>
+				<td colspan="2">
+					<label class="checkbox">
+  						<input type="checkbox" name="SuppressActions" id="SuppressActions" checked>
+  						Hide Rule Actions in Results
+					</label>
 				</td>
+				<td>Note: All Filters are ANDed together</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td colspan="3">Note: All Filters are ANDed together</td>
-			</tr>
-			<tr>
+				<td><button id="search" class="btn btn-primary btn-block">Search</button></td>
 				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td><button id="search" class="btn btn-primary">Search</button></td>
 			</tr>
 			</table>
 			</form>
