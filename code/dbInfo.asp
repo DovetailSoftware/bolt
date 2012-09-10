@@ -74,7 +74,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		<div id="headerContainer" class="span8">
 			<h3>Database Information</h3>
 
-			<table class="tablesorter simple fullWidth">
+			<table class="tablesorter simple">
 				<thead>
 				<tr>
 					<th>ADP DB Header Information</th>
@@ -109,7 +109,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			var schMgr_running = ((rsADP("flags") & 4096) > 0);
 			%>
 
-			<table class="tablesorter simple fullWidth">
+			<table class="tablesorter simple">
 				<thead>
 				<tr>
 					<th>Database Flags</th>
@@ -167,7 +167,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	<div class="row-fluid topMargin">
 		<div class="span2"></div>
 		<div id="fieldsContainer" class="span8">
-			<table class="tablesorter simple fullWidth">
+			<table class="tablesorter simple">
 				<thead>
 				<tr>
 					<th>Additional Database Information</th>
@@ -204,7 +204,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	<div class="row-fluid topMargin">
 		<div class="span2"></div>
 		<div id="relationsContainer" class="span8">
-			<table class="tablesorter simple fullWidth">
+			<table class="tablesorter simple">
 				<thead>
 				<tr>
 					<th>ADO Information</th>

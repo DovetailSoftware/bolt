@@ -29,19 +29,20 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+			<a class="brand" href="index.asp">Bolt</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class=""><a href="index.asp">Schema</a></li>
-					<li class=""><a href="formsonline.asp">Forms</a></li>
-					<li class=""><a href="bizrules.asp">Rules</a></li>
-					<li class=""><a href="dbInfo.asp">Database</a></li>
-					<li class=""><a href="sql.asp">SQL</a></li>
-					<li class=""><a href="lists.asp">Lists</a></li>
-					<li class=""><a href="licenses.asp">Licenses</a></li>
-					<li class=""><a href="about.asp">About</a></li>
-					<li class=""><a class="connected" href="admin.asp" title="Change Connection"></a></li>
+					<li><a href="index.asp">Schema</a></li>
+					<li><a href="formsonline.asp">Forms</a></li>
+					<li><a href="bizrules.asp">Business Rules</a></li>
+					<li><a href="dbInfo.asp">Database Info</a></li>
+					<li><a href="sql.asp">SQL</a></li>
+					<li><a href="lists.asp">Lists</a></li>
+					<li><a href="licenses.asp">Licenses</a></li>
+					<li><a href="about.asp">About</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
+	<a class="connected" href="admin.asp" title="Change Connection"></a>
 </div>

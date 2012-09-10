@@ -43,3 +43,9 @@ table.middle tr td {
 .horizontalMargin {
 	margin: 10px 0;
 }
+
+a.connected {
+	float:right;
+	margin: 0 .3em;
+	font-size:.8em;
+}

@@ -38,6 +38,7 @@
 #headerContainer, .span12 { margin: 20px 0; }
 table.leftHeader thead th { text-align: left; }
 #filters span, #filters a { margin-right: 1em; }
+button.filter { margin: .2em .3em .2em 0; font-size: .9em; }
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->

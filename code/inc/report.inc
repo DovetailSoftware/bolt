@@ -115,11 +115,7 @@ function FillRecordSetWithRemainingRules(rs) {
 }
 
 function BuildTimeFilter(timePeriod, displayString, when) {
-	if(when == timePeriod) {
-		rw("<span>" + displayString + "</span>");
-	} else {
-		rw("<a href=\"javascript:DisplayReport('" + timePeriod + "');\">" + displayString + "</a>");
-	}
+	rw("<button class='btn filter' " + ((when == timePeriod)? "disabled" : "") + " onclick=\"DisplayReport('" + timePeriod + "');\">" + displayString + "</button>");
 }
 
 function ensureValidDate(in_date) {
