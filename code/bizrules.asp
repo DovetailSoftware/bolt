@@ -33,11 +33,7 @@
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<style>
-.span8 h3 { text-align: center;margin-bottom: .5em; }
-#reportContainer table * { margin-bottom: .2em; }
-label { display: inline-block }
-</style>
+<link href="css/bizrules.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -52,7 +48,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <body>
 <!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
-	<div class="row-fluid topMargin">
+	<div class="row-fluid">
 		<div class="span2"></div>
 		<div id="headerContainer" class="span8">
 

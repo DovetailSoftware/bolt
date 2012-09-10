@@ -40,13 +40,12 @@ iframe.theme {
 	height: 120px;
 	margin: 1em;
 	scrolling: no;
-
 }
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
-var sPageTitle = "Home";
+var sPageTitle = "About";
 var sPageType = "Master";
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
@@ -85,19 +84,20 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	<%}%>
 
 	<div class="row-fluid">
-		<div class="span1"></div>
-		<div class="span10 well well-small topMargin">
+		<div class="span2"></div>
+		<div class="span8 well well-small topMargin">
 			<h2>Change Theme</h2>
 			<p>Click on a theme below to change the theme used for Dovetail Bolt.</p>
 
 			<iframe class="theme" src="themes/baseline.asp" scrolling="no"></iframe>
 			<iframe class="theme" src="themes/cyborg.asp" scrolling="no"></iframe>
+			<br/>
 			<iframe class="theme" src="themes/cerulean.asp" scrolling="no"></iframe>
 			<iframe class="theme" src="themes/readable.asp" scrolling="no"></iframe>
 
 			<input type="hidden" id="newTheme" />
 		</div>
-		<div class="span1"></div>
+		<div class="span2"></div>
 	</div>
 
 <!--#include file="inc/footer.inc"-->

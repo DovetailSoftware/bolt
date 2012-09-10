@@ -64,7 +64,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span2"></div>
-		<div id="headerContainer" class="span8 topMargin extraBottomMargin">
+		<div id="headerContainer" class="span8 extraBottomMargin">
 			<form method="POST" name="formsonline" id="formsonline" action="forms.asp">
 				<h3>Search for Forms where</h3>
 

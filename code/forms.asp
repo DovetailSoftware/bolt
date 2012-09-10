@@ -53,7 +53,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div id="headerContainer" class="span12 topMargin">
+		<div id="headerContainer" class="span12">
 		<%	Attribute = Request("attribute");
 			Operator = Request("operator");
 			Filter = Request("filter");

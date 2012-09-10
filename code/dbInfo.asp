@@ -69,7 +69,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/navbar.inc"-->
 
 <div class="container-fluid">
-	<div class="row-fluid topMargin">
+	<div class="row-fluid">
 		<div class="span2"></div>
 		<div id="headerContainer" class="span8">
 			<h3>Database Information</h3>

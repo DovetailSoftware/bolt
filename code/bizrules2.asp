@@ -34,12 +34,7 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
-<style>
-.span12 h3 { text-align: center;margin-bottom: .5em; }
-label { display: inline-block }
-table.tablesorter thead tr th { font-weight: bold; }
-table.tablesorter th, table.tablesorter td { white-space: normal;font-size: .9em;line-height:14px; }
-</style>
+<link href="css/bizrules.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -59,7 +54,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <%
 %>
 <div class="container-fluid">
-	<div class="row-fluid topMargin">
+	<div class="row-fluid">
 		<div id="headerContainer" class="span12">
 		<%
 			var rs = Server.CreateObject("ADODB.Recordset");

@@ -57,7 +57,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span2"></div>
-		<div id="gbstContainer" class="span4 topMargin">
+		<div id="gbstContainer" class="span4">
 			<h3>Application Lists</h3>
 
 			<table id="gbst" class="tablesorter fullWidth">
@@ -79,7 +79,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			</table>
 		</div>
 
-		<div id="hgbstContainer" class="span4 topMargin">
+		<div id="hgbstContainer" class="span4">
 			<h3>User Defined Lists</h3>
 
 			<table class="tablesorter fullWidth">
