@@ -46,6 +46,12 @@ label.checkbox { display: inline-block; margin-left: 4em; margin-bottom: -.5em; 
 #stats { font-size: .8em;margin:-.5em 0; }
 .error { border: 2pt red solid;padding: 1em; }
 .btn { white-space: nowrap; }
+table.help td.shortcut {
+	font-weight: bold;
+	padding-right: .5em;
+	text-align: right;
+	white-space: nowrap;
+}
 </style>
 
 <!--#include file="inc/config.inc"-->
@@ -87,6 +93,7 @@ var initSort = "";
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div id="homeContainer" class="span12">
+			<div style="float:right;margin: .1em 0 .1em -220px;font-size:.8em;">? : Open keyboard shortcut help</div>
 			<h3>SQL</h3>
 		</div>
 	</div>
@@ -248,18 +255,30 @@ var initSort = "";
 	</div>
 </div>
 
-<div id="help" class="modal hide">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
-  </div>
+<div id="help" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	  <h3 id="myModalLabel">Keyboard shortcuts</h3>
+	</div>
+	<div class="modal-body">
+		<table class="help">
+			<tr>
+				<td class="shortcut">alt-s</td>
+				<td>Execute SQL</td>
+			</tr>
+			<tr>
+				<td class="shortcut">alt-x</td>
+				<td>Swap SQL and Clipboard</td>
+			</tr>
+			<tr>
+				<td class="shortcut">?</td>
+				<td>Open keyboard shortcut help</td>
+			</tr>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
 </div>
 
 <form id="formSQL" action="sql.asp" method="POST">
@@ -456,7 +475,7 @@ $(document).ready(function() {
 
 	$("body").keydown(function(evt) {
 		if(evt.shiftKey && evt.which == 191) {
-			$("#help").modal();
+			$("#help").modal({ "keyboard": true });
 			return false;
 		}
 	});
