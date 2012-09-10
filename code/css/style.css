@@ -46,3 +46,20 @@ table.middle tr td {
 table.header {
 	background-color: pink;
 }
+
+table.biz-rule-action{
+  white-space:normal;
+  table-layout: fixed;
+  width: 100%;
+  overflow:hidden;
+  word-wrap:break-word;
+}
+
+table.biz-rule-action tr td{
+	min-width:100px;
+}
+
+table.biz-rule-action tr td.action-message{
+	min-width:300px;
+	width:300px;
+}

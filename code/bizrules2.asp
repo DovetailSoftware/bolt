@@ -38,6 +38,7 @@
 .span12 h3 { text-align: center;margin-bottom: .5em; }
 label { display: inline-block }
 table.tablesorter thead tr th { font-weight: bold; }
+table.tablesorter th, table.tablesorter td { white-space: normal;font-size: .9em;line-height:14px; }
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
@@ -146,8 +147,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 		<h3>Business Rules</h3>
 
-		<p align="center">
-		<table class="tablesorter fullWidth">
+		<table class="tablesorter" style="width:<%=TableWidth%>%;">
 			<thead>
 		   	<tr>
 		      	<th>Title</th>
@@ -320,7 +320,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 						}
 					}
 
-				  	Condition += ConditionCount + ". " + rsRuleCond("operand1") + CondOperator + rsRuleCond("operand2") + "<br/><br/>";
+					if(ConditionCount > 1) Condition += "<br/><br/>"
+				  	Condition += ConditionCount + ". " + rsRuleCond("operand1") + CondOperator + rsRuleCond("operand2");
 				}
 
 				rsRuleCond.MoveNext();
@@ -342,14 +343,14 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 			<tr <%=(DisplayRow)? "" : "style='display:none;'" %> id="<%=rsCT("objid")%>">
 			<td><b><%=rsCT("title")%></b></td>
-			<td><%=rsCT("rule_set")%>&nbsp;</td>
-			<td><%=rsCT("description")%>&nbsp;</td>
-			<td><%=Active%>&nbsp;</td>
-			<td><%=ObjectType%>&nbsp;</td>
-			<td><%=StartEvent%>&nbsp;</td>
-			<td><%=StopEvent%>&nbsp;</td>
-			<td><%=Condition%>&nbsp;</td>
-			<td>
+			<td><%=rsCT("rule_set")%></td>
+			<td><%=rsCT("description")%></td>
+			<td><%=Active%></td>
+			<td><%=ObjectType%></td>
+			<td><%=StartEvent%></td>
+			<td><%=StopEvent%></td>
+			<td><%=Condition%></td>
+			<td width="100%">
 			<% if(bSuppressActions == false) { %>
 			  	<table class="biz-rule-action">
 			  		<thead>
@@ -474,7 +475,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					ActionFlags = rsAction("flags") - 0;
 					%>
 					 	<tr>
-							<td><%=ActionTitle%>&nbsp;</td>
+							<td><%=ActionTitle%></td>
 							<td>
 							<%
 							// Figure out of the "Create Act Log on Action" is checked or not
@@ -482,16 +483,16 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 							rw(((ActionFlags & 1024) > 0)? "Yes" : "No");
 							%>
 							</td>
-							<td><%=ActionType%>&nbsp;</td>
-							<td><%=ToUrgency%>&nbsp;</td>
-							<td><%=CCUrgency%>&nbsp;</td>
-							<td><%=Server.HTMLEncode(ActionMessage)%>&nbsp;</td>
-							<td><%=Server.HTMLEncode(pagerMessage)%>&nbsp;</td>
-							<td><%=StartTime%>&nbsp;</td>
-							<td><%=TimeType%>&nbsp;</td>
-							<td><%=TimeUnits%>&nbsp;</td>
-							<td><%=Repeat%>&nbsp;</td>
-							<td><%=Duration%>&nbsp;</td>
+							<td><%=ActionType%></td>
+							<td><%=ToUrgency%></td>
+							<td><%=CCUrgency%></td>
+							<td><%=Server.HTMLEncode(ActionMessage)%></td>
+							<td><%=Server.HTMLEncode(pagerMessage)%></td>
+							<td><%=StartTime%></td>
+							<td><%=TimeType%></td>
+							<td><%=TimeUnits%></td>
+							<td><%=Repeat%></td>
+							<td><%=Duration%></td>
 					 	</tr>
 					<%
 					rsAction.MoveNext();
