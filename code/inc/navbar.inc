@@ -30,7 +30,6 @@
 				<span class="icon-bar"></span>
 			</button>
 			<div class="nav-collapse collapse">
-				<a class="brand" href="index.asp">Bolt</a>
 				<ul class="nav">
 					<li class=""><a href="index.asp">Schema</a></li>
 					<li class=""><a href="formsonline.asp">Forms</a></li>

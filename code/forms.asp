@@ -48,7 +48,6 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 %>
 <!--#include file="inc/ddonline.inc"-->
-<!--#include file="inc/quicklinks.inc"-->
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
@@ -180,9 +179,6 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		%>
 		</div>
 	</div>
-
-	<!--#include file="inc/recent_objects.asp"-->
-	<!--#include file="inc/quick_links.asp"-->
 </div>
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>

@@ -70,12 +70,12 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 		<div id="headerContainer" class="span6 topMargin well">
 			<center>
 			<table>
-			<tr><td class="header">Table Name:</td><td><%=type_name %></td>													</tr>
-			<tr><td class="header">Table Number:</td><td><%=type_id %></td>                                       </tr>
-			<tr><td class="header">Group:</td><td><%=GetTableGroup(type_name) %></td>                             </tr>
-			<tr><td class="header">Description:</td><td><%=Server.HTMLEncode(GetTableComment(type_name)) %></td>  </tr>
-			<tr><td class="header">Flags:</td><td><%=GetTableParams(type_id) %></td>                              </tr>
-			<tr><td class="header">Baseline/Custom:</td><td><%=BC %></td>                                         </tr>
+			<tr><td class="header">Table Name:</td><td><%=type_name %></td></tr>
+			<tr><td class="header">Table Number:</td><td><%=type_id %></td></tr>
+			<tr><td class="header">Group:</td><td><%=GetTableGroup(type_name) %></td></tr>
+			<tr><td class="header">Description:</td><td><%=Server.HTMLEncode(GetTableComment(type_name)) %></td></tr>
+			<tr><td class="header">Flags:</td><td><%=GetTableParams(type_id) %></td></tr>
+			<tr><td class="header">Baseline/Custom:</td><td><%=BC %></td></tr>
 			</table>
 			</center>
 		</div>

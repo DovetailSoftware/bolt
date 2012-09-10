@@ -34,6 +34,7 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
+<link href="css/tableView.css" rel="stylesheet">
 <style>
 .watermark { color:#666;font-size:10px; }
 </style>
@@ -55,195 +56,129 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 %>
 <!--#include file="inc/ddonline.inc"-->
-<!--#include file="inc/quicklinks.inc"-->
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
+<%
+// Go get the Details for this form
+TheSQL = "select * from table_window_db where objid = " + objid;
+rsForms = Server.CreateObject("ADODB.Recordset");
+rsForms.CursorLocation = gCursorLocation;
+rsForms.ActiveConnection = dbConnect;
+rsForms.Source = TheSQL;
+try {
+	rsForms.Open();
+} catch(e) {
+	displayDBAccessErrorPage(e);
+}
 
+var ConnString = rsForms.ActiveConnection.ConnectionString + '';
+DisconnectRecordset(rsForms);
+
+FormTitle = rsForms("title");
+FormVerClarify = rsForms("ver_clarify");
+FormVerCust = rsForms("ver_customer") + EmptyString;
+
+if(FormVerCust == "null" + EmptyString) FormVerCust = EmptyString;
+FormID = rsForms("id") - 0;
+
+cBottom = rsForms("bottom_c");
+cTop = rsForms("top_c");
+cLeft = rsForms("left_c");
+cRight = rsForms("right_c");
+
+// Store a Local Copy of the Form Data independent of the record set
+// These get used by the Form Viewer
+var TheFormVerClarify = FormVerClarify + EmptyString;
+var TheFormVerCust = FormVerCust + EmptyString;
+var FormNumber = FormID - 0;
+var BottomPixels = cBottom - 0;
+var TopPixels = cTop - 0;
+var LeftPixels = cLeft - 0;
+var RightPixels = cRight - 0;
+var BufferPixels = 21;
+var WidthPixels = RightPixels - LeftPixels + BufferPixels;
+var HeightPixels = BottomPixels - TopPixels + BufferPixels;
+
+FormObjid = rsForms("objid");
+FormName = rsForms("dialog_name");
+FormDescription = rsForms("description") + EmptyString;
+if(FormDescription == "null" + EmptyString) FormDescription = EmptyString;
+
+ // Fetch the Tabs
+TheSQL = "select distinct name from table_control_db where control2window_db = " + FormObjid;
+TheSQL+= " and type = 5 and ((name LIKE 'TAB_D%') OR (name LIKE 'TAB_I_%'))";
+rsTabs = retrieveDataFromDB(TheSQL);
+
+// Init the RC Objid to zero
+var RC_Objid = 0 - 0;
+// Init the Pick a RC variable to False
+var PickRC = 0 - 0 ;
+
+// Go get the Resource Configs that this form is in
+TheSQL = "select objid,name from table_rc_config where objid in( ";
+TheSQL+= "select objid from table_win_head where dlg_id = " + FormNumber;
+TheSQL+= " and ver_clarify = '" + FormVerClarify + "' and ver_customer ='" + rsForms("ver_customer") + "' )";
+
+rsRC = retrieveDataFromDBStatic(TheSQL);
+
+// If this form is only in 1 RC, then this is the RC we'll pass to the Form Viewer
+if(rsRC.RecordCount == 1) {
+	RCobjid = rsRC("objid");
+	RC_Objid = RCobjid - 0;
+} else {
+	// We may need to prompt the user to pick a RC
+	// Only need to do this if the form has tabs
+	if(!rsTabs.EOF) {
+		// There are tabs - make the user pick a RC
+		PickRC = 1;
+	}
+}
+
+if(rsRC.RecordCount == 0) {
+	RC_Objid = 0 - 0;
+	PickRC = 0;
+}
+%>
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span3"></div>
-		<div id="headerContainer" class="span6 topMargin">
-		<%
-			// Go get the Details for this form
-			TheSQL = "select * from table_window_db where objid = " + objid;
-			rsForms = Server.CreateObject("ADODB.Recordset");
-			rsForms.CursorLocation = gCursorLocation;
-			rsForms.ActiveConnection = dbConnect;
-			rsForms.Source = TheSQL;
-			try {
-				rsForms.Open();
-			} catch(e) {
-				displayDBAccessErrorPage(e);
-			}
-
-			var ConnString = rsForms.ActiveConnection.ConnectionString + '';
-			DisconnectRecordset(rsForms);
-
-			FormTitle = rsForms("title");
-			FormVerClarify = rsForms("ver_clarify");
-			FormVerCust = rsForms("ver_customer") + EmptyString;
-
-		 	if(FormVerCust == "null" + EmptyString) FormVerCust = EmptyString;
-			FormID = rsForms("id") - 0;
-
-			cBottom = rsForms("bottom_c");
-			cTop = rsForms("top_c");
-			cLeft = rsForms("left_c");
-			cRight = rsForms("right_c");
-
-			// Store a Local Copy of the Form Data independent of the record set
-			// These get used by the Form Viewer
-			var TheFormVerClarify = FormVerClarify + EmptyString;
-			var TheFormVerCust = FormVerCust + EmptyString;
-			var FormNumber = FormID - 0;
-			var BottomPixels = cBottom - 0;
-			var TopPixels = cTop - 0;
-			var LeftPixels = cLeft - 0;
-			var RightPixels = cRight - 0;
-			var BufferPixels = 21;
-			var WidthPixels = RightPixels - LeftPixels + BufferPixels;
-			var HeightPixels = BottomPixels - TopPixels + BufferPixels;
-
-			FormObjid = rsForms("objid");
-			FormName = rsForms("dialog_name");
-			FormDescription = rsForms("description") + EmptyString;
-		 	if(FormDescription == "null" + EmptyString) FormDescription = EmptyString;
-
-		    // Fetch the Tabs
-			TheSQL = "select distinct name from table_control_db where control2window_db = " + FormObjid;
-			TheSQL+= " and type = 5 and ((name LIKE 'TAB_D%') OR (name LIKE 'TAB_I_%'))";
-			rsTabs = retrieveDataFromDB(TheSQL);
-
-			// Init the RC Objid to zero
-			var RC_Objid = 0 - 0;
-			// Init the Pick a RC variable to False
-			var PickRC = 0 - 0 ;
-
-			// Go get the Resource Configs that this form is in
-			TheSQL = "select objid,name from table_rc_config where objid in( ";
-			TheSQL+= "select objid from table_win_head where dlg_id = " + FormNumber;
-			TheSQL+= " and ver_clarify = '" + FormVerClarify + "' and ver_customer ='" + rsForms("ver_customer") + "' )";
-
-			rsRC = retrieveDataFromDBStatic(TheSQL);
-
-			// If this form is only in 1 RC, then this is the RC we'll pass to the Form Viewer
-			if(rsRC.RecordCount == 1) {
-				RCobjid = rsRC("objid");
-				RC_Objid = RCobjid - 0;
-			} else {
-				// We may need to prompt the user to pick a RC
-				// Only need to do this if the form has tabs
-				if(!rsTabs.EOF) {
-					// There are tabs - make the user pick a RC
-					PickRC = 1;
-				}
-			}
-
-			if(rsRC.RecordCount == 0) {
-				RC_Objid = 0 - 0;
-				PickRC = 0;
-			}
-
-			// Page Header:
-			rw("<table>");
-			rw("<tr>");
-			rw("<td>");
-			rw("Form ID: ");
-			rw("</td>");
-			rw("<td>");
-			rw(FormID);
-			rw("</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td>");
-			rw("Title: ");
-			rw("</td>");
-			rw("<td>");
-			rw(FormTitle);
-			rw("</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td>");
-			rw("Name: ");
-			rw("</td>");
-			rw("<td>");
-			rw(FormName);
-			rw("</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td>");
-			rw("Clarify Ver: ");
-			rw("</td>");
-			rw("<td>");
-			rw(FormVerClarify);
-			rw("</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td>");
-			rw("User Ver: ");
-			rw("</td>");
-			rw("<td>");
-			rw(FormVerCust);
-			rw("</td>");
-			rw("</tr>");
-			rw("<tr>");
-			rw("<td class='padRight'>");
-			rw("Description:");
-			rw("</td>");
-			rw("<td>");
-			rw(FormDescription);
-			rw("</td>");
-			rw("</tr>");
-			rw("</table>");
-
-			// Build the Hyperlinks Table:
-			rw("<table class='fullWidth topMargin'>");
-			rw("<tr>");
-			rw("<td>");
-			rw("<a href='#cobj'>Contextual Objects</a>");
-			rw("</td>");
-			rw("<td>");
-			rw("<a href='#controls'>Controls</a>");
-			rw("</td>");
-			rw("<td>");
-			rw("<a href='#children'>Child Forms & Tabs</a>");
-			rw("</td>");
-			rw("<td>");
-			rw("<a href='#parent'>Parent Forms</a>");
-			rw("</td>");
-			rw("</table>");
-			%>
+		<div id="headerContainer" class="span6 topMargin well">
+			<center>
+			<table>
+			<tr><td class="header">Form ID:</td><td><%=FormID %></td></tr>
+			<tr><td class="header">Title:</td><td><%=FormTitle %></td></tr>
+			<tr><td class="header">Name:</td><td><%=FormName %></td></tr>
+			<tr><td class="header">Clarify Ver:</td><td><%=FormVerClarify %></td></tr>
+			<tr><td class="header">User Ver:</td><td><%=FormVerCust %></td></tr>
+			<tr><td class="header">Description:</td><td><%=FormDescription %></td></tr>
+			</table>
+			</center>
+		</div>
+		<div class="span3">
+			<h5 id="jump">Jump Links</h5>
+			<ul class="unstyled">
+				<li><a href='#cobjContainer'>Contextual Objects</a></li>
+				<li><a href='#controls'>Controls</a></li>
+				<li><a href='#children'>Child Forms & Tabs</a></li>
+				<li><a href='#parent'>Parent Forms</a></li>
+			</ul>
 		</div>
 		<div class="span3"></div>
 	</div>
 
 	<div class="row-fluid">
-		<div id="cobjContainer" class="span12 topMargin">
-		<%	// Cobj Table:
-			// Build the Table Header:
-			rw("<h4>Contextual Objects:</h4>");
-			rw("<table id='cobj' class='tablesorter'>");
+		<div id="cobjContainer" class="span12">
+		<%	rw("<h4 id='cobj'>Contextual Objects:</h4>");
+			rw("<table class='tablesorter'>");
 			rw("<thead><tr>");
-			rw("<th type=Number>");
-			rw("Cobj #");
-			rw("</th>");
-			rw("<th>");
-			rw("Name");
-			rw("</th>");
-			rw("<th>");
-			rw("Defined By");
-			rw("</th>");
-			rw("<th>");
-			rw("Type");
-			rw("</th>");
+			rw("<th type=Number>Cobj #</th>");
+			rw("<th>Name</th>");
+			rw("<th>Defined By</th>");
+			rw("<th>Type</th>");
 			if( GetClarifyVersion() >= CLARIFY_80){
-				rw("<th>");
-				rw("Caption");
-				rw("</th>");
-				rw("<th>");
-				rw("SubType");
-				rw("</th>");
+				rw("<th>Caption</th>");
+				rw("<th>SubType</th>");
 			}
 			rw("</tr></thead>");
 
@@ -301,39 +236,22 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			TheSQL+=" order by id";
 			rsControl = retrieveDataFromDB(TheSQL);
 
+			rw("<h4 id='controls' class='topMargin'>Controls:</h4>");
 			if(rsControl.EOF) {
 				rw("This form does not have any controls.");
 			} else {
 
 				// Controls Table
-				// Build the Table Header:
-				rw("<h4 id='controls' class='topMargin'>Controls:</h4>");
 				rw("\n<table class='tablesorter'>");
 				rw("<thead><tr>");
-				rw("<th Type=Number >");
-				rw("Ctrl #");
-				rw("</th>");
-				rw("<th>");
-				rw("Type");
-				rw("</th>");
-				rw("<th>");
-				rw("Name");
-				rw("</th>");
-				rw("<th>");
-				rw("Caption");
-				rw("</th>");
-				rw("<th>");
-				rw("Source Cobj");
-				rw("</th>");
-				rw("<th>");
-				rw("Dest. Cobj");
-				rw("</th>");
-				rw("<th>");
-				rw("Button Actions");
-				rw("</th>");
-				rw("<th>");
-				rw("Privileges");
-				rw("</th>");
+				rw("<th Type=Number >Ctrl #</th>");
+				rw("<th>Type</th>");
+				rw("<th>Name</th>");
+				rw("<th>Caption</th>");
+				rw("<th>Source Cobj</th>");
+				rw("<th>Dest. Cobj</th>");
+				rw("<th>Button Actions</th>");
+				rw("<th>Privileges</th>");
 				rw("</tr></thead>");
 
 				while(!rsControl.EOF) {
@@ -426,12 +344,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				// Build a Table of Children & Tabs
 				rw("\n<table class='tablesorter'>");
 				rw("<thead><tr>");
-				rw("<th Type=Number>");
-				rw("Form ID");
-				rw("</th>");
-				rw("<th>");
-				rw("Type");
-				rw("</th>");
+				rw("<th Type=Number>Form ID</th>");
+				rw("<th>Type</th>");
 				rw("</tr></thead>");
 
 				// Print out the Tabs
@@ -505,12 +419,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				// Build a Table of Children
 				rw("\n<table class='tablesorter'>");
 				rw("<thead><tr>");
-				rw("<th>");
-				rw("Form ID");
-				rw("</th>");
-				rw("<th>");
-				rw("Type");
-				rw("</th>");
+				rw("<th>Form ID</th>");
+				rw("<th>Type</th>");
 				rw("</tr></thead>");
 
 				// Print out the Parents where this form is a Tab
@@ -555,9 +465,6 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		%>
 		</div>
 	</div>
-
-	<!--#include file="inc/recent_objects.asp"-->
-	<!--#include file="inc/quick_links.asp"-->
 </div>
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
@@ -570,6 +477,7 @@ $(document).ready(function() {
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
+	window.addEventListener("hashchange", function() { scrollBy(0, -50) });
 
 	$(".tablesorter").tablesorter({
 		headers: {
