@@ -93,7 +93,6 @@ var initSort = "";
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div id="homeContainer" class="span12">
-			<div style="float:right;margin: .1em 0 .1em -220px;font-size:.8em;">? : Open keyboard shortcut help</div>
 			<h3>SQL</h3>
 		</div>
 	</div>
@@ -111,6 +110,7 @@ var initSort = "";
 				<button class="btn btn-block" id="copyClp" onclick="copyclp()" title="Copy Clipboard to SQL"><i class="icon icon-chevron-left"></i> Copy</button>
 			</div>
 			<div id="clipDiv" style="float:right;width:42%;">
+				<div style="float:right;margin: 0 .3em;font-size:.8em;"><a id="helpLink" href="">Keyboard shortcuts available</a></div>
 				<h5>Clipboard</h5>
 				<textarea id="clp" name="clp" wrap="soft" style="width:97%;"><%=clp%></textarea>
 			</div>
@@ -272,12 +272,9 @@ var initSort = "";
 			</tr>
 			<tr>
 				<td class="shortcut">?</td>
-				<td>Open keyboard shortcut help</td>
+				<td>Bring up this help dialog</td>
 			</tr>
 		</table>
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 	</div>
 </div>
 
@@ -466,6 +463,11 @@ function resizeTextAreas() {
 	$("#sqlDiv, #clipDiv").css("width", newWidth);
 }
 
+function showHelp() {
+	$("#help").modal({ "keyboard": true });
+	return false;
+}
+
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
@@ -473,11 +475,9 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
+	$("#helpLink").click(showHelp);
 	$("body").keydown(function(evt) {
-		if(evt.shiftKey && evt.which == 191) {
-			$("#help").modal({ "keyboard": true });
-			return false;
-		}
+		if(evt.shiftKey && evt.which == 191) showHelp();
 	});
 
 	resizeTextAreas();
