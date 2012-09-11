@@ -33,6 +33,10 @@
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<style>
+#homeContainer h4 { text-align:left;margin: .5em 0; }
+#homeContainer .btn { margin: 0 .5em; }
+</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -51,11 +55,11 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 	var numAvailable = potentialAvailable - numUsed;
 	var numUsedString = numUsed;
 
-	if (numUsed == 0) numUsedString = "None";
-	if (numUsed == potentialAvailable) numUsedString = "All";
+	if(numUsed == 0) numUsedString = "None";
+	if(numUsed == potentialAvailable) numUsedString = "All";
 
 	var counter = minValue;
-	while (!records.EOF) {
+	while(!records.EOF) {
 		if(records("type_id") != counter) {
 			nextAvailableID = counter;
 			break;
@@ -66,11 +70,11 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 	records.Close();
 
 	rw(numUsedString + " of the " + potentialAvailable + " available IDs in this range have been used.&nbsp;");
-	if (numUsed > 0) {
+	if(numUsed > 0) {
 		var href = "tables.asp?minRange=" + minValue + "&maxRange=" + maxValue;
-		rw('<a href=' + href + '>View them</a>');
+		rw('<button class="btn" onclick="window.location=\'' + href + '\'">View them</button>');
 	}
-	rw("<p>The lowest available ID in this range is <strong>" + nextAvailableID + "</strong></p>");
+	rw("<p>The lowest available ID in this range is <strong>" + nextAvailableID + "</strong>.</p>");
 }
 %>
 <!--#include file="inc/ddonline.inc"-->
@@ -86,28 +90,19 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 			<h3>More information about User-Defined Table and View IDs</h3>
 
 			<p align="center">
-				There are two ranges reserves for custom IDs: 430-571 and 2000-4999.
-				<br/>
+				There are two ranges reserves for custom IDs: 430-571 and 2000-4999.<br/>
 				The rest are reserved for Clarify baseline use.
 			</p>
 
-				<div class="cssbox topMargin" >
-				  <div class="cssbox_head">
-				    <h2>Low Range: 430-571</h2>
-				  </div>
-				  <div class="cssbox_body">
-						<% DisplayInfoForSchemaIdRange(430,571); %>
-				  </div>
-				</div>
+			<div class="topMargin">
+				<h4>Low Range: 430-571</h4>
+				<% DisplayInfoForSchemaIdRange(430,571); %>
+			</div>
 
-				<div class="cssbox topMargin">
-				  <div class="cssbox_head">
-				    <h2>High Range: 2000-4999</h2>
-				  </div>
-				  <div class="cssbox_body">
-						<% DisplayInfoForSchemaIdRange(2000,4999); %>
-				  </div>
-				</div>
+			<div class="topMargin">
+				<h4>High Range: 2000-4999</h4>
+				<% DisplayInfoForSchemaIdRange(2000,4999); %>
+			</div>
 
 		</div>
 		<div class="span2"></div>
