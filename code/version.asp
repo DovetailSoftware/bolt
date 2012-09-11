@@ -65,6 +65,14 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					</tr>
 				</thead>
 				<tr>
+					<td>3.0.2</td>
+					<td>09/11/12</td>
+					<td>Added CSS Theme Support.<br/>
+					Updated a lot of page styles and layouts for readability.<br/>
+					Added Lists page to view contents of Application Lists and User Defined Lists.
+					</td>
+				</tr>
+				<tr>
 					<td>3.0.1</td>
 					<td>08/30/12</td>
 					<td>Upgraded to use Twitter Bootstrap version 2.1.0.</td>
