@@ -580,6 +580,7 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="js/columnSelect.js"></script>
+<script type="text/javascript" src="js/addEvent.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var path = window.location.pathname;
@@ -587,7 +588,7 @@ $(document).ready(function() {
 	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
-	window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
 
    $(".tablesorter").tablesorter();
 	$(".tablesorter tbody tr").click(function () {
