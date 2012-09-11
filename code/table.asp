@@ -105,34 +105,16 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	//Build the Table Header:
 	rw("<h4 id='fields'>Fields:</h4>");
 	rw("<table class='tablesorter fullWidth'>");
-	rw("<thead><tr class='headerRow navbar-inverse navbar'>");
-	rw("<th>");
-	rw("Field Name");
-	rw("</th>");
-	rw("<th>");
-	rw("Common Type");
-	rw("</hth>");
-	rw("<th>");
-	rw("Database Type");
-	rw("</th>");
-	rw("<th type=Number>");
-	rw("Generic Field ID");
-	rw("</th>");
-	rw("<th type=Number>");
-	rw("Array Size");
-	rw("</th>");
-	rw("<th>");
-	rw("Default");
-	rw("</th>");
-	rw("<th>");
-	rw("Flags");
-	rw("</th>");
-	rw("<th>");
-	rw("Comment");
-	rw("</th>");
-	rw("<th>");
-	rw("Field Used in Views");
-	rw("</th>");
+	rw("<thead><tr class='headerRow'>");
+	rw("<th>Field Name</th>");
+	rw("<th>Common Type</th>");
+	rw("<th>Database Type</th>");
+	rw("<th type=Number>Generic Field ID</th>");
+	rw("<th type=Number>Array Size</th>");
+	rw("<th>Default</th>");
+	rw("<th>Flags</th>");
+	rw("<th>Comment</th>");
+	rw("<th>Field Used in Views</th>");
 	rw("</tr></thead>");
 	rw("<tbody>");
 
@@ -241,28 +223,14 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	rw("\n<h4 id='relations'>Relations:</h4>");
 
 	rw("\n<table class='tablesorter fullWidth'>");
-	rw("<thead><tr>");
-	rw("<th>");
-	rw("Relation");
-	rw("</th>");
-	rw("<th>");
-	rw("Type");
-	rw("</th>");
-	rw("<th>");
-	rw("Target Object");
-	rw("</th>");
-	rw("<th>");
-	rw("Inverse Relation");
-	rw("</th>");
-	rw("<th>");
-	rw("Comment");
-	rw("</th>");
-	rw("<th>");
-	rw("Flags");
-	rw("</th>");
-	rw("<th>");
-	rw("MTM Table");
-	rw("</th>");
+	rw("<thead><tr class='headerRow'>");
+	rw("<th>Relation</th>");
+	rw("<th>Type</th>");
+	rw("<th>Target Object</th>");
+	rw("<th>Inverse Relation</th>");
+	rw("<th>Comment</th>");
+	rw("<th>Flags</th>");
+	rw("<th>MTM Table</th>");
 
 	//Check for exclusive relations
    TheSQL = "select count(*) from " + RELATION_TABLE + " where " + ID_FIELD + " = ";
@@ -274,16 +242,10 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 
 	if(hasExclusiveRelationSet) {
 		if (GetClarifyVersion() > CLARIFY_85){
-			rw("<th>");
-			rw("Set Name");
-			rw("</th>");
+			rw("<th>Set Name</th>");
 		}
-		rw("<th>");
-		rw("Type ID Stored in");
-		rw("</th>");
-		rw("<th>");
-		rw("Objid Stored In");
-		rw("</th>");
+		rw("<th>Type ID Stored in</th>");
+		rw("<th>Objid Stored In</th>");
 	}
 	rw("</tr>");
 
@@ -291,12 +253,9 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 		rw("<tr>");
 		rw("<td colspan=7>&nbsp;</td>");
 		var columns = (GetClarifyVersion() > CLARIFY_85)? 3 : 2;
-		rw("<td colspan=" + columns + " class='exclusive'>");
-		rw("<b>Exclusive Set Relations</b>");
-		rw("</td>");
+		rw("<td colspan=" + columns + " class='exclusive'><b>Exclusive Set Relations</b></td>");
 		rw("</tr>");
 	}
-
 	rw("</thead>");
 	rw("<tbody>");
 
@@ -346,27 +305,13 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 
 		//Build the data section of the table
 		rw("<tr>");
-		rw("<td>");
-		rw(RelationName);
-		rw("</td>");
-		rw("<td>");
-		rw(RelationTypeStr);
-		rw("</td>");
-		rw("<td>");
-		rw(TargetObjectLink);
-		rw("</td>");
-		rw("<td>");
-		rw(InverseRelation);
-		rw("</td>");
-		rw("<td>");
-		rw(Comments);
-		rw("</td>");
-		rw("<td>");
-		rw(strFlags);
-		rw("</td>");
-		rw("<td>");
-		rw(MTMTableName);
-		rw("</td>");
+		rw("<td>" + RelationName + "</td>");
+		rw("<td>" + RelationTypeStr + "</td>");
+		rw("<td>" + TargetObjectLink + "</td>");
+		rw("<td>" + InverseRelation + "</td>");
+		rw("<td>" + Comments + "</td>");
+		rw("<td>" + strFlags + "</td>");
+		rw("<td>" + MTMTableName + "</td>");
 
 		if(hasExclusiveRelationSet) {
 			FocusField = rsRelations(FOCUS_FIELD) + EmptyString;
@@ -413,20 +358,10 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	rw("<h4 id='indexes'>Indexes: (Defined in Clarify Schema)</h4>");
 	rw("<table class='tablesorter'>");
 	rw("<thead><tr>");
-	rw("<th>");
-	rw("Index Name");
-	rw("</th>");
-	rw("<th>");
-	rw("Fields");
-	rw("</th>");
-	rw("<th>");
-	rw("Flags");
-	rw("</th>");
-	if(ver > CLARIFY_125) {
-		rw("<th>");
-		rw("Storage");
-		rw("</th>");
-	}
+	rw("<th>Index Name</th>");
+	rw("<th>Fields</th>");
+	rw("<th>Flags</th>");
+	if(ver > CLARIFY_125) rw("<th>Storage</th>");
 	rw("</tr></thead>");
 	rw("<tbody>");
 
@@ -444,13 +379,9 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 
    	//Build the data part of the table
    	rw("<tr>");
-   	rw("<td>");
-   	rw(IndexName);
-		rw("</td><td>");
-   	rw(FieldNames);
-		rw("</td><td>");
-   	rw(strFlags);
-   	rw("</td>");
+   	rw("<td>" + IndexName + "</td>");
+   	rw("<td>" + FieldNames + "</td>");
+   	rw("<td>" + strFlags + "</td>");
 		if(ver > CLARIFY_125) {
 			//Go get the storage for index
 			if (dbType == "MSSQL"){
@@ -467,37 +398,24 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 				if(TheStorageSQL == null || TheStorageSQL == "null") TheStorageSQL = "&nbsp;";
 			}
 			rsIndexStorage.Close();
-			if(TheStorageSQL != "") {
-				rw("<td>");
-				rw(TheStorageSQL);
-				rw("</td>");
-			}
+			if(TheStorageSQL != "") rw("<td>" + TheStorageSQL + "</td>");
 		}
    	rw("</tr>");
-
    	rsIndexes.MoveNext();
 	}
 	rsIndexes.Close;
-
 	rsIndexes = null;
 	rw("</tbody>");
 	rw("</table>");
    rf();
 
 	//Build the (database) Indexes Table:
-	rw("<p><a name='db_indexes'></a></p>");
-	rw("\n<h4>Indexes (Defined in Database):</h4>");
-	rw("\n<table class='tablesorter'>");
-	rw("<thead><TR class=headerRow>");
-	rw("<th>");
-	rw("Index Name");
-	rw("</th>");
-	rw("<th>");
-	rw("Fields");
-	rw("</th>");
-	rw("<th>");
-	rw("Additional Information");
-	rw("</th>");
+	rw("<h4 id='db_indexes'>Indexes (Defined in Database):</h4>");
+	rw("<table class='tablesorter'>");
+	rw("<thead><tr class='headerRow'>");
+	rw("<th>Index Name</th>");
+	rw("<th>Fields</th>");
+	rw("<th>Additional Information</th>");
 	rw("</tr></thead>");
 	rw("<tbody>");
 
@@ -506,7 +424,6 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	}else{
 		DisplayDatabaseIndexesOracle(type_name);
 	}
-
 	rw("</tbody>");
 	rw("</table>");
   	rf();
@@ -522,9 +439,9 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	//First, build the Table Header
 	rw("<h4 id='views'>Referenced in Views:</h4>");
 	rw("<table class='tablesorter'>");
-	rw("<thead><tr>");
-	rw("  <th>View ID</th>");
-	rw("  <th>View Name</th>");
+	rw("<thead><tr class='headerRow'>");
+	rw("<th>View ID</th>");
+	rw("<th>View Name</th>");
 	rw("</tr></thead>");
 	rw("<tbody>");
 

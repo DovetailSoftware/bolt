@@ -5,26 +5,16 @@
 function outputViewHeader(ViewKind,TheLink) {
 	rw("<table>");
    rw("<tr>");
-   rw("<td class='header'>");
-   rw(ViewKind+"View Name:");
-   rw("</td>");
-   rw("<td>");
-   rw(type_name);
-   rw("</td>");
+   rw("<td class='header'>" + ViewKind+"View Name:" + "</td>");
+   rw("<td>" + type_name + "</td>");
    rw("</tr>");
    rw("<tr>");
-   rw("<td class='header'>");
-   rw(ViewKind+"View Number:");
-   rw("</td>");
-   rw("<td>");
-   rw(type_id);
-   rw("</td>");
+   rw("<td class='header'>" + ViewKind+"View Number:" + "</td>");
+   rw("<td>" + type_id + "</td>");
    rw("</tr>");
    rw("<tr>");
    rw("<td class='header'>Group:</td>");
-   rw("<td>");
-   rw(GetTableGroup(type_name));
-   rw("</td>");
+   rw("<td>" + GetTableGroup(type_name) + "</td>");
    rw("</tr>");
    if(TheLink.length > 0){
       rw("<tr>");
@@ -36,24 +26,18 @@ function outputViewHeader(ViewKind,TheLink) {
    }
    rw("<tr>");
    rw("<td class='header'>Description:</td>");
-   rw("<td>");
-   rw(Server.HTMLEncode(GetTableComment(type_name)));
-   rw("</td>");
+   rw("<td>" + Server.HTMLEncode(GetTableComment(type_name)) + "</td>");
    rw("<tr>");
    rw("<td class='header'>Flags:</td>");
-   rw("<td>");
-   rw(GetTableParams(type_id));
-   rw("</td>");
+   rw("<td>" + GetTableParams(type_id) + "</td>");
    rw("</tr>");
    rw("<tr>");
    rw("<td class='header'>Baseline/Custom:</td>");
-   rw("<td>");
    var BC = "Baseline";
    type_id = type_id - 0;
    if((type_id >= 2000 && type_id <= 4999) ||
       (type_id >= 430  && type_id <= 511)) BC = "Custom";
-   rw(BC);
-   rw("</td>");
+   rw("<td>" + BC + "</td>");
    rw("</tr>");
    rw("</table>");
 }
@@ -98,7 +82,6 @@ function outputViewFields() {
    var row = 0;
 
    rw("<h4 id='fields'>Fields:</h4>");
-   rw("<table class='tablesorter fullWidth'>");
 	rw("<table class='tablesorter fullWidth'>");
    rw("<thead><tr class='headerRow'>");
 
@@ -158,12 +141,8 @@ function outputViewFields() {
          ViewArray[row][1] = ViewFieldName + "";
 
          genFieldId = "";
-         if(rsViewFields("gen_field_id") - 0 > 0){
-          genFieldId=rsViewFields("gen_field_id") + "";
-         }
-         if(genFieldId == 3){
-          genFieldId+= " (UNIQUE)";
-         }
+         if(rsViewFields("gen_field_id") - 0 > 0) genFieldId=rsViewFields("gen_field_id") + "";
+         if(genFieldId == 3) genFieldId+= " (UNIQUE)";
 
          ViewArray[row][9] = genFieldId;
 
@@ -175,18 +154,10 @@ function outputViewFields() {
 
    	//Print the Table of view fields
       //Build the Table header
-      rw("<th>");
-      rw("View Field Name");
-      rw("</th>");
-      rw("<th>");
-      rw("Table Name");
-      rw("</th>");
-      rw("<th>");
-      rw("Field Name");
-      rw("</th>");
-      rw("<th>");
-      rw("Comment");
-      rw("</th>");
+      rw("<th>View Field Name</th>");
+      rw("<th>Table Name</th>");
+      rw("<th>Field Name</th>");
+      rw("<th>Comment</th>");
       rw("<th>Generic Field Id</th>");
       rw("</tr></thead>");
       rw("<tbody>");
@@ -202,58 +173,29 @@ function outputViewFields() {
          ViewAlias = ViewArray[row][8];
          GenFieldId = ViewArray[row][9];
 
-			rw("<tr>");
-         rw("<td>");
-         rw(ViewFieldName);
-         rw("</td>");
-         rw("<td>");
-
          //Make the Table Name be a hyperlink:
          TheLink = (TableName == "CONSTANT FIELD") ? TableName : MakeTableOrViewHyperLink(TableNum,TableName);
-
-         //If there's an alias, show the alias, and put the real table in parens & hyperlinked
+         //If there is an alias, show the alias, and put the real table in parens & hyperlinked
          if(ViewAlias != "null" && ViewAlias != "") TheLink = ViewAlias + "(" + TheLink + ")";
 
-         rw(TheLink);
-         rw("</td>");
-         rw("<td>");
-         rw(FieldName);
-         rw("</td>");
-         rw("<td>");
-         rw(Comments);
-         rw("</td>");
-         rw("<td>");
-         rw(GenFieldId);
-         rw("</td>");
+			rw("<tr>");
+         rw("<td>" + ViewFieldName + "</td>");
+         rw("<td>" + TheLink + "</td>");
+         rw("<td>" + FieldName + "</td>");
+         rw("<td>" + Comments + "</td>");
+         rw("<td>" + GenFieldId + "</td>");
          rw("</tr>");
       }
-
    } else {
 
-      rw("<th>");
-      rw("Field Name");
-      rw("</th>");
-      rw("<th>");
-      rw("Common Type");
-      rw("</th>");
-      rw("<th>");
-      rw("Database Type");
-      rw("</th>");
-      rw("<th Type=Number>");
-      rw("Generic Field ID");
-      rw("</th>");
-      rw("<th Type=Number>");
-      rw("Array Size");
-      rw("</th>");
-      rw("<th>");
-      rw("Default");
-      rw("</th>");
-      rw("<th>");
-      rw("Flags");
-      rw("</th>");
-      rw("<th>");
-      rw("Comment");
-      rw("</th>");
+      rw("<th>Field Name</th>");
+      rw("<th>Common Type</th>");
+      rw("<th>Database Type</th>");
+      rw("<th Type=Number>Generic Field ID</th>");
+      rw("<th Type=Number>Array Size</th>");
+      rw("<th>Default</th>");
+      rw("<th>Flags</th>");
+      rw("<th>Comment</th>");
       rw("</th></thead>");
       rw("<tbody>");
 
@@ -289,9 +231,7 @@ function outputViewFields() {
          DecS = rsTables("dec_s");
 
          //If this is a decimal, then build the precision info string
-         if(DBTypeStr == "decimal"){
-            DBTypeStr = DBTypeStr + " (" + DecP + "," + DecS + ")";
-         }
+         if(DBTypeStr == "decimal") DBTypeStr = DBTypeStr + " (" + DecP + "," + DecS + ")";
 
          //If the GenFieldID = -1, then change it to an empty string
          if(GenFieldID == "-1") GenFieldID=EmptyString;
@@ -301,30 +241,14 @@ function outputViewFields() {
 
          //Now that all of our data is cool, build the data part of the table
          rw("<tr>");
-         rw("<td>");
-         rw(FieldName);
-         rw("</td>");
-         rw("<td>");
-         rw(CmnTypeStr);
-         rw("</td>");
-         rw("<td>");
-         rw(DBTypeStr);
-         rw("</td>");
-         rw("<td>");
-         rw(GenFieldID);
-         rw("</td>");
-         rw("<td>");
-         rw(ArraySize);
-         rw("</td>");
-         rw("<td>");
-         rw(FldDefault);
-         rw("</td>");
-         rw("<td>");
-         rw(strFlags);
-         rw("</td>");
-         rw("<td>");
-         rw(Comment);
-         rw("</td>");
+         rw("<td>" + FieldName + "</td>");
+         rw("<td>" + CmnTypeStr + "</td>");
+         rw("<td>" + DBTypeStr + "</td>");
+         rw("<td>" + GenFieldID + "</td>");
+         rw("<td>" + ArraySize + "</td>");
+         rw("<td>" + FldDefault + "</td>");
+         rw("<td>" + strFlags + "</td>");
+         rw("<td>" + Comment + "</td>");
          rw("</tr>");
 
          rsTables.MoveNext();
