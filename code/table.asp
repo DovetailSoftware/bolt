@@ -442,6 +442,7 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	rw("<thead><tr class='headerRow'>");
 	rw("<th>View ID</th>");
 	rw("<th>View Name</th>");
+	rw("<th>Tables</th>");
 	rw("</tr></thead>");
 	rw("<tbody>");
 
@@ -468,6 +469,19 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	   TheLink += ">" + ViewName;
 	   TheLink += "</a>";
 	   rw(TheLink);
+	   rw("</td>");
+
+	   rw("<td style='white-space: normal;'>");
+		TheSQL = "select " + NAME_FIELD + " from " + TABLE_TABLE + " where " + ID_FIELD +
+			" in (select distinct from_obj_type from " + VIEW_TABLE + " where " + VIEW_ID + " = " + ViewNum + ") order by " + NAME_FIELD;
+		rsTargets = retrieveDataFromDB(TheSQL);
+		var targets = [];
+		while(!rsTargets.EOF) {
+		   targets.push(" " + rsTargets(NAME_FIELD));
+			rsTargets.MoveNext();
+		}
+		rw(targets);
+
 	   rw("</td>");
 	   rw("</tr>");
 
