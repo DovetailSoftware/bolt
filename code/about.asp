@@ -100,6 +100,16 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		<div class="span2"></div>
 	</div>
 
+	<div class="row-fluid">
+		<div class="span2"></div>
+		<div class="span8 well well-small topMargin">
+			<h2>Clarify Form Identifier</h2>
+    		<p>A secret little feature you just might find useful: <a href="clarifyID_help.asp">Clarify Form Identifier</a>.</p>
+		</div>
+		<div class="span2"></div>
+	</div>
+
+
 <!--#include file="inc/footer.inc"-->
 </div>
 </body>

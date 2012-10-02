@@ -34,6 +34,11 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <style>
+	body{font-size:12px;}
+	#homeContainer{width:100%;}
+	#homeContainer h4{text-align:left;}
+	.nav{display:none !important;}
+	a.brand{padding-left:25px !important;}
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
@@ -42,7 +47,7 @@ var sPageTitle = "ClarifyID";
 var sPageType = "Forms";
 
 function DisplayConceptInfo(){
-	rw("<h3>Sorry, I couldn't determine the form that got you here.</h3>");
+	rw("<h4>Sorry, I couldn't determine the form that got you here.</h4>");
 	rw("<p>It appears you came here via a general help request, as opposed to from a form.</p>");
 	rw("<p>This can happen if you click Help (or F1) while not having focus on a form.</p>");
 	rw("<p>Try clicking Help (or F1) while your cursor has focus on a form or form element/control.</p>");
@@ -55,7 +60,7 @@ function DisplayConceptInfo(){
 }
 
 function DisplayNoFormInfo(){
-	rw("<h3>Sorry, I couldn't figure out the form ID.</h3>");
+	rw("<h4>Sorry, I couldn't figure out the form ID.</h4>");
 	rw("<p>If you believe you received this message in error, please contact our support team at <a href='http://www.dovetailsoftware.com'>www.dovetailsoftware.com</a></p>");
 	rw("<p>Be sure to include this information in your support request:</p>");
 	rw("<ul>");
@@ -78,7 +83,7 @@ function DisplayNoFormInfo(){
 			var uriFile = parseUri(Request.QueryString).file;
 			var formId = uriFile.replace(".html", "") + "";
 			var noError = true;
-
+				
 			if(formId.length <= 1) {
 				DisplayNoFormInfo();
 				noError = false;
@@ -91,11 +96,11 @@ function DisplayNoFormInfo(){
 
 			if(noError) {
 %>
-			<h3>Clarify Form Identifier</h3>
-			<h4>It looks like you got here from form <%=formId%>.</h4>
-			<h4><a href="#" onclick="$('#formsonline').submit();">View details about form <%=formId%></a></h4>
+			<h4>Clarify Form Identifier</h4>
+			<hr/>
+			<h4>It looks like you got here from <a href="#"  onclick="$('#formsonline').submit();">form <%=formId%></a>.</h4>
 
-			<form method="POST" id="formsonline" name="formsonline" action="forms.asp">
+			<form method="POST" id="formsonline" name="formsonline" action="forms.asp" >
 				<input type="hidden" name="attribute" value="id" />
 				<input type="hidden" name="operator" value="equals" />
 				<input type="hidden" name="filter" value="<%=formId%>" />
