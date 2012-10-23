@@ -506,6 +506,7 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	<!--#include file="inc/recent_objects.asp"-->
 	<!--#include file="inc/quick_links.asp"-->
 </div>
+<input type="button" style="display:none;" onclick="executeSql()" accesskey=S />
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -513,6 +514,11 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 <script type="text/javascript" src="js/columnSelect.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
 <script type="text/javascript">
+function executeSql() {
+	var url = "sql.asp?sql=<%=encoded_select_sql%>";
+	window.location.href = url;
+}
+
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
@@ -520,6 +526,10 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
+
+	$("body").keydown(function(evt) {
+		if(evt.altKey && evt.which == 191) showHelp();
+	});
 
    $(".tablesorter").tablesorter();
 	$(".tablesorter tbody tr").click(function () {

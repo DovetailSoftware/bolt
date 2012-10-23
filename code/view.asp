@@ -268,6 +268,11 @@ var filterSQL = getFilterSQL();
 	<!--#include file="inc/recent_objects.asp"-->
 	<!--#include file="inc/quick_links.asp"-->
 </div>
+<%
+var select_sql = "select * from table_" + type_name;
+var encoded_select_sql = Server.URLEncode(select_sql);
+%>
+<input type="button" style="display:none;" onclick="executeSql()" accesskey=S />
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -275,6 +280,11 @@ var filterSQL = getFilterSQL();
 <script type="text/javascript" src="js/columnSelect.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
 <script type="text/javascript">
+function executeSql() {
+	var url = "sql.asp?sql=<%=encoded_select_sql%>";
+	window.location.href = url;
+}
+
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
