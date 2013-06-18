@@ -108,12 +108,13 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			SuppressActions=Request("SuppressActions");
 
 			bSuppressActions = false;
-
 			TableWidth = "150";
+			SuppressActionsDisplay = "table-cell";
 
-			if(SuppressActions == "ON") {
+			if(new String(SuppressActions).toUpperCase() == "ON") {
 				bSuppressActions = true;
 				TableWidth = "100";
+				SuppressActionsDisplay = "none";
 			}
 
 			//Get the Business Rules
@@ -129,7 +130,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			//Add the Rule Set Filter
 			if(RuleSetFilter != "") {
 				TheSQL += " and upper(rule_set) " + RuleSetOperator + " upper('" + RuleSetFilter;
-				if(RuleSetOperator == "like") TheSQL += "";
+				if(RuleSetOperator == "like") TheSQL += "%";
 				TheSQL += "')";
 			}
 
@@ -141,6 +142,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		%>
 
 		<h3>Business Rules</h3>
+		<h5>Number of rules:&nbsp;<span id="numRules"></span></h5>
 
 		<table class="tablesorter" style="width:<%=TableWidth%>%;">
 			<thead>
@@ -332,11 +334,11 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			}
 
 			//If all of our match booleans are true, then we will display this rule, so set its display property to nothing
-			if(StartMatch && StopMatch && ObjectTypeMatch && ConditionPropMatch && ConditionValueMatch) DisplayRow = true;
-			if(forceDisplay) DisplayRow = true;
+			if(StartMatch && StopMatch && ObjectTypeMatch && ConditionPropMatch && ConditionValueMatch){DisplayRow = true;}
+			if(forceDisplay) {DisplayRow = true;}
 			%>
 
-			<tr <%=(DisplayRow)? "" : "style='display:none;'" %> id="<%=rsCT("objid")%>">
+			<tr <%=(DisplayRow)? "" : "style='display:none;'" %> class="biz-rule" id="<%=rsCT("objid")%>">
 			<td><b><%=rsCT("title")%></b></td>
 			<td><%=rsCT("rule_set")%></td>
 			<td><%=rsCT("description")%></td>
@@ -345,7 +347,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			<td><%=StartEvent%></td>
 			<td><%=StopEvent%></td>
 			<td><%=Condition%></td>
-			<td width="100%">
+			<td style="display:<%=SuppressActionsDisplay%>">
 			<% if(bSuppressActions == false) { %>
 			  	<table class="biz-rule-action">
 			  		<thead>
@@ -498,7 +500,6 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<%
 				//If we have an action type filter,
 				//hide the rule whose actions do not match the action filter
-
 				if(ActionTypeFilter > 0 && GoodAction == false) {
 					rw("document.getElementById('" + CTObjid + "').style.display='none'; ");
 				}
@@ -524,6 +525,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			%>
 				</tbody>
 			</table>
+
 			<% } %>
 			</td>
 			</tr>
@@ -551,10 +553,22 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
-   $(".tablesorter").tablesorter();
+	//no sorting on actions
+   $(".tablesorter").tablesorter({
+   	headers:{
+   		8:{sorter:false}
+   		}
+   });
 	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});
+	
+	//show number of rules
+	var rules =  $('.biz-rule');
+	var numberOfRules = rules.length;
+	var numberOfRulesHidden = rules.filter(':hidden').length;
+	var numberOfRulesDisplayed = numberOfRules - numberOfRulesHidden;
+	$("#numRules").text(numberOfRulesDisplayed);
 });
 </script>
 </html>

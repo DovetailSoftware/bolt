@@ -205,14 +205,18 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</td>
 			</tr>
 			<tr>
+				<td>&nbsp;</td>
 				<td colspan="2">
-					<label class="checkbox">
-  						<input type="checkbox" name="SuppressActions" id="SuppressActions" checked>
-  						Hide Rule Actions in Results
-					</label>
+  			<input type="checkbox" name="SuppressActions" id="SuppressActions" checked/>					
+  			<label class="checkbox" for="SuppressActions">Hide Rule Actions in Results</label>
 				</td>
-				<td>Note: All Filters are ANDed together</td>
 			</tr>
+			
+			<tr>
+				<td>&nbsp;</td>
+				<td colspan=2>Note: All Filters are ANDed together</td>
+			</tr>
+
 			<tr>
 				<td>&nbsp;</td>
 				<td><button id="search" class="btn btn-primary btn-block">Search</button></td>
