@@ -91,9 +91,9 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 			<iframe class="theme" src="themes/baseline.asp" scrolling="no"></iframe>
 			<iframe class="theme" src="themes/cyborg.asp" scrolling="no"></iframe>
-			<br/>
-			<iframe class="theme" src="themes/cerulean.asp" scrolling="no"></iframe>
 			<iframe class="theme" src="themes/readable.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/cerulean.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/slate.asp" scrolling="no"></iframe>
 
 			<input type="hidden" id="newTheme" />
 		</div>

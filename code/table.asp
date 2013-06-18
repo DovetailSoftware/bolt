@@ -193,9 +193,6 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
    	ViewLink += SpecFieldID;
    	ViewLink += "&field_name=";
    	ViewLink += FieldName;
-   	//We could use an image if we want:
-   	//ViewLink += "><img src='./images/smallv.gif' align='center' alt='List of Views where this field is used' />"
-   	//Or, just use a simple string
    	ViewLink += ">Search"
    	ViewLink += "</a>";
 
@@ -472,12 +469,20 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	   rw("</td>");
 
 	   rw("<td style='white-space: normal;'>");
-		TheSQL = "select " + NAME_FIELD + " from " + TABLE_TABLE + " where " + ID_FIELD +
+		TheSQL = "select " + NAME_FIELD + ", " + ID_FIELD + " from " + TABLE_TABLE + " where " + ID_FIELD +
 			" in (select distinct from_obj_type from " + VIEW_TABLE + " where " + VIEW_ID + " = " + ViewNum + ") order by " + NAME_FIELD;
 		rsTargets = retrieveDataFromDB(TheSQL);
 		var targets = [];
 		while(!rsTargets.EOF) {
-		   targets.push(" " + rsTargets(NAME_FIELD));
+			linkedTableId = rsTargets(ID_FIELD);
+			linkedTableName = rsTargets(NAME_FIELD);
+
+			var TargetObjectLink = "<a href=table.asp?type_id=";
+			TargetObjectLink += linkedTableId;
+			TargetObjectLink += ">" + linkedTableName;
+			TargetObjectLink += "</a>";
+
+		   targets.push(" " + TargetObjectLink);
 			rsTargets.MoveNext();
 		}
 		rw(targets);
@@ -506,6 +511,7 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	<!--#include file="inc/recent_objects.asp"-->
 	<!--#include file="inc/quick_links.asp"-->
 </div>
+<input type="button" style="display:none;" onclick="executeSql()" accesskey=S />
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -513,6 +519,11 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 <script type="text/javascript" src="js/columnSelect.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
 <script type="text/javascript">
+function executeSql() {
+	var url = "sql.asp?sql=<%=encoded_select_sql%>";
+	window.location.href = url;
+}
+
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
@@ -520,6 +531,10 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
+
+	$("body").keydown(function(evt) {
+		if(evt.altKey && evt.which == 191) showHelp();
+	});
 
    $(".tablesorter").tablesorter();
 	$(".tablesorter tbody tr").click(function () {

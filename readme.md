@@ -83,9 +83,28 @@ Follow these steps to specify your database connection:
 
 ### Configure the web server to support Dovetail Bolt
 
-* If you are using IIS7 (on Windows 7 or Windows Server 2008), refer to the [IIS7 Setup Instructions](bolt/blob/master/iis7.md)
-* If you are using IIS6 (on Windows Server 2003), refer to the [IIS6 Setup Instructions](bolt/blob/master/iis6.md)
+#### IIS7 Configuration (on Windows 7 or Windows Server 2008)
 
+ASP is disabled by default on IIS7. You must explicitly enable ASP and Server Side Includes. 
+
+* Start Server Manager select the Web Server (IIS) Role. 
+* Click on Add Role Services. 
+* Make sure you have ASP and Server Side Includes selected.
+* Also select the IIS 6 Management Compatibility features which are found near the bottom of the list of features.
+
+Note: Should you run into trouble, additional details and tips regarding installing Classic ASP applications on IIS7 are available online at:
+http://www.dovetailsoftware.com/blogs/kmiller/archive/2008/08/19/installing-classic-asp-web-applications-on-iis7
+
+#### IIS6 Configuration (on Windows Server 2003)
+
+Note: The following assumes IIS version 6.0 on Microsoft Windows 2003. Your system may vary slightly.
+ASP is disabled by default on Windows 2003. You must explicitly enable ASP and Server Side Includes. 
+
+* Open the IIS Manager(Start->Administrative Tools->Internet Information Services (IIS) Manager)
+* Expand the Internet Information Services (IIS) Manager in the tree view on the left and then expand your computer's tree node. 
+* Click on the "Web Service Extensions" node. 
+* Click on "Active Server Pages" then click the "Allow" button. 
+* Click on "Server Side Includes" then click the "Allow" button. 
 
 
 ### Security Considerations:
