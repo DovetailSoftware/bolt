@@ -91,6 +91,7 @@ ASP is disabled by default on IIS7. You must explicitly enable ASP and Server Si
 * Click on Add Role Services. 
 * Make sure you have ASP and Server Side Includes selected.
 * Also select the IIS 6 Management Compatibility features which are found near the bottom of the list of features.
+* Enable Parent Paths. From IIS, click on the Bolt web app. Click on the ASP feature. Set Enable Parent Paths to True. 
 
 Note: Should you run into trouble, additional details and tips regarding installing Classic ASP applications on IIS7 are available online at:
 http://www.dovetailsoftware.com/blogs/kmiller/archive/2008/08/19/installing-classic-asp-web-applications-on-iis7
@@ -217,10 +218,6 @@ From the administration page, you can configure the database connection:
 
 
 ## Customization Guide
-
-### Customizing CSS
-
-You can use Dovetail Bolt's style sheet, <i>code/css/style.css</i>, to customize Dovetail Bolt's look and feel.
 
 ### Customizing the Dovetail Bolt Quick Links
 
