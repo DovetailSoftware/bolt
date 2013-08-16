@@ -25,7 +25,10 @@ var gCursorLocation = adUseClient;
 
 //Globals
 var TheSQLStrName = "mssql_sql";
-var ver = GetClarifyVersion();
+
+if(sPageType != "Admin") {
+	var ver = GetClarifyVersion();
+}
 
 //////////////////////////////////////////////////////////////////////
 // Constants
@@ -224,7 +227,8 @@ function displayDBAccessErrorPage(e,s) {
 	rw('<A HREF="http://www.dovetailsoftware.com"><img src="img/dovetail.png" alt="Dovetail Software"></a>\n');
 	rw("<h3>Database Error</h3>\n");
 	rw('<p>' + e.description + '</p>\n');
-	rw('<p>' + s + '</p>\n');
+	rw('<p>SQL: ' + s + '</p>\n');
+	rw('<p>If needed, you can <a href="admin.asp">set the database connection information on the Admin page</a>.</p>');
 	rw('<p><a id="backLink" href="javascript:window.history.back()">Back</a></p>');
 	rw('<p><a href="javascript:window.location.reload()">Refresh</a></p>\n');
 	rw('</div></div></div>\n');

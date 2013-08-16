@@ -55,18 +55,7 @@ if(read_only_udl) Response.Redirect("online.asp");
 %>
 <!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
-<%
-	TheSQL = "select * from " + GLOBAL_HEADER_TABLE;
-	rsADP = Server.CreateObject("ADODB.Recordset");
-	rsADP.CursorLocation = gCursorLocation;
-	rsADP.ActiveConnection = dbConnect;
-	rsADP.Source = TheSQL;
-	try {
-		rsADP.Open();
-	} catch(e) {
-		displayDBAccessErrorPage(e);
-	}
-%>
+
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
