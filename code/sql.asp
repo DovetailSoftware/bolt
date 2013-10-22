@@ -106,7 +106,7 @@ var initSort = "";
 			<div style="width:85px; float:left;margin-left:.5em;">
 				<h5>&nbsp;</h5>
 				<button class="btn btn-block" id="copySql" onclick="copysql()" title="Copy SQL to Clipboard">Copy <i class="icon icon-chevron-right"></i></button>
-				<button class="btn btn-block" id="swapSql" onclick="swap()" accesskey=X title="Swap SQL and Clipboard"><i class="icon icon-chevron-left"></i> Swap <i class="icon icon-chevron-right"></i></button>
+				<button class="btn btn-block" id="swapSql" onclick="swap()" title="Swap SQL and Clipboard"><i class="icon icon-chevron-left"></i> Swap <i class="icon icon-chevron-right"></i></button>
 				<button class="btn btn-block" id="copyClp" onclick="copyclp()" title="Copy Clipboard to SQL"><i class="icon icon-chevron-left"></i> Copy</button>
 			</div>
 			<div id="clipDiv" style="float:right;width:42%;">
@@ -119,7 +119,7 @@ var initSort = "";
 
 	<div class="row-fluid">
 		<div id="sqlButtons" class="span4">
-			<button class="btn btn-primary input-medium" id="execSql" onclick="submitForm()" accesskey=S title="Execute SQL"><i class="icon-white icon-play"></i> Run</button>
+			<button class="btn btn-primary input-medium" id="execSql" onclick="submitForm()" title="Execute SQL"><i class="icon-white icon-play"></i> Run</button>
 			<button class="btn btn-link" id="clearsql" onclick="clearsql()" title="Clear SQL">Clear</button>
 		</div>
 		<div class="span4 empty"></div>
@@ -478,6 +478,8 @@ $(document).ready(function() {
 	$("#helpLink").click(showHelp);
 	$("body").keydown(function(evt) {
 		if(evt.shiftKey && evt.which == 191) showHelp();
+		if(evt.altKey && evt.which == 88) swap();
+		if(evt.altKey && evt.which == 83) submitForm();
 	});
 
 	resizeTextAreas();
