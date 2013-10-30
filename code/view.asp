@@ -272,7 +272,7 @@ var filterSQL = getFilterSQL();
 var select_sql = "select * from table_" + type_name;
 var encoded_select_sql = Server.URLEncode(select_sql);
 %>
-<input type="button" style="display:none;" onclick="executeSql()" accesskey=S />
+<input type="button" style="display:none;" onclick="executeSql()" />
 </body>
 <script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -292,6 +292,10 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
+
+	$("body").keydown(function(evt) {
+		if(evt.altKey && evt.which == 83) executeSql();
+	});
 
    $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {

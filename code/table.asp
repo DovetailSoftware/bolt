@@ -511,7 +511,7 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	<!--#include file="inc/recent_objects.asp"-->
 	<!--#include file="inc/quick_links.asp"-->
 </div>
-<input type="button" style="display:none;" onclick="executeSql()" accesskey=S />
+<input type="button" style="display:none;" onclick="executeSql()" />
 </body>
 <script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -533,7 +533,7 @@ $(document).ready(function() {
 	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
 
 	$("body").keydown(function(evt) {
-		if(evt.altKey && evt.which == 191) showHelp();
+		if(evt.altKey && evt.which == 83) executeSql();
 	});
 
    $(".tablesorter").tablesorter();
