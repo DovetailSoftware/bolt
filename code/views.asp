@@ -57,23 +57,36 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		<div id="homeContainer" class="span12">
 
 		<% var TableNum = Request("type_id");
-			var SpecFieldID = Request("spec_field_id");
-			var FieldName = Request("field_name");
 			var TableName = GetTableName(TableNum);
+         var forField = true;
 
-			//First, get the list of views where this field is used
-			var TheSQL = "select distinct from_obj_type, from_field_id, view_type_id  from adp_view_field_info where from_obj_type = ";
-			TheSQL += TableNum ;
-			TheSQL += " and from_field_id = ";
-			TheSQL += SpecFieldID;
+         // views for field
+			var SpecFieldID = Request("spec_field_id") - 0;
+			var FieldName = Request("field_name") + "";
+
+         // views for relation
+			var SpecRelID = Request("spec_rel_id") - 0;
+			var RelationName = Request("rel_name") + "";
+
+         if (FieldName != "undefined") {
+   			//Get the list of views where this field is used
+	   		var TheSQL = "select distinct from_obj_type, from_field_id, view_type_id  from adp_view_field_info where from_obj_type = " + TableNum;
+		   	TheSQL += " and from_field_id = " + SpecFieldID;
+         } else {
+            forField = false;
+   			//Get the list of views where this relation is used
+	   		var TheSQL = "select distinct obj_type_id, obj_spec_rel_id, view_type_id  from adp_view_join_info where obj_type_id = " + TableNum;
+		   	TheSQL += " and obj_spec_rel_id = " + SpecRelID;
+         }
+
 			TheSQL +=" order by view_type_id";
 			rsViews = retrieveDataFromDB(TheSQL);
 
-			if(rsViews.EOF) rw("<h3>" + TableName + Dot + FieldName + " is not used in any views</h3>");
+			if(rsViews.EOF) rw("<h3>" + TableName + Dot + ((forField)? FieldName : RelationName) + " is not used in any views</h3>");
 
 			if(!rsViews.EOF) {
 				//Page Header:
-				rw("<h3>List of Views where " + TableName + Dot + FieldName + " is referenced" + "</h3>");
+				rw("<h3>List of Views where " + TableName + Dot + ((forField)? FieldName : RelationName) + " is referenced" + "</h3>");
 
 				//Table Header:
 				rw("<table class='tablesorter fullWidth'>");

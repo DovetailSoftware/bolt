@@ -196,8 +196,16 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
    	ViewLink += ">Search"
    	ViewLink += "</a>";
 
+	   var TheSQL = "select distinct from_obj_type, from_field_id, view_type_id  from adp_view_field_info where from_obj_type = " + TableNum;
+		TheSQL += " and from_field_id = " + SpecFieldID;
+	   var rsFieldViews = retrieveDataFromDB(TheSQL);
+      var viewCount = rsFieldViews.RecordCount;
+      var viewSearch = (viewCount > 0)? ViewLink + " (" + viewCount + ")" : "&nbsp;";
+      rsFieldViews.Close;
+	   rsFieldViews = null;
+
    	rw("<td>");
-   	rw(ViewLink);
+   	rw(viewSearch);
    	rw("</td>");
    	rw("</tr>");
 
@@ -228,6 +236,7 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	rw("<th>Comment</th>");
 	rw("<th>Flags</th>");
 	rw("<th>MTM Table</th>");
+	rw("<th>Used in Views</th>");
 
 	//Check for exclusive relations
    TheSQL = "select count(*) from " + RELATION_TABLE + " where " + ID_FIELD + " = ";
@@ -248,7 +257,7 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 
 	if(hasExclusiveRelationSet) {
 		rw("<tr>");
-		rw("<td colspan=7>&nbsp;</td>");
+		rw("<td colspan=8>&nbsp;</td>");
 		var columns = (GetClarifyVersion() > CLARIFY_85)? 3 : 2;
 		rw("<td colspan=" + columns + " class='exclusive'><b>Exclusive Set Relations</b></td>");
 		rw("</tr>");
@@ -309,6 +318,24 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 		rw("<td>" + Comments + "</td>");
 		rw("<td>" + strFlags + "</td>");
 		rw("<td>" + MTMTableName + "</td>");
+
+   	//Hyperlink for "Where relation is in views"
+   	ViewLink = "<a href=views.asp?type_id="+ type_id;
+   	ViewLink += "&spec_rel_id=" + RelationSpecRelID;
+   	ViewLink += "&rel_name=" + RelationName;
+   	ViewLink += ">Search</a>";
+
+	   var TheSQL = "select distinct obj_type_id, obj_spec_rel_id, view_type_id from adp_view_join_info where obj_type_id = " + type_id;
+		TheSQL += " and obj_spec_rel_id = " + RelationSpecRelID;
+	   var rsRelationViews = retrieveDataFromDB(TheSQL);
+      var viewCount = rsRelationViews.RecordCount;
+      var viewSearch = (viewCount > 0)? ViewLink + " (" + viewCount + ")" : "&nbsp;";
+      rsRelationViews.Close;
+	   rsRelationViews = null;
+
+   	rw("<td>");
+   	rw(viewSearch);
+   	rw("</td>");
 
 		if(hasExclusiveRelationSet) {
 			FocusField = rsRelations(FOCUS_FIELD) + EmptyString;
