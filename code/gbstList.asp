@@ -26,14 +26,14 @@
 <html>
 <head>
 <title></title>
-<meta http-equiv="expires" content="0">
-<meta name="KeyWords" content="">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="css/tablesorter.css" rel="stylesheet">
+<meta http-equiv="expires" content="0" />
+<meta name="KeyWords" content="" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="Shortcut Icon" href="favicon.ico" />
+<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="css/tablesorter.css" rel="stylesheet" />
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -47,7 +47,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	var objid = Request("objid") - 0;
 	var title = Request("title") + "";
 
-	TheSQL = "select title, rank, state from table_gbst_elm where gbst_elm2gbst_lst = " + objid + " order by rank asc";
+	TheSQL = "select objid, title, rank, state from table_gbst_elm where gbst_elm2gbst_lst = " + objid + " order by rank asc";
 	rsGbst = retrieveDataFromDB(TheSQL);
 %>
 </head>
@@ -63,12 +63,13 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
 			<h3>Application List: <%=title%></h3>
 
-			<table class="tablesorter fullWidth">
+			<table class="tablesorter fullWidth localized">
 				<thead>
 					<tr>
 						<th>Title</th>
 						<th>Rank</th>
 						<th>Status</th>
+						<th>Localizations</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -82,6 +83,37 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				 	<td><% rw(rsGbst("title") + ""); %></td>
 				 	<td><% rw(rsGbst("rank") - 0); %></td>
 				 	<td><% rw(status); %></td>
+				 	<td class="bare">
+				<%
+				   var locs = -1;
+            	TheSQL = "select locale, title from table_fc_loc_elm where fc_loc_elm2gbst_elm = " + (rsGbst("objid") - 0) + " order by locale asc";
+	            rsLocElm = retrieveDataFromDB(TheSQL);
+				   if(!rsLocElm.EOF) locs = rsLocElm.RecordCount;
+				   if(locs > 1) {
+   				%>
+   				 	<select>
+   				<%
+				   }
+
+				   while (!rsLocElm.EOF) {
+   					var locale = rsLocElm("locale") + "";
+	   				var title = rsLocElm("title") + "";
+   				   if(locs > 1) {
+   				%>
+   				 	<option><% rw(locale + ": " + title); %></option>
+   				<%
+   				   } else {
+      				 	rw(locale + ": " + title);
+   				   }
+                  rsLocElm.MoveNext();
+   				}
+				   if(locs > 1) {
+   				%>
+   				   </select>
+   				<%
+				   }
+				   %>
+	            </td>
 				 </tr>
 				 <% rsGbst.MoveNext(); } %>
 				</tbody>
@@ -110,6 +142,8 @@ $(document).ready(function() {
 <%
 rsGbst.Close();
 rsGbst = null;
+if(rsLocElm) rsLocElm.Close();
+rsLocElm = null;
 FSO = null;
 udl_file = null;
 %>

@@ -49,3 +49,18 @@ a.connected {
 	margin: 0 .3em;
 	font-size:.8em;
 }
+
+table.tablesorter.localized tbody td {
+   vertical-align: middle;
+   padding-left: 8px;
+}
+table.tablesorter.localized tbody td.bare {
+   width: 240px;
+}
+table.tablesorter.localized tbody td.bare select {
+   font-size: 11px;
+   width: 240px;
+   margin: 0;
+   padding-left: -10px;
+   border: none;
+}
