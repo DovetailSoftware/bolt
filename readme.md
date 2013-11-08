@@ -81,7 +81,7 @@ Follow these steps to specify your database connection:
  * When a warning appears about saving your password to a file, click Yes. Saving your password is required for Bolt to work.
 
 
-### Configure the web server to support Dovetail Bolt
+### Configure the web server 
 
 #### IIS7 Configuration (on Windows 7 or Windows Server 2008)
 
@@ -91,7 +91,31 @@ ASP is disabled by default on IIS7. You must explicitly enable ASP and Server Si
 * Click on Add Role Services. 
 * Make sure you have ASP and Server Side Includes selected.
 * Also select the IIS 6 Management Compatibility features which are found near the bottom of the list of features.
-* Enable Parent Paths. From IIS, click on the Bolt web app. Click on the ASP feature. Set Enable Parent Paths to True. 
+
+Create a Application Pool
+* Open IIS Manager: select Start - type IIS, and select Internet Information Services (IIS) Manager
+* Click on your computer host name to expand the top-level node.
+* Click on Application Pools
+* Right-click on Application Pools and choose Add Application Pool
+* Enter a name, such as BOLT_AppPool
+* Set the .NET Framework Version to version 4.
+* Set the Managed Pipeline Mode to Integrated.
+
+Create the web application(s)
+* Right-click Default Web Site and select Add Application
+* In the Alias text box, type "BOLT" (without the quotes)
+* Enter the path to the BOLT\code directory
+* Select the BOLT Application Pool that you created earlier
+* Select OK.
+
+Enable Parent Paths
+* Navigate to the BOLT web application in IIS Manager.
+* Click on ASP.
+* Set Enable Parent Paths to True.
+* Click on Apply.
+
+Test
+* Using your web browser, navigate to http://server/bolt
 
 Note: Should you run into trouble, additional details and tips regarding installing Classic ASP applications on IIS7 are available online at:
 http://www.dovetailsoftware.com/blogs/kmiller/archive/2008/08/19/installing-classic-asp-web-applications-on-iis7
