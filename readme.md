@@ -33,7 +33,7 @@ This version of Dovetail Bolt requires the following:
 * **Database** - Microsoft SQL Server, Oracle
 * **Web Server** - Microsoft IIS
 * **Web Server Tools** - ActiveX Data Objects (ADO) or Appropriate Database Client Utilities
-
+* **[Oracle Provider for OLE DB](http://www.oracle.com/technetwork/database/windows/index-089115.html)** - for Oracle database connectivity
 
 #### Limitations
 
@@ -74,7 +74,7 @@ Follow these steps to specify your database connection:
  * Enter a database name, and click OK.
 * For **Oracle**:
  * Click the Provider tab.
- * Choose Microsoft OLE DB Provider for Oracle.
+ * Choose Oracle Provider for OLE DB (preferred) or the Microsoft OLE DB Provider for Oracle.
  * On the Connection tab, enter a server name.
  * Enter the user name and password, and check Allow saving password. WARNING: If you do not check Allow saving password, Bolt will not work.
  * Click OK.
