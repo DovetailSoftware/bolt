@@ -27,6 +27,11 @@ function LoadHgbstListFromDatabase(listName, level1value, level2value, level3val
    levelValue[4] = (level4value) ? level4value : "";
    levelValue[5] = "";
 
+   var theSQL = "select type_id from adp_tbl_name_map where type_name = 'fc_loc_elm'";
+   var boLocElm = retrieveDataFromDB(theSQL);
+   var locElmFound = (!boLocElm.EOF);
+   boLocElm.Close();
+
    var theSQL = "select objid, title, hgbst_lst2hgbst_show from table_hgbst_lst where title = '" + listName + "'";
    boHgbstList = retrieveDataFromDB(theSQL);
 
@@ -73,6 +78,20 @@ function LoadHgbstListFromDatabase(listName, level1value, level2value, level3val
          row["title"] = encodeURIComponent(escape(boHgbstElm[level]("title")));
          row["state"] = boHgbstElm[level]("state")+"";
          if(boHgbstElm[level]("state") == "Default") UDPLLevel.defaultValue = boHgbstElm[level]("title")+"";
+         var localizations = [];
+
+         if(locElmFound) {
+            var locSQL = "select locale, title from table_fc_loc_elm where fc_loc_elm2hgbst_elm = " + (boHgbstElm[level]("objid") - 0) + " order by locale asc";
+	         var rsLocElm = retrieveDataFromDB(locSQL);
+		      while(!rsLocElm.EOF) {
+			   	var locale = rsLocElm("locale") + "";
+ 			   	var title = rsLocElm("title") + "";
+   		      if (title > "") localizations.push(locale + ": " + title);
+               rsLocElm.MoveNext();
+   		   }
+            if(localizations.length > 0) row["localizations"] = localizations;
+         }
+
          UDPLLevel[rowCounter++] = row;
          boHgbstElm[level].MoveNext();
       }
@@ -92,8 +111,12 @@ function addLevelToJsonObject(whichLevel,jsonGeneric,value) {
    property = "level" + whichLevel;
    jsonObject[property] = [];
 
+   local = "local" + whichLevel;
+   jsonObject[local] = [];
+
    for(i in jsonGeneric) {
       jsonObject[property][i] = jsonGeneric[i].title;
+      if(jsonGeneric[i].localizations > "") jsonObject[local][i] = jsonGeneric[i].localizations;
    }
 }
 

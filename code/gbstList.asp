@@ -46,9 +46,15 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <%
 	var objid = Request("objid") - 0;
 	var title = Request("title") + "";
+	var rsLocElm = null;
 
 	TheSQL = "select objid, title, rank, state from table_gbst_elm where gbst_elm2gbst_lst = " + objid + " order by rank asc";
 	rsGbst = retrieveDataFromDB(TheSQL);
+
+   var theSQL = "select type_id from adp_tbl_name_map where type_name = 'fc_loc_elm'";
+   var boLocElm = retrieveDataFromDB(theSQL);
+   var locElmFound = (!boLocElm.EOF);
+   boLocElm.Close();
 %>
 </head>
 <body>
@@ -86,15 +92,17 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				 	<td class="bare">
 				<%
 				   var locs = -1;
+               if(locElmFound) {
             	TheSQL = "select locale, title from table_fc_loc_elm where fc_loc_elm2gbst_elm = " + (rsGbst("objid") - 0) + " order by locale asc";
 	            rsLocElm = retrieveDataFromDB(TheSQL);
 				   if(!rsLocElm.EOF) locs = rsLocElm.RecordCount;
+               }
 				   if(locs > 1) {
    				%>
    				 	<select>
    				<%
 				   }
-
+               if(locElmFound) {
 				   while (!rsLocElm.EOF) {
    					var locale = rsLocElm("locale") + "";
 	   				var title = rsLocElm("title") + "";
@@ -107,6 +115,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
    				   }
                   rsLocElm.MoveNext();
    				}
+				   }
 				   if(locs > 1) {
    				%>
    				   </select>

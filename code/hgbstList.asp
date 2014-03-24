@@ -40,9 +40,13 @@ label {
    font-size: 1.2em;
    font-weight: bold;
 }
-select {
+select.hgbst {
    margin: .5em;
-   min-width: 550px;
+   width: 400px;
+}
+select.local {
+   margin: .5em;
+   width: 200px;
 }
 </style>
 <!--#include file="inc/config.inc"-->
@@ -65,22 +69,20 @@ var title = Request("title") + "";
 <div class="container-fluid">
    <div class="row-fluid">
       <div class="span2"></div>
-      <div id="gbstContainer" class="span8 topMargin">
+      <div id="gbstContainer" class="span10 topMargin">
 
          <h5><a href="lists.asp" class="pull-right">(Back to Lists)</a></h5>
 
          <h3>User Defined List: <%=title%></h3>
 
          <div class="playlist topMargin">
-            <label>Level 1</label><select id="level1"></select><br/>
-            <label>Level 2</label><select id="level2"></select><br/>
-            <label>Level 3</label><select id="level3"></select><br/>
-            <label>Level 4</label><select id="level4"></select><br/>
-            <label>Level 5</label><select id="level5"></select><br/>
+            <div><label>Level 1</label><select id="level1" class="hgbst"></select></div>
+            <div><label>Level 2</label><select id="level2" class="hgbst"></select></div>
+            <div><label>Level 3</label><select id="level3" class="hgbst"></select></div>
+            <div><label>Level 4</label><select id="level4" class="hgbst"></select></div>
+            <div><label>Level 5</label><select id="level5" class="hgbst"></select></div>
          </div>
       </div>
-
-      <div class="span2"></div>
    </div>
 </div>
 </body>

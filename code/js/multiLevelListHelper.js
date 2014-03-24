@@ -66,11 +66,11 @@ multiLevelListHelper.prototype.populate = function() {
          var selectElement1 = document.getElementById(jsonObject.selectElement1Id);
          var listObject = selectElement1.listObject;
 
-         addOptionsToSelectList(listObject.elementIds[0],jsonObject.level1,jsonObject.level1Value);
-         addOptionsToSelectList(listObject.elementIds[1],jsonObject.level2,jsonObject.level2Value);
-         addOptionsToSelectList(listObject.elementIds[2],jsonObject.level3,jsonObject.level3Value);
-         addOptionsToSelectList(listObject.elementIds[3],jsonObject.level4,jsonObject.level4Value);
-         addOptionsToSelectList(listObject.elementIds[4],jsonObject.level5,jsonObject.level5Value);
+         addOptionsToSelectList(listObject.elementIds[0],jsonObject.level1,jsonObject.level1Value,jsonObject.local1);
+         addOptionsToSelectList(listObject.elementIds[1],jsonObject.level2,jsonObject.level2Value,jsonObject.local2);
+         addOptionsToSelectList(listObject.elementIds[2],jsonObject.level3,jsonObject.level3Value,jsonObject.local3);
+         addOptionsToSelectList(listObject.elementIds[3],jsonObject.level4,jsonObject.level4Value,jsonObject.local4);
+         addOptionsToSelectList(listObject.elementIds[4],jsonObject.level5,jsonObject.level5Value,jsonObject.local5);
       }
    }
 
@@ -106,21 +106,37 @@ function onDropDownChange() {
       listObject.values[3] = selectElement4.options[selectElement4.selectedIndex].text;
    }
 
+   $('select.local').remove();
    listObject.populate();
 }
 
-function addOptionsToSelectList(elementId,ArrayOfOptionValues,selectedValue) {
+function addOptionsToSelectList(elementId,ArrayOfOptionValues,selectedValue,ArrayOfLocalizations) {
    if(! document.getElementById(elementId)){
       return false;
    }
    document.getElementById(elementId).options.length = 0;
    for(var i = 0; i<ArrayOfOptionValues.length;i++) {
-      var optionValue = ArrayOfOptionValues[i];
-      if(optionValue) try { var ovalue = decodeURIComponent(unescape(optionValue)); optionValue = ovalue; } catch(e) {}
+      var optionValue = getValue(ArrayOfOptionValues[i]);
       var option = new Option(optionValue,optionValue);
       document.getElementById(elementId).add(option);
+   }
+   if(ArrayOfLocalizations != undefined) {
+      if(ArrayOfLocalizations.length > 0) {
+         var $localSelect = $('<select class="local"></select>')
+         for(var i = 0; i<ArrayOfLocalizations.length;i++) {
+            var optionValue = getValue(ArrayOfOptionValues[i]);
+            var optionText = getValue(ArrayOfLocalizations[i]);
+            $localSelect.append('<option value="'+optionValue+'">'+optionText+'</option>');
+         }
+         $localSelect.insertAfter('#'+elementId);
+      }
    }
    if(selectedValue) try { var svalue = decodeURIComponent(unescape(selectedValue)); selectedValue = svalue; } catch(e) {}
    document.getElementById(elementId).value = selectedValue;
    document.getElementById(elementId).disabled = (document.getElementById(elementId).options.length == 0);
+}
+
+function getValue(optionValue) {
+   if(optionValue) try { var ovalue = decodeURIComponent(unescape(optionValue)); optionValue = ovalue; } catch(e) {}
+   return optionValue;
 }
