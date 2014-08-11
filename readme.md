@@ -89,7 +89,8 @@ ASP is disabled by default on IIS7. You must explicitly enable ASP and Server Si
 
 * Start Server Manager select the Web Server (IIS) Role. 
 * Click on Add Role Services. 
-* Make sure you have ASP and Server Side Includes selected.
+* Under Application Development Features, make sure you have ASP and Server Side Includes selected.
+* Under Common HTTP Features, the Static Content feature must be turned on.
 * Also select the IIS 6 Management Compatibility features which are found near the bottom of the list of features.
 
 Create a Application Pool
