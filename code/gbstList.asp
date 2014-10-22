@@ -86,7 +86,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					if(state == 1) status = "Inactive";
 				%>
 				 <tr>
-				 	<td><% rw(rsGbst("title") + ""); %></td>
+				 	<td title="<%=rsGbst("objid")%>"><% rw(rsGbst("title") + ""); %></td>
 				 	<td><% rw(rsGbst("rank") - 0); %></td>
 				 	<td><% rw(status); %></td>
 				 	<td class="bare">
