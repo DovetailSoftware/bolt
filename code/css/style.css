@@ -3,6 +3,13 @@ body {
 	padding-top: 44px;
 }
 
+.inline       { display: inline; }
+.inline-block { display: inline-block; }
+.no-margin         { margin: 0 !important; }
+.margin-default-left { margin-left: 10px !important; }
+.margin-default-right { margin-left: 10px !important; }
+.error { color: red; }
+
 #homeContainer h3, #homeContainer h4 {
 	text-align: center;
 	margin: 10px 0 0 0;
@@ -23,6 +30,10 @@ body {
 
 table.middle tr td {
 	vertical-align: middle;
+}
+
+tr.highlight td {
+	background-color: #ffff80 !important;
 }
 
 .highlight {
@@ -63,4 +74,8 @@ table.tablesorter.localized tbody td.bare select {
    margin: 0;
    padding-left: -10px;
    border: none;
+}
+h4.index {
+  margin-right:12px;
+  margin-top:6px;
 }

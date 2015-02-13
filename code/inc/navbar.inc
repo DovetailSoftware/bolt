@@ -40,6 +40,7 @@
 					<li><a href="privileges.asp">Privileges</a></li>
 					<li><a href="lists.asp">Lists</a></li>
 					<li><a href="licenses.asp">Licenses</a></li>
+					<li><a href="search.asp">Search</a></li>
 					<li><a href="about.asp">About</a></li>
 				</ul>
 			</div>
