@@ -10,4 +10,10 @@ function rf(){
 function re(){
   Response.End();
 }
+
+function FCTrim(strItem) {
+  strItem+='';
+  strItem = strItem.replace(/^\s*/, '').replace(/\s*$/, '');
+  return strItem;
+}
 %>

@@ -181,9 +181,8 @@ var initSort = "";
 					      var orderBy = sql.substr(pos+9);
 					      var colName = orderBy.split(" ");
 					      if(colName.length > 1) {
-					         if(colName[1] == "desc" || colName[1] == "desc,") {
-					            order = 1;
-					         }
+					         var col = FCTrim(colName[1]);
+					         if(col == "desc" || col == "desc,") order = 1;
 					      }
 
 					      for(var i=0; i < RS.Fields.Count;i++) {
@@ -224,7 +223,7 @@ var initSort = "";
 					         if(wrap == "on" && colValue.length > 60) wrap_val = " style='white-space:normal;'";
 
 					         if(colName.toLowerCase() != "sql_stmt") {
-									rw("<td" + wrap_val + ">" + colValue + "</td>");
+									    rw("<td" + wrap_val + ">" + colValue + "</td>");
 					         } else {
 					            colValue = colValue.replace(/outerPlus/g, "(+)")
 					            rw("<td class='sqlTd'" + wrap_val + ">" + colValue + "</td>")
