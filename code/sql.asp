@@ -255,32 +255,7 @@ var initSort = "";
 	</div>
 </div>
 
-<div id="help" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header no-border-bottom">
-	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	  <h3 id="myModalLabel">Keyboard shortcuts</h3>
-	</div>
-	<div class="modal-body">
-		<table class="help table table-condensed table-striped">
-			<tr>
-				<td class="shortcut">alt-s</td>
-				<td>Execute SQL</td>
-			</tr>
-			<tr>
-				<td class="shortcut">alt-t</td>
-				<td>Execute SQL, getting latest 10 rows</td>
-			</tr>
-			<tr>
-				<td class="shortcut">alt-x</td>
-				<td>Swap SQL and Clipboard</td>
-			</tr>
-			<tr>
-				<td class="shortcut">?</td>
-				<td>Bring up this help dialog</td>
-			</tr>
-		</table>
-	</div>
-</div>
+<!--#include file="inc/help.inc"-->
 
 <form id="formSQL" action="sql.asp" method="POST">
 	<input type="hidden" id="sql" name="sql" value="" />
@@ -374,7 +349,7 @@ function subVariables(s) {
 
 /*
    Command:
-     SELECT  * FROM table_fnl_alst WHERE parent_objid = @0 order by  entry_time desc
+     SELECT * FROM table_fnl_alst WHERE parent_objid = @0 order by  entry_time desc
    Parameters:
      @0 = 268435483
 */
@@ -468,6 +443,7 @@ function resizeTextAreas() {
 }
 
 function showHelp() {
+  $("#help tr.sql").removeClass("hide");
 	$("#help").modal({ "keyboard": true });
 	return false;
 }

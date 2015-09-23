@@ -284,6 +284,7 @@ function getEncodedSelectTopSql() {
 var select_sql = "select * from table_" + type_name;
 var encoded_select_sql = Server.URLEncode(select_sql);
 %>
+<!--#include file="inc/help.inc"-->
 <input type="button" style="display:none;" onclick="executeSql()" />
 </body>
 <script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
@@ -292,6 +293,12 @@ var encoded_select_sql = Server.URLEncode(select_sql);
 <script type="text/javascript" src="js/columnSelect.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
 <script type="text/javascript">
+function showHelp() {
+  $("#help tr.object").removeClass("hide");
+	$("#help").modal({ "keyboard": true });
+	return false;
+}
+
 function executeSql() {
 	var url = "sql.asp?sql=<%=encoded_select_sql%>";
 	window.location.href = url;
@@ -308,7 +315,9 @@ $(document).ready(function() {
 	document.title = "Bolt: <%=sPageTitle%>";
 	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
 
+	$("#helpLink").click(showHelp);
 	$("body").keydown(function(evt) {
+		if(evt.shiftKey && evt.which == 191) showHelp();
 		if(evt.altKey && evt.which == 83) executeSql();
 		if(evt.altKey && evt.which == 84) executeTopSql();
 	});
