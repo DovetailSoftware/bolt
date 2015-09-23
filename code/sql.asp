@@ -46,6 +46,7 @@ label.checkbox { display: inline-block; margin-left: 4em; margin-bottom: -.5em; 
 #stats { font-size: .8em;margin:-.5em 0; }
 .error { border: 2pt red solid;padding: 1em; }
 .btn { white-space: nowrap; }
+.no-border-bottom { border-bottom: none !important; }
 table.help td.shortcut {
 	font-weight: bold;
 	padding-right: .5em;
@@ -181,8 +182,8 @@ var initSort = "";
 					      var orderBy = sql.substr(pos+9);
 					      var colName = orderBy.split(" ");
 					      if(colName.length > 1) {
-					         var col = FCTrim(colName[1]);
-					         if(col == "desc" || col == "desc,") order = 1;
+					         var sortOrder = FCTrim(colName[1]).substr(0,4);
+					         if(sortOrder == "desc") order = 1;
 					      }
 
 					      for(var i=0; i < RS.Fields.Count;i++) {
@@ -217,7 +218,7 @@ var initSort = "";
 					         colValue = Server.HTMLEncode(RS.Fields(i).Value + "");
 
 					         //show dates in a nice format
-							   if( RS.Fields(i).Type == 135 && RS.Fields(i).Value != null) colValue = I18N_FormatGeneralDate( RS.Fields(i).Value);
+							     if( RS.Fields(i).Type == 135 && RS.Fields(i).Value != null) colValue = I18N_FormatGeneralDate( RS.Fields(i).Value);
 
 					         wrap_val = "";
 					         if(wrap == "on" && colValue.length > 60) wrap_val = " style='white-space:normal;'";
@@ -255,15 +256,19 @@ var initSort = "";
 </div>
 
 <div id="help" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header">
+	<div class="modal-header no-border-bottom">
 	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	  <h3 id="myModalLabel">Keyboard shortcuts</h3>
 	</div>
 	<div class="modal-body">
-		<table class="help">
+		<table class="help table table-condensed table-striped">
 			<tr>
 				<td class="shortcut">alt-s</td>
 				<td>Execute SQL</td>
+			</tr>
+			<tr>
+				<td class="shortcut">alt-t</td>
+				<td>Execute SQL, getting latest 10 rows</td>
 			</tr>
 			<tr>
 				<td class="shortcut">alt-x</td>

@@ -58,6 +58,18 @@ var BC = "Baseline";
 type_id = type_id - 0;
 if (type_id >= 2000 & type_id <= 4999) BC = "Custom";
 if (type_id >= 430 & type_id <= 511) BC = "Custom";
+
+var orderByField = "objid";
+function getEncodedSelectTopSql() {
+  var select_top_sql = "";
+  if(dbType == "MSSQL") {
+    select_top_sql = "select top 10 * from table_" + type_name + " order by " + orderByField + " desc";
+  } else {
+    select_top_sql = "select * from (select * from table_" + type_name + " order by " + orderByField + " desc) where ROWNUM <= 10  order by " + orderByField + " desc";
+  }
+  return Server.URLEncode(select_top_sql);
+}
+
 %>
 <!--#include file="inc/quicklinks.inc"-->
 </head>
@@ -93,7 +105,8 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 				<% } %>
 			</ul>
 			<% var select_sql = "select * from table_" + type_name;
-				var encoded_select_sql = Server.URLEncode(select_sql); %>
+				 var encoded_select_sql = Server.URLEncode(select_sql);
+			%>
 				<button class="btn"><a href=sql.asp?sql=<%=encoded_select_sql%>&flag=no_query><%=select_sql%></a></button>
 		</div>
 	</div>
@@ -119,26 +132,33 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 	rw("<tbody>");
 
 	//Get the fields for this table
-   TheSQL = "select * from " + FIELD_TABLE + " where " + ID_FIELD + " = ";
+  TheSQL = "select * from " + FIELD_TABLE + " where " + ID_FIELD + " = ";
 	TheSQL += type_id;
 	TheSQL +=" order by field_name";
 	rsTables = retrieveDataFromDB(TheSQL);
 
+  var firstField = "";
+  var foundObjid = false;
+
 	while (!rsTables.EOF) {
    	FieldName = rsTables("field_name");
-	   CmnDataType = rsTables(COMMON_TYPE_FIELD);
-	   DBType = rsTables("db_type");
+
+   	if(firstField == "") firstField = FieldName;
+   	if(FieldName == "objid") foundObjid = true;
+
+	  CmnDataType = rsTables(COMMON_TYPE_FIELD);
+	  DBType = rsTables("db_type");
 		//Translate the DB Data Type
 		DBTypeStr = TranslateDBType(DBType);
-	   CmnType = rsTables(COMMON_TYPE_FIELD);
+	  CmnType = rsTables(COMMON_TYPE_FIELD);
 		//Translate the Cmn Data Type
 		CmnTypeStr = TranslateCommonType(CmnType);
-      SpecFieldID = 0;
-      GenFieldID = 0;
-	   Comment = Server.HTMLEncode(rsTables(comment_field) + "") + EmptyString;
-    	if (Comment == "null" + EmptyString) Comment = EmptyString;
+    SpecFieldID = 0;
+    GenFieldID = 0;
+	  Comment = Server.HTMLEncode(rsTables(comment_field) + "") + EmptyString;
+    if (Comment == "null" + EmptyString) Comment = EmptyString;
    	FldDefault = Server.HTMLEncode(rsTables(DEFAULT_FIELD) + "") + EmptyString;
-    	if (FldDefault == "null" + EmptyString) FldDefault = EmptyString;
+    if (FldDefault == "null" + EmptyString) FldDefault = EmptyString;
    	ArraySize = rsTables(FIELD_LENGTH_FIELD);
    	TableNum = type_id;
    	Flags = rsTables("flags");
@@ -196,13 +216,13 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
    	ViewLink += ">Search"
    	ViewLink += "</a>";
 
-	   var TheSQL = "select distinct from_obj_type, from_field_id, view_type_id  from adp_view_field_info where from_obj_type = " + TableNum;
+	  var TheSQL = "select distinct from_obj_type, from_field_id, view_type_id  from adp_view_field_info where from_obj_type = " + TableNum;
 		TheSQL += " and from_field_id = " + SpecFieldID;
-	   var rsFieldViews = retrieveDataFromDB(TheSQL);
-      var viewCount = rsFieldViews.RecordCount;
-      var viewSearch = (viewCount > 0)? ViewLink + " (" + viewCount + ")" : "&nbsp;";
-      rsFieldViews.Close;
-	   rsFieldViews = null;
+	  var rsFieldViews = retrieveDataFromDB(TheSQL);
+    var viewCount = rsFieldViews.RecordCount;
+    var viewSearch = (viewCount > 0)? ViewLink + " (" + viewCount + ")" : "&nbsp;";
+    rsFieldViews.Close;
+	  rsFieldViews = null;
 
    	rw("<td>");
    	rw(viewSearch);
@@ -211,11 +231,14 @@ if (type_id >= 430 & type_id <= 511) BC = "Custom";
 
    	rsTables.MoveNext();
 	}
+
+ 	if(!foundObjid) orderByField = FieldName;
+
 	rsTables.Close;
 	rsTables = null;
 	rw("</tbody>");
 	rw("</table>");
-   rf();
+  rf();
 %>
 		</div>
 	</div>
@@ -550,7 +573,10 @@ function executeSql() {
 	var url = "sql.asp?sql=<%=encoded_select_sql%>";
 	window.location.href = url;
 }
-
+function executeTopSql() {
+	var url = "sql.asp?sql=<%=getEncodedSelectTopSql()%>";
+	window.location.href = url;
+}
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
@@ -561,11 +587,12 @@ $(document).ready(function() {
 
 	$("body").keydown(function(evt) {
 		if(evt.altKey && evt.which == 83) executeSql();
+		if(evt.altKey && evt.which == 84) executeTopSql();
 	});
 
-   $(".tablesorter").tablesorter();
+  $(".tablesorter").tablesorter();
 	$(".tablesorter tbody tr").click(function () {
-	   $(this).children("td").toggleClass("highlight");
+	  $(this).children("td").toggleClass("highlight");
 	});
 });
 </script>

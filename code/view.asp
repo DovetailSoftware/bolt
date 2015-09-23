@@ -39,6 +39,8 @@
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
+var orderByField = "objid";
+
 var type_id = Request("type_id");
 var rsSpecRelID;
 
@@ -84,6 +86,16 @@ if (Flags & UNION_VIEW_FLAG){
 var unionViewsList = getUnionViewsList(type_id);
 //See if it has filter SQL
 var filterSQL = getFilterSQL();
+
+function getEncodedSelectTopSql() {
+  var select_top_sql = "";
+  if(dbType == "MSSQL") {
+    select_top_sql = "select top 10 * from table_" + type_name + " order by " + orderByField + " desc";
+  } else {
+    select_top_sql = "select * from (select * from table_" + type_name + " order by " + orderByField + " desc) where ROWNUM <= 10  order by " + orderByField + " desc";
+  }
+  return Server.URLEncode(select_top_sql);
+}
 %>
 <div class="container-fluid">
 	<div class="row-fluid topMargin">
@@ -284,7 +296,10 @@ function executeSql() {
 	var url = "sql.asp?sql=<%=encoded_select_sql%>";
 	window.location.href = url;
 }
-
+function executeTopSql() {
+	var url = "sql.asp?sql=<%=getEncodedSelectTopSql()%>";
+	window.location.href = url;
+}
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
@@ -295,9 +310,10 @@ $(document).ready(function() {
 
 	$("body").keydown(function(evt) {
 		if(evt.altKey && evt.which == 83) executeSql();
+		if(evt.altKey && evt.which == 84) executeTopSql();
 	});
 
-   $(".tablesorter").tablesorter();
+  $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});
