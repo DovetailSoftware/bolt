@@ -82,8 +82,11 @@ function outputViewFields() {
    var row = 0;
 
    rw("<h4 id='fields'>Fields:</h4>");
-	rw("<table class='tablesorter fullWidth'>");
+	 rw("<table class='tablesorter fullWidth'>");
    rw("<thead><tr class='headerRow'>");
+
+   var firstField = "";
+   var foundObjid = false;
 
    if(rsView.RecordCount > 1) {
       while (!rsView.EOF){
@@ -138,6 +141,7 @@ function outputViewFields() {
       row = 0;
       while (!rsViewFields.EOF){
          ViewFieldName = rsViewFields("field_name");
+
          ViewArray[row][1] = ViewFieldName + "";
 
          genFieldId = "";
@@ -152,7 +156,7 @@ function outputViewFields() {
       rsViewFields.Close();
       rsViewFields = null;
 
-   	//Print the Table of view fields
+   	  //Print the Table of view fields
       //Build the Table header
       rw("<th>View Field Name</th>");
       rw("<th>Table Name</th>");
@@ -166,6 +170,10 @@ function outputViewFields() {
       nFields = ViewArray.length;
       for(row = 0; row < nFields; row++){
          ViewFieldName = ViewArray[row][1];
+
+         if(firstField == "") firstField = ViewFieldName;
+         if(ViewFieldName == "objid") foundObjid = true;
+
          TableName = ViewArray[row][3];
          FieldName = ViewArray[row][5];
          Comments = ViewArray[row][6];
@@ -178,7 +186,7 @@ function outputViewFields() {
          //If there is an alias, show the alias, and put the real table in parens & hyperlinked
          if(ViewAlias != "null" && ViewAlias != "") TheLink = ViewAlias + "(" + TheLink + ")";
 
-			rw("<tr>");
+    		 rw("<tr>");
          rw("<td>" + ViewFieldName + "</td>");
          rw("<td>" + TheLink + "</td>");
          rw("<td>" + FieldName + "</td>");
@@ -186,6 +194,9 @@ function outputViewFields() {
          rw("<td>" + GenFieldId + "</td>");
          rw("</tr>");
       }
+
+     	if(!foundObjid) orderByField = firstField;
+
    } else {
 
       rw("<th>Field Name</th>");
@@ -253,6 +264,9 @@ function outputViewFields() {
 
          rsTables.MoveNext();
       }
+
+     	if(!foundObjid) orderByField = FieldName;
+
       rsTables.Close();
       rsTables = null;
       rw("<tbody>");
