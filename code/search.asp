@@ -47,6 +47,7 @@ var sPageType = "Schema";
 	<div class="row-fluid bottomMargin">
 		<div class="span12 topMargin">
 	  	<div class="header span7 offset5">
+		  	<h5 class="pull-right"><%=seekerUrl%></h5>
 		  	<h3>Seeker Search</h3>
 <%
   var seeker = "";
