@@ -50,7 +50,7 @@ var read_only_udl = udl_file.Attributes & 1;
 FSO = null;
 udl_file = null;
 
-if(read_only_udl) Response.Redirect("online.asp");
+if(read_only_udl) Response.Redirect("index.asp");
 
 %>
 <!--#include file="inc/ddonline.inc"-->
