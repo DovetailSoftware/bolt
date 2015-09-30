@@ -67,7 +67,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		<div class="span8 well well-small topMargin">
 			<h2>About BOLT</h2>
     		<p>BOLT is a set of <u>B</u>rowser <u>O</u>n<u>L</u>ine <u>T</u>ools for the Clarify<sup>&reg;</sup> system.</p>
-    		<p>View the <a href="version.asp">BOLT Version History</a>.</p>
+    		<p>BOLT is freely available online at <a href="https://github.com/DovetailSoftware/bolt">https://github.com/DovetailSoftware/bolt</a>.</p>
 		</div>
 		<div class="span2"></div>
 	</div>
