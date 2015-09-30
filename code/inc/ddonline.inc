@@ -115,7 +115,8 @@ var CLARIFY_112        = 57;
 var CLARIFY_115        = 58;
 var CLARIFY_12         = 59;
 var CLARIFY_125        = 60;
-var CLARIFY_131        = 62;
+var CLARIFY_13         = 62;
+var CLARIFY_131        = 66;
 var AMDOCS_75          = 6600;
 
 //////////////////////////////////////////////////////////////////////
@@ -1068,6 +1069,9 @@ function GetClarifyRelease() {
 			break;
 		case CLARIFY_125 + "":
 			return "12.5"
+			break;
+		case CLARIFY_13 + "":
+			return "Amdocs CRM6"
 			break;
 		case CLARIFY_131 + "":
 			return "Amdocs CRM6"
