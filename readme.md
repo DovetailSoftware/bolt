@@ -1,4 +1,4 @@
-<img src="http://www.dovetailsoftware.com/sites/default/files/dovetail_logo.png" alt="Dovetail Software, Inc." style="margin: 0;border: 0;" />
+<img src="https://support.dovetailsoftware.com/selfservice/Content/images/DSLogo195.png" alt="Dovetail Software, Inc." style="margin: 0;border: 0;" />
 
 #Dovetail Bolt
 
