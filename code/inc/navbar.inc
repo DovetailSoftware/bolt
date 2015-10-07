@@ -37,10 +37,8 @@
 					<li><a href="bizrules.asp">Business Rules</a></li>
 					<li><a href="dbInfo.asp">Database Info</a></li>
 					<li><a href="sql.asp">SQL</a></li>
-					<li><a href="privileges.asp">Privileges</a></li>
 					<li><a href="lists.asp">Lists</a></li>
 					<li><a href="licenses.asp">Licenses</a></li>
-					<li><a href="search.asp">Search</a></li>
 					<li><a href="about.asp">About</a></li>
 				</ul>
 			</div>

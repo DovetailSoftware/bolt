@@ -24,5 +24,4 @@
 //Customer Specific Configuration Information
 var udlDirectory = Request.ServerVariables("APPL_PHYSICAL_PATH").Item;
 var dbConnect = "File Name=" + udlDirectory + "bolt.udl";
-var seekerUrl = "http://localhost/seeker/";
 %>
