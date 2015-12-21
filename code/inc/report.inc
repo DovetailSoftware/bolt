@@ -8,7 +8,11 @@ function WriteReport(rs) {
 		alternatingRowClassName=SwapClass(alternatingRowClassName);
 		rw("<tr class='" + alternatingRowClassName + "'>");
 		rw("<td>");
-		rw("<a href='select_biz_rules2.asp?operator=%3D&filter2=&forceDisplay=1&filter=" + Server.URLEncode(rs("rulename")) + "'>");
+		if ((rs('objid') - 0) > 0){
+			rw('<a href="bizrule.asp?objid=' + rs('objid') + '">');
+		}else{
+			rw('<a href=# onclick="alert(\'Unable to find this rule in the system. It may have been deleted. \')">');
+		}
 		rw(rs("rulename") + "");
 		rw("</a>");
 		rw("</td>");

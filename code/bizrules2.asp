@@ -339,7 +339,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			%>
 
 			<tr <%=(DisplayRow)? "" : "style='display:none;'" %> class="biz-rule" id="<%=rsCT("objid")%>">
-			<td><b><%=rsCT("title")%></b></td>
+			<td><a href="bizrule.asp?objid=<%=rsCT('objid')%>"><%=rsCT("title")%></a></td>
 			<td><%=rsCT("rule_set")%></td>
 			<td><%=rsCT("description")%></td>
 			<td><%=Active%></td>
