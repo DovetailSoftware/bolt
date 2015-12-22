@@ -43,18 +43,18 @@ function outputViewHeader(ViewKind,TheLink) {
 }
 
 function hyperlinksTable() {
-	rw("<h5 id='jump'>Jump Links</h5>");
-	rw("<ul class='unstyled'>");
-	rw("	<li><a href='#fields'>Fields</a></li>");
-	rw((filterSQL == "" && unionViewsList.length == 0)? "	<li><a href='#joins'>Joins</a></li>" : "");
-  rw((filterSQL != "")? "<li><a href='#filters'>Filters</a></li>" : "");
-  rw((unionViewsList.length > 0)? "<li><a href='#contribs'>Union Views Which This View Contributes To</a></li>" : "");
-	rw("</ul>");
+   rw("<h5 id='jump'>Jump Links</h5>");
+   rw("<ul class='unstyled'>");
+   rw("	<li><a href='#fields'>Fields</a></li>");
+   rw((filterSQL == "" && unionViewsList.length == 0)? "	<li><a href='#joins'>Joins</a></li>" : "");
+   rw((filterSQL != "")? "<li><a href='#filters'>Filters</a></li>" : "");
+   rw((unionViewsList.length > 0)? "<li><a href='#contribs'>Union Views Which This View Contributes To</a></li>" : "");
+   rw("</ul>");
 
-	var select_sql = "select * from table_" + type_name;
-	var encoded_select_sql = Server.URLEncode(select_sql);
-	rw("<button class='btn'><a href='sql.asp?sql=" + encoded_select_sql + "&flag=no_query'>" + select_sql + "</a></button>");
-  rw("<div style='margin:.5em 0;font-size:.8em;'><a id='helpLink' href=''>Keyboard shortcuts available</a></div>");
+   var select_sql = "select * from table_" + type_name;
+   var encoded_select_sql = Server.URLEncode(select_sql);
+   rw("<div class='btn'><a href='sql.asp?sql=" + encoded_select_sql + "&flag=no_query'>" + select_sql + "</a></div>");
+   rw("<div style='margin:.5em 0;font-size:.8em;'><a id='helpLink' href=''>Keyboard shortcuts available</a></div>");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

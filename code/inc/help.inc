@@ -1,6 +1,6 @@
 <div id="help" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header no-border-bottom">
-	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
 	  <h3 id="myModalLabel">Keyboard shortcuts</h3>
 	</div>
 	<div class="modal-body">

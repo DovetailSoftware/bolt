@@ -162,7 +162,7 @@ var initSort = "";
 					rw("<td><b>Start Time:&nbsp;</b></td><td>" + start + "</td>");
 					rw("<td style='width:20px;'>&nbsp;</td>");
 					var end = new Date();
-					var elapsed_ms = end.getMilliseconds() - start.getMilliseconds();
+					var elapsed_ms = end - start;
 
 					try {
 					   rw("<td><b>Number of Records:</b></td><td>" + RS.RecordCount + "</td>");

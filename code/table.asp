@@ -107,7 +107,7 @@ function getEncodedSelectTopSql() {
 			<% var select_sql = "select * from table_" + type_name;
 				 var encoded_select_sql = Server.URLEncode(select_sql);
 			%>
-				<button class="btn"><a href=sql.asp?sql=<%=encoded_select_sql%>&flag=no_query><%=select_sql%></a></button>
+				<div class="btn"><a href="sql.asp?sql=<%=encoded_select_sql%>&flag=no_query"><%=select_sql%></a></div>
 				<div style="margin:.5em 0;font-size:.8em;"><a id="helpLink" href="">Keyboard shortcuts available</a></div>
 		</div>
 	</div>
