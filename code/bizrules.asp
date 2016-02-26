@@ -174,6 +174,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 						<option value="3">Command Line</option>
 						<option value="2">Message</option>
 						<option value="4">Service Message</option>
+						<option value="1001">Carrier Message</option>
 					</select>
 				</td>
 			</tr>

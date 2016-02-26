@@ -419,8 +419,9 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					ActionType = "Message"; //type = 2
 					if(numActionType == 3) ActionType = "Command Line";
 					if(numActionType == 4) ActionType = "Service Message";
+					if(numActionType == 1001) ActionType = "Carrier Message";
 
-					if(numActionType == ActionTypeFilter) GoodAction = true;
+							if(numActionType == ActionTypeFilter) GoodAction = true;
 
 					//If the action type is "All" (actiontypefilter=0), then
 					//this is an action that should be displayed
