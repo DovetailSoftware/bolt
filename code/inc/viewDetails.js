@@ -83,7 +83,7 @@ function outputViewFields() {
    var row = 0;
 
    rw("<h4 id='fields'>Fields:</h4>");
-	 rw("<table class='tablesorter fullWidth'>");
+   rw("<table class='tablesorter fullWidth'>");
    rw("<thead><tr class='headerRow'>");
 
    var firstField = "";
@@ -157,7 +157,7 @@ function outputViewFields() {
       rsViewFields.Close();
       rsViewFields = null;
 
-   	  //Print the Table of view fields
+      //Print the Table of view fields
       //Build the Table header
       rw("<th>View Field Name</th>");
       rw("<th>Table Name</th>");
@@ -217,8 +217,15 @@ function outputViewFields() {
       TheSQL+=" order by field_name";
       rsTables = retrieveDataFromDB(TheSQL);
 
+      var firstField = "";
+      var foundObjid = false;
+
       while (!rsTables.EOF){
-         FieldName = rsTables("field_name");
+         FieldName = rsTables("field_name") + "";
+
+         if(firstField == "") firstField = FieldName;
+         if(FieldName == "objid") foundObjid = true;
+
          CmnDataType = rsTables(COMMON_TYPE_FIELD);
          DBType = rsTables("db_type");
          //Translate the DB Data Type
@@ -266,7 +273,7 @@ function outputViewFields() {
          rsTables.MoveNext();
       }
 
-     	if(!foundObjid) orderByField = FieldName;
+      if(!foundObjid) orderByField = firstField;
 
       rsTables.Close();
       rsTables = null;
