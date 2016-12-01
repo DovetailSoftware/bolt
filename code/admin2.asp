@@ -51,14 +51,20 @@ try {
 	UDLString += DBServer;
 	UDLString += ";Persist Security Info=True";
 
+//Initial File Name="";Server SPN=""
+
 	result.message = "Database set to: ";
 
-	if(Provider == "SQLOLEDB.1") {
-	  	UDLString += ";Initial Catalog=";
-	  	UDLString += Database;
-	  	result.message += Database + " on Server: " + DBServer;
+	if(Provider == "SQLOLEDB.1" || Provider == "SQLNCLI11.1") {
+  	UDLString += ";Initial Catalog=";
+  	UDLString += Database;
+  	result.message += Database + " on Server: " + DBServer;
 	} else {
 		result.message += DBServer;
+	}
+
+	if(Provider == "SQLNCLI11.1") {
+		UDLString += ";Initial File Name=\"\";Server SPN=\"\"";
 	}
 
 	//Get the Connection String & extract the actual file name

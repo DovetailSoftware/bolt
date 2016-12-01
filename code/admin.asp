@@ -71,7 +71,8 @@ if(read_only_udl) Response.Redirect("index.asp");
 
 		   <label class="fixedWidth">Provider:</label>
 		   <select id="Provider" name="Provider">
-		      <option selected value="SQLOLEDB.1">SQL Server</option>
+		      <option selected value="SQLNCLI11.1">SQL Native Client</option>
+		      <option value="SQLOLEDB.1">SQL Server</option>
 		      <option value="OraOLEDB.Oracle">Oracle Provider</option>
 		      <option value="MSDAORA.1">Microsoft Provider for Oracle</option>
 		   </select>
