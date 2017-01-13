@@ -57,8 +57,13 @@ tr.highlight td {
 
 a.connected {
 	float:right;
-	margin: 0 .3em;
-	font-size:.8em;
+	margin: -30px .3em;
+	font-size:14px;
+	color: #999;
+}
+
+a.connected:hover {
+	color: white;
 }
 
 table.tablesorter.localized tbody td {
