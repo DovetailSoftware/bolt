@@ -3,36 +3,36 @@
 //Output header for a view
 ///////////////////////////////////////////////////////////////////////////////////
 function outputViewHeader(ViewKind,TheLink) {
-	rw("<table>");
+	rw("<table class='table table-sm small mb-1'>");
    rw("<tr>");
-   rw("<td class='header'>" + ViewKind+"View Name:" + "</td>");
+   rw("<td class='text-right font-weight-bold pr-2'>" + ViewKind+"View Name:" + "</td>");
    rw("<td>" + type_name + "</td>");
    rw("</tr>");
    rw("<tr>");
-   rw("<td class='header'>" + ViewKind+"View Number:" + "</td>");
+   rw("<td class='text-right font-weight-bold pr-2'>" + ViewKind+"View Number:" + "</td>");
    rw("<td>" + type_id + "</td>");
    rw("</tr>");
    rw("<tr>");
-   rw("<td class='header'>Group:</td>");
+   rw("<td class='text-right font-weight-bold pr-2'>Group:</td>");
    rw("<td>" + GetTableGroup(type_name) + "</td>");
    rw("</tr>");
    if(TheLink.length > 0){
       rw("<tr>");
-	   rw("<td class='header'>Base Table:</td>");
+	   rw("<td class='text-right font-weight-bold pr-2'>Base Table:</td>");
       rw("<td>");
       rw(TheLink);
       rw("</td>");
       rw("</tr>");
    }
    rw("<tr>");
-   rw("<td class='header'>Description:</td>");
+   rw("<td class='text-right font-weight-bold pr-2'>Description:</td>");
    rw("<td>" + Server.HTMLEncode(GetTableComment(type_name)) + "</td>");
    rw("<tr>");
-   rw("<td class='header'>Flags:</td>");
+   rw("<td class='text-right font-weight-bold pr-2'>Flags:</td>");
    rw("<td>" + GetTableParams(type_id) + "</td>");
    rw("</tr>");
    rw("<tr>");
-   rw("<td class='header'>Baseline/Custom:</td>");
+   rw("<td class='text-right font-weight-bold pr-2'>Baseline/Custom:</td>");
    var BC = "Baseline";
    type_id = type_id - 0;
    if((type_id >= 2000 && type_id <= 4999) ||
@@ -43,8 +43,7 @@ function outputViewHeader(ViewKind,TheLink) {
 }
 
 function hyperlinksTable() {
-   rw("<h5 id='jump'>Jump Links</h5>");
-   rw("<ul class='unstyled'>");
+   rw("<ul class='list-unstyled pl-3 mb-1'>");
    rw("	<li><a href='#fields'>Fields</a></li>");
    rw((filterSQL == "" && unionViewsList.length == 0)? "	<li><a href='#joins'>Joins</a></li>" : "");
    rw((filterSQL != "")? "<li><a href='#filters'>Filters</a></li>" : "");
@@ -53,8 +52,8 @@ function hyperlinksTable() {
 
    var select_sql = "select * from table_" + type_name;
    var encoded_select_sql = Server.URLEncode(select_sql);
-   rw("<div class='btn'><a href='sql.asp?sql=" + encoded_select_sql + "&flag=no_query'>" + select_sql + "</a></div>");
-   rw("<div style='margin:.5em 0;font-size:.8em;'><a id='helpLink' href=''>Keyboard shortcuts available</a></div>");
+   rw("<a class='btn btn-primary btn-sm ml-3' href='sql.asp?sql=" + encoded_select_sql + "&flag=no_query'>" + select_sql + "</a>");
+   rw("<div class='small pl-4 mt-2'><a id='helpLink' href=''>Keyboard shortcuts available</a></div>");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +82,7 @@ function outputViewFields() {
    var row = 0;
 
    rw("<h4 id='fields'>Fields:</h4>");
-   rw("<table class='tablesorter fullWidth'>");
+   rw("<table class='tablesorter fields'>");
    rw("<thead><tr class='headerRow'>");
 
    var firstField = "";
@@ -282,6 +281,6 @@ function outputViewFields() {
    }
    rw("<tbody>");
    rw("</table>");
-   Response.Flush();
+   rf();
 }
 %>

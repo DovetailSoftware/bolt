@@ -25,14 +25,12 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style4.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <link href="css/bizrules.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
@@ -50,12 +48,10 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/ddonline.inc"-->
 </head>
 <body>
-<!--#include file="inc/navbar.inc"-->
-<%
-%>
+<!--#include file="inc/navbar4.inc"-->
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div id="headerContainer" class="span12">
+	<div class="row">
+		<div id="headerContainer" class="col-12">
 		<%
 			var rs = Server.CreateObject("ADODB.Recordset");
 			rs.ActiveConnection = dbConnect;
@@ -155,9 +151,9 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		        	<th>Start Event</th>
 		        	<th>Cancel Event</th>
 		        	<th>Conditions</th>
-		      	<% if(bSuppressActions == false) { %>
+		      		<% if(bSuppressActions == false) { %>
 	        		<th>Actions</th>
-		   		<% } %>
+		   				<% } %>
 		      </tr>
 			</thead>
 		<%
@@ -176,7 +172,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			Active = "Active";
 			if((rsCT("flags") & 65536) > 0) Active = "Inactive";
 
-			//Initialize the variables for each rule
+			//Initialize the variables for-each rule
 			StartEvent = "";
 			StopEvent = "";
 			ObjectType = "";
@@ -532,7 +528,6 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			</tr>
 			<%
 			rsRuleCond.Close();
-
 			rsCT.MoveNext();
 		}
 		%>
@@ -544,24 +539,20 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var page = "bizrules.asp";
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
 	//no sorting on actions
-   $(".tablesorter").tablesorter({
-   	headers:{
-   		8:{sorter:false}
-   		}
-   });
+  $(".tablesorter").tablesorter({ headers:{ 8:{sorter:false} } });
 	$(".tablesorter tr").click(function () {
-	   $(this).children("td").toggleClass("highlight");
+		$(this).children("td").toggleClass("highlight");
 	});
 	
 	//show number of rules

@@ -1,0 +1,19 @@
+tr.highlight td {
+	background-color: #ffff80 !important;
+}
+.highlight {
+	background-color: #ffff80 !important;
+}
+.exclusive {
+	text-align: center;
+	background-color: #BDD7FD !important;
+}
+
+#stored-sql {
+  max-height: 120px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#stored-sql .input-group {
+  min-height: 25px;
+}

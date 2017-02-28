@@ -25,19 +25,12 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<style>
-input.formInput { margin-bottom: 0;margin-left: .5em; }
-table.middle tr td { padding: .2em 0; }
-.bottomMargin { margin-bottom: 3em; }
-</style>
+<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style4.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -50,41 +43,38 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/quicklinks.inc"-->
 </head>
 <body>
-<!--#include file="inc/navbar.inc"-->
-
+<!--#include file="inc/navbar4.inc"-->
+<!--#include file="inc/notifications.inc"-->
 <div class="container-fluid">
-	<div class="row-fluid bottomMargin">
-		<div class="span2"></div>
-		<div id="homeContainer" class="span8">
-
-			<h3>Schema Search</h3>
-
+	<div class="row-fluid mb-3">
+		<div id="homeContainer" class="col-8 offset-2 mt-1">
+			<h3 class="mb-3 text-center">Schema Search</h3>
 			<center>
-			<table class="middle">
+			<table>
 				<tr>
 					<td>Tables/Views whose name starts with</td>
 					<td>
-						<div class="input-append">
-    						<input type="text" class="input-medium formInput" id="type_name" />
-    						<button class="btn " id="ddonline">Search</button>
+						<div class="input-group input-group-sm ml-2 mt-1">
+  						<input type="text" class="form-control" id="type_name" />
+  						<span class="btn btn-primary input-group-addon" id="ddonline">Search</span>
 						</div>
-  					</td>
+  				</td>
 				</tr>
 				<tr>
 					<td>Tables/Views whose ID equals</td>
 					<td>
-						<div class="input-append">
-							<input type="text" class="input-medium formInput" id="type_id" />
-							<button class="btn " id="ddonline2">Search</button>
+						<div class="input-group input-group-sm ml-2 mt-1">
+							<input type="text" class="form-control" id="type_id" />
+							<span class="btn btn-primary input-group-addon" id="ddonline2">Search</span>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>Tables/Views that contain a field named</td>
 					<td>
-						<div class="input-append">
-						<input type="text" class="input-medium formInput" id="field_name" />
-							<button class="btn " id="fieldButton">Search</button>
+						<div class="input-group input-group-sm ml-2 mt-1">
+						<input type="text" class="form-control" id="field_name" />
+							<span class="btn btn-primary input-group-addon" id="fieldButton">Search</span>
 							<input type="hidden" value="search_by_field_name" id="search_type" />
 						</div>
 					</td>
@@ -92,38 +82,35 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<tr>
 					<td>Tables that contain a relation name starting with</td>
 					<td>
-						<div class="input-append">
-							<input type="text" class="input-medium formInput" id="rel_name" />
-							<button class="btn " id="relationButton">Search</button>
+						<div class="input-group input-group-sm ml-2 mt-1">
+							<input type="text" class="form-control" id="rel_name" />
+							<span class="btn btn-primary input-group-addon" id="relationButton">Search</span>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>User-Defined Tables/Views whose name starts with</td>
 					<td>
-						<div class="input-append">
-							<input type="text" class="input-medium formInput" id="type_custom" />
-							<button class="btn " id="customButton">Search</button>
+						<div class="input-group input-group-sm ml-2 mt-1">
+							<input type="text" class="form-control" id="type_custom" />
+							<span class="btn btn-primary input-group-addon" id="customButton">Search</span>
 						</div>
 					</td>
 				</tr>
 			</table>
-			</center>
-			<br/>
 
-		<h4><a href="schema_id_info.asp">More information about User-Defined Table/View IDs</a></h4>
-
+			<h5 class="mt-3 mb-5 text-center"><a href="schema_id_info.asp">More information about User-Defined Table/View IDs</a></h5>
 		</div>
-		<div class="span2"></div>
 	</div>
 
-	<!--#include file="inc/recent_objects.asp"-->
-	<!--#include file="inc/quick_links.asp"-->
+	<!--#include file="inc/recent_objects4.asp"-->
+	<!--#include file="inc/quick_links4.asp"-->
 
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/notifier.js"></script>
 <script type="text/javascript" src="js/schemaValidate.js"></script>
 <script type="text/javascript">
 function submitFormByName(strUrl, fieldName) {
@@ -145,7 +132,7 @@ function submitCustom() {
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 

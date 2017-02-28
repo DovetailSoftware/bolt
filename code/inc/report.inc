@@ -1,12 +1,10 @@
 <%
 function WriteReport(rs) {
-	var alternatingRowClassName;
 	rs.Sort = "fired DESC, create_activity_log DESC"
 	if(rs.EOF) return;
 	rs.MoveFirst();
 	while(!rs.EOF) {
-		alternatingRowClassName=SwapClass(alternatingRowClassName);
-		rw("<tr class='" + alternatingRowClassName + "'>");
+		rw("<tr>");
 		rw("<td>");
 		if ((rs('objid') - 0) > 0){
 			rw('<a href="bizrule.asp?objid=' + rs('objid') + '">');
@@ -119,7 +117,7 @@ function FillRecordSetWithRemainingRules(rs) {
 }
 
 function BuildTimeFilter(timePeriod, displayString, when) {
-	rw("<button class='btn filter' " + ((when == timePeriod)? "disabled" : "") + " onclick=\"DisplayReport('" + timePeriod + "');\">" + displayString + "</button>");
+	rw("<button class='btn btn-sm btn-primary mr-1' " + ((when == timePeriod)? "disabled" : "") + " onclick=\"DisplayReport('" + timePeriod + "');\">" + displayString + "</button>");
 }
 
 function ensureValidDate(in_date) {

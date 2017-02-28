@@ -25,18 +25,13 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style4.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
-<style>
-#headerContainer { margin-top: 20px;margin-bottom: 40px; }
-</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -67,12 +62,10 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 %>
 </head>
 <body>
-<!--#include file="inc/navbar.inc"-->
-
+<!--#include file="inc/navbar4.inc"-->
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="headerContainer" class="span8">
+		<div id="headerContainer" class="col-8 offset-2 my-5">
 		<% //If we have none, say so & exit
 			if (rsForms.EOF) {
 				rw("<h3>No matches</h3>");
@@ -206,24 +199,24 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		<div class="span2"></div>
 	</div>
 
-	<!--#include file="inc/recent_objects.asp"-->
-	<!--#include file="inc/quick_links.asp"-->
+	<!--#include file="inc/recent_objects4.asp"-->
+	<!--#include file="inc/quick_links4.asp"-->
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf('/')+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
 	$(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
-	   $(this).children("td").toggleClass("highlight");
+	  $(this).children("td").toggleClass("highlight");
 	});
 });
 </script>

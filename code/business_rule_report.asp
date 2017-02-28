@@ -25,26 +25,17 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style4.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
-<style>
-#headerContainer, .span12 { margin: 20px 0; }
-table.leftHeader thead th { text-align: left; }
-#filters span, #filters a { margin-right: 1em; }
-button.filter { margin: .2em .3em .2em 0; font-size: .9em; }
-</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <!--#include file="inc/report.inc"-->
 <%
-
 var sPageTitle = "Business Rule Usage Report";
 var sPageType = "BizRules";
 
@@ -56,11 +47,11 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/inc_vbscript.inc"-->
 </head>
 <body>
-<!--#include file="inc/navbar.inc"-->
+<!--#include file="inc/navbar4.inc"-->
 <%
 	//Setup start & end dates
 	var when = Request("when") + "";
-	if(when == "undefined" || when == "null") when = "last_30_days";
+	if (when == "undefined" || when == "null") when = "last_30_days";
 
 	var start = getStartDate(when);
 	var end = getEndDate(when);
@@ -78,9 +69,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 %>
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="headerContainer" class="span8">
+	<div class="row">
+		<div id="headerContainer" class="col-8 offset-2">
 			<h3>Business Rule Usage Report (<%=whenString(when)%>)</h3>
 			<div class="horizontalMargin">
 				<span>Filter by Time Period:</span>
@@ -113,12 +103,13 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				FillRecordSetWithRemainingRules(rs);
 			%>
 
-			<table class="tablesorter fullWidth">
+			<table class="tablesorter">
 				<thead>
 					<tr><th>Rule Name</th><th>Rule Action</th><th># of times rule fired</th><th>&nbsp;</th></tr>
 				</thead>
 				<tbody>
-					<%	WriteReport(rs);
+					<%	
+						WriteReport(rs);
 						rs.Close();
 					%>
 				</tbody>
@@ -126,38 +117,32 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					<tr><th>Totals</th><th><%=numberOfRuleActions%>&nbsp;Business Rule Actions</th><th class="centerMiddle"><%=totalRulesFired%></th><th>&nbsp;</th></tr>
 				</tfoot>
 			</table>
-
 		</div>
-		<div class="span2"></div>
 	</div>
 
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div class="span8">
+	<div class="row">
+		<div class="col-8 offset-2">
 			<p class="centered"><img src="img/icon-warning.png" alt="warning"/>
 			<strong>Regarding the Warning:</strong>
 			If a rule action has its <em>Create Activity Log</em> option set to No, then the number of times the rule fired will always be zero.
 			If you wish the number of rule firings to be accurate for this rule, check the <em>Create Activity Log on Action</em> checkbox
 			for this rule action in your Business Rule Editor.</p>
 		</div>
-		<div class="span2"></div>
 	</div>
 
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div class="span8">
+	<div class="row">
+		<div class="col-8 offset-2">
 			<p class="centered"><strong>About this report:</strong>
 			This report allows you to see the rules that are fired, including their frequency.
 			Perhaps even more importantly, it allows you to see the rules that are not being fired.
 			Perhaps those rules could be removed, or made inactive, therefore simplifying your business rule administration.
 			</p>
 		</div>
-		<div class="span2"></div>
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 function DisplayReport(when){
@@ -168,15 +153,15 @@ function DisplayReport(when){
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
 	$("#loading").hide();
 
-   $(".tablesorter").tablesorter();
+  $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
-	   $(this).children("td").toggleClass("highlight");
+	  $(this).children("td").toggleClass("highlight");
 	});
 });
 </script>

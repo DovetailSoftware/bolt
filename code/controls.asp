@@ -25,19 +25,16 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style4.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
-
 var sPageTitle = "Controls";
 var sPageType = "Controls";
 
@@ -46,19 +43,15 @@ var sDefaultControl = "filter";
 
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
-
 %>
 <!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
 </head>
 <body>
-<!--#include file="inc/navbar.inc"-->
-<%
-%>
-
+<!--#include file="inc/navbar4.inc"-->
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div id="headerContainer" class="span12 topMargin">
+	<div class="row">
+		<div id="headerContainer" class="col-12 mb-5">
 		<%
 			Attribute=Request("attribute");
 			Operator=Request("operator");
@@ -154,34 +147,34 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		      var url = "getform.asp?id=" + FormID + "&ver_clarify=" + rsButtons("clarify_ver") + "&ver_customer=" + rsButtons("customer_ver");
 		      var formURL = "<a href='" + url + "'>" + FormName + "</a>";
 
-				rw("<TR>");
-				rw("<TD>");
+				rw("<tr>");
+				rw("<td>");
 				if (rsButtons("control_type")==4){
 					rw(BuildHyperLink(buttonURL, ButtonName));
 				}
 				else{
 					rw(ButtonName);
 				}
-				rw("</TD>");
-				rw("<TD>");
+				rw("</td>");
+				rw("<td>");
 				rw(ButtonLabel);
-				rw("</TD>");
-				rw("<TD>");
+				rw("</td>");
+				rw("<td>");
 				rw(controlType);
-				rw("</TD>");
-				rw("<TD>");
+				rw("</td>");
+				rw("<td>");
 				rw(FormID);
-				rw("</TD>");
-				rw("<TD>");
+				rw("</td>");
+				rw("<td>");
 				rw(formURL);
-				rw("</TD>");
-				rw("<TD>");
+				rw("</td>");
+				rw("<td>");
 				rw(FormVerClarify);
-				rw("</TD>");
-				rw("<TD>");
+				rw("</td>");
+				rw("<td>");
 				rw(FormVerCust);
-				rw("</TD>");
-				rw("</TR>");
+				rw("</td>");
+				rw("</tr>");
 
 				rsButtons.MoveNext();
 			}
@@ -194,16 +187,16 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		</div>
 	</div>
 
-	<!--#include file="inc/recent_objects.asp"-->
-	<!--#include file="inc/quick_links.asp"-->
+	<!--#include file="inc/recent_objects4.asp"-->
+	<!--#include file="inc/quick_links4.asp"-->
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("ul.nav li a[href$='formsonline.asp']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='formsonline.asp']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 

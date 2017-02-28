@@ -1,31 +1,31 @@
 function resetColumnSelection() {
-	$(".temp, .column").remove();
-	$(".columnHighlight").removeClass("columnHighlight");
+  $(".temp, .column").remove();
+  $('button.close').remove();
+  $(".columnHighlight").removeClass("columnHighlight");
 }
 
 function columnSelect() {
    $(".headerRow th").dblclick(function() {
-   	resetColumnSelection()
+    resetColumnSelection()
 
-   	$th = $(this);
-   	var colIndex = $th.index();
-   	var colData = "";
-		$th.parents("table").find("tbody tr").each(function() {
-			var $columnCell = $(this).children("td:eq(" + colIndex + ")");
-			colText = $.trim($columnCell.text());
-			$columnCell.addClass("columnHighlight");
-			if(colText > "") colData += ((colData > "")? ", " : "") + colText;
-		});
+    $th = $(this);
+    var colIndex = $th.index();
+    var colData = "";
+    $th.parents("table").find("tbody tr").each(function() {
+      var $columnCell = $(this).children("td:eq(" + colIndex + ")");
+      colText = $.trim($columnCell.text());
+      $columnCell.addClass("columnHighlight");
+      if(colText > "") colData += ((colData > "")? ", " : "") + colText;
+    });
 
-		$("<span class='column'>Text from Selected Column:<i class='icon icon-remove deleteIcon' title='Hide column text'></i></span><input type=text class=temp title='text from column' />").val(colData).insertBefore($th.parents("table"));
-		$(".temp").focus().select();
+    $("<span class='column d-inline'>Text from Selected Column:</span><button type='button' class='close float-none ml-2' title='Close'><span>&times;</span></button><input type=text class='temp' title='text from column' />").val(colData).insertBefore($th.parents("table"));
+    $("button.close").click(resetColumnSelection);
+    $(".temp").focus().select();
       return false;
    });
 }
 
 $(document).ready(function() {
-   $("<p class='helpSpan'>(double-click a column header to select column text)</p>").insertAfter("#fields");
-   $(".deleteIcon").live("click", resetColumnSelection);
-
-   columnSelect();
+  $("<p class='text-right small p-0' style='margin:-1.7rem 0 0;'>(double-click a column header to select column text)</p>").insertAfter("#fields");
+  columnSelect();
 });
