@@ -25,7 +25,7 @@
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#boltNavbar" aria-controls="boltNavbar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand text-info" href="index.asp"><img src="img/logo.png" height="20" class="mb-1" /> Bolt</a>
+  <a class="navbar-brand text-info" href="index.asp"><img src="/bolt/img/logo.png" height="20" class="mb-1" /> Bolt</a>
   <div class="collapse navbar-collapse" id="boltNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item"><a class="nav-link" href="index.asp">Schema</a></li>

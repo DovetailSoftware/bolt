@@ -30,6 +30,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
 <link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style4.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
@@ -67,6 +68,21 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	<%}%>
 
 	<div class="row">
+		<div class="col-8 offset-2 well well-small topMargin">
+			<h2>Change Theme</h2>
+			<p>Click on a theme below to change the theme used for Dovetail Bolt.</p>
+
+			<iframe class="theme" src="themes/baseline.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/cyborg.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/spacelab.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/cerulean.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/slate.asp" scrolling="no"></iframe>
+
+			<input type="hidden" id="newTheme" />
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col-8 offset-2 card bg-faded mb-4">
 			<h2>Clarify Form Identifier</h2>
    		<p>A secret little feature you just might find useful: <a href="clarifyID_help.asp">Clarify Form Identifier</a>.</p>
@@ -87,12 +103,12 @@ $(document).ready(function() {
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
-	// $("#newTheme").click(function() {
-	// 	var themePath = $(this).val() + "";
-	// 	if(themePath > "") themePath = themePath + "/";
-	// 	$.cookie("boltTheme", themePath, { expires: 365 });
-	// 	window.location.href = path;
-	// });
+	$("#newTheme").click(function() {
+		var themePath = $(this).val() + "";
+		if(themePath > "") themePath = themePath + "/";
+		$.cookie("boltTheme", themePath, { expires: 365 });
+		window.location.href = path;
+	});
 });
 </script>
 </html>

@@ -30,6 +30,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
 <link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style4.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->

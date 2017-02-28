@@ -17,3 +17,10 @@ tr.highlight td {
 #stored-sql .input-group {
   min-height: 25px;
 }
+
+iframe.theme {
+	width: 204px;
+	height: 120px;
+	margin: 1em;
+	scrolling: no;
+}
