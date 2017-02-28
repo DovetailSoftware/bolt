@@ -74,4 +74,4 @@ To see the actual error, you can configure the application to send errors to the
 1. Set <b>Send Errors to Browser</b> to <b>True</b>.
 1. Click on Apply.
 
-Additional Information on [Configuring ASP applications on IIS7 is available online](http://blogs.dovetailsoftware.com/blogs/kmiller/archive/2008/08/19/installing-classic-asp-web-applications-on-iis7.aspx).
+Additional Information on [Configuring ASP applications on IIS7 is available online](http://clarify.dovetailsoftware.com/kmiller/2008/08/19/installing-dovetail-classic-asp-web-applications-on-iis7/).

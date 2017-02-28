@@ -118,6 +118,35 @@ Enable Parent Paths
 Test
 * Using your web browser, navigate to http://server/bolt
 
+#### File System Permissions
+
+Depending on your server, O/S version, IIS version, Application Pool identity, and/or existing settings, you may need to explicitly set permissions. 
+When navigating to the BOLT web application in your browser, you may receive an error such as:
+
+```
+HTTP Error 500.19 – Internal Server Error
+Description: The requested page cannot be accessed because the related configuration data for the page is invalid.
+```
+
+The account running the web application needs permissions for the ApplicationHost.config file or for the Web.config file indicated in the error message. Even if there is no config file at that location, the worker process identity (and/or the IIS_IUSRS group) needs at least Read access to the directory so that it can check for a web.config file in that directory. 
+
+IUSR is the default user identity when using anonymous authentication. 
+When IIS starts a worker process to serve a request it needs to start it under some token. This is your application pool identity (which you can set in the IIS manager). When this token is created, IIS automatically adds the IIS_IUSRS membership to the worker processes token at runtime. Therefore, the directory which has your application config file needs to have atleast Read permissions for the IIS_IUSRS group.
+
+The solution here is to Grant Read access to IUSR and IIS_IUSRS
+
+* Using Windows Explorer, right-clink on the $bolt\code folder and select Properties. 
+* Select the Security tab
+* Click the Edit button to modify permissions:
+* Select the Add button
+* In the "Select Users, Computers, Service Accounts, of Groups" dialog, click the Locations button and then select the Machine name at the top of the list. # Click OK.
+* Click the Advanced button, followed by the Find Now button
+* Select the IUSR and the IIS_IUSRS groups from the list and click OK.
+* Make sure Read permission is selected for IUSR and IIS_IUSRS
+* Click OK
+
+More details on [Understanding Built-In User and Group Accounts in IIS 7](https://www.iis.net/learn/get-started/planning-for-security/understanding-built-in-user-and-group-accounts-in-iis)
+
 Note: Should you run into trouble, additional details and tips regarding installing Classic ASP applications on IIS7 are available online at:
 http://www.dovetailsoftware.com/blogs/kmiller/archive/2008/08/19/installing-classic-asp-web-applications-on-iis7
 
