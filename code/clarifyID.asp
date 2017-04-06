@@ -25,21 +25,13 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<style>
-	body{font-size:12px;}
-	#homeContainer{width:100%;}
-	#homeContainer h4{text-align:left;}
-	.nav{display:none !important;}
-	a.brand{padding-left:25px !important;}
-</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -76,9 +68,8 @@ function DisplayNoFormInfo(){
 <body>
 <!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
-	<div class="row-fluid bottomMargin">
-		<div class="span2"></div>
-		<div id="homeContainer" class="span8">
+	<div class="row mb-4">
+		<div id="homeContainer" class="col-8 offset-2">
 <%
 			var uriFile = parseUri(Request.QueryString).file;
 			var formId = uriFile.replace(".html", "") + "";
@@ -110,19 +101,16 @@ function DisplayNoFormInfo(){
 			}
 %>
 		</div>
-		<div class="span2"></div>
 	</div>
-
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 });

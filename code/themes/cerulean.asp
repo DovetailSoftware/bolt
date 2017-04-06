@@ -26,15 +26,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/cerulean/bootstrap.min.css" rel="stylesheet">
 <link href="../css/style.css" rel="stylesheet">
-<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
 </head>
 <body>
 <!--#include file="../inc/navbar.inc"-->
-<h2>Cerulean</h2>
+<h2 class='ml-3'>Cerulean</h2>
 </body>
-<script type="text/javascript" src="../js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/theme.js"></script>
 </html>

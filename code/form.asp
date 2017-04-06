@@ -25,23 +25,20 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
-<link href="css/tableView.css" rel="stylesheet">
 <style>
 .watermark { color:#666;font-size:10px; }
 </style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
-
 var objid = Request("objid");
 var id = Request("id");
 
@@ -141,35 +138,29 @@ if(rsRC.RecordCount == 0) {
 }
 %>
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span3"></div>
-		<div id="headerContainer" class="span6 topMargin well">
-			<center>
-			<table>
-			<tr><td class="header">Form ID:</td><td><%=FormID %></td></tr>
-			<tr><td class="header">Title:</td><td><%=FormTitle %></td></tr>
-			<tr><td class="header">Name:</td><td><%=FormName %></td></tr>
-			<tr><td class="header">Clarify Ver:</td><td><%=FormVerClarify %></td></tr>
-			<tr><td class="header">User Ver:</td><td><%=FormVerCust %></td></tr>
-			<tr><td class="header">Description:</td><td><%=FormDescription %></td></tr>
+	<div class="row">
+		<div class="col-6 offset-3 card bg-faded">
+			<table class="table table-sm small mb-1">
+				<tr><td class="text-right font-weight-bold pr-2">Form ID:</td><td class="w-75"><%=FormID %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Title:</td><td><%=FormTitle %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Name:</td><td><%=FormName %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Clarify Ver:</td><td><%=FormVerClarify %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">User Ver:</td><td><%=FormVerCust %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Description:</td><td><%=FormDescription %></td></tr>
 			</table>
-			</center>
 		</div>
-		<div class="span3">
-			<h5 id="jump">Jump Links</h5>
-			<ul class="unstyled">
+		<div class="col-3 pl-4">
+			<ul class="list-unstyled pl-3 mb-1">
 				<li><a href='#cobjContainer'>Contextual Objects</a></li>
 				<li><a href='#controls'>Controls</a></li>
 				<li><a href='#children'>Child Forms & Tabs</a></li>
 				<li><a href='#parent'>Parent Forms</a></li>
 			</ul>
 		</div>
-		<div class="span3"></div>
 	</div>
-
-	<div class="row-fluid">
-		<div id="cobjContainer" class="span12">
-		<%	rw("<h4 id='cobj'>Contextual Objects:</h4>");
+	<div class="row">
+		<div id="cobjContainer" class="col-12">
+		<%	rw("<h5 id='cobj'>Contextual Objects</h5>");
 			rw("<table class='tablesorter'>");
 			rw("<thead><tr>");
 			rw("<th type=Number>Cobj #</th>");
@@ -236,7 +227,7 @@ if(rsRC.RecordCount == 0) {
 			TheSQL+=" order by id";
 			rsControl = retrieveDataFromDB(TheSQL);
 
-			rw("<h4 id='controls' class='topMargin'>Controls:</h4>");
+			rw("<h5 id='controls' class='mt-3'>Controls</h5>");
 			if(rsControl.EOF) {
 				rw("This form does not have any controls.");
 			} else {
@@ -333,7 +324,7 @@ if(rsRC.RecordCount == 0) {
 			rsChildren = retrieveDataFromDB(TheSQL);
 
 			// Bookmark & Heading
-			rw("<h4 id='children' class='topMargin'>Child Forms & Tabs:</h4>");
+			rw("<h5 id='children' class='mt-3'>Child Forms & Tabs</h5>");
 
 			// Save the Parent Objid so we can use it in a hyperlink
 			ParentObjid = objid;
@@ -408,7 +399,7 @@ if(rsRC.RecordCount == 0) {
 			rsParent = retrieveDataFromDB(TheSQL);
 
 			// Bookmark & Heading
-			rw("<h4 id='parent' class='topMargin'>Parent Forms:</h4>");
+			rw("<h5 id='parent' class='mt-3'>Parent Forms</h5>");
 
 			// Save the Child Objid so we can use it in a hyperlink
 			ChildObjid = objid;
@@ -461,27 +452,26 @@ if(rsRC.RecordCount == 0) {
 			rsParent = null;
 			rsParentTabs.Close();
 			rsParentTabs = null;
-
 		%>
 		</div>
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf('/')+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
 
 	$(".tablesorter").tablesorter({
-		headers: {
+		header: {
 			0: { sorter: "digit" }
 		}
 	});

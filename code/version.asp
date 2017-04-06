@@ -25,18 +25,14 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
-<style>
-#homeContainer { margin-bottom: 40px; }
-</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -51,12 +47,11 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/navbar.inc"-->
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div id="homeContainer" class="span12">
-
+	<div class="row">
+		<div id="homeContainer" class="col-12">
 			<h3>BOLT Version Information</h3>
 
-			<table class="fullWidth tablesorter top">
+			<table class="tablesorter">
 				<thead>
 					<tr>
 						<th><b>Version</b></th>
@@ -344,20 +339,20 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf('/')+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
 	$(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
-	   $(this).children("td").toggleClass("highlight");
+    $(this).children("td").toggleClass("highlight");
 	});
 });
 </script>

@@ -25,14 +25,13 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -50,59 +49,63 @@ var read_only_udl = udl_file.Attributes & 1;
 FSO = null;
 udl_file = null;
 
-if(read_only_udl) Response.Redirect("index.asp");
-
+if (read_only_udl) Response.Redirect("index.asp");
 %>
 <!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
-
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
-
 <div class="container-fluid">
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div id="headerContainer" class="span8">
+	<div class="row">
+		<div class="col-8 offset-2">
 
-			<h2>Set BOLT Database</h2>
-			<p><b>Warning!</b> Please keep in mind that this sets the database for everyone using this BOLT Web Application.
+			<h2>Connect to BOLT Database</h2>
+			<p class="mt-3"><b>Warning!</b> Please keep in mind that this sets the database for everyone using this BOLT Web Application.
 			<br/>This is a global, not an individual setting.</p>
 
-		   <label class="fixedWidth">Provider:</label>
-		   <select id="Provider" name="Provider">
-		      <option selected value="SQLOLEDB.1">SQL Server</option>
-		      <option value="OraOLEDB.Oracle">Oracle Provider</option>
-		      <option value="MSDAORA.1">Microsoft Provider for Oracle</option>
-		   </select>
+			<div class="form-group row mb-1 mt-4">
+				<label class="form-label col-3">Provider</label>
+				<select class="form-control col-3" id="Provider" name="Provider">
+					<option selected value="SQLNCLI11.1">SQL Native Client</option>
+					<option value="SQLOLEDB.1">SQL Server</option>
+					<option value="OraOLEDB.Oracle">Oracle Provider</option>
+					<option value="MSDAORA.1">Microsoft Provider for Oracle</option>
+				</select>
+			</div>
 
-		   <label class="fixedWidth">User ID:</label>
-		   <input type="text" id="UserID" name="UserID" />
+			<div class="form-group row my-1">
+				<label class="form-label col-3">User ID</label>
+		   	<input class="form-control col-3" type="text" id="UserID" name="UserID" />
+			</div>
 
-		   <label class="fixedWidth">Password:</label>
-		   <input type="password" id="Password"name="Password" />
+			<div class="form-group row my-1">
+				<label class="form-label col-3">Password:</label>
+				<input class="form-control col-3" type="password" id="Password"name="Password" />
+			</div>
 
-		   <label class="fixedWidth">Server:</label>
-		   <input type="text" id="DBServer" name="DBServer" />
+			<div class="form-group row my-1">
+				<label class="form-label col-3">Server:</label>
+				<input class="form-control col-3" type="text" id="DBServer" name="DBServer" />
+			</div>
 
-		   <div id="server">
-		   	<label class="fixedWidth">Database (SQL Server): </label>
-		   	<input type="text" id="Database" name="Database" />
-		   </div>
+			<div id="server" class="form-group row my-1">
+				<label class="form-label col-3">Database (SQL Server): </label>
+				<input class="form-control col-3" type="text" id="Database" name="Database" />
+			</div>
 
-		   <div id="buttonArea">
-		   	<button class="btn " id="submitButton">Submit</button>
-		   	<button class="btn" id="resetButton">Reset</button>
-		   </div>
-
+		  <div class="form-group row mt-3">
+			  <div class="col-3 offset-3 px-0">
+					<button class="btn btn-sm btn-primary col-5" id="submitButton">Submit</button>
+					<button class="btn btn-sm btn-primary col-5" id="resetButton">Reset</button>
+				</div>
+		  </div>
 		</div>
-		<div class="span2"></div>
 	</div>
-
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 //////////////////////////////////////////////////////////////////////
 // Validate Form - make sure the correct data is filled in
@@ -110,47 +113,46 @@ if(read_only_udl) Response.Redirect("index.asp");
 function validate_form() {
 	var searchfield = $("#UserID");
 	var filter = searchfield.val();
-   if (filter.length == 0) {
-      alert("You must specify a User ID.");
+  if (filter.length == 0) {
+    alert("You must specify a User ID.");
 		searchfield.focus();
-      return false;
-   }
+    return false;
+  }
 
 	var searchfield = $("#Password");
 	var filter = searchfield.val();
-   if (filter.length == 0) {
-      alert("You must specify a Password.");
-	   searchfield.focus();
-      return false;
-   }
+  if (filter.length == 0) {
+    alert("You must specify a Password.");
+    searchfield.focus();
+    return false;
+  }
 
 	var searchfield = $("#DBServer");
 	var filter = searchfield.val();
-   if (filter.length == 0) {
-      alert("You must specify a Server.");
+  if (filter.length == 0) {
+    alert("You must specify a Server.");
 		searchfield.focus();
-      return false;
-   }
+    return false;
+  }
 
 	var searchfield = $("#Provider");
-   var TheProvider = searchfield.val();
+  var TheProvider = searchfield.val();
 
-   //Database is required for non-Oracle providers
-   if (TheProvider != "MSDAORA.1" && TheProvider != "OraOLEDB.Oracle") {
-		var searchfield = $("#Database");
+  //Database is required for non-Oracle providers
+  if (TheProvider != "MSDAORA.1" && TheProvider != "OraOLEDB.Oracle") {
+	  var searchfield = $("#Database");
 		var filter = searchfield.val();
-      if (filter.length == 0) {
-         alert("You must specify a Database.");
+    if (filter.length == 0) {
+      alert("You must specify a Database.");
 			searchfield.focus();
-         return false;
-      }
-   }
+      return false;
+    }
+  }
 
-   return true;
+  return true;
 }
 
 function changeDatabase() {
-
 	if(!validate_form()) return;
 
 	var databaseData = {
@@ -175,13 +177,13 @@ function changeDatabase() {
 	      }
 	   },
 	   error: function(xhr) {
-	      alert("An error occurred while updating database in admin2.asp");
+	     alert("An error occurred while updating database in admin2.asp");
 	   }
 	});
 }
 
 $(document).ready(function() {
-	$("ul.nav li a[href$='index.asp']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='index.asp']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
@@ -200,7 +202,7 @@ $(document).ready(function() {
 		if(event.keyCode == 13) $("#submitButton").click();
 	});
 
-   $("#Provider").focus();
+   $("#UserID").focus();
 });
 </script>
 </html>

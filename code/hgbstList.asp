@@ -25,34 +25,17 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<style>
-label {
-   display: inline;
-   margin: .5em;
-   font-size: 1.2em;
-   font-weight: bold;
-}
-select.hgbst {
-   margin: .5em;
-   width: 400px;
-}
-select.local {
-   margin: .5em;
-   width: 200px;
-}
-</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
-var sPageTitle = "Lists";
+var sPageTitle = "User Defined List";
 var sPageType = "lists";
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
@@ -65,42 +48,51 @@ var title = Request("title") + "";
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
-
 <div class="container-fluid">
-   <div class="row-fluid">
-      <div class="span2"></div>
-      <div id="gbstContainer" class="span10 topMargin">
+   <div class="row">
+      <div id="gbstContainer" class="col-10 offset-2 mt-2">
 
-         <h5><a href="lists.asp" class="pull-right">(Back to Lists)</a></h5>
+         <h5 class="text-right"><a href="lists.asp">(Back to Lists)</a></h5>
+         <h3 class="mb-4">User Defined List: <%=title%></h3>
 
-         <h3>User Defined List: <%=title%></h3>
-
-         <div class="playlist topMargin">
-            <div><label>Level 1</label><select id="level1" class="hgbst"></select></div>
-            <div><label>Level 2</label><select id="level2" class="hgbst"></select></div>
-            <div><label>Level 3</label><select id="level3" class="hgbst"></select></div>
-            <div><label>Level 4</label><select id="level4" class="hgbst"></select></div>
-            <div><label>Level 5</label><select id="level5" class="hgbst"></select></div>
+         <div class="form-group row">
+           <label for="level1" class="col-1 col-form-label">Level 1</label>
+           <select class="form-control col-6" id="level1"></select>
+         </div>
+         <div class="form-group row">
+           <label for="level2" class="col-1 col-form-label">Level 2</label>
+           <select class="form-control col-6" id="level2"></select>
+         </div>
+         <div class="form-group row">
+           <label for="level3" class="col-1 col-form-label">Level 3</label>
+           <select class="form-control col-6" id="level3"></select>
+         </div>
+         <div class="form-group row">
+           <label for="level4" class="col-1 col-form-label">Level 4</label>
+           <select class="form-control col-6" id="level4"></select>
+         </div>
+         <div class="form-group row">
+           <label for="level5" class="col-1 col-form-label">Level 5</label>
+           <select class="form-control col-6" id="level5"></select>
          </div>
       </div>
    </div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/multiLevelListHelper.js"></script>
-
 <script type="text/javascript">
 $(document).ready(function() {
    var path = window.location.pathname;
    var page = path.substr(path.lastIndexOf("/")+1);
-   $("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+   $("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
    $(".navbar").find(".connected").text("<%=connect_info%>");
    document.title = "Bolt: <%=sPageTitle%>";
 
    var multiLevelList = new multiLevelListHelper('<%=title%>', ['level1','level2','level3','level4','level5'], ['','','','','']);
    multiLevelList.populate();
+   $("#level1").focus();
 });
 </script>
 </html>

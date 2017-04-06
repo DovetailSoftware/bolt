@@ -25,14 +25,13 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <link href="css/tableView.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
@@ -78,11 +77,11 @@ function GetNativeSQL(){
 function GetSQL(){
 	var TheSQL = "select " + ((dbType == "MSSQL")? "sql" : "TO_CHAR(sql)") + " from " + TABLE_TABLE + " where " + ID_FIELD + " = " + type_id;
 	var rsView = retrieveDataFromDB(TheSQL);
-   try {
+  try {
 		var TheViewSQL = rsView("sql") + "";
-   } catch(e) {
-      rw(e.description + "<br/><br/>" + TheSQL + "<br/><br/>");rf();
-   }
+  } catch(e) {
+		rw(e.description + "<br/><br/>" + TheSQL + "<br/><br/>");rf();
+  }
 	rsView.Close;
 	rsView = null;
 	return TheViewSQL;
@@ -99,7 +98,7 @@ function getEncodedSelectTopSql() {
 }
 %>
 <div class="container-fluid">
-	<div class="row-fluid">
+	<div class="row">
 		<% //Get the base table
 			var TheLink = getBaseTableLink();
 
@@ -110,13 +109,10 @@ function getEncodedSelectTopSql() {
 			//See if it has filter SQL
 			var filterSQL = getFilterSQL();
 		%>
-		<div class="span3"></div>
-		<div id="headerContainer" class="span6 topMargin well">
-			<center>
-			<%	outputViewHeader("SQL ", TheLink); %>
-			</center>
+    <div class="col-6 offset-3 card bg-faded">
+			<% outputViewHeader("SQL ", TheLink); %>
 		</div>
-		<div class="span3">
+		<div class="col-3">
 			<%
 				var select_sql = "select * from table_" + type_name;
 				var encoded_select_sql = Server.URLEncode(select_sql);
@@ -126,18 +122,18 @@ function getEncodedSelectTopSql() {
 		</div>
 	</div>
 
-	<div class="row-fluid">
-		<div id="fieldsContainer" class="span12 topMargin">
+	<div class="row">
+		<div id="fieldsContainer" class="col-12 mt-3">
 		<% //Fields Table:
 			outputViewFields();
 
 			//SQL for the view:
-			rw("<h4 id='sql' class='topMargin'>SQL:</h4>");
+			rw("<h4 id='sql' class='mt-3 mb-0'>SQL:</h4>");
 			rw(TheViewSQL.replace(/\n/g, "<br>"));
 
 			//Print the filter
 			if(filterSQL != "") {
-				rw("<h4 id='filters' class='topMargin'>Filters:</h4>");
+				rw("<h4 id='filters' class='mt-3'>Filters:</h4>");
 				rw(filterSQL.replace(/\n/g,  "<br>"));
 			}
 		%>
@@ -154,14 +150,14 @@ var encoded_select_sql = Server.URLEncode(select_sql);
 <!--#include file="inc/help.inc"-->
 <input type="button" style="display:none;" onclick="executeSql()" />
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
 <script type="text/javascript">
 function showHelp() {
-  $("#help tr.object").removeClass("hide");
-	$("#help").modal({ "keyboard": true });
+  $("#help tr.object").removeClass("hidden-xs-up");
+	$("#help").modal();
 	return false;
 }
 
@@ -169,14 +165,16 @@ function executeSql() {
 	var url = "sql.asp?sql=<%=encoded_select_sql%>";
 	window.location.href = url;
 }
+
 function executeTopSql() {
 	var url = "sql.asp?sql=<%=getEncodedSelectTopSql()%>";
 	window.location.href = url;
 }
+
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
@@ -190,7 +188,7 @@ $(document).ready(function() {
 
   $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
-	   $(this).children("td").toggleClass("highlight");
+		$(this).children("td").toggleClass("highlight");
 	});
 });
 </script>

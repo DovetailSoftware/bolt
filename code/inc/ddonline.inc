@@ -216,7 +216,6 @@ function displayDBAccessErrorPage(e,s) {
 	rw('<html>\n');
 	rw('<head>\n');
 	rw('<link href="css/bootstrap.min.css" rel="stylesheet">\n');
-	rw('<link href="css/bootstrap-responsive.min.css" rel="stylesheet">\n');
 	rw('<title>Error</title>\n');
 	rw('</head>\n');
 	rw('<body onload="if(window.history.length==0) {document.getElementById(\'backLink\').style.visibility=\'hidden\';}">\n');
@@ -225,7 +224,7 @@ function displayDBAccessErrorPage(e,s) {
 	rw('<div class="row-fluid topMargin">\n');
 	rw('<div class="span2"></div>\n');
 	rw('<div id="headerContainer" class="span8">\n');
-	rw('<A HREF="http://www.dovetailsoftware.com"><img src="img/dovetail.png" alt="Dovetail Software"></a>\n');
+	rw('<a href="http://www.dovetailsoftware.com"><img src="img/dovetail.png" alt="Dovetail Software"></a>\n');
 	rw("<h3>Database Error</h3>\n");
 	rw('<p>' + e.description + '</p>\n');
 	rw('<p>SQL: ' + s + '</p>\n');
@@ -1098,6 +1097,19 @@ function GetSpecRelID(TargetObjectID,InverseRelation) {
 	rsSpecRelID = null;
 
 	return SpecRelID;
+}
+
+//////////////////////////////////////////////////////////////////////
+// Get the Spec Rel ID for a relation
+//////////////////////////////////////////////////////////////////////
+function GetSpecRelInfo(Relation) {
+	TheSQL = "select target_name from adp_sch_rel_info where rel_name = '" + Relation + "'";
+	rsSpecRelInfo = retrieveDataFromDB(TheSQL);
+	TargetName = rsSpecRelInfo("target_name") + "";
+	rsSpecRelInfo.Close();
+	rsSpecRelInfo = null;
+
+	return TargetName;
 }
 
 //////////////////////////////////////////////////////////////////////

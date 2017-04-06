@@ -25,18 +25,14 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
-<style>
-#headerContainer table { margin: 10px auto; }
-</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -45,16 +41,15 @@ var sPageType = "Forms";
 
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
-
 %>
 <!--#include file="inc/ddonline.inc"-->
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div id="headerContainer" class="span12">
-		<%	Attribute = Request("attribute");
+	<div class="row">
+		<div class="col-12">
+		<%Attribute = Request("attribute");
 			Operator = Request("operator");
 			Filter = Request("filter");
 			var which = Request.Form("which");
@@ -177,16 +172,15 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			rsForms.Close();
 			rsForms = null;
 		%>
-		</div>
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("ul.nav li a[href$='formsonline.asp']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='formsonline.asp']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 

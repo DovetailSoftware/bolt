@@ -25,18 +25,14 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
-<style>
-.tablesorter tbody td { width: 50%; }
-</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -49,7 +45,6 @@ var sPageType = "DB Info";
 
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
-
 %>
 <!--#include file="inc/ddonline.inc"-->
 <%
@@ -69,9 +64,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/navbar.inc"-->
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="headerContainer" class="span8">
+	<div class="row">
+		<div id="headerContainer" class="col-8 offset-2">
 			<h3>Database Information</h3>
 
 			<table class="tablesorter simple">
@@ -82,22 +76,21 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</tr>
 				</thead>
 				<tbody>
-				<% var fldCount = rsADP.Fields.Count;
-			    	for (count=1;count <= fldCount;count++) { %>
+				<% var fldCount = rsADP.Fields.Count; 
+			    	for (count=1;count <= fldCount;count++) {
+			  %>
 				<tr>
-					<td><b><%=rsADP.Fields(count -1).Name%></b></td>
-					<td><%=rsADP.Fields(count -1)%></td>
+					<td class="w-50"><b><%=rsADP.Fields(count -1).Name%></b></td>
+					<td class="w-50"><%=rsADP.Fields(count -1)%></td>
 				</tr>
 				<% } %>
 				</tbody>
 			</table>
 		</div>
-		<div class="span2"></div>
 	</div>
 
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div id="hyperlinksContainer" class="span8">
+	<div class="row">
+		<div id="hyperlinksContainer" class="col-8 offset-2">
 			<%
 			var case_insensitive = ((rsADP("flags") & 1) > 0);
 			var password_encrypted = ((rsADP("flags") & 2) > 0);
@@ -118,8 +111,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</thead>
 				<tbody>
 				<tr>
-					<td><b>Case Insensitive</b></td>
-					<td><%=case_insensitive%></td>
+					<td class="w-50"><b>Case Insensitive</b></td>
+					<td class="w-50"><%=case_insensitive%></td>
 				</tr>
 				<tr>
 				<tr>
@@ -161,12 +154,10 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</tbody>
 			</table>
 		</div>
-		<div class="span2"></div>
 	</div>
 
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div id="fieldsContainer" class="span8">
+	<div class="row">
+		<div id="fieldsContainer" class="col-8 offset-2">
 			<table class="tablesorter simple">
 				<thead>
 				<tr>
@@ -176,8 +167,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</thead>
 				<tbody>
 				<tr>
-					<td><b>Database Type</b></td>
-					<td><%=dbType%></td>
+					<td class="w-50"><b>Database Type</b></td>
+					<td class="w-50"><%=dbType%></td>
 				</tr>
 				<tr>
 					<td><b>Clarify Version</b></td>
@@ -198,12 +189,10 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</tbody>
 			</table>
 		</div>
-		<div class="span2"></div>
 	</div>
 
-	<div class="row-fluid topMargin">
-		<div class="span2"></div>
-		<div id="relationsContainer" class="span8">
+	<div class="row">
+		<div id="relationsContainer" class="col-8 offset-2">
 			<table class="tablesorter simple">
 				<thead>
 				<tr>
@@ -213,8 +202,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</thead>
 				<tbody>
 				<tr>
-					<td><b>Data Source</b></td>
-					<td><%=rsADP.ActiveConnection.Properties("Data Source")%></td>
+					<td class="w-50"><b>Data Source</b></td>
+					<td class="w-50"><%=rsADP.ActiveConnection.Properties("Data Source")%></td>
 				</tr>
 				<tr>
 					<td><b>Provider</b></td>
@@ -231,26 +220,25 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				</tbody>
 			</table>
 		</div>
-		<div class="span2"></div>
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf('/')+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 
-   $(".tablesorter").tablesorter({
-      headers: { 1: { sorter: false } }
-   });
+  $(".tablesorter").tablesorter({
+    headers: { 1: { sorter: false } }
+  });
 	$(".tablesorter tr").click(function () {
-	   $(this).children("td").toggleClass("highlight");
+    $(this).children("td").toggleClass("highlight");
 	});
 });
 </script>

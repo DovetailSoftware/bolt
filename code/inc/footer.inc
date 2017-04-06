@@ -22,13 +22,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 -->
 <footer>
-	<div id="boltFooter" class="row-fluid top-margin">
-		<div class="span2"></div>
-		<div class="span8 well well-small topMargin">
+	<div id="boltFooter" class="row bt-2">
+		<div class="col-8 offset-2 card bg-faded">
 			<h2>Support</h2>
    		<p>For support, contact us at <a href=http://support.dovetailsoftware.com>support.dovetailsoftware.com</a>.</p>
 		</div>
-		<div class="span2"></div>
 	</div>
 </footer>
 

@@ -25,14 +25,13 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <link href="css/columnSelect.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
@@ -58,31 +57,28 @@ UpdateCookies();
 <body>
 <!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span3"></div>
-		<div id="headerContainer" class="span6 topMargin well">
-			<center>
+	<div class="row">
+    <div class="col-6 offset-3 card bg-faded">
 			<%
 				//Get the base table
 				var TheLink = getBaseTableLink();
 				outputViewHeader("Union ", TheLink);
 			%>
-			</center>
 		</div>
-		<div class="span3">
+		<div class="col-3">
 			<%
 				var select_sql = "select * from table_" + type_name;
 				var encoded_select_sql = Server.URLEncode(select_sql);
 				//See if it has filter SQL
-			   var filterSQL = getFilterSQL();
+				var filterSQL = getFilterSQL();
 				var unionViewsList = [];
 				hyperlinksTable();
 			%>
 		</div>
 	</div>
 
-	<div class="row-fluid">
-		<div id="fieldsContainer" class="span12">
+	<div class="row">
+		<div id="fieldsContainer" class="col-12">
 		<% outputViewFields(); %>
 		</div>
 	</div>
@@ -91,8 +87,8 @@ UpdateCookies();
 	<!--#include file="inc/quick_links.asp"-->
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="js/columnSelect.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
@@ -100,12 +96,12 @@ UpdateCookies();
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf("/")+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 	addEvent(window, "hashchange", function() { scrollBy(0, -50) });
 
-   $(".tablesorter").tablesorter();
+  $(".tablesorter").tablesorter();
 	$(".tablesorter tr").click(function () {
 	   $(this).children("td").toggleClass("highlight");
 	});

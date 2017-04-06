@@ -2,7 +2,9 @@ function validate_filter(fieldName) {
 	var $field = $("#"+fieldName);
 	var filter = $field.val();
 	if(filter.length == 0) {
-		alert('You must specify a filter.');
+		// alert('You must specify a filter.');
+		//notify('You must specify a filter.', true);
+		addNotification('You must specify a filter.', true);
 		$field.focus();
 		return false;
 	}
@@ -15,7 +17,9 @@ function validate_id(fieldName) {
 	var filter = $field.val();
 
 	if (filter.length == 0) {
-		alert('You must specify a filter.');
+		//alert('You must specify a filter.');
+		//notify('You must specify a filter.', true);
+		addNotification('You must specify a filter.', true);
 		$field.focus();
 		return false;
 	}
@@ -33,7 +37,10 @@ function validate_id(fieldName) {
 	}
 
 	if(!isInteger) {
-		alert('Table or View ID must be an Integer.');
+		// alert('Table or View ID must be an Integer.');
+		//notify('Table or View ID must be an Integer.', true);
+		addNotification('Table or View ID must be an Integer.', true);
+
 		$field.focus();
 		return false;
 	}

@@ -25,17 +25,16 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <link href="css/columnSelect.css" rel="stylesheet">
-<link href="css/tableView.css" rel="stylesheet">
+
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -69,7 +68,6 @@ function getEncodedSelectTopSql() {
   }
   return Server.URLEncode(select_top_sql);
 }
-
 %>
 <!--#include file="inc/quicklinks.inc"-->
 </head>
@@ -77,23 +75,19 @@ function getEncodedSelectTopSql() {
 <!--#include file="inc/navbar.inc"-->
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span3"></div>
-		<div id="headerContainer" class="span6 topMargin well">
-			<center>
-			<table>
-			<tr><td class="header">Table Name:</td><td><%=type_name %></td></tr>
-			<tr><td class="header">Table Number:</td><td><%=type_id %></td></tr>
-			<tr><td class="header">Group:</td><td><%=GetTableGroup(type_name) %></td></tr>
-			<tr><td class="header">Description:</td><td><%=Server.HTMLEncode(GetTableComment(type_name)) %></td></tr>
-			<tr><td class="header">Flags:</td><td><%=GetTableParams(type_id) %></td></tr>
-			<tr><td class="header">Baseline/Custom:</td><td><%=BC %></td></tr>
+	<div class="row">
+		<div class="col-6 offset-3 card bg-faded">
+			<table class="table table-sm small mb-1">
+				<tr><td class="text-right font-weight-bold pr-2">Table Name:</td><td><%=type_name %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Table Number:</td><td><%=type_id %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Group:</td><td><%=GetTableGroup(type_name) %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Description:</td><td><%=Server.HTMLEncode(GetTableComment(type_name)) %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Flags:</td><td><%=GetTableParams(type_id) %></td></tr>
+				<tr><td class="text-right font-weight-bold pr-2">Baseline/Custom:</td><td><%=BC %></td></tr>
 			</table>
-			</center>
 		</div>
-		<div class="span3">
-			<h5 id="jump">Jump Links</h5>
-			<ul class="unstyled">
+		<div class="col-3 pl-4">
+			<ul class="list-unstyled pl-3 mb-1">
 				<li><a href='#fields'>Fields</a></li>
 				<li><a href='#relations'>Relations</a></li>
 				<li><a href='#indexes'>Indexes</a></li>
@@ -107,17 +101,17 @@ function getEncodedSelectTopSql() {
 			<% var select_sql = "select * from table_" + type_name;
 				 var encoded_select_sql = Server.URLEncode(select_sql);
 			%>
-				<div class="btn"><a href="sql.asp?sql=<%=encoded_select_sql%>&flag=no_query"><%=select_sql%></a></div>
-				<div style="margin:.5em 0;font-size:.8em;"><a id="helpLink" href="">Keyboard shortcuts available</a></div>
+			<a class="btn btn-primary btn-sm ml-3" href="sql.asp?sql=<%=encoded_select_sql%>&flag=no_query"><%=select_sql%></a>
+			<div class="small pl-4 mt-2"><a id="helpLink" href="">Keyboard shortcuts available</a></div>
 		</div>
 	</div>
 
 	<div class="row-fluid">
-		<div id="fieldsContainer" class="span12">
+		<div id="fieldsContainer" class="">
 <%
 	//Fields Table:
-	//Build the Table Header:
-	rw("<h4 id='fields'>Fields:</h4>");
+	//Build the Table header:
+	rw("<h5 id='fields'>Fields:</h5>");
 	rw("<table class='tablesorter fullWidth'>");
 	rw("<thead><tr class='headerRow'>");
 	rw("<th>Field Name</th>");
@@ -248,8 +242,8 @@ function getEncodedSelectTopSql() {
 		<div id="relationsContainer" class="span12">
 <%
 	//Build the Relations Table:
-	//First, Build the Table Header:
-	rw("\n<h4 id='relations'>Relations:</h4>");
+	//First, Build the Table header:
+	rw("\n<h5 id='relations'>Relations:</h5>");
 
 	rw("\n<table class='tablesorter fullWidth'>");
 	rw("<thead><tr class='headerRow'>");
@@ -263,7 +257,7 @@ function getEncodedSelectTopSql() {
 	rw("<th>Used in Views</th>");
 
 	//Check for exclusive relations
-   TheSQL = "select count(*) from " + RELATION_TABLE + " where " + ID_FIELD + " = ";
+  TheSQL = "select count(*) from " + RELATION_TABLE + " where " + ID_FIELD + " = ";
 	TheSQL += type_id;
 	TheSQL +=" and rel_flags = 1";
 	rsRelations = retrieveDataFromDBStatic(TheSQL);
@@ -349,13 +343,13 @@ function getEncodedSelectTopSql() {
    	ViewLink += "&rel_name=" + RelationName;
    	ViewLink += ">Search</a>";
 
-	   var TheSQL = "select distinct obj_type_id, obj_spec_rel_id, view_type_id from adp_view_join_info where obj_type_id = " + type_id;
+		var TheSQL = "select distinct obj_type_id, obj_spec_rel_id, view_type_id from adp_view_join_info where obj_type_id = " + type_id;
 		TheSQL += " and obj_spec_rel_id = " + RelationSpecRelID;
-	   var rsRelationViews = retrieveDataFromDB(TheSQL);
-      var viewCount = rsRelationViews.RecordCount;
-      var viewSearch = (viewCount > 0)? ViewLink + " (" + viewCount + ")" : "&nbsp;";
-      rsRelationViews.Close;
-	   rsRelationViews = null;
+   	var rsRelationViews = retrieveDataFromDB(TheSQL);
+    var viewCount = rsRelationViews.RecordCount;
+    var viewSearch = (viewCount > 0)? ViewLink + " (" + viewCount + ")" : "&nbsp;";
+    rsRelationViews.Close;
+	  rsRelationViews = null;
 
    	rw("<td>");
    	rw(viewSearch);
@@ -400,10 +394,9 @@ function getEncodedSelectTopSql() {
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="indexesContainer" class="span8">
+		<div id="indexesContainer" class="col-8 offset-2">
 <%
-	rw("<h4 id='indexes'>Indexes: (Defined in Clarify Schema)</h4>");
+	rw("<h5 id='indexes'>Indexes: (Defined in Clarify Schema)</h5>");
 	rw("<table class='tablesorter'>");
 	rw("<thead><tr>");
 	rw("<th>Index Name</th>");
@@ -458,7 +451,7 @@ function getEncodedSelectTopSql() {
    rf();
 
 	//Build the (database) Indexes Table:
-	rw("<h4 id='db_indexes'>Indexes (Defined in Database):</h4>");
+	rw("<h5 id='db_indexes'>Indexes (Defined in Database):</h5>");
 	rw("<table class='tablesorter'>");
 	rw("<thead><tr class='headerRow'>");
 	rw("<th>Index Name</th>");
@@ -477,15 +470,13 @@ function getEncodedSelectTopSql() {
   	rf();
 %>
 		</div>
-		<div class="span2"></div>
 	</div>
 	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="viewsContainer" class="span8">
+		<div id="viewsContainer" class="col-8 offset-2">
 <%
 	//Table for the List of views where this table is joined
-	//First, build the Table Header
-	rw("<h4 id='views'>Referenced in Views:</h4>");
+	//First, build the Table header
+	rw("<h5 id='views'>Referenced in Views:</h5>");
 	rw("<table class='tablesorter'>");
 	rw("<thead><tr class='headerRow'>");
 	rw("<th>View ID</th>");
@@ -551,12 +542,11 @@ function getEncodedSelectTopSql() {
 
 	//Print the storage
 	if(storageSQL != "") {
-		rw("<h4 id='storage'>Storage:</h4>");
+		rw("<h5 id='storage'>Storage:</h5>");
 		rw(storageSQL.replace(/\n/g, "<br>"));
 	}
 %>
 		</div>
-		<div class="span2"></div>
 	</div>
 
 	<!--#include file="inc/recent_objects.asp"-->
@@ -565,15 +555,15 @@ function getEncodedSelectTopSql() {
 <!--#include file="inc/help.inc"-->
 <input type="button" style="display:none;" onclick="executeSql()" />
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="js/columnSelect.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
 <script type="text/javascript">
 function showHelp() {
-  $("#help tr.object").removeClass("hide");
-	$("#help").modal({ "keyboard": true });
+  $("#help tr.object").removeClass("hidden-xs-up");
+	$("#help").modal();
 	return false;
 }
 

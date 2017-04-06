@@ -25,18 +25,13 @@
 -->
 <html>
 <head>
-<title></title>
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<style>
-#homeContainer h4 { text-align:left;margin: .5em 0; }
-#homeContainer .btn { margin: 0 .5em; }
-</style>
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -72,9 +67,9 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 	rw(numUsedString + " of the " + potentialAvailable + " available IDs in this range have been used.&nbsp;");
 	if(numUsed > 0) {
 		var href = "tables.asp?minRange=" + minValue + "&maxRange=" + maxValue;
-		rw('<button class="btn" onclick="window.location=\'' + href + '\'">View them</button>');
+		rw('<button class="btn btn-sm btn-outline-info ml-2" onclick="window.location=\'' + href + '\'">View them</button>');
 	}
-	rw("<p>The lowest available ID in this range is <strong>" + nextAvailableID + "</strong>.</p>");
+	rw("<p>The lowest available ID in this range is <b>" + nextAvailableID + "</b>.</p>");
 }
 %>
 <!--#include file="inc/ddonline.inc"-->
@@ -83,40 +78,37 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 <!--#include file="inc/navbar.inc"-->
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div id="homeContainer" class="span8">
+	<div class="row">
+		<div id="homeContainer" class="col-8 offset-2">
 
 			<h3>More information about User-Defined Table and View IDs</h3>
 
-			<p align="center">
+			<p class="text-center">
 				There are two ranges reserves for custom IDs: 430-571 and 2000-4999.<br/>
 				The rest are reserved for Clarify baseline use.
 			</p>
 
-			<div class="topMargin">
-				<h4>Low Range: 430-571</h4>
+			<div class="mt-3">
+				<h5>Low Range: 430-571</h5>
 				<% DisplayInfoForSchemaIdRange(430,571); %>
 			</div>
 
-			<div class="topMargin">
-				<h4>High Range: 2000-4999</h4>
+			<div class="mt-3">
+				<h5>High Range: 2000-4999</h5>
 				<% DisplayInfoForSchemaIdRange(2000,4999); %>
 			</div>
 
 		</div>
-		<div class="span2"></div>
 	</div>
-
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var page = path.substr(path.lastIndexOf('/')+1);
-	$("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+	$("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
 	$(".navbar").find(".connected").text("<%=connect_info%>");
 	document.title = "Bolt: <%=sPageTitle%>";
 });
