@@ -1,41 +1,6 @@
-body {
-	font-family: Verdana, Arial, Helvetica, Sans-Serif;
-	padding-top: 44px;
-}
-
-.inline       { display: inline; }
-.inline-block { display: inline-block; }
-.no-margin         { margin: 0 !important; }
-.margin-default-left { margin-left: 10px !important; }
-.margin-default-right { margin-left: 10px !important; }
-.error { color: red; }
-
-#homeContainer h3, #homeContainer h4 {
-	text-align: center;
-	margin: 10px 0 0 0;
-}
-
-#footer {
-	position:fixed;
-	bottom: 20px;
-}
-
-.fullWidth {
-	width: 100%;
-}
-
-.fullWidth.top tr td {
-	vertical-align: top;
-}
-
-table.middle tr td {
-	vertical-align: middle;
-}
-
 tr.highlight td {
 	background-color: #ffff80 !important;
 }
-
 .highlight {
 	background-color: #ffff80 !important;
 }
@@ -44,43 +9,27 @@ tr.highlight td {
 	background-color: #BDD7FD !important;
 }
 
-#quickLinks td {
-	width: 25%;
+#stored-sql {
+  max-height: 175px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#stored-sql .input-group {
+  min-height: 25px;
+  max-height: 25px;
 }
 
-.topMargin { margin-top: 20px; }
-.padRight { padding-right: .5em; }
-
-.horizontalMargin {
-	margin: 10px 0;
+iframe.theme {
+	width: 204px;
+	height: 120px;
+	margin: 1em;
+	scrolling: no;
 }
 
-a.connected {
-	float:right;
-	margin: -30px .3em;
-	font-size:14px;
-	color: #999;
+.table.recent td, .table.recent th {
+  border-top: none !important;
 }
 
-a.connected:hover {
-	color: white;
-}
-
-table.tablesorter.localized tbody td {
-   vertical-align: middle;
-   padding-left: 8px;
-}
-table.tablesorter.localized tbody td.bare {
-   width: 240px;
-}
-table.tablesorter.localized tbody td.bare select {
-   font-size: 11px;
-   width: 240px;
-   margin: 0;
-   padding-left: -10px;
-   border: none;
-}
-h4.index {
-  margin-right:12px;
-  margin-top:6px;
+.error {
+	background-color: pink;
 }

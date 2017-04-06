@@ -29,9 +29,9 @@
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style4.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -55,7 +55,7 @@ if (read_only_udl) Response.Redirect("index.asp");
 <!--#include file="inc/quicklinks.inc"-->
 </head>
 <body>
-<!--#include file="inc/navbar4.inc"-->
+<!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-8 offset-2">
@@ -65,7 +65,7 @@ if (read_only_udl) Response.Redirect("index.asp");
 			<br/>This is a global, not an individual setting.</p>
 
 			<div class="form-group row mb-1 mt-4">
-				<label class="form-label col-2">Provider</label>
+				<label class="form-label col-3">Provider</label>
 				<select class="form-control col-3" id="Provider" name="Provider">
 					<option selected value="SQLNCLI11.1">SQL Native Client</option>
 					<option value="SQLOLEDB.1">SQL Server</option>
@@ -75,35 +75,37 @@ if (read_only_udl) Response.Redirect("index.asp");
 			</div>
 
 			<div class="form-group row my-1">
-				<label class="form-label col-2">User ID</label>
+				<label class="form-label col-3">User ID</label>
 		   	<input class="form-control col-3" type="text" id="UserID" name="UserID" />
 			</div>
 
 			<div class="form-group row my-1">
-				<label class="form-label col-2">Password:</label>
+				<label class="form-label col-3">Password:</label>
 				<input class="form-control col-3" type="password" id="Password"name="Password" />
 			</div>
 
 			<div class="form-group row my-1">
-				<label class="form-label col-2">Server:</label>
+				<label class="form-label col-3">Server:</label>
 				<input class="form-control col-3" type="text" id="DBServer" name="DBServer" />
 			</div>
 
 			<div id="server" class="form-group row my-1">
-				<label class="form-label col-2">Database (SQL Server): </label>
+				<label class="form-label col-3">Database (SQL Server): </label>
 				<input class="form-control col-3" type="text" id="Database" name="Database" />
 			</div>
 
-		  <div class="form-group row my-1 col-3 offset-2 mt-3">
-				<button class="btn btn-sm btn-primary col-5 m-2" id="submitButton">Submit</button>
-				<button class="btn btn-sm btn-primary col-5 m-2" id="resetButton">Reset</button>
+		  <div class="form-group row mt-3">
+			  <div class="col-3 offset-3 px-0">
+					<button class="btn btn-sm btn-primary col-5" id="submitButton">Submit</button>
+					<button class="btn btn-sm btn-primary col-5" id="resetButton">Reset</button>
+				</div>
 		  </div>
 		</div>
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 //////////////////////////////////////////////////////////////////////
 // Validate Form - make sure the correct data is filled in
@@ -200,7 +202,7 @@ $(document).ready(function() {
 		if(event.keyCode == 13) $("#submitButton").click();
 	});
 
-   $("#Provider").focus();
+   $("#UserID").focus();
 });
 </script>
 </html>

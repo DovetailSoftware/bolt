@@ -29,9 +29,10 @@
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style4.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -44,7 +45,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/quicklinks.inc"-->
 </head>
 <body>
-<!--#include file="inc/navbar4.inc"-->
+<!--#include file="inc/navbar.inc"-->
 <!--#include file="inc/notifications.inc"-->
 <div class="container-fluid">
 	<div class="row-fluid mb-3">
@@ -57,7 +58,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					<td>
 						<div class="input-group input-group-sm ml-2 mt-1">
   						<input type="text" class="form-control" id="type_name" />
-  						<span class="btn btn-primary input-group-addon" id="ddonline">Search</span>
+  						<span class="btn btn-primary input-group-addon" id="ddonline"><i class="fa fa-search"></i></span>
 						</div>
   				</td>
 				</tr>
@@ -66,7 +67,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					<td>
 						<div class="input-group input-group-sm ml-2 mt-1">
 							<input type="text" class="form-control" id="type_id" />
-							<span class="btn btn-primary input-group-addon" id="ddonline2">Search</span>
+							<span class="btn btn-primary input-group-addon" id="ddonline2"><i class="fa fa-search"></i></span>
 						</div>
 					</td>
 				</tr>
@@ -75,7 +76,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					<td>
 						<div class="input-group input-group-sm ml-2 mt-1">
 						<input type="text" class="form-control" id="field_name" />
-							<span class="btn btn-primary input-group-addon" id="fieldButton">Search</span>
+							<span class="btn btn-primary input-group-addon" id="fieldButton"><i class="fa fa-search"></i></span>
 							<input type="hidden" value="search_by_field_name" id="search_type" />
 						</div>
 					</td>
@@ -85,7 +86,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					<td>
 						<div class="input-group input-group-sm ml-2 mt-1">
 							<input type="text" class="form-control" id="rel_name" />
-							<span class="btn btn-primary input-group-addon" id="relationButton">Search</span>
+							<span class="btn btn-primary input-group-addon" id="relationButton"><i class="fa fa-search"></i></span>
 						</div>
 					</td>
 				</tr>
@@ -94,7 +95,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					<td>
 						<div class="input-group input-group-sm ml-2 mt-1">
 							<input type="text" class="form-control" id="type_custom" />
-							<span class="btn btn-primary input-group-addon" id="customButton">Search</span>
+							<span class="btn btn-primary input-group-addon" id="customButton"><i class="fa fa-search"></i></span>
 						</div>
 					</td>
 				</tr>
@@ -104,14 +105,14 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		</div>
 	</div>
 
-	<!--#include file="inc/recent_objects4.asp"-->
-	<!--#include file="inc/quick_links4.asp"-->
+	<!--#include file="inc/recent_objects.asp"-->
+	<!--#include file="inc/quick_links.asp"-->
 
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/notifier.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/notifications.js"></script>
 <script type="text/javascript" src="js/schemaValidate.js"></script>
 <script type="text/javascript">
 function submitFormByName(strUrl, fieldName) {

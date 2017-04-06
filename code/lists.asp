@@ -29,9 +29,9 @@
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style4.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
@@ -51,7 +51,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 %>
 </head>
 <body>
-<!--#include file="inc/navbar4.inc"-->
+<!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
 	<div class="row">
 		<div id="gbstContainer" class="col-4 offset-2">
@@ -98,8 +98,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {

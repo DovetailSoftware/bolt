@@ -21,34 +21,33 @@
 // All Rights Reserved.
 ///////////////////////////////////////////////////////////////////////////////
 -->
-	<div class="row-fluid">
-		<div class="span2"></div>
-		<div class="span8 well well-small">
-			<h4>Quick Links</h4>
-			<table id="quickLinks" class="fullWidth">
-				<tr>
-				<% var j = 0;
-					for (var i = 1; i < LinkArray.length; i++) {
-						j = j + 1;
-						if(j == 5) {
-							j = 1;
-							rw("</tr><tr>");
-						}
+	<div class="row-fluid justify-content-md-center mt-2">
+		<div class="col-8 card bg-faded offset-2">
+			<div class="card-block py-1">
+				<h5 class="card-title my-1">Quick Links</h5>
+				<table class="recent table table-condensed">
+					<tr>
+					<% var j = 0;
+						for (var i = 1; i < LinkArray.length; i++) {
+							if(++j == 5) {
+								j = 1;
+								rw("</tr><tr>");
+							}
 
-						//If this table exists in this database, then its good
-						var table_num = GetTableNum(LinkArray[i][1]);
-						if((table_num  >= 0) && (table_num == LinkArray[i][2])) {
-							if(IsView(LinkArray[i][2])) { %>
-		              		<td><a href="view.asp?type_id=<%=LinkArray[i][2]%>"> <%=LinkArray[i][1]%> </a></td>
-							<% } else { %>
-								<td><a href="table.asp?type_id=<%=LinkArray[i][2]%>"> <%=LinkArray[i][1]%> </a></td>
-							<% }
+							//If this table exists in this database, then its good
+							var table_num = GetTableNum(LinkArray[i][1]);
+							if((table_num  >= 0) && (table_num == LinkArray[i][2])) {
+								if(IsView(LinkArray[i][2])) { %>
+	             		<td class='w-25 my-0 py-0'><a href="view.asp?type_id=<%=LinkArray[i][2]%>"> <%=LinkArray[i][1]%> </a></td>
+								<% } else { %>
+									<td class='w-25 my-0 py-0'><a href="table.asp?type_id=<%=LinkArray[i][2]%>"> <%=LinkArray[i][1]%> </a></td>
+								<% }
 		        		} else {
-		           		rw("<td>" + LinkArray[i][1] + "</td>");
+		           		rw("<td class='w-25 my-0 py-0'>" + LinkArray[i][1] + "</td>");
 		        		}
-		     		} %>
-				</tr>
-			</table>
+			     		} %>
+					</tr>
+				</table>
+			</div>
 		</div>
-		<div class="span2"></div>
 	</div>

@@ -29,9 +29,9 @@
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style4.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -43,7 +43,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/ddonline.inc"-->
 </head>
 <body>
-<!--#include file="inc/navbar4.inc"-->
+<!--#include file="inc/navbar.inc"-->
 
 <div class="container-fluid">
 	<div class="row">
@@ -77,6 +77,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			<iframe class="theme" src="themes/spacelab.asp" scrolling="no"></iframe>
 			<iframe class="theme" src="themes/cerulean.asp" scrolling="no"></iframe>
 			<iframe class="theme" src="themes/slate.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/journal.asp" scrolling="no"></iframe>
 
 			<input type="hidden" id="newTheme" />
 		</div>
@@ -92,8 +93,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	<!--#include file="inc/footer.inc"-->
 </div>
 </body>
-<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {

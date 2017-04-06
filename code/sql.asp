@@ -29,13 +29,12 @@
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="bs4/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
-<link href="css/style4.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 <link href="css/tablesorter.css" rel="stylesheet">
 <link href="css/columnSelect.css" rel="stylesheet">
-<style>
-</style>
+<link href="css/font-awesome.min.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <!--#include file="inc/utility.vbs"-->
@@ -48,84 +47,69 @@ var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
 
 var sql = Request("sql") + "";
-if(sql == "undefined") sql = "";
+if(sql === "undefined") sql = "";
 
 var flag = Request("flag");
 
 var wrap = Request("chk_wrap") + "";
-if(wrap == "undefined") wrap = "";
+if(wrap === "undefined") wrap = "";
 
 %>
 <!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
 <%
 var PARAM_CHAR = "@";
-if(dbType == "Oracle") PARAM_CHAR = ":";
+if(dbType === "Oracle") PARAM_CHAR = ":";
 %>
 <script type="text/javascript">
 var initSort = "";
-// temp
-// var s = ["select top 10 * from table_case order by objid desc"];
-// s.push("select top 10 * from table_subcase order by objid desc");
-// s.push("select * from table_case where objid in (268435463, 268435462, 268435461, 268435460, 268435459, 268435458, 268435457) order by objid desc");
-// s.push("select top 10 * from table_subcase order by objid desc");
-// s.push("select top 10 * from table_subcase order by objid desc");
-// s.push("select top 10 * from table_subcase order by objid desc");
-// s.push("select top 10 * from table_subcase order by objid desc");
-// s.push("select top 10 * from table_subcase order by objid desc");
-// s.push("select top 10 * from table_subcase order by objid desc");
-// localStorage.setItem('storedSql', JSON.stringify(s));
-
 var storedSql = JSON.parse(localStorage.getItem('storedSql'));
 var sqlIndex = 0;
 </script>
 </head>
 <body>
-<!--#include file="inc/navbar4.inc"-->
+<!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
   <div class="row">
-    <div id="homeContainer" class="col-12">
-      <h3>SQL</h3>
-    </div>
-  </div>
-
-  <div class="row">
-    <div id="sqlDiv" class="col-7">
-      <div class="form-group mb-1">
-        <label for="sqlStmt">SQL Code</label>
-        <textarea id="sqlStmt" name="sqlStmt" wrap="soft" class="form-control" rows="5"><%=sql%></textarea>
+    <div class="col-7">
+      <div class="row">
+        <div class="col-8">
+          <h5>SQL Code</h5>
+        </div>
+        <div class="col-4">
+          <div style="float:right">
+            <button class="btn btn-sm btn-info" id="clearsql" onclick="clearsql()" title="Clear SQL Code"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-sm btn-success" id="storeSql" onclick="storeSql()" title="Store SQL command"><i class="fa fa-arrow-circle-right"></i></button>
+          </div>
+        </div>
       </div>    
-    </div>
-    <div id="clipDiv" class="col-5">
-      <div style="float:right" class="m-0 mr-2 small"><a id="helpLink" href="">Keyboard shortcuts available</a></div>
-      <div class="form-group mb-1">
-        <label for="stored-sql">Stored SQL</label>
-        <button class="btn btn-link" onclick="clearStoredSQL()" title="Clear Stored SQL">Clear</button>
-        <div id='stored-sql' class="list-group"></div>
+      <div class="row">
+        <div class="form-group my-1 col-12">
+          <textarea id="sqlStmt" name="sqlStmt" wrap="soft" class="form-control" rows="5"><%=sql%></textarea>
+        </div>    
       </div>    
-    </div>
-  </div>
-
-  <div class="row">
-    <div id="sqlButtons" class="col-4">
-      <button class="btn btn-primary btn-sm col-4 mb-2" id="execSql" onclick="submitForm()" title="Execute SQL"><i class="icon-white icon-play"></i> Run</button>
-    </div>
-    <div id="clipboardButtons" class="col-3">
-      <div style="float:right" class="btn-group btn-group-sm">
-        <button class="btn btn-info" id="clearsql" onclick="clearsql()" title="Clear SQL">Clear</button>
-        <button class="btn btn-success" id="storeSql" onclick="storeSql()" title="Store SQL command">Store ></button>
+      <div class="row">
+        <div class="col-3">
+          <button class="btn btn-primary btn-sm col-12 mb-2 mr-0" id="execSql" onclick="submitForm()" title="Execute SQL"><i class="fa fa-play"></i> Run</button>
+        </div>
+        <div class="col-9">
+          <button class="btn btn-sm" id="prefill" onclick="prefill()" title="Prefill SQL">select * from table_</button>
+          <button class="btn btn-sm" id="substitute" onclick="substitute()" title="Bind Variable Character is '<%=PARAM_CHAR%>'">Substitute Bind Variables</button>
+          <div class="form-group ml-2 list-inline-item">
+            <input type="checkbox" id="wrapLong" <%=(wrap === 'on')? 'checked' : '' %> />
+            <label for="wrapLong" class="small">Wrap Long Columns</label>
+          </div>    
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div id="otherButtons" class="col-12">
-      <button class="btn btn-sm col-2" id="prefill" onclick="prefill()" title="Prefill SQL">select * from table_</button>
-      <button class="btn btn-sm col-2" id="substitute" onclick="substitute()" title="Bind Variables">Substitute Bind Variables</button>
-      <span class="small mx-4">(Bind Variable Character is "<b><%=PARAM_CHAR%></b>")</span>
-      <label>
-        <input type="checkbox" id="wrapLong" <%=(wrap == 'on')? 'checked' : '' %> /> Wrap Long Columns
-      </label>
+    <div class="col-5 pl-0">
+      <div style="float:right" class="m-0 mr-2 small"><a id="helpLink" href="">Keyboard shortcuts available</a></div>
+      <div class="form-group">
+        <h5 class="mb-0 list-inline-item">Stored SQL</h5>
+        <button class="btn btn-sm btn-info" onclick="clearStoredSQL()" title="Clear Stored SQL"><i class="fa fa-trash"></i></button>
+        <div id='stored-sql' class="mt-1 list-group"></div>
+      </div>    
     </div>
   </div>
 
@@ -147,9 +131,9 @@ var sqlIndex = 0;
           var RS = aRecordSet;
 
           rw("<div class='col-5 pl-0'>");
-          rw("<table id='stats' class='table table-sm small'>");
+          rw("<table id='stats' class='my-0 table table-sm small'>");
           rw("<tr>");
-          rw("<td class='pl-0 font-weight-bold'>Start Time:</td><td>" + start + "</td>");
+          rw("<td class='pl-0 font-weight-bold'>Start:</td><td>" + start + "</td>");
           var end = new Date();
           var elapsed_ms = end - start;
           try {
@@ -157,13 +141,13 @@ var sqlIndex = 0;
           } catch(e) {}
           rw("</tr>");
           rw("<tr>");
-          rw("<td class='pl-0 font-weight-bold'>End Time:</td><td>" + end + "</td>");
+          rw("<td class='pl-0 font-weight-bold'>End:</td><td>" + end + "</td>");
           rw("<td class='font-weight-bold'>Elapsed Time (seconds):</td><td>" + elapsed_ms/1000 + "</td>");
           rw("</tr>");
           rw("</table>")
           rw("</div>")
 
-          if(RS.State == 1) { // if the recordset has rows
+          if(RS.State === 1) { // if the recordset has rows
              var pos = sql.indexOf("order by ");
              if(pos > 0) {
                 var order = 0;
@@ -171,11 +155,11 @@ var sqlIndex = 0;
                 var colName = orderBy.split(" ");
                 if(colName.length > 1) {
                    var sortOrder = FCTrim(colName[1]).substr(0,4);
-                   if(sortOrder == "desc") order = 1;
+                   if(sortOrder === "desc") order = 1;
                 }
 
                 for(var i=0; i < RS.Fields.Count;i++) {
-                   if(RS.Fields(i).Name.toLowerCase() == colName[0].toLowerCase()) {
+                   if(RS.Fields(i).Name.toLowerCase() === colName[0].toLowerCase()) {
                       rw("<script>");
                       rw("  initSort = { sortList: [[" + i + ", " + order + "]] };");
                       rw("</script>");
@@ -185,14 +169,17 @@ var sqlIndex = 0;
              }
           }
 
+          // reset any existing focusType
+          focusType = -1;
+
           rw("<p id='fields'/><div id='sql-results'><table class='tablesorter'>");
-          if(RS.State == 1) { // if the recordset has rows
+          if(RS.State === 1) { // if the recordset has rows
             //show the column names
             rw("<thead>");
             rw("  <tr class='headerRow'>");
             for(var i=0; i < RS.Fields.Count;i++) {
                the_type = "CaseInsensitiveString";
-               if( RS.Fields(i).Type == 135) the_type="Date";
+               if(RS.Fields(i).Type === 135) the_type="Date";
                rw("<th title='Click to Sort'>" + RS.Fields(i).Name + "</th>")
             }
             rw("  </tr>");
@@ -200,29 +187,52 @@ var sqlIndex = 0;
             rw("<tbody>");
             //show the rows
             while(!RS.EOF) {
-                rw("  <tr>");
-                for(var i=0; i < RS.Fields.Count;i++) {
-                   colName = RS.Fields(i).Name;
-                   colValue = Server.HTMLEncode(RS.Fields(i).Value + "");
-
-                   //show dates in a nice format
-                   if( RS.Fields(i).Type == 135 && RS.Fields(i).Value != null) colValue = I18N_FormatGeneralDate( RS.Fields(i).Value);
-
-                   wrap_val = "";
-                   if(wrap == "on" && colValue.length > 60) wrap_val = " style='white-space:normal;'";
-
-                   if(colName.toLowerCase() != "sql_stmt") {
-                      rw("<td" + wrap_val + ">" + colValue + "</td>");
-                   } else {
-                      colValue = colValue.replace(/outerPlus/g, "(+)")
-                      rw("<td class='sqlTd'" + wrap_val + ">" + colValue + "</td>")
+              rw("  <tr>");
+              for(var i=0; i < RS.Fields.Count;i++) {
+                 colName = RS.Fields(i).Name;
+                 colValue = Server.HTMLEncode(RS.Fields(i).Value + "");
+                 colType = "";
+                 colClass = "";
+                 TargetName = "";
+                 if(colName.toLowerCase() === "sql_stmt") {
+                   colClass = " class='sqlTd'";
+                 } else if(RS.Fields(i).Type === 3) {
+                   if(RS.Fields(i).Value != null) {
+                     colClass = " class='relTd'";
+                     colType = " data-type='3' data-rel='" + colName + "'";
+                     TargetName = GetSpecRelInfo(colName)
+                     if(TargetName) {
+                       sqlHref = "sql.asp?sql=" + Server.URLEncode("select * from table_" + TargetName + " where objid = " + colValue)
+                       colValue = "<a href='" + sqlHref + "'>" + colValue + "</a>"
+                     } else if(colName === "focus_lowid" && colValue > 0) {
+                       TargetName = GetTableName(focusType)
+                       if(TargetName) {
+                         sqlHref = "sql.asp?sql=" + Server.URLEncode("select * from table_" + TargetName + " where objid = " + colValue)
+                         colValue = "<a href='" + sqlHref + "'>" + colValue + "</a>"
+                       }
+                     }
                    }
+                 } else if(RS.Fields(i).Type === 2 && colName === "focus_type") {
+                   focusType = colValue;
+                 }
+
+                 //show dates in a nice format
+                 if(RS.Fields(i).Type === 135 && RS.Fields(i).Value != null) 
+                   colValue = I18N_FormatGeneralDate( RS.Fields(i).Value);
+
+                 wrap_val = "";
+                 if(wrap === "on" && colValue.length > 60) wrap_val = " style='white-space:normal;'";
+
+                 if(colName.toLowerCase() != "sql_stmt") {
+                    rw("<td" + colClass + wrap_val + colType + ">" + colValue + "</td>");
+                 } else {
+                    colValue = colValue.replace(/outerPlus/g, "(+)")
+                    rw("<td" + colClass + wrap_val + ">" + colValue + "</td>")
+                 }
                 }
                 rw("  </tr>");
                 RS.MoveNext();
              }
-
-
           } else {
              rw("  <tr><td class='font-weight-bold'>Command Completed Successfully</td></tr>");
           }
@@ -253,8 +263,8 @@ var sqlIndex = 0;
 </form>
 
 </body>
-<script type="text/javascript" src="js/jquery/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="bs4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="js/columnSelect.js"></script>
 <script type="text/javascript">
@@ -377,21 +387,21 @@ function clearStoredSQL() {
   storedSql = [];
   localStorage.setItem('storedSql', JSON.stringify(storedSql));
   
-  $(`input.stored`).each(function() {
+  $('input.stored').each(function() {
     var i = $(this).data('index');
-    $(`#remove${i}`).trigger('click');
+    $('#remove'+i).trigger('click');
   });
 }
 
 function storeSql() {
   var sql = $("#sqlStmt").val();
-  if(sql.length == 0) return false;
+  if(sql.length === 0) return false;
 
   var found = storedSql.indexOf(sql) > -1;
   if(found) {
-    $(`input.stored[value='${sql}']`).each(function() {
+    $('input.stored[value="'+sql+'"]').each(function() {
       var i = $(this).data('index');
-      $(`#remove${i}`).trigger('click');
+      $('#remove'+i).trigger('click');
     });
   }
 
@@ -414,19 +424,19 @@ function removeSql(el) {
 
 function appendSql(sql) {
   var i = sqlIndex++;
-  var cmd = `<div class="storage input-group mb-1">
-      <span class="input-group-btn">
-        <button class="load btn btn-success btn-sm" type="button"><</button>
-      </span>
-      <input type="text" class="stored form-control p-1" readonly value="${sql}" title="${sql}" data-index="${i}">
-      <span class="input-group-btn">
-        <button id="remove${i}" class="btn btn-default btn-sm" type="button" data-index="${i}">x</button>
-      </span>
-    </div>`;
+  var cmd = '<div class="storage input-group mb-1">' +
+      '<span class="input-group-btn">' +
+      '  <button class="load btn btn-success btn-sm" type="button"><i class="fa fa-arrow-circle-left"></i></button>' +
+      '</span>' +
+      '<input type="text" class="stored form-control p-1" readonly value="'+sql+'" title="'+sql+'" data-index="'+i+'">' +
+      '<span class="input-group-btn">' +
+      '  <button id="remove'+i+'" class="btn btn-default btn-sm" type="button" data-index="'+i+'"><i class="fa fa-close"></i></button>' +
+      '</span>' +
+    '</div>';
 
   $('#stored-sql').prepend(cmd);
 
-  $(`#remove${i}`).click(function() {
+  $('#remove'+i).click(function() {
     removeSql(this);
   });
 }
@@ -434,15 +444,15 @@ function appendSql(sql) {
 $(document).ready(function() {
   var path = window.location.pathname;
   var page = path.substr(path.lastIndexOf("/")+1);
-  $("ul.nav li a[href$='" + page + "']").parent().addClass("active");
+  $("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
   $(".navbar").find(".connected").text("<%=connect_info%>");
   document.title = "Bolt: <%=sPageTitle%>";
 
   $("#helpLink").click(showHelp);
   $("body").keydown(function(evt) {
-    if(evt.shiftKey && evt.which == 191) showHelp();
-    if(evt.altKey && evt.which == 88) swap();
-    if(evt.altKey && evt.which == 83) submitForm();
+    if(evt.shiftKey && evt.which === 191) showHelp();
+    if(evt.altKey && evt.which === 88) swap();
+    if(evt.altKey && evt.which === 83) submitForm();
   });
 
   $("#resultsContainer").on("click", ".tablesorter tbody tr", function () {

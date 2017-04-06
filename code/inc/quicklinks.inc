@@ -24,36 +24,13 @@
 var LinkIndex = 1;
 var LinkArray = [];
 
-LinkArray[LinkIndex] = [];
-LinkArray[LinkIndex][1]= "act_entry";
-LinkArray[LinkIndex++][2]= "21";
-
-LinkArray[LinkIndex] = [];
-LinkArray[LinkIndex][1]= "case";
-LinkArray[LinkIndex++][2]= "0";
-
-LinkArray[LinkIndex] = [];
-LinkArray[LinkIndex][1]= "contact";
-LinkArray[LinkIndex++][2]= "45";
-
-LinkArray[LinkIndex] = [];
-LinkArray[LinkIndex][1]= "employee";
-LinkArray[LinkIndex++][2]= "44";
-
-LinkArray[LinkIndex] = [];
-LinkArray[LinkIndex][1]= "rol_contct";
-LinkArray[LinkIndex++][2]= "289";
-
-LinkArray[LinkIndex] = [];
-LinkArray[LinkIndex][1]= "site";
-LinkArray[LinkIndex++][2]= "52";
-
-LinkArray[LinkIndex] = [];
-LinkArray[LinkIndex][1]= "site_view";
-LinkArray[LinkIndex++][2]= "88";
-
-LinkArray[LinkIndex] = [];
-LinkArray[LinkIndex][1]= "user";
-LinkArray[LinkIndex++][2]= "20";
+LinkArray[LinkIndex++] = ["", "act_entry", "21"];
+LinkArray[LinkIndex++] = ["", "case", "0"];
+LinkArray[LinkIndex++] = ["", "contact", "45"];
+LinkArray[LinkIndex++] = ["", "employee", "44"];
+LinkArray[LinkIndex++] = ["", "rol_contct", "289"];
+LinkArray[LinkIndex++] = ["", "site", "52"];
+LinkArray[LinkIndex++] = ["", "site_view", "88"];
+LinkArray[LinkIndex++] = ["", "user", "20"];
 
 %>

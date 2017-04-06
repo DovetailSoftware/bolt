@@ -6,9 +6,9 @@
 //
 // Series         :  Dovetail Software Development Series(tm)
 //
-// Name           :  spacelab.asp
+// Name           :  journal.asp
 //
-// Description    :  spacelab theme example
+// Description    :  journal theme example
 //
 // Author         :  Dovetail Software, Inc.
 //                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
@@ -27,12 +27,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../css/bootstrap.min.css" rel="stylesheet">
-<link href="../css/spacelab/bootstrap.min.css" rel="stylesheet">
+<link href="../css/journal/bootstrap.min.css" rel="stylesheet">
 <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
 <!--#include file="../inc/navbar.inc"-->
-<h2>Spacelab</h2>
+<h2 class='ml-3'>journal</h2>
 </body>
 <script type="text/javascript" src="../js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
