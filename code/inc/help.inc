@@ -17,10 +17,6 @@
 						<td>alt-t</td>
 						<td>Execute SQL, getting latest 10 rows</td>
 					</tr>
-					<tr class="sql hidden-xs-up">
-						<td>alt-x</td>
-						<td>Swap SQL and Clipboard</td>
-					</tr>
 					<tr>
 						<td>?</td>
 						<td>Bring up this help dialog</td>
