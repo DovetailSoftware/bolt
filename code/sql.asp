@@ -63,7 +63,10 @@ if(dbType === "Oracle") PARAM_CHAR = ":";
 %>
 <script type="text/javascript">
 var initSort = "";
+
 var storedSql = JSON.parse(localStorage.getItem('storedSql'));
+if(storedSql == undefined) storedSql = [];
+
 var sqlIndex = 0;
 </script>
 </head>
