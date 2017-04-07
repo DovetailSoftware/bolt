@@ -48,10 +48,12 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 <!--#include file="inc/navbar.inc"-->
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-8 offset-2 my-3">
-			<h3><a href="business_rule_report.asp">Business Rule Usage Report</a></h3>
+		<div class="col-8 card bg-faded offset-2 my-3">
+			<h3>Business Rule Usage Report</h3>			
+			<p>This report allows you to see the rules that are fired, including their frequency. <a href="business_rule_report.asp">Run Report</a></p>
 		</div>
 	</div>
+<hr/>
 	<div class="row">
 		<form method="POST" name ="bizrules" action="bizrules2.asp" class="form col-8 offset-2">
 			<h3>Search for Business Rules where</h3>
