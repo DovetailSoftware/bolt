@@ -37,3 +37,7 @@ button.pointer,
 input.stored {
 	cursor: pointer;
 }
+
+body {
+	margin-bottom: 30px !important;
+}
