@@ -81,8 +81,8 @@ var sqlIndex = 0;
         </div>
         <div class="col-4">
           <div style="float:right">
-            <button class="btn btn-sm btn-info" id="clearsql" onclick="clearsql()" title="Clear SQL Code"><i class="fa fa-trash"></i></button>
-            <button class="btn btn-sm btn-success" id="storeSql" onclick="storeSql()" title="Store SQL command"><i class="fa fa-arrow-circle-right"></i></button>
+            <button class="btn btn-sm btn-info pointer" id="clearsql" onclick="clearsql()" title="Clear SQL Code"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-sm btn-success pointer" id="storeSql" onclick="storeSql()" title="Store SQL command"><i class="fa fa-arrow-circle-right"></i></button>
           </div>
         </div>
       </div>    
@@ -110,7 +110,7 @@ var sqlIndex = 0;
       <div style="float:right" class="m-0 mr-2 small"><a id="helpLink" href="">Keyboard shortcuts available</a></div>
       <div class="form-group">
         <h5 class="mb-0 list-inline-item">Stored SQL</h5>
-        <button class="btn btn-sm btn-info" onclick="clearStoredSQL()" title="Clear Stored SQL"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-sm btn-info pointer" onclick="clearStoredSQL()" title="Clear Stored SQL"><i class="fa fa-trash"></i></button>
         <div id='stored-sql' class="mt-1 list-group"></div>
       </div>    
     </div>
@@ -430,11 +430,11 @@ function appendSql(sql) {
   var i = sqlIndex++;
   var cmd = '<div class="storage input-group mb-1">' +
       '<span class="input-group-btn">' +
-      '  <button class="load btn btn-success btn-sm" type="button"><i class="fa fa-arrow-circle-left"></i></button>' +
+      '  <button class="load btn btn-success btn-sm pointer" type="button"><i class="fa fa-arrow-circle-left"></i></button>' +
       '</span>' +
       '<input type="text" class="stored form-control p-1" readonly value="'+sql+'" title="'+sql+'" data-index="'+i+'">' +
       '<span class="input-group-btn">' +
-      '  <button id="remove'+i+'" class="btn btn-default btn-sm" type="button" data-index="'+i+'"><i class="fa fa-close"></i></button>' +
+      '  <button id="remove'+i+'" class="btn btn-default btn-sm pointer" type="button" data-index="'+i+'"><i class="fa fa-close"></i></button>' +
       '</span>' +
     '</div>';
 
@@ -443,6 +443,20 @@ function appendSql(sql) {
   $('#remove'+i).click(function() {
     removeSql(this);
   });
+
+  $("button.load")
+    .unbind("click")
+    .on("click", function () {
+      var sql = $(this).parents('div').children("input").val();
+      $("#sqlStmt").focus().val(sql);
+    });
+
+  $("input.stored")
+    .unbind("click")
+    .on("click", function () {
+      var sql = $(this).val();
+      $("#sqlStmt").focus().val(sql);
+    });
 }
 
 $(document).ready(function() {
@@ -477,11 +491,6 @@ $(document).ready(function() {
 
   storedSql.forEach(function(sql) {
     appendSql(sql);
-  });
-
-  $("button.load").on("click", function () {
-    var sql = $(this).parents('div').children("input").val();
-    $("#sqlStmt").focus().val(sql);
   });
 
   var sql = $("#sqlStmt").val() + "";

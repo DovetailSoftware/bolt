@@ -33,3 +33,7 @@ iframe.theme {
 .error {
 	background-color: pink;
 }
+button.pointer, 
+input.stored {
+	cursor: pointer;
+}
