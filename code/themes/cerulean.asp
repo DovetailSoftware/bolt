@@ -26,6 +26,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/cerulean/bootstrap.min.css" rel="stylesheet">
 <link href="../css/style.css" rel="stylesheet">
@@ -35,6 +36,7 @@
 <h2 class='ml-3'>Cerulean</h2>
 </body>
 <script type="text/javascript" src="../js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="../js/tether.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/theme.js"></script>
 </html>
