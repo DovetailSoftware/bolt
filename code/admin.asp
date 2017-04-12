@@ -28,6 +28,7 @@
 <meta http-equiv="expires" content="0">
 <meta name="KeyWords" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="Shortcut Icon" href="favicon.ico">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
@@ -56,6 +57,7 @@ if (read_only_udl) Response.Redirect("index.asp");
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
+<!--#include file="inc/notifications.inc"-->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-8 offset-2">
@@ -107,6 +109,7 @@ if (read_only_udl) Response.Redirect("index.asp");
 <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="js/tether.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/notifications.js"></script>
 <script type="text/javascript">
 //////////////////////////////////////////////////////////////////////
 // Validate Form - make sure the correct data is filled in
@@ -115,7 +118,7 @@ function validate_form() {
 	var searchfield = $("#UserID");
 	var filter = searchfield.val();
   if (filter.length == 0) {
-    alert("You must specify a User ID.");
+		addNotification('You must specify a User ID.');
 		searchfield.focus();
     return false;
   }
@@ -123,7 +126,7 @@ function validate_form() {
 	var searchfield = $("#Password");
 	var filter = searchfield.val();
   if (filter.length == 0) {
-    alert("You must specify a Password.");
+		addNotification('You must specify a Password.');
     searchfield.focus();
     return false;
   }
@@ -131,7 +134,7 @@ function validate_form() {
 	var searchfield = $("#DBServer");
 	var filter = searchfield.val();
   if (filter.length == 0) {
-    alert("You must specify a Server.");
+		addNotification('You must specify a Server.');
 		searchfield.focus();
     return false;
   }
@@ -144,7 +147,7 @@ function validate_form() {
 	  var searchfield = $("#Database");
 		var filter = searchfield.val();
     if (filter.length == 0) {
-      alert("You must specify a Database.");
+			addNotification('You must specify a Database.');
 			searchfield.focus();
       return false;
     }
@@ -174,11 +177,11 @@ function changeDatabase() {
 	      if(results.success == true) {
 	         window.location = "index.asp";
 	      } else {
-	         alert("An error occurred while updating database: " + results.errorMessage);
+       		 addNotification("An error occurred while updating database: " + results.errorMessage);
 	      }
 	   },
 	   error: function(xhr) {
-	     alert("An error occurred while updating database in admin2.asp");
+   		 addNotification('An error occurred while updating database in admin2.asp');
 	   }
 	});
 }

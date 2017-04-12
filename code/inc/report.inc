@@ -9,7 +9,7 @@ function WriteReport(rs) {
 		if ((rs('objid') - 0) > 0){
 			rw('<a href="bizrule.asp?objid=' + rs('objid') + '">');
 		}else{
-			rw('<a href=# onclick="alert(\'Unable to find this rule in the system. It may have been deleted. \')">');
+			rw('<a href=# onclick="addNotification(\'Unable to find this rule in the system. It may have been deleted. \')">');
 		}
 		rw(rs("rulename") + "");
 		rw("</a>");
