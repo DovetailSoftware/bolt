@@ -104,6 +104,9 @@ var sqlIndex = 0;
             <label for="wrapLong" class="small">Wrap Long Columns</label>
           </div>    
         </div>
+      </div>    
+      <div class="row">
+        <div id="statDiv" class="col-8 ml-2"></div>
       </div>
     </div>
 
@@ -466,6 +469,8 @@ $(document).ready(function() {
   $("ul.navbar-nav li a[href$='" + page + "']").parent().addClass("active");
   $(".navbar").find(".connected").text("<%=connect_info%>");
   document.title = "Bolt: <%=sPageTitle%>";
+
+  $("#stats").appendTo("#statDiv");
 
   $("#helpLink").click(showHelp);
   $("body").keydown(function(evt) {

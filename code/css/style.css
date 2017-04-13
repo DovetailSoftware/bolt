@@ -10,7 +10,7 @@ tr.highlight td {
 }
 
 #stored-sql {
-  max-height: 175px;
+  max-height: 230px;
   overflow-x: hidden;
   overflow-y: auto;
 }
