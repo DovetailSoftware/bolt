@@ -1,6 +1,6 @@
 <img src="https://support.dovetailsoftware.com/selfservice/Content/images/DSLogo195.png" alt="Dovetail Software, Inc." style="margin: 0;border: 0;" />
 
-#Dovetail Bolt
+# Dovetail Bolt
 
 ## Introduction
 
@@ -175,7 +175,7 @@ Right-click the *code/bolt.udl* file, select 'Properties' from the menu and then
 
 ## Using Dovetail Bolt
 
-###Schema
+### Schema
 
 In the Schema section, you can view your customized schema in real-time, including tables, views, relations, joins, and indexes.
 
