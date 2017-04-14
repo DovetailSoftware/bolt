@@ -73,12 +73,12 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			<h2>Change Theme</h2>
 			<p>Click on a theme below to change the theme used for Dovetail Bolt.</p>
 
-			<iframe class="theme" src="themes/baseline.asp" scrolling="no"></iframe>
-			<iframe class="theme" src="themes/cyborg.asp" scrolling="no"></iframe>
-			<iframe class="theme" src="themes/spacelab.asp" scrolling="no"></iframe>
-			<iframe class="theme" src="themes/cerulean.asp" scrolling="no"></iframe>
-			<iframe class="theme" src="themes/slate.asp" scrolling="no"></iframe>
-			<iframe class="theme" src="themes/journal.asp" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/example.asp?css=" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/example.asp?css=Cyborg" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/example.asp?css=Spacelab" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/example.asp?css=Cerulean" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/example.asp?css=Slate" scrolling="no"></iframe>
+			<iframe class="theme" src="themes/example.asp?css=Journal" scrolling="no"></iframe>
 
 			<input type="hidden" id="newTheme" />
 		</div>
