@@ -20,8 +20,15 @@ function columnSelect() {
 
     $("<span class='column d-inline'>Text from Selected Column:</span><button type='button' class='close float-none ml-2' title='Close'><span>&times;</span></button><input type=text class='temp' title='text from column' />").val(colData).insertBefore($th.parents("table"));
     $("button.close").click(resetColumnSelection);
+
+    $(".temp").keydown(function(e) {
+      if (e.keyCode === 27) {
+        $("button.close").trigger('click');
+      }
+    });
+
     $(".temp").focus().select();
-      return false;
+    return false;
    });
 }
 
