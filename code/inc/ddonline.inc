@@ -215,7 +215,7 @@ function displayDBAccessErrorPage(e,s) {
 	Response.Clear();
 	rw('<html>\n');
 	rw('<head>\n');
-	rw('<link href="css/bootstrap.min.css" rel="stylesheet">\n');
+	rw('<link href="css/bootstrap.min.css" rel="stylesheet" />\n');
 	rw('<title>Error</title>\n');
 	rw('</head>\n');
 	rw('<body onload="if(window.history.length==0) {document.getElementById(\'backLink\').style.visibility=\'hidden\';}">\n');

@@ -30,7 +30,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="Shortcut Icon" href="favicon.ico">
-<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/bizrules.css" rel="stylesheet">
