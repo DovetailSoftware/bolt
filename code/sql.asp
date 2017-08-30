@@ -402,6 +402,7 @@ function clearStoredSQL() {
 
 function storeSql() {
   var sql = $("#sqlStmt").val();
+  sql = sql.replace(/\n/g,' ');
   if(sql.length === 0) return false;
 
   var found = storedSql.indexOf(sql) > -1;

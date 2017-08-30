@@ -38,3 +38,7 @@ input.stored {
 body {
 	margin-bottom: 30px !important;
 }
+
+.hide {
+	display: none;
+}
