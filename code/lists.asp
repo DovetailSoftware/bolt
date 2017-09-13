@@ -66,7 +66,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<% while (!rsGbst.EOF) { %>
 				 <tr>
 				 	<td>
-				 	<% listTarget = "<a href='gbstList.asp?objid=" + rsGbst("objid") + "&title=" + rsGbst("title") + "'>" + rsGbst("title") + "</a>";
+				 	<% listTarget = "<a href='gbstList.asp?objid=" + rsGbst("objid") + "&title=" + Server.URLEncode(rsGbst("title")) + "'>" + rsGbst("title") + "</a>";
 				 		rw(listTarget); %>
 				 	</td>
 				 </tr>
@@ -87,7 +87,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				<% while (!rsHgbst.EOF) { %>
 				 <tr>
 				 	<td>
-				 	<% listTarget = "<a href='hgbstList.asp?objid=" + rsHgbst("objid") + "&title=" + rsHgbst("title") + "'>" + rsHgbst("title") + "</a>";
+				 	<% listTarget = "<a href='hgbstList.asp?objid=" + rsHgbst("objid") + "&title=" + Server.URLEncode(rsHgbst("title")) + "'>" + rsHgbst("title") + "</a>";
 				 		rw(listTarget); %>
 				 	</td>
 				 </tr>

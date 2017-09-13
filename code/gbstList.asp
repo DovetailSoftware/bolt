@@ -6,9 +6,9 @@
 //
 // Series         :  Dovetail Software Development Series(tm)
 //
-// Name           :  lists.asp
+// Name           :  gbstList.asp
 //
-// Description    :  List Viewer
+// Description    :  GBST List Viewer
 //
 // Author         :  Dovetail Software, Inc.
 //                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
