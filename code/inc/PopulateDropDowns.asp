@@ -77,6 +77,7 @@ function LoadHgbstListFromDatabase(listName, level1value, level2value, level3val
          var row = {};
          row["title"] = encodeURIComponent(escape(boHgbstElm[level]("title")));
          row["state"] = boHgbstElm[level]("state")+"";
+         row["id"] = boHgbstElm[level]("objid") - 0;
          if(boHgbstElm[level]("state") == "Default") UDPLLevel.defaultValue = boHgbstElm[level]("title")+"";
          var localizations = [];
 
@@ -114,9 +115,13 @@ function addLevelToJsonObject(whichLevel,jsonGeneric,value) {
    local = "local" + whichLevel;
    jsonObject[local] = [];
 
+   id = "id" + whichLevel;
+   jsonObject[id] = [];
+
    for(i in jsonGeneric) {
       jsonObject[property][i] = jsonGeneric[i].title;
       if(jsonGeneric[i].localizations > "") jsonObject[local][i] = jsonGeneric[i].localizations;
+      jsonObject[id][i] = jsonGeneric[i].id;
    }
 }
 

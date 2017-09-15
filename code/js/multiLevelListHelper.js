@@ -66,11 +66,11 @@ multiLevelListHelper.prototype.populate = function() {
          var selectElement1 = document.getElementById(jsonObject.selectElement1Id);
          var listObject = selectElement1.listObject;
 
-         addOptionsToSelectList(listObject.elementIds[0],jsonObject.level1,jsonObject.level1Value,jsonObject.local1);
-         addOptionsToSelectList(listObject.elementIds[1],jsonObject.level2,jsonObject.level2Value,jsonObject.local2);
-         addOptionsToSelectList(listObject.elementIds[2],jsonObject.level3,jsonObject.level3Value,jsonObject.local3);
-         addOptionsToSelectList(listObject.elementIds[3],jsonObject.level4,jsonObject.level4Value,jsonObject.local4);
-         addOptionsToSelectList(listObject.elementIds[4],jsonObject.level5,jsonObject.level5Value,jsonObject.local5);
+         addOptionsToSelectList(listObject.elementIds[0],jsonObject.level1,jsonObject.level1Value,jsonObject.local1,jsonObject.id1);
+         addOptionsToSelectList(listObject.elementIds[1],jsonObject.level2,jsonObject.level2Value,jsonObject.local2,jsonObject.id2);
+         addOptionsToSelectList(listObject.elementIds[2],jsonObject.level3,jsonObject.level3Value,jsonObject.local3,jsonObject.id3);
+         addOptionsToSelectList(listObject.elementIds[3],jsonObject.level4,jsonObject.level4Value,jsonObject.local4,jsonObject.id4);
+         addOptionsToSelectList(listObject.elementIds[4],jsonObject.level5,jsonObject.level5Value,jsonObject.local5,jsonObject.id5);
       }
    }
 
@@ -110,7 +110,7 @@ function onDropDownChange() {
    listObject.populate();
 }
 
-function addOptionsToSelectList(elementId,ArrayOfOptionValues,selectedValue,ArrayOfLocalizations) {
+function addOptionsToSelectList(elementId,ArrayOfOptionValues,selectedValue,ArrayOfLocalizations,ArrayOfIds) {
    if(! document.getElementById(elementId)){
       return false;
    }
@@ -118,6 +118,7 @@ function addOptionsToSelectList(elementId,ArrayOfOptionValues,selectedValue,Arra
    for(var i = 0; i<ArrayOfOptionValues.length;i++) {
       var optionValue = getValue(ArrayOfOptionValues[i]);
       var option = new Option(optionValue,optionValue);
+      option.title = ArrayOfIds[i];
       document.getElementById(elementId).add(option);
    }
    if(ArrayOfLocalizations != undefined) {
@@ -126,6 +127,7 @@ function addOptionsToSelectList(elementId,ArrayOfOptionValues,selectedValue,Arra
          for(var i = 0; i<ArrayOfLocalizations.length;i++) {
             var optionValue = getValue(ArrayOfOptionValues[i]);
             var optionText = getValue(ArrayOfLocalizations[i]);
+            var optionTitle = ArrayOfIds[i];
             $localSelect.append('<option value="'+optionValue+'">'+optionText+'</option>');
          }
          $localSelect.insertAfter('#'+elementId);
