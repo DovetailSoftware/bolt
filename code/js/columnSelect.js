@@ -10,12 +10,14 @@ function columnSelect() {
 
     $th = $(this);
     var colIndex = $th.index();
-    var colData = "";
+    var colData = [];
     $th.parents("table").find("tbody tr").each(function() {
       var $columnCell = $(this).children("td:eq(" + colIndex + ")");
       colText = $.trim($columnCell.text());
       $columnCell.addClass("columnHighlight");
-      if(colText > "") colData += ((colData > "")? ", " : "") + colText;
+      if(colText > "" && colData.indexOf(colText) === -1) {
+        colData.push(colText);
+      }
     });
 
     $("<span class='column d-inline'>Text from Selected Column:</span><button type='button' class='close float-none ml-2' title='Close'><span>&times;</span></button><input type=text class='temp' title='text from column' />").val(colData).insertBefore($th.parents("table"));
