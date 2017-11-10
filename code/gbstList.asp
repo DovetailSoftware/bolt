@@ -90,8 +90,9 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 					var status = "Active";
 					if (state == 2) status = "Default";
 					if (state == 1) status = "Inactive";
+				  var rowClass = 'row' + status;
 				%>
-				<tr>
+				<tr class="<%=rowClass%>">
 				 	<td title="<%=rsGbst("objid")%>"><% rw(rsGbst("title") + ""); %></td>
 				 	<td><% rw(rsGbst("rank") - 0); %></td>
 				 	<td><% rw(status); %></td>

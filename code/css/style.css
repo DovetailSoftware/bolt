@@ -9,6 +9,13 @@ tr.highlight td {
 	background-color: #BDD7FD !important;
 }
 
+tr.rowDefault td {
+	background-color: #a7baa1 !important;
+}
+tr.rowInactive td {
+	background-color: #c4bfbc !important;
+}
+
 #stored-sql {
   max-height: 230px;
   overflow-x: hidden;
