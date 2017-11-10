@@ -32,6 +32,7 @@
 <link rel="Shortcut Icon" href="favicon.ico">
 <link href="css/<%=Request.Cookies("boltTheme")%>bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
 <!--#include file="inc/config.inc"-->
 <!--#include file="inc/adojavas.inc"-->
 <%
@@ -53,6 +54,53 @@ if (read_only_udl) Response.Redirect("index.asp");
 %>
 <!--#include file="inc/ddonline.inc"-->
 <!--#include file="inc/quicklinks.inc"-->
+<script type="text/javascript">
+(function(){
+    var keyPaths = [];
+
+    var saveKeyPath = function(path) {
+        keyPaths.push({
+            sign: (path[0] === '+' || path[0] === '-')? parseInt(path.shift()+1) : 1,
+            path: path
+        });
+    };
+
+    var valueOf = function(object, path) {
+        var ptr = object;
+        for (var i=0,l=path.length; i<l; i++) ptr = ptr[path[i]];
+        return ptr;
+    };
+
+    var comparer = function(a, b) {
+        for (var i = 0, l = keyPaths.length; i < l; i++) {
+            aVal = valueOf(a, keyPaths[i].path);
+            bVal = valueOf(b, keyPaths[i].path);
+            if (aVal > bVal) return keyPaths[i].sign;
+            if (aVal < bVal) return -keyPaths[i].sign;
+        }
+        return 0;
+    };
+
+    Array.prototype.sortBy = function() {
+        keyPaths = [];
+        for (var i=0,l=arguments.length; i<l; i++) {
+            switch (typeof(arguments[i])) {
+                case "object": saveKeyPath(arguments[i]); break;
+                case "string": saveKeyPath(arguments[i].match(/[+-]|[^.]+/g)); break;
+            }
+        }
+        return this.sort(comparer);
+    };    
+})();
+
+var allowConnectionSaves = ("<%=allowConnectionSaves%>" === "True");
+var storedConnections = JSON.parse(localStorage.getItem('storedConnections'));
+if(storedConnections == undefined) storedConnections = [];
+
+storedConnections.sortBy('Provider', 'DBServer', 'Database');
+
+var connectionIndex = 0;
+</script>
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
@@ -100,7 +148,19 @@ if (read_only_udl) Response.Redirect("index.asp");
 					<button class="btn btn-sm btn-primary col-5" id="submitButton">Submit</button>
 					<button class="btn btn-sm btn-primary col-5" id="resetButton">Reset</button>
 				</div>
+			</div>
+
+		  <div id="connections" class="form-group row mt-5 hide">
+		    <div class="col-8">
+		      <div class="form-group">
+		        <h5 class="mb-0 list-inline-item">Stored Connections</h5>
+		        <button class="btn btn-sm btn-success pointer" id="storeConnection" onclick="storeConnection()" title="Store Connection"><i class="fa fa-arrow-circle-down"></i></button>
+		        <button class="btn btn-sm btn-default pointer" onclick="clearStoredConnections()" title="Remove all Stored Connections"><i class="fa fa-trash"></i></button>
+		        <div id='stored-connections' class="mt-1 list-group"></div>
+		      </div>    
+		    </div>
 		  </div>
+
 		</div>
 	</div>
 </div>
@@ -155,6 +215,103 @@ function validate_form() {
   return true;
 }
 
+function clearStoredConnections() {
+  storedConnections = [];
+  localStorage.setItem('storedConnections', JSON.stringify(storedConnections));
+  
+  $('input.stored').each(function() {
+    var i = $(this).data('index');
+    $('#remove'+i).trigger('click');
+  });
+}
+
+function storeConnection() {
+	var databaseData = {
+	   Provider: $("#Provider").val(),
+	   UserID: $("#UserID").val(),
+	   Password: $("#Password").val(),
+	   DBServer: $("#DBServer").val(),
+	   Database: $("#Database").val()
+	}
+
+  var found = storedConnections.indexOf(databaseData) > -1;
+  if(found) {
+    $('input.stored[value="'+databaseData+'"]').each(function() {
+      var i = $(this).data('index');
+      $('#remove'+i).trigger('click');
+    });
+  }
+
+  storedConnections.push(databaseData);
+  localStorage.setItem('storedConnections', JSON.stringify(storedConnections));
+  appendConnection(databaseData);
+}
+
+function appendConnection(connection) {
+  var i = connectionIndex++;
+
+	var provider = 'SQL';
+	var name = connection.DBServer + ': ' + connection.Database;
+
+	if(connection.Provider == "MSDAORA.1" || connection.Provider == "OraOLEDB.Oracle") {
+		provider = 'Oracle';
+		name = connection.DBServer;
+	}
+
+	var connectionTitle = provider + ': ' + name;
+
+  var cmd = '<div class="storage input-group mb-1">' +
+      '<span class="input-group-btn">' +
+      '  <button class="load btn btn-success btn-sm pointer" title="Load Connection" type="button"><i class="fa fa-arrow-circle-up"></i></button>' +
+      '</span>' +
+      '<input id="connection'+i+'" type="text" class="stored form-control p-1" title="Load Connection" readonly value="'+ connectionTitle +'" title="'+connection.Database+ '" data-index="'+i+'">' +
+      '<span class="input-group-btn">' +
+      '  <button id="remove'+i+'" class="btn btn-default btn-sm pointer" type="button" title="Remove Connection" data-index="'+i+'"><i class="fa fa-trash"></i></button>' +
+      '</span>' +
+    '</div>';
+
+  $('#stored-connections').prepend(cmd);
+  $('#connection'+i).data('conn', connection);
+
+  $('#remove'+i).click(function() {
+    removeConnection(this);
+  });
+
+  $("button.load")
+    .unbind("click")
+    .on("click", function () {
+      loadConnectionForId($(this).parents('div').children('input').prop('id'));
+    });
+
+  $("input.stored")
+    .unbind("click")
+    .on("click", function () {
+      loadConnectionForId($(this).prop('id'));
+    });
+}
+
+function loadConnectionForId(id) {
+	var connection = $('#'+id).data('conn');
+	$("#Provider").val(connection.Provider).trigger('change');
+	$("#UserID").val(connection.UserID);
+	$("#Password").val(connection.Password);
+	$("#DBServer").val(connection.DBServer);
+	$("#Database").val(connection.Database);
+}
+
+function removeConnection(el) {
+  var dropConnection = $(el).parents('div').children("input").data('conn');
+
+  var $div = $(el).parents('div.storage');
+  var i = $(el).data('index');
+  $div.remove();
+
+  storedConnections = storedConnections.filter(function(item) { 
+    return item !== dropConnection;
+  });
+  localStorage.setItem('storedConnections', JSON.stringify(storedConnections));
+}
+
 function changeDatabase() {
 	if(!validate_form()) return;
 
@@ -205,7 +362,15 @@ $(document).ready(function() {
 		if(event.keyCode == 13) $("#submitButton").click();
 	});
 
-   $("#UserID").focus();
+	if(allowConnectionSaves) {
+		$('#connections').show();
+
+	  storedConnections.forEach(function(connection) {
+	    appendConnection(connection);
+	  });
+	}
+
+  $("#UserID").focus();
 });
 </script>
 </html>
