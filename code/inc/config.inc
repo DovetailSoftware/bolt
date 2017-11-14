@@ -21,8 +21,17 @@
 // All Rights Reserved.
 ///////////////////////////////////////////////////////////////////////////////
 
-//Customer Specific Configuration Information
 var udlDirectory = Request.ServerVariables("APPL_PHYSICAL_PATH").Item;
 var dbConnect = "File Name=" + udlDirectory + "bolt.udl";
+
+//
+//Customer Specific Configuration Information
+//
+
+//enable/disable saving different database connections into locla storage on the admin page
 var allowConnectionSaves = true;
+
+//enable/disable the SQL query functionality
+var allowSQL = true;
+
 %>

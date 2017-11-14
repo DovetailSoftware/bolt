@@ -72,12 +72,27 @@ var sqlIndex = 0;
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
+
+<% if (!allowSQL){ %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h5>SQL</h5>          
+        <p>The SQL functionality has been disabled.</p>
+        <p>Contact your application administrator to enable this functionality.</p>
+      </div>
+    </div>
+  </div>
+
+<% Response.End();}%>
+  
 <div class="container-fluid">
   <div class="row">
     <div class="col-7">
       <div class="row">
         <div class="col-8">
-          <h5>SQL Code</h5>
+          <h5>SQL Code</h5>          
         </div>
         <div class="col-4">
           <div style="float:right">
