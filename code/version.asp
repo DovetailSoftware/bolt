@@ -51,6 +51,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		<div id="homeContainer" class="col-12">
 			<h3>BOLT Version Information</h3>
 
+			<p><img src="img/icon-warning.png"/>&nbsp;This version page is no longer current and is not  being maintained. For the latest changes, refer to the <a href="https://github.com/DovetailSoftware/bolt/commits/master">commit history on Github</a></p>			
+
 			<table class="tablesorter">
 				<thead>
 					<tr>
