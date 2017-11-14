@@ -68,7 +68,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 	<%}%>
 
 	<div class="row">
-		<div class="col-8 offset-2 well well-small topMargin">
+		<div class="col-8 offset-2 card bg-faded mb-4">	
+		<div>
 			<h2>Change Theme</h2>
 			<p>Click on a theme below to change the theme used for Dovetail Bolt.</p>
 
@@ -80,6 +81,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			<iframe class="theme" src="themes/example.asp?css=Journal" scrolling="no"></iframe>
 
 			<input type="hidden" id="newTheme" />
+		</div>
 		</div>
 	</div>
 

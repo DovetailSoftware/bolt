@@ -58,7 +58,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 		<form method="POST" name ="bizrules" action="bizrules2.asp" class="form col-8 offset-2">
 			<h3>Search for Business Rules where</h3>
 			<div class="form-group row mb-1 mt-3">
-				<label class="col-4 col-form-label">Title</label>				
+				<label class="col-4 col-form-label ">Title</label>				
 				<select class="form-control col-3 mr-1" name="operator" name="operator">
 			   	<option selected value="like">starts with</option>
 			   	<option value="=">equals</option>

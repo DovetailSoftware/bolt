@@ -67,7 +67,7 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 	rw(numUsedString + " of the " + potentialAvailable + " available IDs in this range have been used.&nbsp;");
 	if(numUsed > 0) {
 		var href = "tables.asp?minRange=" + minValue + "&maxRange=" + maxValue;
-		rw('<button class="btn btn-sm btn-outline-info ml-2" onclick="window.location=\'' + href + '\'">View them</button>');
+		rw('<a href=' +   href + '>View them</a>');
 	}
 	rw("<p>The lowest available ID in this range is <b>" + nextAvailableID + "</b>.</p>");
 }
@@ -83,7 +83,7 @@ function DisplayInfoForSchemaIdRange(minValue,maxValue) {
 
 			<h3>More information about User-Defined Table and View IDs</h3>
 
-			<p class="text-center">
+			<p >
 				There are two ranges reserves for custom IDs: 430-571 and 2000-4999.<br/>
 				The rest are reserved for Clarify baseline use.
 			</p>
