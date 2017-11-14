@@ -1227,6 +1227,15 @@ function TranslateTimeType(TimeType) {
 			TimeString = TimeType + '&nbsp';
 			break;
 	}
+
+	//see if this is a custom one
+	TheSQL4 = "select extra_info from table_prop_name where prop_name = '@USERTIME" + TimeType + "'"; 
+	rsPropName = retrieveDataFromDB(TheSQL4);
+	if (rsPropName.RecordCount > 0){
+		TimeString = rsPropName("extra_info") + "";
+	}
+	rsPropName.Close();
+		
 	return TimeString;
 }
 
@@ -1594,6 +1603,57 @@ function DisplayDatabaseIndexesOracle(type_name){
 	rsIndexes.Close;
 	rsIndexes = null;
 }
+
+function TranslateCustomEvent(eventName){
+    var translatedEventName = eventName;
+
+    //We have to translate some events, such as Clarify Custom & User Defined
+    //Query for the Real Value
+    if(eventName.slice(0,7).toUpperCase() == "CLARIFY" || eventName.slice(0,4).toUpperCase() == "USER" || eventName.slice(0,4).toUpperCase() == "CHST") {
+
+        //First, check if it's in value_item (from clarify biz rule form)
+        TheSQL4 = "select value1 from table_value_item where value3 = '" + eventName + "'";
+        rsValueItem = retrieveDataFromDB(TheSQL4);
+        if (rsValueItem.RecordCount > 0){
+            translatedEventName = rsValueItem("value1") + "";
+            rsValueItem.Close();
+            return translatedEventName;
+        }      
+        rsValueItem.Close();
+
+        //Second, check if it's in a config item (Dovetail-style)
+        if (eventName.slice(0,4).toUpperCase() == "USER"){
+             var eventId = eventName.slice(4);                    
+             TheSQL4 = "select name from table_config_itm where value_type = 1001 and i_value = " + eventId;
+             rsConfigItem = retrieveDataFromDB(TheSQL4);
+             if (rsConfigItem.RecordCount > 0){
+                translatedEventName = rsConfigItem("name") + "";
+                rsConfigItem.Close();
+                return translatedEventName;
+             }
+             rsConfigItem.Close();
+        }   
+
+        //If we're still here, just return the event name untranslated
+        return eventName;
+
+    }else{
+        //No translation needed.
+        return eventName;
+    }       
+} 
+
+function FormatMultilineText(strText) {
+    if (strText == null) return null;
+    if (strText.length == 0) return strText;
+ 
+    // Replace multiple LF(newline) w/ space + <br/><br/>)
+    strText = strText.replace(/\n{2,}/g, " <br/><br/>")
+    // Replace all other LF(newline) w/ space + <br/>)
+    strText = strText.replace(/\n/g, " <br/>")
+    return strText
+ }
+
 
 %>
 

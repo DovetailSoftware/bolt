@@ -220,22 +220,12 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				}
 
 				if(rsRuleCond("type") == 2) {
-					strStartEvent = String(rsRuleCond("operand1"));
-
-					//We have to translate some events, such as Clarify Custom & User Defined
-					//Query for the Real Value
-					if(strStartEvent.slice(0,7).toUpperCase() == "CLARIFY" || strStartEvent.slice(0,4).toUpperCase() == "USER" || strStartEvent.slice(0,4).toUpperCase() == "CHST") {
-						TheSQL4 = "select value1 from table_value_item where value3 = '" + strStartEvent + "'";
-						rsValueItem = retrieveDataFromDB(TheSQL4);
-						RealStartEvent = rsValueItem("value1") + "";
-						rsValueItem.Close();
-					} else {
-						RealStartEvent = rsRuleCond("operand1");
-					}
-
-					strRealStartEvent = String(RealStartEvent).toUpperCase();
+					strStartEvent = String(rsRuleCond("operand1") + '');
+					RealStartEvent = TranslateCustomEvent(strStartEvent)
 					StartEvent += RealStartEvent + "<br/>";
 
+					strRealStartEvent = String(RealStartEvent).toUpperCase();
+	
 					//If we have a filter, see if we match to the filter
 					//If it does, set the match boolean to True
 					if(StartEventFilter != "") {
@@ -251,19 +241,9 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 				}
 
 				if(rsRuleCond("type") == 3) {
-					strStopEvent = String(rsRuleCond("operand1"));
 
-					//We have to translate some events, such as Clarify Custom & User Defined
-					//Query for the Real Value
-					if(strStopEvent.slice(0,7).toUpperCase() == "CLARIFY" || strStopEvent.slice(0,4).toUpperCase() == "USER" || strStopEvent.slice(0,4).toUpperCase() == "CHST") {
-						TheSQL5 = "select value1 from table_value_item where value3 = '" + strStopEvent + "'";
-						rsValueItem2 = retrieveDataFromDB(TheSQL5);
-						RealStopEvent = rsValueItem2("value1") + "";
-						rsValueItem2.Close();
-					} else {
-						RealStopEvent = rsRuleCond("operand1");
-					}
-
+					strStopEvent = String(rsRuleCond("operand1") + '');
+					RealStopEvent = TranslateCustomEvent(strStopEvent)
 					StopEvent += RealStopEvent + "<br/>";
 					strRealStopEvent = String(RealStopEvent).toUpperCase();
 

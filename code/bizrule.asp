@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <!--
 ///////////////////////////////////////////////////////////////////////////////
-// Product        :  Online Tools(tm)
+// Product        :  BOLT
 //
 // Series         :  Dovetail Software Development Series(tm)
 //
@@ -11,17 +11,16 @@
 // Description    :  Business Rule Details
 //
 // Author         :  Dovetail Software, Inc.
-//                   4807 Spicewood Springs Rd, Bldg 4 Suite 200
-//                   Austin, TX 78759
 //                   (512) 610-5400
 //                   EMAIL: support@dovetailsoftware.com
 //                   www.dovetailsoftware.com
 //
-// Platforms      :  This version supports Clarify 9.0 and later
-//
-// Copyright (C) 2001-2012 Dovetail Software, Inc.
+// Copyright (C) 2001-2017 Dovetail Software, Inc.
 // All Rights Reserved.
 ///////////////////////////////////////////////////////////////////////////////
+
+// TO DO:
+* separate out the To and CC from the message
 -->
 <html>
 <head>
@@ -42,14 +41,14 @@ var sPageType = "BizRules";
 
 var FSO = Server.CreateObject("Scripting.FileSystemObject");
 var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\\"));
+
 %>
 <!--#include file="inc/ddonline.inc"-->
+
 </head>
 <body>
 <!--#include file="inc/navbar.inc"-->
-<div class="container-fluid">
-   <div class="row">
-      <div id="headerContainer" class="col-12">
+
       <%
       var rs = Server.CreateObject("ADODB.Recordset");
       rs.ActiveConnection = dbConnect;
@@ -68,46 +67,25 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
       //Get the Business Rule
       TheSQL = "select * from table_com_tmplte where objid=" + ruleObjid;
-
       rsCT = retrieveDataFromDBStatic(TheSQL);
-      %>
 
-      <h3 class="mb-0">Business Rule</h3>
+      if (rsCT.RecordCount == 0){
+          rsCT.Close();
+          Response.Write('<h4>Business Rule with objid of ' + ruleObjid + ' not found.</h4>')
+          Response.End();
+       }
 
-      <div class="col-4 offset-3 card bg-faded">
-         <table class="table table-sm small mb-1">
-            <tr><td class="text-right font-weight-bold pr-2">Title:</td><td><%=rsCT("title")%></td></tr>
-            <tr><td class="text-right font-weight-bold pr-2">Rule Set:</td><td><%=rsCT("rule_set")%></td></tr>
-            <tr><td class="text-right font-weight-bold pr-2">Description:</td><td><%=rsCT("description")%></td></tr>
-         </table>
-      </div>
-
-      <table class="tablesorter" style="width:150;">
-         <thead>
-            <tr>
-               <th>Status</th>
-               <th>Object</th>
-               <th>Start&nbsp;Event</th>
-               <th>Cancel&nbsp;Event</th>
-               <th>Conditions</th>
-               <th>Actions</th>
-            </tr>
-         </thead>
-      <%
-      //Loop through the list of rules
-      while(rsCT.EOF == false) {
+      //Assume Active
+      //If the 65536 flag is on, then it is Inactive
+      Active = "Active";
+      if((rsCT("flags") & 65536) > 0) Active = "Inactive";
 
          //Get the Object Types, Start Events, Stop Events, and Conditions for the rule
          CTObjid = rsCT("objid") - 0;
          TheSQL2 = "select * from table_rule_cond where parentrule2com_tmplte = " + CTObjid;
          rsRuleCond = retrieveDataFromDB(TheSQL2);
 
-         //Assume Active
-         //If the 65536 flag is on, then it is Inactive
-         Active = "Active";
-         if((rsCT("flags") & 65536) > 0) Active = "Inactive";
-
-         //Initialize the variables for-each rule
+         //Initialize the variables
          StartEvent = "";
          StopEvent = "";
          ObjectType = "";
@@ -125,43 +103,21 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
                strObjectType = String(rsRuleCond("operand1")).toUpperCase();
                //Append this data to the list
                ObjectType += rsRuleCond("operand1") + " ";
-            }
+            }           
 
             if(rsRuleCond("type") == 2) {
-               strStartEvent = String(rsRuleCond("operand1"));
-
-               //We have to translate some events, such as Clarify Custom & User Defined
-               //Query for the Real Value
-               if(strStartEvent.slice(0,7).toUpperCase() == "CLARIFY" || strStartEvent.slice(0,4).toUpperCase() == "USER" || strStartEvent.slice(0,4).toUpperCase() == "CHST") {
-                  TheSQL4 = "select value1 from table_value_item where value3 = '" + strStartEvent + "'";
-                  rsValueItem = retrieveDataFromDB(TheSQL4);
-                  RealStartEvent = rsValueItem("value1") + "";
-                  rsValueItem.Close();
-               } else {
-                  RealStartEvent = rsRuleCond("operand1");
-               }
-
-               strRealStartEvent = String(RealStartEvent).toUpperCase();
-               StartEvent += RealStartEvent + "<br/>";
+               strStartEvent = String(rsRuleCond("operand1") + '');
+               RealStartEvent = TranslateCustomEvent(strStartEvent)
+               if (StartEvent != "") StartEvent += "<br/>"; 
+               StartEvent += RealStartEvent;
             }
 
             if(rsRuleCond("type") == 3) {
-               strStopEvent = String(rsRuleCond("operand1"));
-
-               //We have to translate some events, such as Clarify Custom & User Defined
-               //Query for the Real Value
-               if(strStopEvent.slice(0,7).toUpperCase() == "CLARIFY" || strStopEvent.slice(0,4).toUpperCase() == "USER" || strStopEvent.slice(0,4).toUpperCase() == "CHST") {
-                  TheSQL5 = "select value1 from table_value_item where value3 = '" + strStopEvent + "'";
-                  rsValueItem2 = retrieveDataFromDB(TheSQL5);
-                  RealStopEvent = rsValueItem2("value1") + "";
-                  rsValueItem2.Close();
-               } else {
-                  RealStopEvent = rsRuleCond("operand1");
-               }
-
-               StopEvent += RealStopEvent + "<br/>";
-               strRealStopEvent = String(RealStopEvent).toUpperCase();
-            }
+                strStopEvent = String(rsRuleCond("operand1") + '');
+                RealStopEvent = TranslateCustomEvent(strStopEvent)
+                if (StopEvent != "") StopEvent += "<br/>";                 
+                StopEvent += RealStopEvent; 
+             }
 
             if(rsRuleCond("type") == 4) {
                ConditionCount++;
@@ -171,14 +127,8 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
                ConditionProperty = String(rsRuleCond("operand1")).toUpperCase();
                ConditionValue = String(rsRuleCond("operand2")).toUpperCase();
 
-               //If we have a filter, see if we match to the filter
-               //If it does, set the match boolean to True
-               //We need to do this for the Condition Property and the Condition Value filters
-               ConditionPropMatch = true;
-               ConditionValueMatch = true;
-
-               if(ConditionCount > 1) Condition += "<br/><br/>"
-               Condition += ConditionCount + ". " + rsRuleCond("operand1") + CondOperator + rsRuleCond("operand2");
+               if(ConditionCount > 1) Condition += "<br/>"
+               Condition += rsRuleCond("operand1") + CondOperator + rsRuleCond("operand2");
             }
 
             rsRuleCond.MoveNext();
@@ -191,125 +141,189 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
          ActionTitle = "";
          ActionCount = 0;
          %>
-         <tr class="biz-rule" id="<%=rsCT("objid")%>">
-         <td><%=Active%></td>
-         <td><%=ObjectType%></td>
-         <td><%=StartEvent%></td>
-         <td><%=StopEvent%></td>
-         <td><%=Condition%></td>
-         <td style="display:table-cell">
-            <table class="biz-rule-action">
-               <thead>
-                  <tr>
-                     <th>Action&nbsp;Title</th>
-                     <th>Create Act Log?</th>
-                     <th>Action&nbsp;Type</th>
-                     <th>To&nbsp;Urgency</th>
-                     <th>CC&nbsp;Urgency</th>
-                     <th class="action-message">Message</th>
-                     <th class="action-message" nowrap>Pager&nbsp;Message</th>
-                     <th>Start&nbsp;Action (d:h:m)</th>
-                     <th>From</th>
-                     <th>Using</th>
-                     <th>Repeat&nbsp;every (d:h:m)</th>
-                     <th>Repeat&nbsp;Duration (d:h:m)</th>
-                  </tr>
-               </thead>
-               <tbody>
-            <%
-            while(rsAction.EOF == false) {
-               ActionCount++;
-               ActionTitle = ActionCount + ". " + rsAction("title");
-               ActionUrgency = rsAction("urgency");
 
-               // Decode the To Urgency
-               ToUrgency = "";
-               //If the 1 bit is on, then it is To Low
-               //If the 2 bit is on, then it is To Medium
-               //If the 4 bit is on, then it is To High
-               if((ActionUrgency & 1) > 0) ToUrgency = "Low";
-               if((ActionUrgency & 2) > 0) ToUrgency = "Medium";
-               if((ActionUrgency & 4) > 0) ToUrgency = "High";
+<div class="container col-8" id="biz-rule-container">
+    <div class="row">
+        <div class="col">
 
-               // Decode the CC Urgency
-               CCUrgency = "";
-               //If the 8 bit is on, then it is CC Low
-               //If the 16 bit is on, then it is CC Medium
-               //If the 32 bit is on, then it is CC High
-               if((ActionUrgency & 8) > 0) CCUrgency = "Low";
-               if((ActionUrgency & 16) > 0) CCUrgency = "Medium";
-               if((ActionUrgency & 32) > 0) CCUrgency = "High";
+             <h3>Business Rule</h3>
 
-               ActionMessage = rsAction("action") + "";
-               var pagerMessage 	= rsAction("condition") + "";
-               var strPagerMessage = pagerMessage.toUpperCase();
-               strActionMessage = ActionMessage.toString().toUpperCase();
+            <table class="table table-sm small">
+                <thead>
+                    <tr><td></td><td></td></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Title</td><td><%=rsCT("title")%></td></tr>
+                    <tr><td>Description</td><td><%=rsCT("description")%></td></tr>
+                    <tr><td>Rule Set</td><td><%=rsCT("rule_set")%></td></tr>
+                    <tr><td>Status</td><td><%=Active%></td></tr>
+                    <tr><td>Object Types</td><td><%=ObjectType%></td></tr>                     
+                    <tr><td>Start Events</td><td><%=StartEvent%></td></tr>
+                    <tr><td>Cancel Events</td><td><%=StopEvent%></td></tr>
+                    <tr><td>Conditions</td><td><%=Condition%></td></tr>   
+                </tbody>                  
+            </table>
+        </div>
+    </div>
 
-               ActionObjid = rsAction("objid");
-               numActionType = rsAction("type") - 0;
-               ActionType = "Message"; //type = 2
-               if(numActionType == 3) ActionType = "Command Line";
-               if(numActionType == 4) ActionType = "Service Message";
+    <div class="row">
+        <div class="col">
+            <h4>Business Rule Actions (<%=rsAction.RecordCount%>)</h4>
+        </div>
+    </div>
 
-               StartTime = FormatSeconds(rsAction("time_til_esc"));
-               repeat_period = rsAction("repeat_period");
-               repeat_num = rsAction("repeat_num");
-               duration_num = repeat_period * repeat_num;
-               Duration = FormatSeconds(duration_num);
-               Repeat = FormatSeconds(rsAction("repeat_period"));
-               TimeType = TranslateTimeType(rsAction("time_type"));
-               TimeUnits = TranslateTimeUnits(rsAction("time_units"));
-               ActionFlags = rsAction("flags") - 0;
-               %>
-                  <tr>
-                     <td><%=ActionTitle%></td>
-                     <td>
-                     <%
-                     // Figure out of the "Create Act Log on Action" is checked or not
-                     // If the 1024 bit is on, then its checked;
-                     rw(((ActionFlags & 1024) > 0)? "Yes" : "No");
-                     %>
-                     </td>
-                     <td><%=ActionType%></td>
-                     <td><%=ToUrgency%></td>
-                     <td><%=CCUrgency%></td>
-                     <td><%=Server.HTMLEncode(ActionMessage)%></td>
-                     <td><%=Server.HTMLEncode(pagerMessage)%></td>
-                     <td><%=StartTime%></td>
-                     <td><%=TimeType%></td>
-                     <td><%=TimeUnits%></td>
-                     <td><%=Repeat%></td>
-                     <td><%=Duration%></td>
-                  </tr>
-               <%
-               rsAction.MoveNext();
-            }
-            rsAction.Close();
-            %>
-            </tbody>
-         </table>
-         </td>
-         </tr>
-         <%
-         rsCT.MoveNext();
-      }
-      %>
-      </table>
-      <%
-      rsCT.Close();
-      %>
-      </div>
-   </div>
+    <%
+    while(rsAction.EOF == false) {
+
+        ActionCount++;
+        ActionTitle = rsAction("title");
+        ActionUrgency = rsAction("urgency");
+
+        // Decode the To Urgency
+        ToUrgency = "";
+        //If the 1 bit is on, then it is To Low
+        //If the 2 bit is on, then it is To Medium
+        //If the 4 bit is on, then it is To High
+        if((ActionUrgency & 1) > 0) ToUrgency = "Low";
+        if((ActionUrgency & 2) > 0) ToUrgency = "Medium";
+        if((ActionUrgency & 4) > 0) ToUrgency = "High";
+
+        // Decode the CC Urgency
+        CCUrgency = "";
+        //If the 8 bit is on, then it is CC Low
+        //If the 16 bit is on, then it is CC Medium
+        //If the 32 bit is on, then it is CC High
+        if((ActionUrgency & 8) > 0) CCUrgency = "Low";
+        if((ActionUrgency & 16) > 0) CCUrgency = "Medium";
+        if((ActionUrgency & 32) > 0) CCUrgency = "High";
+
+        ActionMessage = rsAction("action") + "";
+        pagerMessage = rsAction("condition") + "";
+
+        ActionObjid = rsAction("objid");
+        numActionType = rsAction("type") - 0;
+        ActionType = "Message"; //type = 2
+        if(numActionType == 3) ActionType = "Command Line";
+        if(numActionType == 4) ActionType = "Service Message";
+        if(numActionType == 1001) ActionType = "Carrier Message";
+
+        StartTime = FormatSeconds(rsAction("time_til_esc"));
+        repeat_period = rsAction("repeat_period");
+        repeat_num = rsAction("repeat_num");
+        duration_num = repeat_period * repeat_num;
+        Duration = FormatSeconds(duration_num);
+        Repeat = FormatSeconds(rsAction("repeat_period"));
+        TimeType = TranslateTimeType(rsAction("time_type"));
+        TimeUnits = TranslateTimeUnits(rsAction("time_units"));
+        ActionFlags = rsAction("flags") - 0;
+        %>
+
+    <hr/>
+        
+    <div class="row">
+        <div class="col">        
+            <h5>Action: <%=ActionTitle%> </h5>            
+            <table class="table table-sm small">
+                <thead>
+                    <tr><td></td><td></td></tr>
+                </thead>
+                <tr><td>Type</td><td><%=ActionType%></td></tr>
+                <tr><td>Create Activity Log</td><td><%=((ActionFlags & 1024) > 0)? "Yes" : "No"%></td></tr>
+                <tr><td>Start Action</td><td><%=StartTime%> (ddd hh:mm)</td></tr>
+                <tr><td>From</td><td><%=TimeType%></td></tr>
+                <tr><td>Using</td><td><%=TimeUnits%></td></tr>
+                <tr><td>Repeat Every</td><td><%=Repeat%>  (ddd hh:mm)</td></tr>
+                <tr><td>Repeat For</td><td><%=Duration%>  (ddd hh:mm)</td></tr>
+                <!-- <tr><td>To</td><td></td></tr> -->
+                <tr><td>To Urgency</td><td><%=ToUrgency%></td></tr>
+                <!-- <tr><td>CC</td><td></td></tr> -->                   
+                <tr><td>CC Urgency</td><td><%=CCUrgency%></td></tr>
+            </table>            
+        </div>
+
+        <div class="col-7">
+            <h6>Message</h6> 
+            <div class="card bg-faded"><%=FormatMultilineText(Server.HTMLEncode(ActionMessage))%><br/></div>
+            <h6>Pager Message</h6> 
+            <div class="card bg-faded"><%=FormatMultilineText(Server.HTMLEncode(pagerMessage))%><br/></div>
+        </div>
+
+    </div>
+
+    <%
+    rsAction.MoveNext();
+    }
+    rsCT.Close();
+    %>
 </div>
+<div class="container col-8" id="markdown-container">
+    <div class="row">
+        <div class="col">
+                <p><span class="bold">Convert to Markdown</span> - This can be useful when sharing a business rule, such as in a Github issue</p>
+                <button onclick="convertToMarkdown()">Convert to Markdown</button>   
+                <button id="copy" data-clipboard-target="#markdown-text" title="Copied!" data-trigger="manual" data-toggle="tooltip"  data-placement="bottom">Copy Markdown to Clipboard</button>
+                <br/>
+                <textarea id="markdown-text" readonly></textarea>
+        </div>
+    </div>
+
+</div> 
+
+
 <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="js/tether.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/to-markdown.js"></script>
+<script src="js/clipboard.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
    $("ul.navbar-nav li a[href$='bizrules.asp']").parent().addClass("active");
    $(".navbar").find(".connected").text("<%=connect_info%>");
    document.title = "Bolt: <%=sPageTitle%>";
+   $('[data-toggle="tooltip"]').tooltip();
+   $('#markdown-text').hide();
 });
+
+function convertToMarkdown(){
+    //keep BRs, to allow for multi-lines in a table cell, which GFM (github flavored markdown) supports
+    //get rid of DIVs
+    var myConverters=[
+        {
+        filter: ['br'],
+        replacement: function (content) {return '<br/>'}
+        },
+        {
+        filter: ['div'],
+        replacement: function (content) {return content;}
+        }
+    ];
+
+    var html = document.getElementById('biz-rule-container').outerHTML;
+    var md = toMarkdown(html, {gfm: true,converters: myConverters})
+    $('#markdown-text').show();
+    document.getElementById('markdown-text').innerText=md;
+    document.getElementById('markdown-text').scrollIntoView({behavior: "smooth"});
+    $('#copy').show();
+}
+
+var clipboard = new Clipboard('#copy');
+
+clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    //console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+    $('#copy').tooltip('show');
+    setTimeout(function(){
+        $('#copy').tooltip( 'hide' );
+        }, 1000);
+    e.clearSelection();
+});
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+});
+
 </script>
 </body>
 </html>

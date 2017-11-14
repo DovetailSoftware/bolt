@@ -16,3 +16,25 @@ table.biz-rule-action tr td.action-message{
 	min-width:300px;
 	width:300px;
 }
+
+label.col-4.col-form-label{
+  text-align:right;
+  margin-right:5px;
+}
+
+td:nth-child(1){font-weight:500;min-width:120px;}
+h4{margin-left: 0px; margin-right: 0px; margin-top: 16px; margin-bottom: 0px;}
+h5{margin-left: 0px; margin-right: 0px; margin-top: 20px; margin-bottom: 10px;}
+h6{margin-left: 0px; margin-right: 0px; margin-top: 25px; margin-bottom: 10px;}
+.card{word-break: break-all;}
+.table thead{display:none;}
+#copy{display:none;}
+#markdown-text{
+    width:100%;
+    height:500px;
+    margin-top:20px;
+    background-color: #f7f7f7;
+}
+#markdown-container{background-color:#eee;margin-top:20px;border-top:solid 1px #666; padding-bottom:10px;}
+#markdown-container *{font-size:small;}
+.bold{font-weight: bold;}
