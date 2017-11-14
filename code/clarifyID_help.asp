@@ -68,11 +68,11 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			<h4>Requirements</h4>
 
  			<ul>
- 				<li>This feature requires IIS7 (Support for IIS6 may be added in the future, depending on customer demand)</li>
- 				<li>HTTP Redirection component of IIS</li>
+ 				<li>IIS7 or higher</li>
+ 				<li>HTTP Redirect component of IIS</li>
  			</ul>
 
-			<p>In IIS Manager, you should see the HTTP Redirection component:</p>
+			<p>In IIS Manager, you should see the HTTP Redirect component:</p>
 
 			<img src="img/iis.png" alt="IIS Redirection component" />
 
