@@ -166,6 +166,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 			//Get the Object Types, Start Events, Stop Events, and Conditions for the rule
 			CTObjid = rsCT("objid") - 0;
 			TheSQL2 = "select * from table_rule_cond where parentrule2com_tmplte = " + CTObjid;
+			if (IsField(287,"x_rank")){TheSQL2+=' order by x_rank'}
 			rsRuleCond = retrieveDataFromDB(TheSQL2);
 
 			//Assume Active

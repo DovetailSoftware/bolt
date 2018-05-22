@@ -601,6 +601,22 @@ function GetFieldName(TableNum, SpecFieldID) {
 }
 
 //////////////////////////////////////////////////////////////////////
+// IsField - Is the given field valid for this table ID?
+//////////////////////////////////////////////////////////////////////
+function IsField(TableNum, FieldName) {
+	var isField=false;
+	TheSQL = "select * from adp_sch_info where type_id = " + TableNum;
+	TheSQL+= " and field_name = '" + FieldName + "'";
+	rsFieldName = retrieveDataFromDB(TheSQL);
+	if (rsFieldName.RecordCount > 0){
+		isField=true;
+	}
+	rsFieldName.Close();
+
+	return isField;
+}
+
+//////////////////////////////////////////////////////////////////////
 // Return the comment for a table
 //////////////////////////////////////////////////////////////////////
 function GetTableComment(TableName) {
