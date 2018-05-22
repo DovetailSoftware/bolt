@@ -1319,6 +1319,9 @@ function TranslateRuleOperator(RuleOperator) {
 		case 13:
 			CondOperator = ' is between ';
 			break;
+		case 14:
+			CondOperator = ' is not in ';
+			break;
 		default:
 			CondOperator = ' ? ';
 			break;
