@@ -151,7 +151,7 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
 
             <table class="table table-sm small">
                 <thead>
-                    <tr><td></td><td></td></tr>
+                    <tr><td>Property</td><td>Value</td></tr>
                 </thead>
                 <tbody>
                     <tr><td>Title</td><td><%=rsCT("title")%></td></tr>
@@ -223,10 +223,10 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
         
     <div class="row">
         <div class="col">        
-            <h5>Action: <%=ActionTitle%> </h5>            
+            <h5>Action <%=ActionCount%>: <%=ActionTitle%> </h5>            
             <table class="table table-sm small">
                 <thead>
-                    <tr><td></td><td></td></tr>
+                    <tr><td>Property</td><td>Value</td></tr>
                 </thead>
                 <tr><td>Type</td><td><%=ActionType%></td></tr>
                 <tr><td>Create Activity Log</td><td><%=((ActionFlags & 1024) > 0)? "Yes" : "No"%></td></tr>
@@ -264,17 +264,17 @@ var udl_file = FSO.GetFile(dbConnect.replace("File Name=","").replace(/\\/g,"\\\
                 <button onclick="convertToMarkdown()">Convert to Markdown</button>   
                 <button id="copy" data-clipboard-target="#markdown-text" title="Copied!" data-trigger="manual" data-toggle="tooltip"  data-placement="bottom">Copy Markdown to Clipboard</button>
                 <br/>
-                <textarea id="markdown-text" readonly></textarea>
+                <div id="markdown-text" style="overflow:scroll;"></div>
         </div>
     </div>
-
 </div> 
-
 
 <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="js/tether.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/to-markdown.js"></script>
+<script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+<script src="https://unpkg.com/turndown-plugin-gfm/dist/turndown-plugin-gfm.js"></script>
+
 <script src="js/clipboard.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -286,21 +286,44 @@ $(document).ready(function() {
 });
 
 function convertToMarkdown(){
-    //keep BRs, to allow for multi-lines in a table cell, which GFM (github flavored markdown) supports
-    //get rid of DIVs
-    var myConverters=[
-        {
-        filter: ['br'],
-        replacement: function (content) {return '<br/>'}
-        },
-        {
-        filter: ['div'],
-        replacement: function (content) {return content;}
-        }
-    ];
 
     var html = document.getElementById('biz-rule-container').outerHTML;
-    var md = toMarkdown(html, {gfm: true,converters: myConverters})
+    var turndownService = new TurndownService();
+
+    // Import plugins from turndown-plugin-gfm
+    var gfm = turndownPluginGfm.gfm;
+    var tables = turndownPluginGfm.tables;
+
+    // Use the plugins
+    turndownService.use(gfm);
+    turndownService.use(tables);
+
+    //keep BRs, to allow for multi-lines in a table cell, which GFM (github flavored markdown) supports
+    turndownService.addRule('breaks', {
+      filter: ['br'],
+      replacement: function (content) {
+        return '<br/>'
+      }
+    });
+
+    //get rid of DIVs
+    turndownService.addRule('divs', {
+      filter: ['div'],
+      replacement: function (content) {
+        return content
+      }
+    });
+
+    //improve how h5 headings render
+    turndownService.addRule('h5', {
+      filter: ['h5'],
+      replacement: function (content) {
+        return '#### ' + content
+      }
+    });
+
+    var md = turndownService.turndown(html);
+
     $('#markdown-text').show();
     document.getElementById('markdown-text').innerText=md;
     document.getElementById('markdown-text').scrollIntoView({behavior: "smooth"});
